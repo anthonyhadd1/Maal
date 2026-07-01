@@ -1,8 +1,16 @@
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, {
+  cancelAnimation,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 
+import { useReducedMotionPref } from '@/lib/motion';
 import { colors, radii, spacing } from '@/theme/tokens';
 
 interface ContinuousProps {
@@ -11,6 +19,7 @@ interface ContinuousProps {
   progress: number;
   segments?: never;
   filled?: never;
+  pulseIndex?: never;
 }
 
 interface SegmentedProps {
@@ -18,6 +27,8 @@ interface SegmentedProps {
   segments: number;
   /** Number of filled segments. */
   filled: number;
+  /** Segment that pulses (the question currently on screen). */
+  pulseIndex?: number;
   progress?: never;
 }
 
@@ -36,7 +47,7 @@ export function ProgressBar(props: ProgressBarProps) {
   const height = props.height ?? 12;
 
   if (props.variant === 'segmented') {
-    const { segments, filled } = props;
+    const { segments, filled, pulseIndex } = props;
     return (
       <View
         accessibilityLabel={t('a11y.progress', {
@@ -46,12 +57,12 @@ export function ProgressBar(props: ProgressBarProps) {
         style={[styles.segmentRow, { height }]}
       >
         {Array.from({ length: segments }, (_, i) => (
-          <View
+          <Segment
+            accent={accent}
+            filled={i < filled}
+            height={height}
             key={i}
-            style={[
-              styles.segment,
-              { backgroundColor: i < filled ? accent : colors.neutral[100], height },
-            ]}
+            pulsing={i === pulseIndex && i >= filled}
           />
         ))}
       </View>
@@ -59,6 +70,45 @@ export function ProgressBar(props: ProgressBarProps) {
   }
 
   return <ContinuousBar accent={accent} height={height} progress={props.progress} />;
+}
+
+/** One session segment; the current question's segment breathes in accent. */
+function Segment({
+  filled,
+  pulsing,
+  accent,
+  height,
+}: {
+  filled: boolean;
+  pulsing: boolean;
+  accent: string;
+  height: number;
+}) {
+  const reduceMotion = useReducedMotionPref();
+  const pulse = useSharedValue(0.35);
+
+  useEffect(() => {
+    if (!pulsing || reduceMotion) {
+      pulse.value = 0.35;
+      return;
+    }
+    pulse.value = withRepeat(withTiming(0.75, { duration: 650 }), -1, true);
+    return () => cancelAnimation(pulse);
+  }, [pulsing, reduceMotion, pulse]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: pulsing ? pulse.value : 1,
+  }));
+
+  return (
+    <Animated.View
+      style={[
+        styles.segment,
+        { backgroundColor: filled || pulsing ? accent : colors.neutral[100], height },
+        animatedStyle,
+      ]}
+    />
+  );
 }
 
 function ContinuousBar({

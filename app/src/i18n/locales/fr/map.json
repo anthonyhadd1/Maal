@@ -10,9 +10,19 @@
   "offlinePlay": "Connecte-toi à Internet pour jouer.",
   "switcher": {
     "title": "Choisis ta matière",
-    "completed": "{{pct}} % terminé"
+    "completed": "{{pct}} % terminé",
+    "close": "Fermer"
   },
   "unitProgress": "{{done}}/{{total}}",
   "boss": "Examen blanc",
-  "legendary": "Niveau légendaire"
+  "legendary": "Niveau légendaire",
+  "resume": {
+    "title": "Reprendre ta partie ?",
+    "body": "Tu as un niveau en cours. Reprends là où tu t'étais arrêté·e !",
+    "conflictBody": "Une partie est déjà en cours. Reprends-la, ou abandonne-la pour recommencer.",
+    "resume": "Reprendre",
+    "abandon": "Abandonner",
+    "abandonRestart": "Abandonner et recommencer",
+    "cancel": "Annuler"
+  }
 }

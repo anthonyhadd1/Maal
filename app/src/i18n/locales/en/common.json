@@ -31,12 +31,14 @@
     "total": "{{xp}} XP"
   },
   "hearts": {
-    "label": "Hearts"
+    "label": "Hearts",
+    "unlimited": "Unlimited hearts"
   },
   "streak": {
     "label": "Streak",
     "days_one": "{{count}} day",
     "days_other": "{{count}} days",
+    "celebrate": "{{count}}-day streak!",
     "todayDone": "{{count}}-day streak — today is in the bag!",
     "milestone": "{{count}}-day streak! ACE is proud of you.",
     "freezeUsed": "Your Streak Freeze saved you!"

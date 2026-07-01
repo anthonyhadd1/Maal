@@ -71,7 +71,30 @@ export default function RootLayout() {
                   headerShown: false,
                   contentStyle: styles.content,
                 }}
-              />
+              >
+                {/* Interrupting flows are modals (design_mobile.md §3). */}
+                <Stack.Screen
+                  name="session"
+                  options={{
+                    presentation: 'fullScreenModal',
+                    gestureEnabled: false,
+                    animation: 'slide_from_bottom',
+                  }}
+                />
+                <Stack.Screen
+                  name="subject/switcher"
+                  options={{ presentation: 'formSheet', sheetAllowedDetents: [0.75, 1] }}
+                />
+                <Stack.Screen name="paywall" options={{ presentation: 'modal' }} />
+                <Stack.Screen
+                  name="streak"
+                  options={{
+                    presentation: 'transparentModal',
+                    animation: 'fade',
+                    contentStyle: styles.transparent,
+                  }}
+                />
+              </Stack>
               <OfflineBanner />
             </ToastProvider>
           </BottomSheetModalProvider>
@@ -87,5 +110,8 @@ const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: colors.neutral[50],
+  },
+  transparent: {
+    backgroundColor: 'transparent',
   },
 });

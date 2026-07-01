@@ -6,6 +6,10 @@ export const keys = {
   me: ['me'] as const,
   subjects: ['subjects'] as const,
   map: (subjectSlug: string) => ['map', subjectSlug] as const,
+  /** Root key — invalidates every subject map at once (post-completion). */
+  mapRoot: ['map'] as const,
+  /** /me/game/ gamification summary (hearts, streak, XP, league). */
+  game: ['game'] as const,
   hearts: ['hearts'] as const,
   league: ['league', 'current'] as const,
   leaderboard: (leagueId: number | string) => ['leaderboard', leagueId] as const,

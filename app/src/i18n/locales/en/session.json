@@ -1,4 +1,8 @@
 {
+  "cta": {
+    "validate": "Submit"
+  },
+  "questionCounter": "Question {{n}}/{{total}}",
   "feedback": {
     "correct": {
       "1": "Well done!",
@@ -15,6 +19,21 @@
     "explanationTitle": "Explanation",
     "correctAnswer": "The correct answer"
   },
+  "combo": {
+    "badge": "x{{count}}"
+  },
+  "passage": {
+    "read": "Read the text",
+    "hide": "Hide the text"
+  },
+  "imageZoom": {
+    "open": "Zoom the image",
+    "close": "Close"
+  },
+  "media": {
+    "unmute": "Unmute",
+    "mute": "Mute"
+  },
   "results": {
     "perfect": "Flawless! Incredible.",
     "passed": "Level passed!",
@@ -23,14 +42,25 @@
     "accuracy": "Accuracy",
     "maxCombo": "Best run",
     "time": "Time",
-    "replay": "Replay"
+    "replay": "Replay",
+    "xp": {
+      "base": "Correct answers",
+      "perfect": "Perfect score",
+      "combo": "Combo bonus",
+      "firstClear": "First clear",
+      "streak": "Streak bonus"
+    }
   },
   "hearts": {
     "lost": "You lost a heart",
     "earned": "+1 heart! Nice.",
+    "emptyMidSession": "Out of hearts! Finish this level in peace.",
+    "refillIn": "Next heart in {{time}}",
     "empty": {
       "title": "Out of hearts!",
-      "body": "Get a heart back in {{time}}, earn one in Review, or go unlimited with Premium."
+      "body": "Get a heart back in {{time}}, earn one in Review, or go unlimited with Premium.",
+      "review": "Do a Review",
+      "premium": "Discover Premium"
     }
   },
   "quit": {
@@ -43,5 +73,10 @@
     "title": "Review",
     "subtitle": "Your mistakes, turned into strengths."
   },
-  "provenance": "Exam {{year}}"
+  "provenance": "Exam {{year}}",
+  "provenanceFull": "Exam {{year}} · {{session}}",
+  "a11y": {
+    "quit": "Quit the level",
+    "combo": "{{count}} correct answers in a row"
+  }
 }

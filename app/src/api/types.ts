@@ -122,6 +122,9 @@ export interface AttemptQuestion {
   image_url: string | null;
   passage: AttemptPassage | null;
   choices: AttemptChoice[];
+  /** Provenance chip: « Concours 2019 · juillet ». Absent for owner-written drills. */
+  exam_year?: number | null;
+  exam_session?: string | null;
 }
 
 export interface StartAttemptResponse {
@@ -135,13 +138,18 @@ export interface AnswerPayload {
   time_ms: number;
 }
 
+export type ExplanationMediaType = 'image' | 'video' | 'lottie';
+
 /** Grading response for ONE question (wrong answers deduct a heart here). */
 export interface AnswerResponse {
   is_correct: boolean;
   correct_choice_ids: number[];
   explanation_text: string;
   explanation_media_url: string | null;
+  explanation_media_type: ExplanationMediaType | null;
   hearts_remaining: number;
+  /** Premium / grace period: hearts are never deducted. */
+  hearts_unlimited: boolean;
   next_heart_at: string | null;
   combo: number;
 }
@@ -201,6 +209,8 @@ export interface CompleteResponse {
 export interface MeGame {
   xp_total: number;
   hearts: number;
+  /** Premium / signup grace period: render the infinity heart. */
+  hearts_unlimited: boolean;
   next_heart_at: string | null;
   streak_current: number;
   streak_longest: number;
@@ -217,3 +227,18 @@ export interface MeGame {
 
 /** DRF error body: {detail: "..."} or {field: ["msg", ...]}. */
 export type ApiErrorBody = { detail?: string } & Record<string, string[] | string | undefined>;
+
+/**
+ * Business-rule error codes on the attempt endpoints (PLAN decision 1):
+ * 402 `premium_required`, 409 `out_of_hearts`,
+ * 409 `attempt_in_progress` (+ `extra.attempt_id`).
+ */
+export type AttemptErrorCode = 'premium_required' | 'out_of_hearts' | 'attempt_in_progress';
+
+export interface CodedErrorBody {
+  detail?: string;
+  code?: string;
+  extra?: {
+    attempt_id?: number;
+  };
+}

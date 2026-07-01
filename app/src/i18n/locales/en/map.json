@@ -10,9 +10,19 @@
   "offlinePlay": "Connect to the internet to play.",
   "switcher": {
     "title": "Pick your subject",
-    "completed": "{{pct}}% complete"
+    "completed": "{{pct}}% complete",
+    "close": "Close"
   },
   "unitProgress": "{{done}}/{{total}}",
   "boss": "Mock exam",
-  "legendary": "Legendary level"
+  "legendary": "Legendary level",
+  "resume": {
+    "title": "Resume your session?",
+    "body": "You have a level in progress. Pick up right where you left off!",
+    "conflictBody": "A session is already in progress. Resume it, or abandon it to start over.",
+    "resume": "Resume",
+    "abandon": "Abandon",
+    "abandonRestart": "Abandon and restart",
+    "cancel": "Cancel"
+  }
 }

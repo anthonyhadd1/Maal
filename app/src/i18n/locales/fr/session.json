@@ -1,4 +1,8 @@
 {
+  "cta": {
+    "validate": "Valider"
+  },
+  "questionCounter": "Question {{n}}/{{total}}",
   "feedback": {
     "correct": {
       "1": "Bravo !",
@@ -15,6 +19,21 @@
     "explanationTitle": "Explication",
     "correctAnswer": "La bonne réponse"
   },
+  "combo": {
+    "badge": "x{{count}}"
+  },
+  "passage": {
+    "read": "Lire le texte",
+    "hide": "Masquer le texte"
+  },
+  "imageZoom": {
+    "open": "Agrandir l'image",
+    "close": "Fermer"
+  },
+  "media": {
+    "unmute": "Activer le son",
+    "mute": "Couper le son"
+  },
   "results": {
     "perfect": "Sans-faute ! Incroyable.",
     "passed": "Niveau réussi !",
@@ -23,14 +42,25 @@
     "accuracy": "Précision",
     "maxCombo": "Meilleure série",
     "time": "Temps",
-    "replay": "Rejouer"
+    "replay": "Rejouer",
+    "xp": {
+      "base": "Bonnes réponses",
+      "perfect": "Sans-faute",
+      "combo": "Bonus combo",
+      "firstClear": "Premier succès",
+      "streak": "Bonus série"
+    }
   },
   "hearts": {
     "lost": "Tu as perdu un cœur",
     "earned": "+1 cœur ! Bien joué.",
+    "emptyMidSession": "Plus de cœurs ! Termine ce niveau tranquillement.",
+    "refillIn": "Prochain cœur dans {{time}}",
     "empty": {
       "title": "Plus de cœurs !",
-      "body": "Récupère un cœur dans {{time}}, gagne-en un en Révision, ou passe en illimité avec Premium."
+      "body": "Récupère un cœur dans {{time}}, gagne-en un en Révision, ou passe en illimité avec Premium.",
+      "review": "Faire une Révision",
+      "premium": "Découvrir Premium"
     }
   },
   "quit": {
@@ -43,5 +73,10 @@
     "title": "Révision",
     "subtitle": "Tes erreurs, transformées en points forts."
   },
-  "provenance": "Concours {{year}}"
+  "provenance": "Concours {{year}}",
+  "provenanceFull": "Concours {{year}} · {{session}}",
+  "a11y": {
+    "quit": "Quitter le niveau",
+    "combo": "{{count}} bonnes réponses d'affilée"
+  }
 }

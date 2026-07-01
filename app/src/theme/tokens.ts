@@ -40,8 +40,14 @@ export const colors = {
 /** Inner top highlight used on raised clay surfaces. */
 export const clayHighlight = 'rgba(255, 255, 255, 0.65)';
 
+/** Soft white overlay for pills/chips sitting on accent-colored surfaces. */
+export const overlayLight = 'rgba(255, 255, 255, 0.28)';
+
 /** Scrim behind modals/sheets. */
 export const scrim = 'rgba(36, 31, 62, 0.45)';
+
+/** Full-bleed dark backdrop (image zoom, video). */
+export const backdropDark = 'rgba(10, 8, 20, 0.96)';
 
 // ---------------------------------------------------------------------------
 // Subject accents (slug -> accent). Subjects are data-driven: prefer the
@@ -204,7 +210,9 @@ export const theme = {
   fonts,
   typography,
   clayHighlight,
+  overlayLight,
   scrim,
+  backdropDark,
   subjectAccents,
 } as const;
 
