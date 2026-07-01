@@ -1,0 +1,67 @@
+{
+  "appName": "ACE",
+  "tagline": "Your exam, game mode on.",
+  "cta": {
+    "start": "Let's go!",
+    "continue": "Continue",
+    "check": "Check",
+    "nextQuestion": "Next question",
+    "retry": "Try again",
+    "play": "Play",
+    "challengeFriend": "Challenge a friend",
+    "back": "Back",
+    "goHome": "Back to home",
+    "cancel": "Cancel",
+    "close": "Close",
+    "comingSoon": "Coming soon"
+  },
+  "tabs": {
+    "learn": "Learn",
+    "league": "League",
+    "quests": "Quests",
+    "profile": "Profile"
+  },
+  "offline": {
+    "banner": "No internet connection"
+  },
+  "loading": "Loading…",
+  "xp": {
+    "label": "XP",
+    "amount": "+{{xp}} XP",
+    "total": "{{xp}} XP"
+  },
+  "hearts": {
+    "label": "Hearts"
+  },
+  "streak": {
+    "label": "Streak",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days",
+    "todayDone": "{{count}}-day streak — today is in the bag!",
+    "milestone": "{{count}}-day streak! ACE is proud of you.",
+    "freezeUsed": "Your Streak Freeze saved you!"
+  },
+  "level_one": "{{count}} level",
+  "level_other": "{{count}} levels",
+  "trophy": {
+    "unlocked": "Trophy unlocked: {{name}}!"
+  },
+  "quests": {
+    "title": "Quests",
+    "empty": {
+      "title": "Your quests are coming soon!",
+      "message": "Daily goal, daily challenges and trophies to collect — it's all being set up here."
+    }
+  },
+  "notFound": {
+    "title": "Oops, page not found",
+    "message": "This page doesn't exist… or not anymore. Head back home to keep studying."
+  },
+  "a11y": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "hearts": "{{count}} of {{max}} hearts",
+    "stars": "{{count}} of 3 stars",
+    "progress": "Progress: {{pct}}%"
+  }
+}

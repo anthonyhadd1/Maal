@@ -1,0 +1,15 @@
+{
+  "title": "Passe en Premium",
+  "pitch": "Tous les niveaux. Cœurs illimités. Révision intelligente. Tout pour décrocher ta place.",
+  "priceNote": "Moins cher qu'une heure de soutien scolaire.",
+  "cta": "Essayer 7 jours gratuits",
+  "restore": "Restaurer mes achats",
+  "perMonth": "{{price}} / mois",
+  "perYear": "{{price}} / an",
+  "features": {
+    "allUnits": "Toutes les unités, tous les niveaux",
+    "unlimitedHearts": "Cœurs illimités",
+    "smartReview": "Révision illimitée et ciblée",
+    "detailedStats": "Statistiques détaillées"
+  }
+}

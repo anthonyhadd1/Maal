@@ -1,0 +1,15 @@
+{
+  "title": "Go Premium",
+  "pitch": "Every level. Unlimited hearts. Smart review. Everything to earn your seat.",
+  "priceNote": "Cheaper than an hour of tutoring.",
+  "cta": "Try 7 days free",
+  "restore": "Restore my purchases",
+  "perMonth": "{{price}} / month",
+  "perYear": "{{price}} / year",
+  "features": {
+    "allUnits": "All units, all levels",
+    "unlimitedHearts": "Unlimited hearts",
+    "smartReview": "Unlimited, targeted review",
+    "detailedStats": "Detailed statistics"
+  }
+}

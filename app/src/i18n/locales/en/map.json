@@ -1,0 +1,18 @@
+{
+  "title": "Learn",
+  "subtitle": "Pick a level and go.",
+  "empty": {
+    "title": "The level map is coming!",
+    "message": "Your subjects, units and levels will live here very soon. Get ready."
+  },
+  "lockedToast": "Finish the previous level first!",
+  "startTooltip": "START",
+  "offlinePlay": "Connect to the internet to play.",
+  "switcher": {
+    "title": "Pick your subject",
+    "completed": "{{pct}}% complete"
+  },
+  "unitProgress": "{{done}}/{{total}}",
+  "boss": "Mock exam",
+  "legendary": "Legendary level"
+}

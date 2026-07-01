@@ -1,0 +1,18 @@
+{
+  "title": "Apprendre",
+  "subtitle": "Choisis un niveau et fonce.",
+  "empty": {
+    "title": "La carte des niveaux arrive !",
+    "message": "Tes matières, tes unités et tes niveaux s'installeront ici très bientôt. Prépare-toi."
+  },
+  "lockedToast": "Termine le niveau précédent !",
+  "startTooltip": "COMMENCE",
+  "offlinePlay": "Connecte-toi à Internet pour jouer.",
+  "switcher": {
+    "title": "Choisis ta matière",
+    "completed": "{{pct}} % terminé"
+  },
+  "unitProgress": "{{done}}/{{total}}",
+  "boss": "Examen blanc",
+  "legendary": "Niveau légendaire"
+}

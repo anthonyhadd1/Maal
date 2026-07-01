@@ -1,0 +1,47 @@
+{
+  "feedback": {
+    "correct": {
+      "1": "Bravo !",
+      "2": "Exact !",
+      "3": "Trop fort·e !",
+      "4": "Dans le mille !"
+    },
+    "wrong": {
+      "1": "Aïe…",
+      "2": "Pas tout à fait.",
+      "3": "Presque ! Regarde l'explication."
+    },
+    "combo": "{{count}} d'affilée !",
+    "explanationTitle": "Explication",
+    "correctAnswer": "La bonne réponse"
+  },
+  "results": {
+    "perfect": "Sans-faute ! Incroyable.",
+    "passed": "Niveau réussi !",
+    "failed": "Pas cette fois… on remet ça ?",
+    "xpEarned": "+{{xp}} XP",
+    "accuracy": "Précision",
+    "maxCombo": "Meilleure série",
+    "time": "Temps",
+    "replay": "Rejouer"
+  },
+  "hearts": {
+    "lost": "Tu as perdu un cœur",
+    "earned": "+1 cœur ! Bien joué.",
+    "empty": {
+      "title": "Plus de cœurs !",
+      "body": "Récupère un cœur dans {{time}}, gagne-en un en Révision, ou passe en illimité avec Premium."
+    }
+  },
+  "quit": {
+    "title": "Tu veux vraiment quitter ?",
+    "body": "Tu vas perdre ta progression sur ce niveau.",
+    "confirm": "Quitter",
+    "stay": "Rester"
+  },
+  "review": {
+    "title": "Révision",
+    "subtitle": "Tes erreurs, transformées en points forts."
+  },
+  "provenance": "Concours {{year}}"
+}

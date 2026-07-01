@@ -1,0 +1,47 @@
+{
+  "feedback": {
+    "correct": {
+      "1": "Well done!",
+      "2": "Exactly!",
+      "3": "You're on fire!",
+      "4": "Bullseye!"
+    },
+    "wrong": {
+      "1": "Ouch…",
+      "2": "Not quite.",
+      "3": "Almost! Check the explanation."
+    },
+    "combo": "{{count}} in a row!",
+    "explanationTitle": "Explanation",
+    "correctAnswer": "The correct answer"
+  },
+  "results": {
+    "perfect": "Flawless! Incredible.",
+    "passed": "Level passed!",
+    "failed": "Not this time… run it back?",
+    "xpEarned": "+{{xp}} XP",
+    "accuracy": "Accuracy",
+    "maxCombo": "Best run",
+    "time": "Time",
+    "replay": "Replay"
+  },
+  "hearts": {
+    "lost": "You lost a heart",
+    "earned": "+1 heart! Nice.",
+    "empty": {
+      "title": "Out of hearts!",
+      "body": "Get a heart back in {{time}}, earn one in Review, or go unlimited with Premium."
+    }
+  },
+  "quit": {
+    "title": "Really quit?",
+    "body": "You'll lose your progress on this level.",
+    "confirm": "Quit",
+    "stay": "Stay"
+  },
+  "review": {
+    "title": "Review",
+    "subtitle": "Your mistakes, turned into strengths."
+  },
+  "provenance": "Exam {{year}}"
+}

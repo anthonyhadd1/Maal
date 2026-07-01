@@ -1,0 +1,67 @@
+{
+  "appName": "ACE",
+  "tagline": "Ton concours, en mode jeu.",
+  "cta": {
+    "start": "C'est parti !",
+    "continue": "Continuer",
+    "check": "Vérifier",
+    "nextQuestion": "Question suivante",
+    "retry": "Réessayer",
+    "play": "Jouer",
+    "challengeFriend": "Défier un ami",
+    "back": "Retour",
+    "goHome": "Retour à l'accueil",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "comingSoon": "Bientôt disponible"
+  },
+  "tabs": {
+    "learn": "Apprendre",
+    "league": "Ligue",
+    "quests": "Quêtes",
+    "profile": "Profil"
+  },
+  "offline": {
+    "banner": "Pas de connexion Internet"
+  },
+  "loading": "Chargement…",
+  "xp": {
+    "label": "XP",
+    "amount": "+{{xp}} XP",
+    "total": "{{xp}} XP"
+  },
+  "hearts": {
+    "label": "Cœurs"
+  },
+  "streak": {
+    "label": "Série",
+    "days_one": "{{count}} jour",
+    "days_other": "{{count}} jours",
+    "todayDone": "Série de {{count}} jours — c'est dans la poche pour aujourd'hui !",
+    "milestone": "{{count}} jours de série ! ACE est fier de toi.",
+    "freezeUsed": "Ton Gel de série t'a sauvé·e !"
+  },
+  "level_one": "{{count}} niveau",
+  "level_other": "{{count}} niveaux",
+  "trophy": {
+    "unlocked": "Trophée débloqué : {{name}} !"
+  },
+  "quests": {
+    "title": "Quêtes",
+    "empty": {
+      "title": "Tes quêtes arrivent bientôt !",
+      "message": "Objectif du jour, défis quotidiens et trophées à collectionner — tout se prépare ici."
+    }
+  },
+  "notFound": {
+    "title": "Oups, page introuvable",
+    "message": "Cette page n'existe pas… ou plus. Reviens à l'accueil pour continuer à réviser."
+  },
+  "a11y": {
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "hearts": "{{count}} cœurs sur {{max}}",
+    "stars": "{{count}} étoiles sur 3",
+    "progress": "Progression : {{pct}} %"
+  }
+}

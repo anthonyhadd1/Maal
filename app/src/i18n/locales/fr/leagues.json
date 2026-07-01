@@ -1,0 +1,25 @@
+{
+  "title": "Ligue",
+  "empty": {
+    "title": "La ligue ouvre bientôt !",
+    "message": "Chaque semaine, affronte 29 autres candidat·e·s. Les 10 premiers montent, les 5 derniers descendent."
+  },
+  "promoted": "Promu·e en Ligue {{league}} !",
+  "demotionWarning": "Attention, tu es dans la zone rouge…",
+  "weekEnd": "La semaine se termine dimanche à minuit !",
+  "promotionZone": "Zone de promotion",
+  "demotionZone": "Zone de relégation",
+  "you": "Toi",
+  "challenge": {
+    "received": "{{name}} te défie !",
+    "won": "Victoire ! {{a}}–{{b}} contre {{name}}",
+    "lost": "{{name}} t'a battu·e {{a}}–{{b}}. Revanche ?"
+  },
+  "tiers": {
+    "bronze": "Ligue Bronze",
+    "argent": "Ligue Argent",
+    "or": "Ligue Or",
+    "diamant": "Ligue Diamant",
+    "cedre": "Ligue Cèdre"
+  }
+}

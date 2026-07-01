@@ -1,0 +1,24 @@
+{
+  "title": "Profile",
+  "memberSince": "Member since {{date}}",
+  "usernamePrefix": "@{{username}}",
+  "stats": {
+    "xpTotal": "Total XP",
+    "streak": "Streak",
+    "hearts": "Hearts"
+  },
+  "email": "Email",
+  "noEmail": "No email on file",
+  "logout": "Log out",
+  "empty": {
+    "friends": "Add your friends and show them who the future doctor is."
+  },
+  "settings": {
+    "title": "Settings",
+    "sound": "Sound",
+    "haptics": "Haptics",
+    "reduceMotion": "Reduce motion",
+    "language": "Language",
+    "deleteAccount": "Delete my account"
+  }
+}

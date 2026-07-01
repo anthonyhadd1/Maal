@@ -1,0 +1,24 @@
+{
+  "title": "Profil",
+  "memberSince": "Membre depuis {{date}}",
+  "usernamePrefix": "@{{username}}",
+  "stats": {
+    "xpTotal": "XP total",
+    "streak": "Série",
+    "hearts": "Cœurs"
+  },
+  "email": "E-mail",
+  "noEmail": "Aucun e-mail enregistré",
+  "logout": "Se déconnecter",
+  "empty": {
+    "friends": "Ajoute tes amis et montre-leur qui est le futur médecin."
+  },
+  "settings": {
+    "title": "Réglages",
+    "sound": "Sons",
+    "haptics": "Vibrations",
+    "reduceMotion": "Réduire les animations",
+    "language": "Langue",
+    "deleteAccount": "Supprimer mon compte"
+  }
+}
