@@ -119,3 +119,29 @@ class TestSubjectMap:
     def test_inactive_subject_404(self, auth_client):
         subject = SubjectFactory(slug="secret", is_active=False)
         assert auth_client.get(f"/api/v1/subjects/{subject.slug}/map/").status_code == 404
+
+
+class TestMapReflectsProgress:
+    """Phase 3 : l'import paresseux de progress est actif — la carte et les
+    matières doivent refléter les vraies lignes LevelProgress."""
+
+    def test_completed_level_next_unlocked_and_completion_pct(self, auth_client):
+        from apps.progress.tests.helpers import make_level, play_level
+
+        subject = SubjectFactory(slug="bio-progress")
+        unit = UnitFactory(subject=subject, order=1)
+        level1, questions1 = make_level(unit=unit, order=1, n_questions=2)
+        level2, _ = make_level(unit=unit, order=2, n_questions=2)
+
+        result = play_level(auth_client.user, level1, questions1)  # sans-faute
+        assert result["unlocked_level_id"] == level2.id
+
+        response = auth_client.get(f"/api/v1/subjects/{subject.slug}/map/")
+        states = {lvl["id"]: lvl for u in response.data["units"] for lvl in u["levels"]}
+        assert states[level1.id]["status"] == "completed"
+        assert states[level1.id]["stars"] == 3
+        assert states[level2.id]["status"] == "unlocked"  # déverrouillage matérialisé
+
+        subjects = auth_client.get("/api/v1/subjects/")
+        row = next(s for s in subjects.data if s["slug"] == "bio-progress")
+        assert row["completion_pct"] == 50  # 1 niveau sur 2

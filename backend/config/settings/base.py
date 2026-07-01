@@ -158,6 +158,7 @@ GAME = {
     "LEGENDARY_MIN_SCORE_PCT": env.int("LEGENDARY_MIN_SCORE_PCT", default=90),
     "LEGENDARY_XP": env.int("LEGENDARY_XP", default=40),
     "QUESTIONS_PER_LEVEL": env.int("QUESTIONS_PER_LEVEL", default=10),
+    "ATTEMPT_STALE_MINUTES": env.int("ATTEMPT_STALE_MINUTES", default=30),
     "REVIEW_BOX_DAYS": env.list("REVIEW_BOX_DAYS", cast=int, default=[1, 3, 7]),
     "LEAGUE_GROUP_SIZE": env.int("LEAGUE_GROUP_SIZE", default=30),
     "LEAGUE_PROMOTE_COUNT": env.int("LEAGUE_PROMOTE_COUNT", default=10),

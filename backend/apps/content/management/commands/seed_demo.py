@@ -91,9 +91,14 @@ class Command(BaseCommand):
         self.stdout.write(f"Utilisateurs démo : {created} créé(s), {len(DEMO_USERS) - created} déjà présent(s).")
 
     def seed_gamification(self):
-        from apps.gamification.models import LeagueTier  # noqa: F401 — ImportError tant que la phase 3 n'existe pas
+        from apps.gamification.models import PlayerState
 
-        # Phase 3 étend cette fonction (ligues, achievements, XP démo).
+        # Phase 3 : un PlayerState pour chaque utilisateur (y compris ceux créés
+        # avant la phase 3). Pas d'XP démo ici — la phase 4 (ligues) s'en charge.
+        created = sum(
+            PlayerState.objects.get_or_create(user=user)[1] for user in User.objects.all()
+        )
+        self.stdout.write(f"PlayerState : {created} créé(s), {User.objects.count() - created} déjà présent(s).")
 
     def seed_social(self):
         from apps.social.models import Friendship  # noqa: F401 — ImportError tant que la phase 4 n'existe pas
