@@ -219,6 +219,15 @@ def _update_review_item(user, question, is_correct: bool, now) -> None:
         return
     if item.box >= len(box_days):  # correct en dernière boîte → diplômé
         item.delete()
+        # Compteur bon marché du trophée « Mémoire d'éléphant » — F() atomique,
+        # même transaction que la suppression de l'item.
+        from django.db.models import F
+
+        from apps.gamification.models import PlayerState
+
+        PlayerState.objects.filter(user=user).update(
+            review_graduated_total=F("review_graduated_total") + 1
+        )
         return
     item.box += 1
     item.due_at = now + timedelta(days=box_days[item.box - 1])
@@ -290,7 +299,9 @@ def submit_answer(user, attempt_id: int, question_id: int, selected_choice_ids: 
     _update_review_item(user, question, is_correct, now)
 
     exempt = economy.heart_exempt(user)
-    if not is_correct and not attempt.is_practice and not exempt:
+    # Les cœurs ne se perdent qu'en NIVEAU réel — jamais en révision ni en défi
+    # (gameplay §2 et §6).
+    if not is_correct and not attempt.is_practice and attempt.challenge_id is None and not exempt:
         _, spent = economy.spend_heart(state, now)
         if spent:
             attempt.hearts_lost = (attempt.hearts_lost or 0) + 1
@@ -341,6 +352,7 @@ def _scored_replays_today(user, level, progress, today) -> int:
         user=user,
         level=level,
         is_practice=False,
+        challenge__isnull=True,  # une tentative de défi n'est pas un replay scoré
         status=LevelAttempt.Status.COMPLETED,
         completed_at__gte=day_start,
         completed_at__lt=day_end,
@@ -406,7 +418,20 @@ def complete_attempt(user, attempt_id: int, request=None) -> dict:
     heart_earned = False
     unlocked_level_id = None
 
-    if attempt.is_practice:
+    if attempt.challenge_id is not None:
+        # Mode défi (gameplay §6) : on ne fait QUE scorer — ni étoiles, ni
+        # progression, ni cœurs, ni série. L'XP (20/5/10, des deux côtés)
+        # est attribué par la résolution du défi, après la persistance des
+        # résultats ci-dessous.
+        stars = None
+        passed = None
+        xp_parts = {
+            "base": 0,
+            "perfect_bonus": 0,
+            "combo_bonus": 0,
+            "first_clear_bonus": 0,
+        }
+    elif attempt.is_practice:
         stars = None
         passed = None
         xp_parts = {
@@ -492,8 +517,16 @@ def complete_attempt(user, attempt_id: int, request=None) -> dict:
                 LevelProgress.objects.get_or_create(user=user, level=next_level)
                 unlocked_level_id = next_level.id
 
-    # La révision compte pour la série (design gameplay §3) — comme les niveaux.
-    streak_info = economy.update_streak(user, state, today)
+    if attempt.challenge_id is None:
+        # La révision compte pour la série (design gameplay §3) — comme les
+        # niveaux. Une tentative de défi n'y touche jamais (gameplay §6).
+        streak_info = economy.update_streak(user, state, today)
+    else:
+        streak_info = {
+            "current": state.streak_current,
+            "extended_today": False,
+            "freeze_consumed": False,
+        }
 
     xp_total_awarded = sum(xp_parts.values())
     attempt.status = LevelAttempt.Status.COMPLETED
@@ -507,22 +540,37 @@ def complete_attempt(user, attempt_id: int, request=None) -> dict:
     attempt.duration_ms = sum(a.time_ms or 0 for a in answers)
     attempt.save()
 
-    achievements_unlocked: list = []
-    try:  # phase 4 branche le moteur de trophées ici
-        from apps.gamification.services import achievements
+    xp_payload = {**xp_parts, "total": xp_total_awarded}
+    challenge_info = None
+    if attempt.challenge_id is not None:
+        # Résolution du défi (même transaction) : score adverse, vainqueur,
+        # XP 20/5/10 des deux côtés — les résultats de la tentative sont posés.
+        from apps.social.services import challenges as challenge_service
 
-        achievements_unlocked = achievements.check(user) or []
-    except (ImportError, AttributeError):
-        pass
+        challenge_info = challenge_service.on_attempt_completed(attempt, now)
+        if challenge_info.get("xp"):
+            attempt.xp_awarded = challenge_info["xp"]
+            attempt.save(update_fields=["xp_awarded"])
+        xp_payload = {**xp_parts, "challenge": challenge_info.get("xp", 0), "total": challenge_info.get("xp", 0)}
+
+    from apps.gamification.services import achievements  # câblé en phase 4
+
+    achievements_unlocked = achievements.check(
+        user,
+        context={
+            "completed_at": now,
+            "is_level": not attempt.is_practice and attempt.challenge_id is None,
+        },
+    )
 
     hearts_remaining, next_heart_at = (None, None) if exempt else economy.hearts_effective(state, now)
-    return {
+    payload = {
         "score_pct": score_pct,
         "correct_count": correct,
         "total_count": total,
         "stars": stars,
         "passed": passed,
-        "xp": {**xp_parts, "total": xp_total_awarded},
+        "xp": xp_payload,
         "hearts": {
             "lost": attempt.hearts_lost,
             "remaining": hearts_remaining,
@@ -535,6 +583,9 @@ def complete_attempt(user, attempt_id: int, request=None) -> dict:
         "achievements_unlocked": achievements_unlocked,
         "review": _review_payload(answers, request),
     }
+    if challenge_info is not None:
+        payload["challenge"] = challenge_info
+    return payload
 
 
 # --- 4. Abandon --------------------------------------------------------------------
@@ -551,6 +602,41 @@ def abandon_attempt(user, attempt_id: int) -> None:
         attempt.status = LevelAttempt.Status.ABANDONED
         attempt.save(update_fields=["status"])
     # déjà abandonnée → idempotent
+
+
+def get_attempt(user, attempt_id: int, request=None) -> dict:
+    """Reprise d'une tentative active (autre appareil / stockage local perdu) :
+    même payload de questions qu'au démarrage + réponses déjà soumises."""
+    attempt = LevelAttempt.objects.filter(pk=attempt_id, user=user).first()
+    if attempt is None:
+        raise GameError("attempt_not_found", "Tentative introuvable.", status_code=404)
+    if attempt.status != LevelAttempt.Status.ACTIVE:
+        raise GameError("attempt_not_active", "Cette tentative est terminée.", status_code=409)
+
+    questions_by_id = {
+        q.id: q
+        for q in Question.objects.filter(pk__in=attempt.question_ids)
+        .select_related("passage", "exam")
+        .prefetch_related("choices")
+    }
+    ordered = [questions_by_id[qid] for qid in attempt.question_ids if qid in questions_by_id]
+    answered = [
+        {
+            "question_id": qa.question_id,
+            "selected_choice_ids": qa.selected_choice_ids,
+            "is_correct": qa.is_correct,
+        }
+        for qa in attempt.answers.order_by("created_at")
+    ]
+    return {
+        "attempt_id": attempt.id,
+        "level_id": attempt.level_id,
+        "challenge_id": attempt.challenge_id,
+        "is_practice": attempt.is_practice,
+        "started_at": attempt.started_at,
+        "questions": _questions_payload(ordered, request),
+        "answered": answered,
+    }
 
 
 # --- 5. Révision (practice) ----------------------------------------------------------

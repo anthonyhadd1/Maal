@@ -1,16 +1,21 @@
-"""Vues fines — toute la logique vit dans services/attempts.py."""
+"""Vues fines — toute la logique vit dans services/attempts.py et services/stats.py."""
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import AnswerSubmitSerializer
-from .services import attempts
+from .services import attempts, stats
 
 
 class StartLevelAttemptView(APIView):
     def post(self, request, level_id: int):
         payload = attempts.start_level_attempt(request.user, level_id, request=request)
         return Response(payload, status=status.HTTP_201_CREATED)
+
+
+class AttemptDetailView(APIView):
+    def get(self, request, attempt_id: int):
+        return Response(attempts.get_attempt(request.user, attempt_id, request=request))
 
 
 class SubmitAnswerView(APIView):
@@ -46,3 +51,8 @@ class StartPracticeAttemptView(APIView):
     def post(self, request):
         payload = attempts.start_practice_attempt(request.user, request=request)
         return Response(payload, status=status.HTTP_201_CREATED)
+
+
+class MeStatsView(APIView):
+    def get(self, request):
+        return Response(stats.me_stats(request.user))

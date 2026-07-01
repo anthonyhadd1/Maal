@@ -1,12 +1,13 @@
+"""Vues fines — ligues/trophées/quêtes vivent dans services/."""
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import PlayerState
-from .services import economy
+from .services import achievements, economy, leagues, quests
 
 
 class MeGameView(APIView):
-    """Résumé économie du joueur. `league` reste null jusqu'à la phase 4."""
+    """Résumé économie du joueur, champ `league` inclus (phase 4)."""
 
     def get(self, request):
         state, _ = PlayerState.objects.get_or_create(user=request.user)
@@ -20,6 +21,26 @@ class MeGameView(APIView):
                 "streak_current": state.streak_current,
                 "streak_longest": state.streak_longest,
                 "streak_freezes": state.streak_freezes,
-                "league": None,
+                "league": leagues.me_summary(request.user),
             }
         )
+
+
+class LeagueView(APIView):
+    def get(self, request):
+        return Response(leagues.leaderboard(request.user))
+
+
+class FriendsLeaderboardView(APIView):
+    def get(self, request):
+        return Response(leagues.friends_leaderboard(request.user))
+
+
+class AchievementsView(APIView):
+    def get(self, request):
+        return Response(achievements.overview(request.user))
+
+
+class QuestsTodayView(APIView):
+    def get(self, request):
+        return Response(quests.quests_today(request.user))

@@ -41,7 +41,15 @@ class LevelProgress(TimeStampedModel):
 
 class LevelAttempt(models.Model):
     """Une session de jeu. `level` est NULL pour les sessions de révision
-    (is_practice=True) — la file Leitner n'appartient à aucun niveau."""
+    (is_practice=True) — la file Leitner n'appartient à aucun niveau.
+
+    Mode « défi » (phase 4, choix documenté) : plutôt qu'un champ `mode`
+    migrant is_practice, une FK nullable `challenge` marque les tentatives de
+    défi (is_practice reste False). Les gardes économiques testent
+    `challenge_id is None` : une tentative de défi ne touche NI cœurs, NI
+    étoiles/progression, NI série — son XP (20/5/10) vient de la résolution
+    du défi (apps.social.services.challenges), pas du barème de niveau.
+    """
 
     class Status(models.TextChoices):
         ACTIVE = "active", "En cours"
@@ -56,6 +64,13 @@ class LevelAttempt(models.Model):
     )
     status = models.CharField(max_length=10, choices=Status.choices, default=Status.ACTIVE)
     is_practice = models.BooleanField(default=False)
+    challenge = models.ForeignKey(
+        "social.Challenge",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="attempts",
+    )
     question_ids = models.JSONField(default=list)  # ordre servi au départ — la correction valide contre CET ensemble
     started_at = models.DateTimeField(default=timezone.now)
     completed_at = models.DateTimeField(null=True, blank=True)

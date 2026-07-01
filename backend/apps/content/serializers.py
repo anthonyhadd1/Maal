@@ -43,7 +43,19 @@ class QuestionPublicSerializer(serializers.ModelSerializer):
     image_url = AbsoluteFileField(source="image", read_only=True)
     passage = PassageSerializer(read_only=True)
     choices = ChoicePublicSerializer(many=True, read_only=True)
+    exam_year = serializers.IntegerField(source="exam.year", read_only=True, default=None)
+    exam_session = serializers.CharField(source="exam.session", read_only=True, default=None)
 
     class Meta:
         model = Question
-        fields = ["id", "qtype", "language", "text", "image_url", "passage", "choices"]
+        fields = [
+            "id",
+            "qtype",
+            "language",
+            "text",
+            "image_url",
+            "passage",
+            "choices",
+            "exam_year",
+            "exam_session",
+        ]

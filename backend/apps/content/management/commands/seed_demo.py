@@ -34,6 +34,39 @@ DEMO_USERS = [
     ("nadine", "Nadine", "avatar-02", 40),
 ]
 
+# Phase 4 — ligues, trophées, social (idempotent, voir seed_gamification/seed_social).
+LEAGUE_TIERS = [
+    # (nom, icône lucide, couleur)
+    ("Bronze", "medal", "#CD7F32"),
+    ("Argent", "award", "#94A3B8"),
+    ("Or", "trophy", "#F59E0B"),
+    ("Diamant", "gem", "#38BDF8"),
+    ("Cèdre", "tree-pine", "#15803D"),
+]
+
+DEMO_WEEK_XP = {
+    "elie": 300,
+    "maya": 250,
+    "rita": 180,
+    "karim": 150,
+    "nour": 120,
+    "lea": 95,
+    "tony": 70,
+    "yasmina": 55,
+    "marc": 40,
+    "nadine": 30,
+}
+
+DEMO_STREAKS = {"elie": 12, "maya": 7, "rita": 3, "nour": 25, "karim": 1}
+
+DEMO_FRIENDSHIPS = [
+    # (demandeur, destinataire, statut)
+    ("elie", "maya", "accepted"),
+    ("maya", "rita", "accepted"),
+    ("elie", "rita", "accepted"),
+    ("elie", "karim", "pending"),
+]
+
 
 class Command(BaseCommand):
     help = "Peuple la base avec le contenu démo français, les facultés et les utilisateurs démo (idempotent)."
@@ -91,19 +124,132 @@ class Command(BaseCommand):
         self.stdout.write(f"Utilisateurs démo : {created} créé(s), {len(DEMO_USERS) - created} déjà présent(s).")
 
     def seed_gamification(self):
-        from apps.gamification.models import PlayerState
+        from django.db import transaction
 
-        # Phase 3 : un PlayerState pour chaque utilisateur (y compris ceux créés
-        # avant la phase 3). Pas d'XP démo ici — la phase 4 (ligues) s'en charge.
+        from apps.billing.models import Entitlement
+        from apps.gamification.models import LeagueTier, PlayerState, XpEvent
+        from apps.gamification.services import achievements, economy, leagues
+
+        # Satellites pour chaque utilisateur (y compris ceux d'avant les phases 3/4).
         created = sum(
             PlayerState.objects.get_or_create(user=user)[1] for user in User.objects.all()
         )
         self.stdout.write(f"PlayerState : {created} créé(s), {User.objects.count() - created} déjà présent(s).")
+        created = sum(
+            Entitlement.objects.get_or_create(user=user)[1] for user in User.objects.all()
+        )
+        self.stdout.write(f"Entitlement : {created} créé(s).")
+
+        # Paliers de ligue (Bronze → Cèdre), pilotés par data.
+        created = sum(
+            LeagueTier.objects.get_or_create(
+                order=order, defaults={"name": name, "icon": icon, "color_hex": color}
+            )[1]
+            for order, (name, icon, color) in enumerate(LEAGUE_TIERS, start=1)
+        )
+        self.stdout.write(f"Paliers de ligue : {created} créé(s), {len(LEAGUE_TIERS) - created} déjà présent(s).")
+
+        # Catalogue des trophées (gameplay §5 — les 21, famille Expert·e incluse).
+        created = achievements.seed_catalog()
+        self.stdout.write(f"Trophées : {created} créé(s).")
+
+        # XP démo de LA SEMAINE COURANTE via award_xp (les adhésions de ligue se
+        # forment par le hook) — jamais re-seedé si l'utilisateur a déjà de l'XP
+        # cette semaine (idempotent, ne double pas au redémarrage).
+        week_start = leagues.week_bounds()[1]
+        seeded = 0
+        for username, amount in DEMO_WEEK_XP.items():
+            user = User.objects.filter(username__iexact=username).first()
+            if user is None or XpEvent.objects.filter(user=user, created_at__gte=week_start).exists():
+                continue
+            with transaction.atomic():
+                economy.award_xp(
+                    user, amount, XpEvent.EventType.LEVEL_COMPLETE, meta={"scoring": "seed_demo"}
+                )
+            seeded += 1
+        self.stdout.write(f"XP démo de la semaine : {seeded} utilisateur(s) crédité(s).")
+
+        # Séries variées (champs posés directement, uniquement sur état vierge).
+        for username, streak in DEMO_STREAKS.items():
+            state = PlayerState.objects.filter(user__username__iexact=username).first()
+            if state is None or state.streak_current != 0:
+                continue
+            state.streak_current = streak
+            state.streak_longest = max(state.streak_longest, streak)
+            state.streak_last_day = economy.game_today()
+            state.save(update_fields=["streak_current", "streak_longest", "streak_last_day", "updated_at"])
+        self.stdout.write("Séries démo posées.")
 
     def seed_social(self):
-        from apps.social.models import Friendship  # noqa: F401 — ImportError tant que la phase 4 n'existe pas
+        from django.utils import timezone
 
-        # Phase 4 étend cette fonction (amitiés et défis démo).
+        from apps.content.models import Level, LevelQuestion
+        from apps.social.models import Challenge, Friendship
+
+        def get_user(username):
+            return User.objects.filter(username__iexact=username).first()
+
+        def edge_exists(user_a, user_b):
+            from django.db.models import Q
+
+            return Friendship.objects.filter(
+                Q(requester=user_a, addressee=user_b) | Q(requester=user_b, addressee=user_a)
+            ).exists()
+
+        now = timezone.now()
+        created = 0
+        for a_name, b_name, status in DEMO_FRIENDSHIPS:
+            user_a, user_b = get_user(a_name), get_user(b_name)
+            if not user_a or not user_b or edge_exists(user_a, user_b):
+                continue
+            Friendship.objects.create(
+                requester=user_a,
+                addressee=user_b,
+                status=status,
+                responded_at=now if status == Friendship.Status.ACCEPTED else None,
+            )
+            created += 1
+        self.stdout.write(f"Amitiés démo : {created} créée(s).")
+
+        # Un défi terminé (elie a battu maya) + un défi en attente (maya → elie).
+        elie, maya = get_user("elie"), get_user("maya")
+        level = (
+            Level.objects.filter(is_active=True, unit__is_active=True)
+            .order_by("unit__subject__order", "unit__order", "order")
+            .first()
+        )
+        if elie and maya and level and not Challenge.objects.filter(
+            challenger__in=[elie, maya], opponent__in=[elie, maya]
+        ).exists():
+            snapshot = list(
+                LevelQuestion.objects.filter(level=level, question__is_active=True)
+                .order_by("order")
+                .values_list("question_id", flat=True)[: level.question_count_target]
+            )
+            Challenge.objects.create(
+                challenger=elie,
+                opponent=maya,
+                level=level,
+                question_ids=snapshot,
+                challenger_score=8,
+                opponent_score=6,
+                winner=elie,
+                status=Challenge.Status.COMPLETED,
+                xp_awarded=True,
+                expires_at=now,
+            )
+            Challenge.objects.create(
+                challenger=maya,
+                opponent=elie,
+                level=level,
+                question_ids=snapshot,
+                challenger_score=7,
+                status=Challenge.Status.PENDING,
+                expires_at=now + timezone.timedelta(hours=48),
+            )
+            self.stdout.write("Défis démo : 1 terminé + 1 en attente.")
+        else:
+            self.stdout.write("Défis démo : déjà présents (ou contenu manquant) — ignorés.")
 
     @staticmethod
     def _generate_placeholder_png(dest: Path):

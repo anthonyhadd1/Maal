@@ -46,11 +46,23 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class MeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
+    entitlement = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ["id", "username", "email", "date_joined", "profile"]
+        fields = ["id", "username", "email", "date_joined", "profile", "entitlement"]
         read_only_fields = ["id", "username", "date_joined"]
+
+    def get_entitlement(self, obj) -> dict:
+        # Import paresseux : accounts ne dépend de billing qu'à l'exécution.
+        try:
+            from apps.billing.models import Entitlement
+        except ImportError:
+            return {"is_premium": False, "premium_until": None}
+        entitlement = Entitlement.objects.filter(user=obj).first()
+        if entitlement is None:
+            return {"is_premium": False, "premium_until": None}
+        return {"is_premium": entitlement.is_premium, "premium_until": entitlement.premium_until}
 
     def update(self, instance, validated_data):
         profile_data = validated_data.pop("profile", None)
