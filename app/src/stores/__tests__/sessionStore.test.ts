@@ -181,6 +181,46 @@ describe('sessionStore', () => {
     expect(isSessionResumable(s)).toBe(true);
   });
 
+  test('legendary flag: default false, set by startSession, cleared by reset', async () => {
+    seedSession();
+    expect(useSessionStore.getState().legendary).toBe(false);
+
+    useSessionStore.getState().startSession({
+      attemptId: ATTEMPT_ID + 1,
+      levelId: LEVEL_ID,
+      questions: startAttemptResponse.questions,
+      legendary: true,
+    });
+    expect(useSessionStore.getState().legendary).toBe(true);
+
+    // Persisted for crash recovery (gold banner + withheld explanations
+    // survive a relaunch mid-run).
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const persisted = JSON.parse((await AsyncStorage.getItem('ace.session'))!) as {
+      state: { legendary: boolean };
+    };
+    expect(persisted.state.legendary).toBe(true);
+
+    useSessionStore.getState().reset();
+    expect(useSessionStore.getState().legendary).toBe(false);
+  });
+
+  test('a legendary run still records verdicts and results like a plain one', () => {
+    useSessionStore.getState().startSession({
+      attemptId: ATTEMPT_ID,
+      levelId: LEVEL_ID,
+      questions: startAttemptResponse.questions,
+      legendary: true,
+    });
+    const store = useSessionStore.getState();
+    store.recordAnswer(101, [1], correctAnswer({ combo: 1, explanation_text: null }));
+
+    const s = useSessionStore.getState();
+    expect(s.legendary).toBe(true);
+    expect(s.answers[101]).toEqual({ selected: [1], is_correct: true });
+    expect(s.challengeId).toBeNull();
+  });
+
   test('isSessionResumable respects the 30 min window and status', () => {
     const now = Date.now();
     const base = { status: 'inProgress' as const, attemptId: 1, startedAt: now - 60_000 };

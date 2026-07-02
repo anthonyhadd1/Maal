@@ -5,6 +5,7 @@ import { StyleSheet, Switch, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useLogout, useMe } from '@/api/queries/auth';
+import { useMeGame } from '@/api/queries/game';
 import { useDeleteAccount, usePatchMe } from '@/api/queries/profile';
 import { ClayButton } from '@/components/clay/ClayButton';
 import { ClayCard } from '@/components/clay/ClayCard';
@@ -18,6 +19,7 @@ import { PressableScale } from '@/components/layout/PressableScale';
 import { Screen } from '@/components/layout/Screen';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { SUPPORTED_LOCALES, type SupportedLocale } from '@/i18n';
+import { cancelStreakReminders, scheduleStreakReminders } from '@/lib/notifications';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
@@ -31,6 +33,7 @@ export function SettingsScreen() {
   const { t: tErrors } = useTranslation('errors');
   const toast = useToast();
   const me = useMe();
+  const game = useMeGame();
   const patchMe = usePatchMe();
   const logout = useLogout();
   const deleteAccount = useDeleteAccount();
@@ -69,13 +72,25 @@ export function SettingsScreen() {
   const soundEnabled = useSettingsStore((s) => s.soundEnabled);
   const hapticsEnabled = useSettingsStore((s) => s.hapticsEnabled);
   const reduceMotion = useSettingsStore((s) => s.reduceMotion);
+  const streakRemindersEnabled = useSettingsStore((s) => s.streakRemindersEnabled);
   const locale = useSettingsStore((s) => s.locale);
   const setSoundEnabled = useSettingsStore((s) => s.setSoundEnabled);
   const setHapticsEnabled = useSettingsStore((s) => s.setHapticsEnabled);
   const setReduceMotion = useSettingsStore((s) => s.setReduceMotion);
+  const setStreakRemindersEnabled = useSettingsStore((s) => s.setStreakRemindersEnabled);
   const setLocale = useSettingsStore((s) => s.setLocale);
   const { i18n } = useTranslation();
   const activeLocale = (locale ?? i18n.language) as SupportedLocale;
+
+  /** « Rappels de série » — off cancels everything, on reschedules now. */
+  const toggleStreakReminders = (value: boolean) => {
+    setStreakRemindersEnabled(value);
+    if (value) {
+      void scheduleStreakReminders(game.data?.streak_current ?? 0);
+    } else {
+      void cancelStreakReminders();
+    }
+  };
 
   // --- Ligue ----------------------------------------------------------------
   const leaguesOptIn = me.data?.profile.leagues_opt_in ?? true;
@@ -176,6 +191,12 @@ export function SettingsScreen() {
               onValueChange={setReduceMotion}
               testID="toggle-reduce-motion"
               value={reduceMotion}
+            />
+            <ToggleRow
+              label={t('settings.streakReminders')}
+              onValueChange={toggleStreakReminders}
+              testID="toggle-streak-reminders"
+              value={streakRemindersEnabled}
             />
 
             <View style={styles.langRow}>

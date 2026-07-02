@@ -16,6 +16,21 @@
   "unitProgress": "{{done}}/{{total}}",
   "boss": "Mock exam",
   "legendary": "Legendary level",
+  "legendaryDialog": {
+    "title": "Legendary level",
+    "body": "Score at least 9/10. 1 heart to enter. No explanations during the run.",
+    "start": "Attempt the legendary run",
+    "replayNormal": "Replay normally",
+    "cancel": "Cancel"
+  },
+  "legendaryLocked": "The legendary run isn't unlocked for this level yet.",
+  "a11y": {
+    "nodeCompleted": "{{title}} — completed, {{stars}} of 3 stars",
+    "nodeLegendary": "{{title}} — legendary crown, {{stars}} of 3 stars",
+    "nodeLocked": "{{title}} — locked",
+    "nodePremium": "{{title}} — Premium only",
+    "nodeUnlocked": "{{title}} — ready to play"
+  },
   "resume": {
     "title": "Resume your session?",
     "body": "You have a level in progress. Pick up right where you left off!",

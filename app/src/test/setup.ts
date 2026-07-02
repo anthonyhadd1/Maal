@@ -37,6 +37,38 @@ jest.mock('expo-haptics', () => ({
   NotificationFeedbackType: { Success: 'success', Error: 'error', Warning: 'warning' },
 }));
 
+// --- expo-audio: player factory stand-in (sounds.ts pool) -------------------
+jest.mock('expo-audio', () => ({
+  createAudioPlayer: jest.fn(() => ({
+    play: jest.fn(),
+    pause: jest.fn(),
+    seekTo: jest.fn(async () => {}),
+    remove: jest.fn(),
+    volume: 1,
+    loop: false,
+  })),
+}));
+
+// --- expo-notifications: permission denied by default (nothing schedules) ---
+jest.mock('expo-notifications', () => ({
+  getPermissionsAsync: jest.fn(async () => ({ granted: false, status: 'undetermined' })),
+  requestPermissionsAsync: jest.fn(async () => ({ granted: false, status: 'denied' })),
+  scheduleNotificationAsync: jest.fn(async () => 'mock-notification-id'),
+  cancelScheduledNotificationAsync: jest.fn(async () => {}),
+  cancelAllScheduledNotificationsAsync: jest.fn(async () => {}),
+  setNotificationChannelAsync: jest.fn(async () => null),
+  AndroidImportance: { DEFAULT: 3, HIGH: 4, LOW: 2 },
+  SchedulableTriggerInputTypes: {
+    CALENDAR: 'calendar',
+    DAILY: 'daily',
+    DATE: 'date',
+    MONTHLY: 'monthly',
+    TIME_INTERVAL: 'timeInterval',
+    WEEKLY: 'weekly',
+    YEARLY: 'yearly',
+  },
+}));
+
 // --- expo-localization: deterministic fr device ----------------------------
 jest.mock('expo-localization', () => ({
   getLocales: () => [

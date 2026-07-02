@@ -34,6 +34,12 @@
     "unmute": "Unmute",
     "mute": "Mute"
   },
+  "legendary": {
+    "banner": "Legendary run — 9/10 minimum",
+    "withheld": "Explanations at the end of the run",
+    "earnedTitle": "Legendary crown!",
+    "notEarned": "Not this time — you need 9/10."
+  },
   "results": {
     "perfect": "Flawless! Incredible.",
     "passed": "Level passed!",
@@ -48,7 +54,8 @@
       "perfect": "Perfect score",
       "combo": "Combo bonus",
       "firstClear": "First clear",
-      "streak": "Streak bonus"
+      "streak": "Streak bonus",
+      "legendary": "Legendary crown"
     }
   },
   "hearts": {

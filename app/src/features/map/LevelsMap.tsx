@@ -1,5 +1,6 @@
 import { useNetworkState } from 'expo-network';
 import { useRouter } from 'expo-router';
+import { Crown } from 'lucide-react-native';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +20,7 @@ import { Skeleton } from '@/components/feedback/Skeleton';
 import { useToast } from '@/components/feedback/Toast';
 import { Screen } from '@/components/layout/Screen';
 import { HeartsModal } from '@/features/map/HeartsModal';
-import { LevelNode, NODE_SIZE } from '@/features/map/LevelNode';
+import { LevelNode, NODE_SIZE, offersLegendary } from '@/features/map/LevelNode';
 import { MapConnector } from '@/features/map/MapConnector';
 import { UnitHeader } from '@/features/map/UnitHeader';
 import {
@@ -31,7 +32,7 @@ import {
 import { MapHeader } from '@/features/map/MapHeader';
 import { isSessionResumable, useSessionStore } from '@/stores/sessionStore';
 import { useSettingsStore } from '@/stores/settingsStore';
-import { getSubjectAccent, spacing } from '@/theme/tokens';
+import { colors, getSubjectAccent, spacing } from '@/theme/tokens';
 
 /** TAB 1 « Apprendre » — the levels map (design_mobile.md §4a). */
 export function LevelsMap() {
@@ -67,6 +68,8 @@ export function LevelsMap() {
   const [conflict, setConflict] = useState<{ level: MapLevel; attemptId: number | null } | null>(
     null,
   );
+  /** 3-star node pressed → offer the legendary run (PLAN decision 9). */
+  const [legendaryPrompt, setLegendaryPrompt] = useState<MapLevel | null>(null);
 
   // --- initial scroll to the current node --------------------------------
   const listRef = useRef<FlatList<MapRow>>(null);
@@ -115,7 +118,8 @@ export function LevelsMap() {
   );
 
   const startLevel = useCallback(
-    (level: MapLevel) => {
+    (level: MapLevel, options: { legendary?: boolean } = {}) => {
+      const legendary = options.legendary ?? false;
       if (startAttempt.isPending) return;
       // Sessions are server-graded — no offline play (design_mobile.md §5).
       if (
@@ -130,12 +134,13 @@ export function LevelsMap() {
         setHeartsModalVisible(true);
         return;
       }
-      startAttempt.mutate(level.id, {
+      startAttempt.mutate(legendary ? { levelId: level.id, legendary: true } : level.id, {
         onSuccess: (data) => {
           useSessionStore.getState().startSession({
             attemptId: data.attempt_id,
             levelId: level.id,
             questions: data.questions,
+            legendary,
           });
           launchSession(level.id);
         },
@@ -149,6 +154,10 @@ export function LevelsMap() {
             setHeartsModalVisible(true);
             return;
           }
+          if (info.code === 'legendary_locked') {
+            toast.show({ type: 'error', message: t('legendaryLocked') });
+            return;
+          }
           if (info.code === 'attempt_in_progress') {
             setConflict({ level, attemptId: info.attemptId });
             return;
@@ -158,6 +167,18 @@ export function LevelsMap() {
       });
     },
     [startAttempt, game.data, launchSession, router, toast, tErrors, networkState, t],
+  );
+
+  /** Node press: 3-star completed levels get the legendary offer first. */
+  const onNodeStart = useCallback(
+    (level: MapLevel) => {
+      if (offersLegendary(level)) {
+        setLegendaryPrompt(level);
+        return;
+      }
+      startLevel(level);
+    },
+    [startLevel],
   );
 
   const onLockedPress = useCallback(() => {
@@ -232,14 +253,14 @@ export function LevelsMap() {
             level={node.level}
             onLocked={onLockedPress}
             onPremium={onPremiumPress}
-            onStart={startLevel}
+            onStart={onNodeStart}
             rowWidth={width}
             x={layout.xFor(node.globalIndex)}
           />
         </View>
       );
     },
-    [accent, layout, width, onLockedPress, onPremiumPress, startLevel],
+    [accent, layout, width, onLockedPress, onPremiumPress, onNodeStart],
   );
 
   const refresh = useCallback(async () => {
@@ -314,6 +335,43 @@ export function LevelsMap() {
           router.push('/quests');
         }}
         visible={heartsModalVisible}
+      />
+
+      {/* Legendary offer on a 3-star node (gameplay §1.5): gold crown rules. */}
+      <ClayDialog
+        actions={[
+          {
+            label: t('legendaryDialog.start'),
+            onPress: () => {
+              const level = legendaryPrompt;
+              setLegendaryPrompt(null);
+              if (level) startLevel(level, { legendary: true });
+            },
+            variant: 'gold',
+            testID: 'legendary-start',
+          },
+          {
+            label: t('legendaryDialog.replayNormal'),
+            onPress: () => {
+              const level = legendaryPrompt;
+              setLegendaryPrompt(null);
+              if (level) startLevel(level);
+            },
+            variant: 'secondary',
+            testID: 'legendary-replay-normal',
+          },
+          {
+            label: t('legendaryDialog.cancel'),
+            onPress: () => setLegendaryPrompt(null),
+            variant: 'secondary',
+            testID: 'legendary-cancel',
+          },
+        ]}
+        icon={<Crown color={colors.xpGold} fill={colors.xpGold} size={56} />}
+        message={t('legendaryDialog.body')}
+        onRequestClose={() => setLegendaryPrompt(null)}
+        title={t('legendaryDialog.title')}
+        visible={legendaryPrompt != null}
       />
 
       {/* Crash recovery: resume the persisted in-progress attempt. */}

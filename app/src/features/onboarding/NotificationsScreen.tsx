@@ -39,7 +39,13 @@ export function NotificationsScreen() {
     try {
       // Dynamic import keeps expo-notifications out of the test/module graph.
       const Notifications = await import('expo-notifications');
-      await Notifications.requestPermissionsAsync();
+      const result = await Notifications.requestPermissionsAsync();
+      if (result.granted) {
+        // Seed the daily reminder right away (no-streak copy); every
+        // completed session reschedules it with the live streak value.
+        const { scheduleStreakReminders } = await import('@/lib/notifications');
+        await scheduleStreakReminders(0);
+      }
     } catch {
       // Permission failures never block onboarding.
     } finally {

@@ -110,3 +110,48 @@ export const completeResponse: CompleteResponse = {
   achievements_unlocked: [],
   review: [],
 };
+
+/** Legendary run WON: ≥9/10 → crown + one-time 40 XP bonus (PLAN decision 9). */
+export const legendaryEarnedComplete: CompleteResponse = {
+  score_pct: 90,
+  correct_count: 9,
+  total_count: 10,
+  stars: 2,
+  passed: true,
+  xp: {
+    base: 18,
+    perfect_bonus: 0,
+    combo_bonus: 4,
+    first_clear_bonus: 0,
+    legendary_bonus: 40,
+    total: 62,
+  },
+  hearts: { lost: 1, remaining: 3, next_heart_at: '2026-07-02T12:00:00Z' },
+  streak: { current: 5, extended_today: true },
+  unlocked_level_id: null,
+  achievements_unlocked: [],
+  review: [],
+  legendary: { attempted: true, earned: true },
+};
+
+/** Legendary run MISSED: attempted but under the 9/10 bar. */
+export const legendaryMissComplete: CompleteResponse = {
+  score_pct: 70,
+  correct_count: 7,
+  total_count: 10,
+  stars: 1,
+  passed: true,
+  xp: {
+    base: 14,
+    perfect_bonus: 0,
+    combo_bonus: 0,
+    first_clear_bonus: 0,
+    total: 14,
+  },
+  hearts: { lost: 3, remaining: 1, next_heart_at: '2026-07-02T12:00:00Z' },
+  streak: { current: 5, extended_today: false },
+  unlocked_level_id: null,
+  achievements_unlocked: [],
+  review: [],
+  legendary: { attempted: true, earned: false },
+};

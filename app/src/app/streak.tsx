@@ -1,11 +1,13 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Flame } from 'lucide-react-native';
+import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { ClayButton } from '@/components/clay/ClayButton';
 import { ClaySurface } from '@/components/clay/ClaySurface';
 import { Mascot } from '@/components/mascot/Mascot';
+import { play } from '@/lib/sounds';
 import { colors, scrim, spacing, typography } from '@/theme/tokens';
 
 /**
@@ -17,6 +19,11 @@ export default function StreakRoute() {
   const router = useRouter();
   const { days } = useLocalSearchParams<{ days?: string }>();
   const count = Number(days ?? 0) || 0;
+
+  // The flame moment gets its own fanfare.
+  useEffect(() => {
+    play('streak');
+  }, []);
 
   return (
     <View style={styles.scrim}>

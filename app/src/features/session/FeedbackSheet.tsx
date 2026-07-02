@@ -1,5 +1,5 @@
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { Landmark, Volume2, VolumeX } from 'lucide-react-native';
+import { Crown, Landmark, Volume2, VolumeX } from 'lucide-react-native';
 import { useMemo, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -75,6 +75,12 @@ export function FeedbackSheet({ answer, question, onContinue }: FeedbackSheetPro
           <View style={styles.explanation}>
             <Text style={styles.explanationTitle}>{t('feedback.explanationTitle')}</Text>
             <MathText color={colors.neutral[700]} fontSize={15} text={answer.explanation_text} />
+          </View>
+        ) : answer.explanation_text === null ? (
+          // Legendary run: the server withholds explanations until the end.
+          <View style={styles.withheldChip} testID="legendary-withheld">
+            <Crown color={colors.xpGold} fill={colors.xpGold} size={14} />
+            <Text style={styles.withheldText}>{t('legendary.withheld')}</Text>
           </View>
         ) : null}
 
@@ -197,6 +203,20 @@ const styles = StyleSheet.create({
   explanationTitle: {
     ...typography.h2,
     color: colors.neutral[900],
+  },
+  withheldChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'center',
+    gap: spacing.xs,
+    backgroundColor: colors.neutral[100],
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    paddingVertical: spacing.xs,
+  },
+  withheldText: {
+    ...typography.caption,
+    color: colors.neutral[700],
   },
   media: {
     alignSelf: 'center',

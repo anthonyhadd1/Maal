@@ -1,4 +1,4 @@
-import { Check, Crown, Lock, Play, Swords, Trophy, type LucideIcon } from 'lucide-react-native';
+import { Check, Crown, Lock, Play, Swords, type LucideIcon } from 'lucide-react-native';
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -30,6 +30,14 @@ export function nodeVisual(level: MapLevel): NodeVisual {
   if (level.status === 'locked') return 'locked';
   if (level.status === 'completed') return 'completed';
   return 'unlocked';
+}
+
+/**
+ * A press on this node should offer the legendary run (gameplay doc §1.5):
+ * playable, completed with the full 3 stars, crown not yet earned.
+ */
+export function offersLegendary(level: MapLevel): boolean {
+  return nodeVisual(level) === 'completed' && level.stars >= 3 && !level.is_legendary;
 }
 
 interface LevelNodeProps {
@@ -97,13 +105,27 @@ export function LevelNode({
   const top = (ROW_HEIGHT - size) / 2;
   const mascotOnLeft = x > rowWidth / 2;
 
+  // Live-state label: title + status (+ stars when completed), i18n'd.
+  const a11yKey = isLegendary
+    ? 'a11y.nodeLegendary'
+    : visual === 'completed'
+      ? 'a11y.nodeCompleted'
+      : visual === 'locked'
+        ? 'a11y.nodeLocked'
+        : visual === 'premiumLocked'
+          ? 'a11y.nodePremium'
+          : 'a11y.nodeUnlocked';
+  const a11yLabel = `${t(a11yKey, { title: level.title, stars: level.stars })}${
+    isBoss ? ` — ${t('boss')}` : ''
+  }`;
+
   return (
     <View pointerEvents="box-none" style={styles.rowFill}>
       {visual === 'unlocked' ? <PulseRing size={size} accent={accent} left={left} top={top} /> : null}
 
       <Animated.View style={[styles.nodeWrap, { left, top }, shakeStyle]}>
         <PressableScale
-          accessibilityLabel={`${level.title}${isBoss ? ` — ${t('boss')}` : ''}`}
+          accessibilityLabel={a11yLabel}
           accessibilityState={{ disabled: visual === 'locked' }}
           onPress={handlePress}
           pressedTranslateY={3}
@@ -163,7 +185,8 @@ function nodeAppearance(
   isLegendary: boolean,
 ): { fill: string; iconColor: string; Icon: LucideIcon } {
   if (isLegendary) {
-    return { fill: colors.xpGold, iconColor: colors.neutral[0], Icon: Trophy };
+    // Gold crown skin — the legendary run has been earned on this level.
+    return { fill: colors.xpGold, iconColor: colors.neutral[0], Icon: Crown };
   }
   switch (visual) {
     case 'premiumLocked':

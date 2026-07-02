@@ -1,6 +1,6 @@
 import { Redirect, useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
-import { Star } from 'lucide-react-native';
+import { Crown, Star } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import { parseApiError } from '@/api/errors';
 import { useStartAttempt } from '@/api/queries/session';
-import type { XpBreakdown } from '@/api/types';
+import type { LegendaryResult, XpBreakdown } from '@/api/types';
 import { ClayButton } from '@/components/clay/ClayButton';
 import { ClayCard } from '@/components/clay/ClayCard';
 import { useToast } from '@/components/feedback/Toast';
@@ -16,8 +16,10 @@ import { Screen } from '@/components/layout/Screen';
 import { Mascot } from '@/components/mascot/Mascot';
 import { ChallengeResultBlock } from '@/features/session/ChallengeResultBlock';
 import { formatElapsedMs, formatNumber, formatPercent } from '@/lib/format';
-import { impactMedium } from '@/lib/haptics';
+import { impactMedium, notifySuccess } from '@/lib/haptics';
 import { useReducedMotionPref } from '@/lib/motion';
+import { scheduleStreakReminders } from '@/lib/notifications';
+import { play } from '@/lib/sounds';
 import { useSessionStore } from '@/stores/sessionStore';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
@@ -60,6 +62,41 @@ export function ResultsScreen() {
     );
     return () => timers.forEach(clearTimeout);
   }, [reduceMotion]);
+
+  // Mount-time game feel + follow-ups (results snapshot is stable):
+  // level-complete SFX, trophy toasts (+success haptic), streak reminders.
+  useEffect(() => {
+    const results = snapshot.results;
+    if (!results) return;
+
+    if (results.passed) play('level_complete');
+
+    const unlocked = results.achievements_unlocked;
+    if (unlocked.length > 0) {
+      notifySuccess();
+      const timers = unlocked.map((achievement, index) =>
+        setTimeout(
+          () =>
+            toast.show({
+              type: 'success',
+              message: tCommon('trophy.unlocked', { name: achievement.title }),
+            }),
+          index * 2000, // single-slot toast — stagger multiples
+        ),
+      );
+      // Cancel pending toasts if the user leaves early; shown ones auto-dismiss.
+      return () => timers.forEach(clearTimeout);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Reschedule the local streak reminders with the fresh streak value.
+  // No-op without permission / with the settings toggle off (never prompts).
+  useEffect(() => {
+    const streak = snapshot.results?.streak;
+    if (streak) void scheduleStreakReminders(streak.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const results = snapshot.results;
   if (!results) {
@@ -135,6 +172,11 @@ export function ResultsScreen() {
       {/* Challenge mode: VS outcome block (fetched fresh after completion). */}
       {snapshot.challengeId != null ? (
         <ChallengeResultBlock challengeId={snapshot.challengeId} />
+      ) : null}
+
+      {/* Legendary outcome — crown moment (earned) or encouragement. */}
+      {results.legendary?.attempted && stage >= 1 ? (
+        <LegendaryBlock legendary={results.legendary} reduceMotion={reduceMotion} />
       ) : null}
 
       {/* 2 — XP count-up + breakdown */}
@@ -238,9 +280,65 @@ function PunchStar({
   );
 }
 
+/**
+ * Legendary run outcome. Earned: gold crown punch-in + legendary SFX +
+ * medium haptic (the « couronne » moment). Attempted only: encouragement.
+ */
+function LegendaryBlock({
+  legendary,
+  reduceMotion,
+}: {
+  legendary: LegendaryResult;
+  reduceMotion: boolean;
+}) {
+  const { t } = useTranslation('session');
+  const scale = useSharedValue(reduceMotion || !legendary.earned ? 1 : 0);
+
+  useEffect(() => {
+    if (!legendary.earned) return;
+    play('legendary');
+    impactMedium();
+    if (!reduceMotion) {
+      scale.value = withSpring(1, { damping: 9, stiffness: 220 });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const crownStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  if (!legendary.earned) {
+    return (
+      <Text style={styles.legendaryMiss} testID="legendary-not-earned">
+        {t('legendary.notEarned')}
+      </Text>
+    );
+  }
+
+  return (
+    <View style={styles.legendaryEarned} testID="legendary-earned">
+      <Animated.View style={crownStyle}>
+        <Crown color={colors.xpGold} fill={colors.xpGold} size={56} />
+      </Animated.View>
+      <Text style={styles.legendaryTitle}>{t('legendary.earnedTitle')}</Text>
+    </View>
+  );
+}
+
 function XpBlock({ xp, reduceMotion }: { xp: XpBreakdown; reduceMotion: boolean }) {
   const { t } = useTranslation('session');
   const value = useCountUp(xp.total, reduceMotion);
+
+  // 3-4 soft discrete ticks under the count-up (skipped at reduced motion —
+  // the value renders instantly there).
+  useEffect(() => {
+    if (reduceMotion || xp.total <= 0) return;
+    const timers = [0, 240, 480, 720].map((delay) =>
+      setTimeout(() => play('xp_tick'), delay),
+    );
+    return () => timers.forEach(clearTimeout);
+  }, [reduceMotion, xp.total]);
 
   const rows: { label: string; amount: number | undefined }[] = [
     { label: t('results.xp.base'), amount: xp.base },
@@ -248,6 +346,7 @@ function XpBlock({ xp, reduceMotion }: { xp: XpBreakdown; reduceMotion: boolean 
     { label: t('results.xp.combo'), amount: xp.combo_bonus },
     { label: t('results.xp.firstClear'), amount: xp.first_clear_bonus },
     { label: t('results.xp.streak'), amount: xp.streak_bonus },
+    { label: t('results.xp.legendary'), amount: xp.legendary_bonus },
   ];
 
   return (
@@ -313,6 +412,22 @@ const styles = StyleSheet.create({
   },
   xpPlaceholder: {
     height: 96,
+  },
+  legendaryEarned: {
+    alignItems: 'center',
+    gap: spacing.s,
+    marginBottom: spacing.l,
+  },
+  legendaryTitle: {
+    ...typography.h2,
+    color: colors.xpGold,
+    textAlign: 'center',
+  },
+  legendaryMiss: {
+    ...typography.bodyMedium,
+    color: colors.neutral[700],
+    textAlign: 'center',
+    marginBottom: spacing.l,
   },
   xpCard: {
     gap: spacing.s,

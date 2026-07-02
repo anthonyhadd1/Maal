@@ -48,6 +48,18 @@
   "trophy": {
     "unlocked": "Trophée débloqué : {{name}} !"
   },
+  "notifications": {
+    "channelName": "Rappels de série",
+    "streak": {
+      "title": "C'est l'heure de réviser !",
+      "eveningBody_one": "Ta série de {{count}} jour t'attend ! Un niveau et c'est réglé.",
+      "eveningBody_other": "Ta série de {{count}} jours t'attend ! Un niveau et c'est réglé.",
+      "noStreakBody": "5 minutes de révision, ça te dit ?",
+      "lastChanceTitle": "Dernière chance !",
+      "lastChanceBody_one": "Ta série de {{count}} jour expire à minuit.",
+      "lastChanceBody_other": "Ta série de {{count}} jours expire à minuit."
+    }
+  },
   "quests": {
     "title": "Quêtes",
     "empty": {

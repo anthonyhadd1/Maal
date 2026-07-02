@@ -48,6 +48,18 @@
   "trophy": {
     "unlocked": "Trophy unlocked: {{name}}!"
   },
+  "notifications": {
+    "channelName": "Streak reminders",
+    "streak": {
+      "title": "Time to study!",
+      "eveningBody_one": "Your {{count}}-day streak is waiting! One level and you're set.",
+      "eveningBody_other": "Your {{count}}-day streak is waiting! One level and you're set.",
+      "noStreakBody": "5 minutes of review, how about it?",
+      "lastChanceTitle": "Last chance!",
+      "lastChanceBody_one": "Your {{count}}-day streak expires at midnight.",
+      "lastChanceBody_other": "Your {{count}}-day streak expires at midnight."
+    }
+  },
   "quests": {
     "title": "Quests",
     "empty": {

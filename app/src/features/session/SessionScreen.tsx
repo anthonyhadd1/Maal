@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { Crown } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -47,6 +48,7 @@ export function SessionScreen({ levelId, challengeId }: SessionScreenProps) {
   );
 
   const attemptId = useSessionStore((s) => s.attemptId);
+  const legendary = useSessionStore((s) => s.legendary);
   const [selected, setSelected] = useState<number[]>([]);
   const [quitVisible, setQuitVisible] = useState(false);
 
@@ -127,6 +129,12 @@ export function SessionScreen({ levelId, challengeId }: SessionScreenProps) {
           onQuit={() => setQuitVisible(true)}
           total={engine.total}
         />
+        {legendary ? (
+          <View accessibilityRole="text" style={styles.legendaryBanner} testID="legendary-banner">
+            <Crown color={colors.neutral[900]} fill={colors.neutral[900]} size={14} />
+            <Text style={styles.legendaryBannerText}>{t('legendary.banner')}</Text>
+          </View>
+        ) : null}
       </View>
 
       {engine.phase === 'loading' || !question ? (
@@ -216,6 +224,23 @@ const styles = StyleSheet.create({
   chrome: {
     paddingHorizontal: spacing.l,
     paddingTop: spacing.s,
+  },
+  legendaryBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.xs,
+    alignSelf: 'center',
+    backgroundColor: colors.xpGold,
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    paddingVertical: 3,
+    marginTop: spacing.xs,
+  },
+  legendaryBannerText: {
+    ...typography.caption,
+    color: colors.neutral[900],
+    letterSpacing: 0.4,
   },
   counter: {
     ...typography.caption,

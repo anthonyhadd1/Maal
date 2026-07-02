@@ -67,6 +67,7 @@
     "sound": "Sound",
     "haptics": "Haptics",
     "reduceMotion": "Reduce motion",
+    "streakReminders": "Streak reminders",
     "language": "Language",
     "locales": {
       "fr": "FR",

@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
 import { PressableScale } from '@/components/layout/PressableScale';
+import { selection } from '@/lib/haptics';
 import { clayHighlight, colors, radii, shadows, spacing, typography } from '@/theme/tokens';
 
 /**
@@ -57,6 +58,8 @@ export function ClayTabBar({ state, navigation }: ClayTabBarProps) {
         const color = focused ? colors.primary[600] : colors.neutral[500];
 
         const onPress = () => {
+          // Tab switches use the subtler selection tick (not the impact tap).
+          selection();
           const event = navigation.emit({
             type: 'tabPress',
             target: route.key,
@@ -73,6 +76,7 @@ export function ClayTabBar({ state, navigation }: ClayTabBarProps) {
             accessibilityRole="tab"
             accessibilityState={{ selected: focused }}
             clay={false}
+            haptic={false}
             key={route.key}
             onPress={onPress}
             pressedTranslateY={2}

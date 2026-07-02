@@ -173,7 +173,8 @@ export type ExplanationMediaType = 'image' | 'video' | 'lottie';
 export interface AnswerResponse {
   is_correct: boolean;
   correct_choice_ids: number[];
-  explanation_text: string;
+  /** null on legendary runs — explanations are withheld until the end. */
+  explanation_text: string | null;
   explanation_media_url: string | null;
   explanation_media_type: ExplanationMediaType | null;
   hearts_remaining: number;
@@ -189,6 +190,8 @@ export interface XpBreakdown {
   combo_bonus?: number;
   first_clear_bonus: number;
   streak_bonus?: number;
+  /** One-time +40 XP for earning the legendary crown (PLAN decision 9). */
+  legendary_bonus?: number;
   total: number;
 }
 
@@ -217,6 +220,12 @@ export interface ReviewEntry {
   explanation_media_type?: 'image' | 'video' | 'lottie' | null;
 }
 
+/** Legendary-run outcome on the completion payload (gameplay doc §1.5). */
+export interface LegendaryResult {
+  attempted: boolean;
+  earned: boolean;
+}
+
 export interface CompleteResponse {
   score_pct: number;
   correct_count: number;
@@ -229,6 +238,8 @@ export interface CompleteResponse {
   unlocked_level_id: number | null;
   achievements_unlocked: AchievementUnlocked[];
   review: ReviewEntry[];
+  /** Absent/null on plain attempts from older payloads. */
+  legendary?: LegendaryResult | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -459,9 +470,14 @@ export type ApiErrorBody = { detail?: string } & Record<string, string[] | strin
 /**
  * Business-rule error codes on the attempt endpoints (PLAN decision 1):
  * 402 `premium_required`, 409 `out_of_hearts`,
- * 409 `attempt_in_progress` (+ `extra.attempt_id`).
+ * 409 `attempt_in_progress` (+ `extra.attempt_id`),
+ * 403 `legendary_locked` (legendary start without the 3-star unlock).
  */
-export type AttemptErrorCode = 'premium_required' | 'out_of_hearts' | 'attempt_in_progress';
+export type AttemptErrorCode =
+  | 'premium_required'
+  | 'out_of_hearts'
+  | 'attempt_in_progress'
+  | 'legendary_locked';
 
 export interface CodedErrorBody {
   detail?: string;

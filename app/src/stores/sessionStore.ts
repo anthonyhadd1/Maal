@@ -32,6 +32,8 @@ interface SessionStateData {
   levelId: number | null;
   /** Non-null when this attempt was started from a friend challenge. */
   challengeId: number | null;
+  /** True for legendary runs (≥9/10, explanations withheld, gold chrome). */
+  legendary: boolean;
   questions: AttemptQuestion[];
   /** Index of the question currently on screen (forward-only). */
   currentIndex: number;
@@ -60,6 +62,8 @@ interface SessionStateActions {
     questions: AttemptQuestion[];
     /** Friend-challenge attempts carry the challenge id (default null). */
     challengeId?: number | null;
+    /** Legendary-mode attempts flag the whole session (default false). */
+    legendary?: boolean;
   }) => void;
   /** Records ONE server verdict. Ignores duplicates (no re-answer, no re-queue). */
   recordAnswer: (questionId: number, selected: number[], response: AnswerResponse) => void;
@@ -78,6 +82,7 @@ const INITIAL: Omit<SessionStateData, 'hasHydrated'> = {
   attemptId: null,
   levelId: null,
   challengeId: null,
+  legendary: false,
   questions: [],
   currentIndex: 0,
   answers: {},
@@ -97,12 +102,13 @@ export const useSessionStore = create<SessionState>()(
       ...INITIAL,
       hasHydrated: false,
 
-      startSession: ({ attemptId, levelId, questions, challengeId = null }) =>
+      startSession: ({ attemptId, levelId, questions, challengeId = null, legendary = false }) =>
         set({
           ...INITIAL,
           attemptId,
           levelId,
           challengeId,
+          legendary,
           questions,
           startedAt: Date.now(),
           status: 'inProgress',

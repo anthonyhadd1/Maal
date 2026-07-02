@@ -8,6 +8,8 @@ interface SettingsState {
   soundEnabled: boolean;
   hapticsEnabled: boolean;
   reduceMotion: boolean;
+  /** « Rappels de série » — local streak reminder notifications (default on). */
+  streakRemindersEnabled: boolean;
   /** Persisted user choice; null = follow device locale. */
   locale: SupportedLocale | null;
   activeSubjectSlug: string | null;
@@ -17,6 +19,7 @@ interface SettingsState {
   setSoundEnabled: (value: boolean) => void;
   setHapticsEnabled: (value: boolean) => void;
   setReduceMotion: (value: boolean) => void;
+  setStreakRemindersEnabled: (value: boolean) => void;
   setLocale: (locale: SupportedLocale | null) => void;
   setActiveSubjectSlug: (slug: string | null) => void;
   setHasHydrated: (value: boolean) => void;
@@ -28,6 +31,7 @@ export const useSettingsStore = create<SettingsState>()(
       soundEnabled: true,
       hapticsEnabled: true,
       reduceMotion: false,
+      streakRemindersEnabled: true,
       locale: null,
       activeSubjectSlug: null,
       hasHydrated: false,
@@ -35,6 +39,7 @@ export const useSettingsStore = create<SettingsState>()(
       setSoundEnabled: (soundEnabled) => set({ soundEnabled }),
       setHapticsEnabled: (hapticsEnabled) => set({ hapticsEnabled }),
       setReduceMotion: (reduceMotion) => set({ reduceMotion }),
+      setStreakRemindersEnabled: (streakRemindersEnabled) => set({ streakRemindersEnabled }),
       setLocale: (locale) => {
         set({ locale });
         if (locale && locale !== i18n.language) {
@@ -51,6 +56,7 @@ export const useSettingsStore = create<SettingsState>()(
         soundEnabled: state.soundEnabled,
         hapticsEnabled: state.hapticsEnabled,
         reduceMotion: state.reduceMotion,
+        streakRemindersEnabled: state.streakRemindersEnabled,
         locale: state.locale,
         activeSubjectSlug: state.activeSubjectSlug,
       }),

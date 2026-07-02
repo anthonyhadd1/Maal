@@ -16,6 +16,21 @@
   "unitProgress": "{{done}}/{{total}}",
   "boss": "Examen blanc",
   "legendary": "Niveau légendaire",
+  "legendaryDialog": {
+    "title": "Niveau légendaire",
+    "body": "Réussis 9/10 minimum. 1 cœur d'entrée. Pas d'explications pendant le run.",
+    "start": "Tenter le run légendaire",
+    "replayNormal": "Rejouer normalement",
+    "cancel": "Annuler"
+  },
+  "legendaryLocked": "Le run légendaire n'est pas encore débloqué pour ce niveau.",
+  "a11y": {
+    "nodeCompleted": "{{title}} — terminé, {{stars}} étoiles sur 3",
+    "nodeLegendary": "{{title}} — couronne légendaire, {{stars}} étoiles sur 3",
+    "nodeLocked": "{{title}} — verrouillé",
+    "nodePremium": "{{title}} — réservé Premium",
+    "nodeUnlocked": "{{title}} — à jouer"
+  },
   "resume": {
     "title": "Reprendre ta partie ?",
     "body": "Tu as un niveau en cours. Reprends là où tu t'étais arrêté·e !",

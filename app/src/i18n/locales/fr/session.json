@@ -34,6 +34,12 @@
     "unmute": "Activer le son",
     "mute": "Couper le son"
   },
+  "legendary": {
+    "banner": "Run légendaire — 9/10 minimum",
+    "withheld": "Explications à la fin du run",
+    "earnedTitle": "Couronne légendaire !",
+    "notEarned": "Pas cette fois — il te faut 9/10."
+  },
   "results": {
     "perfect": "Sans-faute ! Incroyable.",
     "passed": "Niveau réussi !",
@@ -48,7 +54,8 @@
       "perfect": "Sans-faute",
       "combo": "Bonus combo",
       "firstClear": "Premier succès",
-      "streak": "Bonus série"
+      "streak": "Bonus série",
+      "legendary": "Couronne légendaire"
     }
   },
   "hearts": {

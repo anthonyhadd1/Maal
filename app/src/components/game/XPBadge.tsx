@@ -13,11 +13,16 @@ interface XPBadgeProps {
 /** Gold XP pill: bolt icon + formatted amount. */
 export function XPBadge({ xp, size = 16 }: XPBadgeProps) {
   const { t } = useTranslation('common');
+  const formatted = t('xp.total', { xp: formatNumber(xp) });
 
   return (
-    <View accessibilityRole="text" style={styles.pill}>
+    <View
+      accessibilityLabel={`${t('xp.label')} : ${formatted}`}
+      accessibilityRole="text"
+      style={styles.pill}
+    >
       <Zap color={colors.xpGold} fill={colors.xpGold} size={size} />
-      <Text style={styles.label}>{t('xp.total', { xp: formatNumber(xp) })}</Text>
+      <Text style={styles.label}>{formatted}</Text>
     </View>
   );
 }

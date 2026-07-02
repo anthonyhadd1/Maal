@@ -10,7 +10,11 @@ import {
 } from '@/api/queries/session';
 import type { AnswerResponse, StartAttemptResponse } from '@/api/types';
 import { notifyError, notifySuccess } from '@/lib/haptics';
+import { play } from '@/lib/sounds';
 import { useSessionStore } from '@/stores/sessionStore';
+
+/** Combo run lengths that get the escalating combo flourish (design §4b). */
+export const COMBO_SOUND_STEPS = [3, 5, 8] as const;
 
 /**
  * Session state machine (design_mobile.md §4b + PLAN decisions 1/4):
@@ -187,8 +191,17 @@ export function useSessionEngine(
             useSessionStore.getState().recordAnswer(question.id, selectedChoiceIds, response);
             setLastAnswer(response);
             setPhase('feedback');
-            if (response.is_correct) notifySuccess();
-            else notifyError();
+            if (response.is_correct) {
+              notifySuccess();
+              play('correct');
+              // Combo flourish lands on top of the correct blip at 3/5/8.
+              if ((COMBO_SOUND_STEPS as readonly number[]).includes(response.combo)) {
+                play('combo');
+              }
+            } else {
+              notifyError();
+              play('wrong');
+            }
             if (
               !response.hearts_unlimited &&
               response.hearts_remaining === 0 &&

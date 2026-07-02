@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 
 import { ClayButton, type ClayButtonVariant } from '@/components/clay/ClayButton';
@@ -20,6 +20,8 @@ export interface ClayDialogProps {
   title: string;
   message?: string;
   mascotState?: MascotState;
+  /** Decorative header icon (crown, flame…) rendered above the title. */
+  icon?: ReactNode;
   actions: ClayDialogAction[];
   /** Android back / dismiss request. Omit to make the dialog blocking. */
   onRequestClose?: () => void;
@@ -34,6 +36,7 @@ export function ClayDialog({
   title,
   message,
   mascotState,
+  icon,
   actions,
   onRequestClose,
   children,
@@ -49,6 +52,11 @@ export function ClayDialog({
       <View style={styles.scrim}>
         <ClaySurface radius="xl" shadow="floating" style={styles.card}>
           {mascotState ? <Mascot size={104} state={mascotState} /> : null}
+          {icon ? (
+            <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+              {icon}
+            </View>
+          ) : null}
           <Text accessibilityRole="header" style={styles.title}>
             {title}
           </Text>
