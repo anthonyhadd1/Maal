@@ -3,7 +3,22 @@ import { useNetworkState } from 'expo-network';
 import { useRouter } from 'expo-router';
 import { Crown } from 'lucide-react-native';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, View, useWindowDimensions } from 'react-native';
+import {
+  FlatList,
+  Platform,
+  RefreshControl,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
+} from 'react-native';
+import Animated, {
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  type SharedValue,
+} from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 
 import { parseApiError } from '@/api/errors';
@@ -23,6 +38,8 @@ import { Screen } from '@/components/layout/Screen';
 import { HeartsModal } from '@/features/map/HeartsModal';
 import { LevelNode, NODE_SIZE, offersLegendary } from '@/features/map/LevelNode';
 import { MapConnector } from '@/features/map/MapConnector';
+import { MapMilestone } from '@/features/map/MapMilestone';
+import { RowScenery } from '@/features/map/MapScenery';
 import { UnitHeader } from '@/features/map/UnitHeader';
 import {
   ROW_HEIGHT,
@@ -32,9 +49,17 @@ import {
 } from '@/features/map/useMapLayout';
 import { MapHeader } from '@/features/map/MapHeader';
 import { withAlpha } from '@/lib/color';
+import { useReducedMotionPref } from '@/lib/motion';
 import { isSessionResumable, useSessionStore } from '@/stores/sessionStore';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { colors, getSubjectAccent, spacing } from '@/theme/tokens';
+
+/**
+ * Zone ambience: each unit section washes the backdrop towards the subject
+ * accent at a slightly different (barely-perceptible) strength, so units
+ * read as REGIONS of the world rather than segments of a list.
+ */
+const ZONE_TINT_ALPHAS = [0.018, 0.032, 0.045] as const;
 
 /** TAB 1 « Apprendre » — the levels map (design_mobile.md §4a). */
 export function LevelsMap() {
@@ -72,6 +97,24 @@ export function LevelsMap() {
   );
   /** 3-star node pressed → offer the legendary run (PLAN decision 9). */
   const [legendaryPrompt, setLegendaryPrompt] = useState<MapLevel | null>(null);
+
+  // --- scroll parallax (backdrop layers move slower than the rows) --------
+  const scrollY = useSharedValue(0);
+  const onScrollWorklet = useAnimatedScrollHandler((event) => {
+    scrollY.value = event.contentOffset.y;
+  });
+  // Reanimated's scroll worklet never fires on web — plain handler there.
+  const onScrollJs = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      scrollY.value = event.nativeEvent.contentOffset.y;
+    },
+    [scrollY],
+  );
+  const onScroll = Platform.OS === 'web' ? onScrollJs : onScrollWorklet;
+  // Reanimated's Animated.FlatList breaks the web scroll container (the host
+  // grows to its content instead of clipping), so web keeps the plain
+  // FlatList — the JS handler above feeds the same shared value.
+  const List = (Platform.OS === 'web' ? FlatList : Animated.FlatList) as typeof FlatList<MapRow>;
 
   // --- initial scroll to the current node --------------------------------
   const listRef = useRef<FlatList<MapRow>>(null);
@@ -231,14 +274,38 @@ export function LevelsMap() {
   // --- render --------------------------------------------------------------
   const renderItem = useCallback(
     ({ item }: { item: MapRow }) => {
+      const zoneTint = withAlpha(accent, ZONE_TINT_ALPHAS[item.unitIndex % ZONE_TINT_ALPHAS.length]);
       if (item.type === 'unitHeader') {
-        return <UnitHeader accent={accent} done={item.done} total={item.total} unit={item.unit} />;
+        return (
+          <View style={{ backgroundColor: zoneTint }}>
+            <UnitHeader accent={accent} done={item.done} total={item.total} unit={item.unit} />
+          </View>
+        );
       }
       const node = item as NodeRow;
       const isCurrent =
         layout.currentRowIndex >= 0 && layout.rows[layout.currentRowIndex]?.key === node.key;
+      const nodeX = layout.xFor(node.globalIndex);
       return (
-        <View style={styles.nodeRow}>
+        <View style={[styles.nodeRow, { backgroundColor: zoneTint }]}>
+          {/* World scenery in the empty side of the curve (milestone rows breathe). */}
+          {node.isUnitLast ? (
+            <MapMilestone
+              accent={accent}
+              isBoss={!!node.level.is_boss}
+              nodeX={nodeX}
+              rowWidth={width}
+              unitCompleted={node.unitTotal > 0 && node.unitDone >= node.unitTotal}
+            />
+          ) : (
+            <RowScenery
+              accent={accent}
+              globalIndex={node.globalIndex}
+              nodeX={nodeX}
+              rowWidth={width}
+              slug={activeSlug ?? ''}
+            />
+          )}
           {node.prevGlobalIndex != null && node.prevLevel ? (
             <MapConnector
               accent={accent}
@@ -246,7 +313,7 @@ export function LevelsMap() {
               level={node.level}
               prevLevel={node.prevLevel}
               rowWidth={width}
-              toX={layout.xFor(node.globalIndex)}
+              toX={nodeX}
             />
           ) : null}
           <LevelNode
@@ -257,12 +324,12 @@ export function LevelsMap() {
             onPremium={onPremiumPress}
             onStart={onNodeStart}
             rowWidth={width}
-            x={layout.xFor(node.globalIndex)}
+            x={nodeX}
           />
         </View>
       );
     },
-    [accent, layout, width, onLockedPress, onPremiumPress, onNodeStart],
+    [accent, layout, width, onLockedPress, onPremiumPress, onNodeStart, activeSlug],
   );
 
   const refresh = useCallback(async () => {
@@ -275,8 +342,8 @@ export function LevelsMap() {
   const isLoading = subjects.isPending || (map.isPending && !!activeSlug);
 
   return (
-    <Screen edges={['top', 'left', 'right']} padded={false}>
-      <MapBackdrop accent={accent} />
+    <Screen contentStyle={styles.screenContent} edges={['top', 'left', 'right']} padded={false}>
+      <MapBackdrop accent={accent} scrollY={scrollY} />
       <MapHeader
         accent={accent}
         game={game.data}
@@ -297,12 +364,13 @@ export function LevelsMap() {
       ) : layout.rows.length === 0 ? (
         <EmptyState mascotState="idle" message={t('empty.message')} title={t('empty.title')} />
       ) : (
-        <FlatList
+        <List
           contentContainerStyle={styles.listContent}
           data={layout.rows}
           getItemLayout={layout.getItemLayout}
           initialNumToRender={10}
           keyExtractor={(item) => item.key}
+          onScroll={onScroll}
           onScrollToIndexFailed={(info) => {
             // Offsets are exact — fall back to a direct offset scroll.
             const { offset } = layout.getItemLayout(null, info.index);
@@ -322,6 +390,7 @@ export function LevelsMap() {
           }
           removeClippedSubviews={false}
           renderItem={renderItem}
+          scrollEventThrottle={16}
           testID="levels-map-list"
         />
       )}
@@ -428,19 +497,66 @@ export function LevelsMap() {
   );
 }
 
+/** Vertical tiling periods of the parallax layers (content repeats seamlessly). */
+const FAR_PERIOD = 900;
+const MID_PERIOD = 1100;
+/** Parallax rates: far blobs barely move, mid ghosts follow a bit faster. */
+const FAR_RATE = 0.15;
+const MID_RATE = 0.3;
+
 /**
- * Fixed soft backdrop behind the map: light brand gradient + two large
- * accent-tinted blobs, so the path never sits on a dead-flat field.
+ * Layered pseudo-3D backdrop behind the map (design_mobile.md §4a bis):
+ * static light gradient, then two SCROLL-PARALLAX layers — far accent blobs
+ * (0.15×) and mid ghost shapes (0.3×) — each a vertically-tiling pattern so
+ * the drift wraps seamlessly however long the subject map is. Transform-only,
+ * driven from the list's scroll offset; static under reduced motion.
  */
-function MapBackdrop({ accent }: { accent: string }) {
+function MapBackdrop({ accent, scrollY }: { accent: string; scrollY: SharedValue<number> }) {
+  const reduceMotion = useReducedMotionPref();
+
+  const farStyle = useAnimatedStyle(() => {
+    if (reduceMotion) return { transform: [{ translateY: 0 }] };
+    const p = ((scrollY.value * FAR_RATE) % FAR_PERIOD + FAR_PERIOD) % FAR_PERIOD;
+    return { transform: [{ translateY: -p }] };
+  });
+  const midStyle = useAnimatedStyle(() => {
+    if (reduceMotion) return { transform: [{ translateY: 0 }] };
+    const p = ((scrollY.value * MID_RATE) % MID_PERIOD + MID_PERIOD) % MID_PERIOD;
+    return { transform: [{ translateY: -p }] };
+  });
+
+  const blobTint = withAlpha(accent, 0.07);
+  const blobTintSoft = withAlpha(accent, 0.06);
+  const ghostTint = withAlpha(accent, 0.05);
+  const ghostViolet = withAlpha(colors.primary[300], 0.07);
+
   return (
-    <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+    <View pointerEvents="none" style={[StyleSheet.absoluteFill, styles.backdropClip]}>
       <LinearGradient
         colors={[colors.primary[50], colors.neutral[50], colors.primary[50]]}
         style={StyleSheet.absoluteFill}
       />
-      <View style={[styles.blob, styles.blobTop, { backgroundColor: withAlpha(accent, 0.07) }]} />
-      <View style={[styles.blob, styles.blobBottom, { backgroundColor: withAlpha(accent, 0.06) }]} />
+
+      {/* FAR layer — large soft blobs, 0.15× scroll. */}
+      <Animated.View style={[styles.parallaxLayer, farStyle]}>
+        {[0, FAR_PERIOD].map((dy) => (
+          <View key={dy}>
+            <View style={[styles.blob, { top: 90 + dy, right: -140, backgroundColor: blobTint }]} />
+            <View style={[styles.blob, { top: 520 + dy, left: -150, backgroundColor: blobTintSoft }]} />
+          </View>
+        ))}
+      </Animated.View>
+
+      {/* MID layer — big ghost shapes, 0.3× scroll (between blobs and rows). */}
+      <Animated.View style={[styles.parallaxLayer, midStyle]}>
+        {[0, MID_PERIOD].map((dy) => (
+          <View key={dy}>
+            <View style={[styles.ghostSquare, { top: 160 + dy, left: -70, backgroundColor: ghostTint }]} />
+            <View style={[styles.ghostRing, { top: 610 + dy, right: -80, borderColor: ghostTint }]} />
+            <View style={[styles.ghostDot, { top: 930 + dy, left: 46, backgroundColor: ghostViolet }]} />
+          </View>
+        ))}
+      </Animated.View>
     </View>
   );
 }
@@ -464,6 +580,15 @@ function MapSkeleton({ width }: { width: number }) {
 }
 
 const styles = StyleSheet.create({
+  /**
+   * Screen's content View is flexGrow-only; without flexShrink the list is
+   * never height-bounded on web, so it can't scroll (and the parallax scroll
+   * events never fire). Shrink-to-fit keeps the list windowed everywhere.
+   */
+  screenContent: {
+    flexShrink: 1,
+    minHeight: 0,
+  },
   nodeRow: {
     height: ROW_HEIGHT,
     overflow: 'visible',
@@ -477,18 +602,40 @@ const styles = StyleSheet.create({
     gap: spacing.xl,
     paddingTop: spacing.xl,
   },
+  backdropClip: {
+    overflow: 'hidden',
+  },
+  parallaxLayer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
   blob: {
     position: 'absolute',
     width: 340,
     height: 340,
     borderRadius: 170,
   },
-  blobTop: {
-    top: 90,
-    right: -140,
+  ghostSquare: {
+    position: 'absolute',
+    width: 250,
+    height: 250,
+    borderRadius: 64,
+    transform: [{ rotate: '24deg' }],
   },
-  blobBottom: {
-    bottom: 40,
-    left: -150,
+  ghostRing: {
+    position: 'absolute',
+    width: 230,
+    height: 230,
+    borderRadius: 115,
+    borderWidth: 34,
+  },
+  ghostDot: {
+    position: 'absolute',
+    width: 170,
+    height: 170,
+    borderRadius: 85,
   },
 });

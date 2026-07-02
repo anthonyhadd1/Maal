@@ -1,14 +1,33 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { Flame, Map, Trophy, type LucideIcon } from 'lucide-react-native';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect } from 'react';
+import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
+import Animated, {
+  cancelAnimation,
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
 import { ClayButton } from '@/components/clay/ClayButton';
 import { Mascot } from '@/components/mascot/Mascot';
+import { FloatingIsland, OrbitingProp } from '@/features/scenes';
+import { useReducedMotionPref } from '@/lib/motion';
 import { colors, gradients, overlayLight, radii, spacing, typography } from '@/theme/tokens';
 
+/**
+ * The opening scene: the phoenix chick standing on a floating clay island,
+ * three study props (book, flask, trophy) orbiting at different depths —
+ * the trophy passes IN FRONT of the island's lower edge for occlusion
+ * depth. Background blobs drift slower than the island (parallax layers).
+ */
 export function WelcomeScreen() {
   const { t } = useTranslation('auth');
   const router = useRouter();
@@ -21,14 +40,52 @@ export function WelcomeScreen() {
         start={{ x: 0, y: 0 }}
         style={StyleSheet.absoluteFill}
       />
-      {/* Soft floating blobs */}
-      <View pointerEvents="none" style={[styles.blob, styles.blobA]} />
-      <View pointerEvents="none" style={[styles.blob, styles.blobB]} />
-      <View pointerEvents="none" style={[styles.blob, styles.blobC]} />
+      {/* Far parallax layer: soft blobs, drifting slower than the island. */}
+      <DriftBlob dx={9} dy={7} durationMs={16000} style={[styles.blob, styles.blobA]} />
+      <DriftBlob delayMs={1200} dx={-7} dy={9} durationMs={19000} style={[styles.blob, styles.blobB]} />
+      <DriftBlob delayMs={2400} dx={8} dy={-8} durationMs={17000} style={[styles.blob, styles.blobC]} />
 
       <SafeAreaView edges={['top', 'left', 'right', 'bottom']} style={styles.safe}>
         <View style={styles.hero}>
-          <Mascot size={190} state="idle" />
+          <View style={styles.scene}>
+            {/* Far props — occluded by the island on the low half of their orbit. */}
+            <OrbitingProp
+              durationMs={13000}
+              kind="book"
+              phase={0.3}
+              radiusX={150}
+              radiusY={30}
+              size={44}
+              style={styles.orbitBook}
+            />
+            <OrbitingProp
+              clockwise={false}
+              durationMs={17000}
+              kind="flask"
+              phase={0.82}
+              radiusX={160}
+              radiusY={24}
+              size={40}
+              style={styles.orbitFlask}
+            />
+            <FloatingIsland bobAmplitude={8} bobDurationMs={10000} size={296}>
+              <Mascot size={158} state="idle" />
+            </FloatingIsland>
+            {/* Near prop — crosses IN FRONT of the island's lower edge. */}
+            {/* Flat low sweep: stays below the island so the always-on-top
+                layer never contradicts the depth read. */}
+            <OrbitingProp
+              depthScale={0.14}
+              durationMs={15000}
+              kind="trophy"
+              phase={0.05}
+              radiusX={120}
+              radiusY={13}
+              size={46}
+              style={styles.orbitLow}
+            />
+          </View>
+
           <Text accessibilityRole="header" style={styles.wordmark}>
             {t('welcome.title')}
           </Text>
@@ -60,6 +117,54 @@ export function WelcomeScreen() {
       </SafeAreaView>
     </View>
   );
+}
+
+/**
+ * Background blob with a slow diagonal drift loop — the far parallax
+ * layer behind the island (smaller travel, longer period). Static under
+ * reduced motion.
+ */
+function DriftBlob({
+  dx,
+  dy,
+  durationMs,
+  delayMs = 0,
+  style,
+}: {
+  dx: number;
+  dy: number;
+  durationMs: number;
+  delayMs?: number;
+  style?: StyleProp<ViewStyle>;
+}) {
+  const reduceMotion = useReducedMotionPref();
+  const progress = useSharedValue(0);
+
+  useEffect(() => {
+    cancelAnimation(progress);
+    progress.value = 0;
+    if (reduceMotion) return;
+    progress.value = withDelay(
+      delayMs,
+      withRepeat(
+        withSequence(
+          withTiming(1, { duration: durationMs / 2, easing: Easing.inOut(Easing.sin) }),
+          withTiming(0, { duration: durationMs / 2, easing: Easing.inOut(Easing.sin) }),
+        ),
+        -1,
+      ),
+    );
+    return () => cancelAnimation(progress);
+  }, [progress, reduceMotion, durationMs, delayMs]);
+
+  const driftStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: dx * (progress.value * 2 - 1) },
+      { translateY: dy * (progress.value * 2 - 1) },
+    ],
+  }));
+
+  return <Animated.View pointerEvents="none" style={[style, driftStyle]} />;
 }
 
 function FeatureChip({ Icon, label }: { Icon: LucideIcon; label: string }) {
@@ -112,13 +217,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: spacing.s,
   },
+  scene: {
+    alignItems: 'center',
+    marginBottom: spacing.s,
+  },
+  // Orbit anchors: % offsets are relative to the scene box (island + mascot).
+  orbitBook: {
+    left: '50%',
+    top: '46%',
+  },
+  orbitFlask: {
+    left: '50%',
+    top: '38%',
+  },
+  orbitLow: {
+    left: '50%',
+    top: '72%',
+  },
   wordmark: {
     ...typography.display,
-    fontSize: 64,
-    lineHeight: 72,
+    fontSize: 60,
+    lineHeight: 68,
     color: colors.neutral[0],
     letterSpacing: -1.5,
-    marginTop: spacing.s,
   },
   tagline: {
     ...typography.h2,
@@ -129,7 +250,7 @@ const styles = StyleSheet.create({
   chips: {
     flexDirection: 'row',
     gap: spacing.s,
-    marginTop: spacing.l,
+    marginTop: spacing.m,
   },
   chip: {
     flexDirection: 'row',

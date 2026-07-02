@@ -28,6 +28,12 @@ interface MapConnectorProps {
 }
 
 const STROKE = 8;
+/**
+ * Wide soft "road" under the connector stroke — reads as a ribbon path
+ * through the world (accent at ~10% alpha, always present, even dashed).
+ */
+const RIBBON_STROKE = 14;
+const RIBBON_OPACITY = 0.1;
 /** Stroke endpoints tucked just at the sphere edges (radius 39 of 78px node). */
 const EDGE_GAP = 46;
 
@@ -53,6 +59,14 @@ export function MapConnector({
       style={styles.svg}
       width={rowWidth}
     >
+      <Path
+        d={d}
+        fill="none"
+        stroke={accent}
+        strokeLinecap="round"
+        strokeOpacity={RIBBON_OPACITY}
+        strokeWidth={RIBBON_STROKE}
+      />
       <Path
         d={d}
         fill="none"

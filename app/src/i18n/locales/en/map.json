@@ -14,6 +14,11 @@
     "close": "Close"
   },
   "unitProgress": "{{done}}/{{total}}",
+  "milestone": {
+    "checkpoint": "End-of-unit checkpoint",
+    "boss": "Mock exam checkpoint",
+    "completed": "Unit completed — gold pennant"
+  },
   "boss": "Mock exam",
   "legendary": "Legendary level",
   "legendaryDialog": {

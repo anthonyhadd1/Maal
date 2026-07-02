@@ -33,9 +33,18 @@ import {
   restore,
   type PlanId,
 } from '@/features/paywall/entitlements';
+import { FloatingIsland, type IslandPalette } from '@/features/scenes';
+import { shade } from '@/lib/color';
 import { formatDate } from '@/lib/format';
 import { colors, fonts, gradients, radii, shadows, spacing, typography } from '@/theme/tokens';
 import { tints } from '@/theme/tints';
+
+/** Gold-tinted mini island for the premium pitch (violet crystals stay). */
+const GOLD_ISLAND: Partial<IslandPalette> = {
+  topLight: shade(colors.xpGold, 0.45),
+  top: colors.xpGold,
+  rim: colors.goldDeep,
+};
 
 const BENEFITS: { key: string; Icon: LucideIcon }[] = [
   { key: 'allUnits', Icon: Layers },
@@ -158,12 +167,21 @@ export function PaywallScreen() {
           </ClayIconButton>
         </View>
         <View style={styles.hero}>
-          <View>
-            <Mascot size={124} state="celebrate" />
-            <View style={styles.heroCrown}>
-              <Crown color={colors.xpGold} fill={colors.xpGold} size={34} />
+          {/* Crowned mascot on a mini gold island — the premium worldlet. */}
+          <FloatingIsland
+            bobAmplitude={6}
+            bobDurationMs={11000}
+            idPrefix="paywallIsland"
+            palette={GOLD_ISLAND}
+            size={188}
+          >
+            <View>
+              <Mascot size={112} state="celebrate" />
+              <View style={styles.heroCrown}>
+                <Crown color={colors.xpGold} fill={colors.xpGold} size={34} />
+              </View>
             </View>
-          </View>
+          </FloatingIsland>
           <Text accessibilityRole="header" style={styles.title}>
             {t('title')}
           </Text>
@@ -306,8 +324,8 @@ const styles = StyleSheet.create({
   },
   heroCrown: {
     position: 'absolute',
-    top: -10,
-    right: -14,
+    top: -8,
+    right: 2,
     transform: [{ rotate: '18deg' }],
   },
   crownRow: {

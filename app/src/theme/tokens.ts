@@ -120,6 +120,38 @@ export const mascotPalette = {
   groundShadow: 'rgba(36, 31, 62, 0.12)',
 } as const;
 
+/**
+ * Scene palette — pseudo-3D story scenes (floating islands, orbiting clay
+ * props, particles, embers). Additive extension of the clay language:
+ * violet clay-grass tops over warm earthy strata, light from the top-left
+ * like every other clay surface.
+ */
+export const scenePalette = {
+  /** Floating island — violet clay-grass top disc. */
+  islandTop: colors.primary[400],
+  islandTopLight: colors.primary[300],
+  islandRim: colors.primary[600],
+  /** Earthy underside cone strata. */
+  earthLight: '#A5806B',
+  earth: '#8A6553',
+  earthShadow: '#5E4136',
+  /** Dangling crystal / root bits under the island. */
+  crystal: colors.primary[400],
+  crystalDeep: colors.primary[600],
+  root: '#6E4E3F',
+  /** Soft shadow blob hovering below the island. */
+  underShadow: 'rgba(36, 31, 62, 0.30)',
+  /** Clay props orbiting the island. */
+  bookCover: '#F472B6',
+  bookCoverDeep: '#DB2777',
+  page: colors.neutral[50],
+  pageShade: colors.neutral[200],
+  flaskGlass: '#BAE6FD',
+  flaskGlassDeep: '#7DD3FC',
+  flaskLiquid: colors.success,
+  flaskLiquidDeep: colors.successDeep,
+} as const;
+
 /** Inner top highlight used on raised clay surfaces. */
 export const clayHighlight = 'rgba(255, 255, 255, 0.65)';
 
@@ -131,6 +163,12 @@ export const scrim = 'rgba(36, 31, 62, 0.45)';
 
 /** Full-bleed dark backdrop (image zoom, video). */
 export const backdropDark = 'rgba(10, 8, 20, 0.96)';
+
+/**
+ * Soft ground "contact shadow" under pseudo-3D props (map scenery,
+ * level nodes, milestones) — grounds floating clay shapes on the world.
+ */
+export const contactShadow = 'rgba(36, 31, 62, 0.10)';
 
 // ---------------------------------------------------------------------------
 // Subject accents (slug -> accent). Subjects are data-driven: prefer the

@@ -7,16 +7,17 @@ import { avatarPalette, fonts } from '@/theme/tokens';
  * initials from the display name. No photo upload in v1 (moderation-free).
  */
 
-/** The 8 preset avatar ids offered by the settings picker. */
+/** The 8 preset avatar ids offered by the settings picker.
+ * MUST match the backend's ids (Profile.avatar_id default + seed users): avatar-01…avatar-08. */
 export const AVATAR_PRESET_IDS = [
-  'ace-1',
-  'ace-2',
-  'ace-3',
-  'ace-4',
-  'ace-5',
-  'ace-6',
-  'ace-7',
-  'ace-8',
+  'avatar-01',
+  'avatar-02',
+  'avatar-03',
+  'avatar-04',
+  'avatar-05',
+  'avatar-06',
+  'avatar-07',
+  'avatar-08',
 ] as const;
 
 /** Deterministic palette index for an avatar id (same hash style as hashToHue). */

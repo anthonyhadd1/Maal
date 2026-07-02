@@ -17,7 +17,7 @@ import { PressableScale } from '@/components/layout/PressableScale';
 import { Mascot } from '@/components/mascot/Mascot';
 import { shade } from '@/lib/color';
 import { useReducedMotionPref } from '@/lib/motion';
-import { colors, radii, shadows, spacing, typography } from '@/theme/tokens';
+import { colors, contactShadow, radii, shadows, spacing, typography } from '@/theme/tokens';
 import { ROW_HEIGHT } from '@/features/map/useMapLayout';
 
 export const NODE_SIZE = 78;
@@ -128,6 +128,14 @@ export function LevelNode({
 
   return (
     <View pointerEvents="box-none" style={styles.rowFill}>
+      {/* Ground contact ellipse — anchors the clay sphere to the world. */}
+      <View
+        pointerEvents="none"
+        style={[
+          styles.groundShadow,
+          { left: x - size * 0.42, top: top + size + NODE_EDGE - 4, width: size * 0.84 },
+        ]}
+      />
       {visual === 'unlocked' ? (
         <PulseRing accent={accent} left={left} size={size} top={top} />
       ) : null}
@@ -381,6 +389,12 @@ const styles = StyleSheet.create({
   },
   nodeWrap: {
     position: 'absolute',
+  },
+  groundShadow: {
+    position: 'absolute',
+    height: 9,
+    borderRadius: radii.pill,
+    backgroundColor: contactShadow,
   },
   node: {
     alignItems: 'center',

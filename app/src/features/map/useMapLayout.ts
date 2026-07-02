@@ -27,6 +27,8 @@ export interface UnitHeaderRow {
   /** Completed levels in this unit. */
   done: number;
   total: number;
+  /** 0-based position of the unit in the subject (zone ambience tint). */
+  unitIndex: number;
 }
 
 export interface NodeRow {
@@ -40,6 +42,13 @@ export interface NodeRow {
   prevGlobalIndex: number | null;
   /** Status of the previous node (styles the connector segment). */
   prevLevel: MapLevel | null;
+  /** 0-based position of the unit in the subject (zone ambience tint). */
+  unitIndex: number;
+  /** True on the unit's final node row — hosts the checkpoint milestone. */
+  isUnitLast: boolean;
+  /** Completed levels in this node's unit (gold pennant when full). */
+  unitDone: number;
+  unitTotal: number;
 }
 
 export type MapRow = UnitHeaderRow | NodeRow;
@@ -48,16 +57,20 @@ export type MapRow = UnitHeaderRow | NodeRow;
 export function buildMapRows(units: MapUnit[]): MapRow[] {
   const rows: MapRow[] = [];
   let globalIndex = 0;
+  let unitIndex = 0;
   for (const unit of units) {
+    const done = unit.levels.filter((l) => l.status === 'completed').length;
     rows.push({
       type: 'unitHeader',
       key: `unit-${unit.id}`,
       unit,
-      done: unit.levels.filter((l) => l.status === 'completed').length,
+      done,
       total: unit.levels.length,
+      unitIndex,
     });
     let prevInUnit: { globalIndex: number; level: MapLevel } | null = null;
-    for (const level of unit.levels) {
+    for (let i = 0; i < unit.levels.length; i += 1) {
+      const level = unit.levels[i];
       rows.push({
         type: 'node',
         key: `level-${level.id}`,
@@ -66,10 +79,15 @@ export function buildMapRows(units: MapUnit[]): MapRow[] {
         globalIndex,
         prevGlobalIndex: prevInUnit?.globalIndex ?? null,
         prevLevel: prevInUnit?.level ?? null,
+        unitIndex,
+        isUnitLast: i === unit.levels.length - 1,
+        unitDone: done,
+        unitTotal: unit.levels.length,
       });
       prevInUnit = { globalIndex, level };
       globalIndex += 1;
     }
+    unitIndex += 1;
   }
   return rows;
 }

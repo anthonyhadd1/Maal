@@ -14,6 +14,11 @@
     "close": "Fermer"
   },
   "unitProgress": "{{done}}/{{total}}",
+  "milestone": {
+    "checkpoint": "Étape de fin d'unité",
+    "boss": "Étape d'examen blanc",
+    "completed": "Unité terminée — fanion d'or"
+  },
   "boss": "Examen blanc",
   "legendary": "Niveau légendaire",
   "legendaryDialog": {

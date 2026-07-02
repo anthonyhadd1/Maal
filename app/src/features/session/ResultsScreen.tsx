@@ -35,6 +35,7 @@ import { play } from '@/lib/sounds';
 import { withAlpha } from '@/lib/color';
 import { useSessionStore } from '@/stores/sessionStore';
 import { ClaySurface } from '@/components/clay/ClaySurface';
+import { ParticleBurst, PodiumDisc, RadialRays } from '@/features/scenes';
 import { colors, spacing, typography } from '@/theme/tokens';
 
 const STAR_STAGGER_MS = 380;
@@ -167,8 +168,16 @@ export function ResultsScreen() {
 
   return (
     <Screen edges={['top', 'left', 'right', 'bottom']} scroll>
-      {/* 1 — stars punch in (arc: side stars tilted, middle raised) */}
+      {/* 1 — stars punch in (arc: side stars tilted, middle raised),
+             wrapped by the reward scene: slow-turning light rays behind
+             the arc + a one-shot burst of clay particles drifting up. */}
       <View style={styles.starsRow} testID="results-stars">
+        {results.passed ? (
+          <RadialRays durationMs={60000} opacity={0.2} size={340} style={styles.rays} />
+        ) : null}
+        {results.passed ? (
+          <ParticleBurst height={240} style={styles.particles} width={340} />
+        ) : null}
         <View style={[styles.starSide, styles.starLeft]}>
           <PunchStar
             delay={0}
@@ -216,9 +225,12 @@ export function ResultsScreen() {
         <View style={styles.xpPlaceholder} />
       )}
 
-      {/* 3 — mascot (+ confetti overlay below) */}
+      {/* 3 — mascot on a small clay podium (+ confetti overlay below) */}
       {stage >= 2 ? (
-        <Mascot size={132} state={results.passed ? 'celebrate' : 'sad'} />
+        <View style={styles.mascotScene}>
+          <Mascot size={132} state={results.passed ? 'celebrate' : 'sad'} style={styles.mascotOnPodium} />
+          <PodiumDisc width={158} />
+        </View>
       ) : null}
 
       {/* 4 — stat chips */}
@@ -469,6 +481,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: spacing.xl,
     minHeight: 96,
+  },
+  rays: {
+    left: '50%',
+    top: -122,
+    marginLeft: -170,
+  },
+  particles: {
+    left: '50%',
+    top: -80,
+    marginLeft: -170,
+  },
+  mascotScene: {
+    alignItems: 'center',
+  },
+  mascotOnPodium: {
+    marginBottom: -26,
+    zIndex: 2,
   },
   starCenter: {
     marginTop: -6,
