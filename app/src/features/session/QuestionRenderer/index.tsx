@@ -19,8 +19,8 @@ export function QuestionRenderer(props: RendererProps) {
     <View style={styles.root}>
       <MathText
         color={colors.neutral[900]}
-        fontSize={19}
-        lineHeight={28}
+        fontSize={22}
+        lineHeight={30}
         text={props.question.text}
         textStyle={styles.stem}
       />
@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
     gap: spacing.xl,
   },
   stem: {
-    fontFamily: fonts.bodyBold,
+    fontFamily: fonts.heading,
   },
 });

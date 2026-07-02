@@ -1,14 +1,16 @@
 import axios, { AxiosError, AxiosHeaders, type InternalAxiosRequestConfig } from 'axios';
-import * as SecureStore from 'expo-secure-store';
+import { Platform } from 'react-native';
 
 import { ENDPOINTS } from '@/api/endpoints';
 import type { Tokens } from '@/api/types';
+import * as SecureStore from '@/lib/secureStorage';
 
 /**
  * Axios instances + token lifecycle.
  *
  * - Access token mirrored in memory (no SecureStore read per request).
- * - Tokens persisted in expo-secure-store under `ace.access` / `ace.refresh`.
+ * - Tokens persisted via the secureStorage adapter under `ace.access` /
+ *   `ace.refresh` (expo-secure-store on native, localStorage on the web demo).
  * - 401 handling: single-flight refresh mutex — concurrent 401s all await ONE
  *   `POST /auth/token/refresh/`, then replay their original request.
  * - Refresh failure: purge tokens + notify the auth store (registered callback,
@@ -18,7 +20,20 @@ import type { Tokens } from '@/api/types';
 export const ACCESS_TOKEN_KEY = 'ace.access';
 export const REFRESH_TOKEN_KEY = 'ace.refresh';
 
-const baseURL = process.env.EXPO_PUBLIC_API_URL ?? 'http://127.0.0.1:8000/api/v1';
+/**
+ * Native: EXPO_PUBLIC_API_URL (the phone reaches the backend through the
+ * hotspot gateway IP). Web demo: same host the page was served from — the
+ * backend's port 18000 is published on the laptop, so localhost (or the LAN
+ * IP, if opened remotely) always resolves without touching .env.
+ */
+function resolveBaseURL(): string {
+  if (Platform.OS === 'web' && typeof window !== 'undefined' && window.location?.hostname) {
+    return `http://${window.location.hostname}:18000/api/v1`;
+  }
+  return process.env.EXPO_PUBLIC_API_URL ?? 'http://127.0.0.1:8000/api/v1';
+}
+
+const baseURL = resolveBaseURL();
 
 let accessToken: string | null = null;
 let authFailureHandler: (() => void) | null = null;

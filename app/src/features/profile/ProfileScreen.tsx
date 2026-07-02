@@ -25,7 +25,8 @@ import { XPBadge } from '@/components/game/XPBadge';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { Screen } from '@/components/layout/Screen';
 import { formatDate, formatNumber } from '@/lib/format';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, radii, spacing, typography } from '@/theme/tokens';
+import { tints } from '@/theme/tints';
 
 /** TAB 4 « Profil » — hero + summary + premium status + drill-down rows. */
 export function ProfileScreen() {
@@ -58,11 +59,13 @@ export function ProfileScreen() {
           {/* Hero */}
           <ClayCard style={styles.card}>
             <View style={styles.identityRow}>
-              <Avatar
-                avatarId={me.data.profile.avatar_id}
-                name={me.data.profile.display_name || me.data.username}
-                size={72}
-              />
+              <View style={styles.avatarRing}>
+                <Avatar
+                  avatarId={me.data.profile.avatar_id}
+                  name={me.data.profile.display_name || me.data.username}
+                  size={72}
+                />
+              </View>
               <View style={styles.identity}>
                 <Text numberOfLines={1} style={styles.displayName}>
                   {me.data.profile.display_name || me.data.username}
@@ -83,7 +86,11 @@ export function ProfileScreen() {
               {game.data?.league ? (
                 <View style={styles.chip} testID="league-chip">
                   <Trophy color={colors.xpGold} size={16} />
-                  <Text style={styles.chipLabel}>{game.data.league.tier}</Text>
+                  <Text style={styles.chipLabel}>
+                    {typeof game.data.league.tier === 'string'
+                      ? game.data.league.tier
+                      : game.data.league.tier.name}
+                  </Text>
                 </View>
               ) : null}
             </View>
@@ -120,7 +127,9 @@ export function ProfileScreen() {
           {/* Premium status */}
           {isPremium ? (
             <ClayCard style={[styles.card, styles.premiumCard]} testID="premium-card">
-              <Crown color={colors.xpGold} fill={colors.xpGold} size={26} />
+              <View style={styles.crownBubble}>
+                <Crown color={tints.goldText} size={22} strokeWidth={2.2} />
+              </View>
               <View style={styles.premiumText}>
                 <Text style={styles.premiumTitle}>{t('premium.active')}</Text>
                 {me.data.entitlement?.premium_until ? (
@@ -139,7 +148,9 @@ export function ProfileScreen() {
               style={[styles.row, styles.upsellRow]}
               testID="premium-upsell"
             >
-              <Crown color={colors.xpGold} fill={colors.xpGold} size={24} />
+              <View style={styles.crownBubble}>
+                <Crown color={tints.goldText} size={22} strokeWidth={2.2} />
+              </View>
               <Text style={styles.upsellText}>{t('premium.upsell')}</Text>
               <ChevronRight color={colors.primary[600]} size={20} />
             </PressableScale>
@@ -261,12 +272,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.l,
   },
+  avatarRing: {
+    borderRadius: radii.pill,
+    borderWidth: 3,
+    borderColor: colors.primary[400],
+    padding: 3,
+    backgroundColor: colors.neutral[0],
+  },
   identity: {
     flex: 1,
     gap: 2,
   },
   displayName: {
     ...typography.h2,
+    fontSize: 22,
+    lineHeight: 28,
     color: colors.neutral[900],
   },
   username: {
@@ -315,7 +335,9 @@ const styles = StyleSheet.create({
   },
   summaryValue: {
     ...typography.h2,
+    fontFamily: fonts.headingBlack,
     color: colors.neutral[900],
+    fontVariant: ['tabular-nums'],
   },
   summaryLabel: {
     ...typography.caption,
@@ -325,6 +347,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.m,
+    borderColor: 'rgba(245, 158, 11, 0.45)',
+    borderBottomColor: 'rgba(180, 83, 9, 0.5)',
+  },
+  crownBubble: {
+    width: 44,
+    height: 44,
+    borderRadius: radii.s,
+    backgroundColor: tints.gold,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   premiumText: {
     flex: 1,
@@ -339,13 +371,17 @@ const styles = StyleSheet.create({
     color: colors.neutral[500],
   },
   upsellRow: {
-    borderWidth: 1.5,
-    borderColor: colors.primary[300],
+    borderWidth: 2,
+    borderColor: colors.primary[200],
+    borderBottomWidth: 3,
+    borderBottomColor: colors.primary[300],
     backgroundColor: colors.primary[50],
     marginBottom: spacing.l,
+    paddingVertical: spacing.m,
   },
   upsellText: {
     ...typography.bodyMedium,
+    fontFamily: fonts.bodyBold,
     color: colors.primary[700],
     flex: 1,
   },
@@ -362,6 +398,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.m,
     minHeight: 60,
+    borderWidth: 1,
+    borderColor: 'rgba(36, 31, 62, 0.05)',
+    borderBottomWidth: 2,
+    borderBottomColor: 'rgba(36, 31, 62, 0.09)',
   },
   rowIcon: {
     width: 38,

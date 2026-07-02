@@ -292,6 +292,10 @@ const styles = StyleSheet.create({
     borderRadius: radii.m,
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.m,
+    borderWidth: 1,
+    borderColor: 'rgba(36, 31, 62, 0.05)',
+    borderBottomWidth: 2,
+    borderBottomColor: 'rgba(36, 31, 62, 0.09)',
   },
   rowBody: {
     flex: 1,

@@ -14,7 +14,7 @@ import { PressableScale } from '@/components/layout/PressableScale';
 import { Screen } from '@/components/layout/Screen';
 import { LeagueBadge } from '@/features/leagues/LeagueBadge';
 import { LeaderboardList } from '@/features/leagues/LeaderboardList';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { colors, radii, shadows, spacing, typography } from '@/theme/tokens';
 
 type Board = 'league' | 'friends';
 
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   },
   toggleRow: {
     flexDirection: 'row',
-    backgroundColor: colors.neutral[100],
+    backgroundColor: colors.neutral[200],
     borderRadius: radii.pill,
     padding: spacing.xs,
     marginBottom: spacing.l,
@@ -217,11 +217,14 @@ const styles = StyleSheet.create({
   pill: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: radii.pill,
+    minHeight: 40,
     paddingVertical: spacing.s,
   },
   pillActive: {
     backgroundColor: colors.neutral[0],
+    ...shadows.clayPressed,
   },
   pillLabel: {
     ...typography.smallMedium,

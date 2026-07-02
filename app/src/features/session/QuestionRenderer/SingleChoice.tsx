@@ -8,11 +8,12 @@ import { spacing } from '@/theme/tokens';
 export function SingleChoice({ question, accent, selected, onToggle, revealed, disabled }: RendererProps) {
   return (
     <View style={styles.list}>
-      {question.choices.map((choice) => (
+      {question.choices.map((choice, index) => (
         <AnswerOption
           accent={accent}
           disabled={disabled}
           imageUrl={choice.image_url}
+          index={index}
           key={choice.id}
           onPress={() => onToggle(choice.id)}
           state={choiceRevealState(choice.id, selected, revealed)}

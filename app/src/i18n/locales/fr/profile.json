@@ -34,7 +34,8 @@
       "title": "Statistiques détaillées",
       "body": "Précision par matière, progression jour par jour, tendances — tout est dans Premium.",
       "cta": "Découvrir Premium"
-    }
+    },
+    "today": "Aujourd'hui"
   },
   "achievementsScreen": {
     "title": "Trophées",

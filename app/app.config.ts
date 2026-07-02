@@ -28,6 +28,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     predictiveBackGestureEnabled: false,
   },
   web: {
+    // Browser support is DEMO-ONLY (laptop walkthroughs) — native is the product.
+    bundler: 'metro',
+    output: 'single',
     favicon: './assets/favicon.png',
   },
   plugins: [

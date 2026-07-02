@@ -7,7 +7,8 @@ import type { LeaderboardRow } from '@/api/types';
 import { Avatar } from '@/components/game/Avatar';
 import { buildBoardItems, type BoardItem } from '@/features/leagues/leaderboardZones';
 import { formatNumber } from '@/lib/format';
-import { colors, medalColors, radii, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, medalColors, radii, shadows, spacing, typography } from '@/theme/tokens';
+import { darken } from '@/features/leagues/tierColor';
 
 interface LeaderboardListProps {
   rows: LeaderboardRow[];
@@ -18,8 +19,9 @@ interface LeaderboardListProps {
 }
 
 /**
- * Leaderboard rows: rank medal (1–3), avatar, name, weekly XP — my row
- * highlighted; promotion/danger zone separators between the right rows.
+ * Leaderboard rows: clay list with rank medals (1–3 = gold/silver/bronze
+ * discs), avatar, name, tabular right-aligned XP — my row gets the accent
+ * border + tint; promotion/danger zone separators between the right rows.
  */
 export function LeaderboardList({
   rows,
@@ -53,17 +55,18 @@ function BoardItemView({ item }: { item: BoardItem }) {
 
 function ZoneSeparator({ zone }: { zone: 'promote' | 'demote' }) {
   const { t } = useTranslation('leagues');
-  const color = zone === 'promote' ? colors.success : colors.danger;
-  const Icon = zone === 'promote' ? ChevronsUp : ChevronsDown;
-  const label = zone === 'promote' ? t('promotionZone') : t('dangerZone');
+  const promote = zone === 'promote';
+  const color = promote ? colors.successDeep : colors.dangerDeep;
+  const bg = promote ? 'rgba(34, 197, 94, 0.12)' : 'rgba(239, 68, 68, 0.10)';
+  const Icon = promote ? ChevronsUp : ChevronsDown;
+  const label = promote ? t('promotionZone') : t('dangerZone');
 
   return (
     <View style={styles.separator} testID={`zone-${zone}`}>
       <View style={[styles.separatorLine, { backgroundColor: color }]} />
-      <View style={styles.separatorLabelRow}>
-        <Icon color={color} size={16} strokeWidth={2.6} />
+      <View style={[styles.separatorPill, { backgroundColor: bg }]}>
+        <Icon color={color} size={14} strokeWidth={2.8} />
         <Text style={[styles.separatorLabel, { color }]}>{label}</Text>
-        <Icon color={color} size={16} strokeWidth={2.6} />
       </View>
       <View style={[styles.separatorLine, { backgroundColor: color }]} />
     </View>
@@ -88,7 +91,12 @@ function LeaderboardRowView({ row }: { row: LeaderboardRow }) {
       testID={row.is_me ? 'board-row-me' : `board-row-${row.rank}`}
     >
       {medal ? (
-        <View style={[styles.medal, { backgroundColor: medal }]}>
+        <View
+          style={[
+            styles.medal,
+            { backgroundColor: medal, borderBottomColor: darken(medal, 0.28) },
+          ]}
+        >
           <Text style={styles.medalText}>{row.rank}</Text>
         </View>
       ) : (
@@ -101,7 +109,9 @@ function LeaderboardRowView({ row }: { row: LeaderboardRow }) {
         </Text>
         {row.is_me ? <Text style={styles.youTag}>{t('you')}</Text> : null}
       </View>
-      <Text style={styles.xp}>{t('xpWeek', { xp: formatNumber(row.xp_week) })}</Text>
+      <Text style={[styles.xp, row.is_me && styles.xpMe]}>
+        {t('xpWeek', { xp: formatNumber(row.xp_week) })}
+      </Text>
     </View>
   );
 }
@@ -120,29 +130,37 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.m,
     borderWidth: 2,
-    borderColor: 'transparent',
+    borderColor: 'rgba(36, 31, 62, 0.04)',
+    borderBottomColor: 'rgba(36, 31, 62, 0.08)',
+    ...shadows.clayPressed,
   },
   rowMe: {
     borderColor: colors.primary[500],
+    borderBottomColor: colors.primary[600],
     backgroundColor: colors.primary[50],
+    ...shadows.clayRaised,
   },
   medal: {
-    width: 28,
-    height: 28,
+    width: 30,
+    height: 32,
     borderRadius: radii.pill,
+    borderBottomWidth: 3,
     alignItems: 'center',
     justifyContent: 'center',
   },
   medalText: {
-    ...typography.caption,
-    fontFamily: typography.h2.fontFamily,
+    fontFamily: fonts.headingBlack,
+    fontSize: 13,
+    lineHeight: 16,
     color: colors.neutral[0],
   },
   rank: {
     ...typography.smallMedium,
+    fontFamily: fonts.bodyBold,
     color: colors.neutral[500],
-    width: 28,
+    width: 30,
     textAlign: 'center',
+    fontVariant: ['tabular-nums'],
   },
   names: {
     flex: 1,
@@ -154,32 +172,46 @@ const styles = StyleSheet.create({
   },
   nameMe: {
     fontFamily: typography.bodyBold.fontFamily,
+    color: colors.primary[700],
   },
   youTag: {
     ...typography.caption,
+    fontFamily: fonts.bodyBold,
     color: colors.primary[600],
   },
   xp: {
     ...typography.smallMedium,
     color: colors.neutral[700],
+    fontVariant: ['tabular-nums'],
+    textAlign: 'right',
+  },
+  xpMe: {
+    fontFamily: fonts.bodyBold,
+    color: colors.primary[700],
   },
   separator: {
-    gap: spacing.xs,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.s,
     paddingVertical: spacing.xs,
   },
   separatorLine: {
+    flex: 1,
     height: 2,
     borderRadius: 1,
-    opacity: 0.35,
+    opacity: 0.25,
   },
-  separatorLabelRow: {
+  separatorPill: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing.s,
+    gap: spacing.xs,
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    paddingVertical: 3,
   },
   separatorLabel: {
     ...typography.caption,
+    fontFamily: fonts.bodyBold,
     textTransform: 'uppercase',
     letterSpacing: 0.8,
   },

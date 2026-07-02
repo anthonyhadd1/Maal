@@ -41,6 +41,8 @@ export async function ensureAndroidChannel(
 
 /** Cancels both scheduled streak reminders (settings toggle off, logout…). */
 export async function cancelStreakReminders(): Promise<void> {
+  // Web demo: local scheduled notifications don't exist in the browser.
+  if (Platform.OS === 'web') return;
   await Promise.all([
     Notifications.cancelScheduledNotificationAsync(STREAK_REMINDER_IDS.evening),
     Notifications.cancelScheduledNotificationAsync(STREAK_REMINDER_IDS.lastChance),
@@ -53,6 +55,8 @@ export async function cancelStreakReminders(): Promise<void> {
  * cancel) when the user disabled reminders or never granted permission.
  */
 export async function scheduleStreakReminders(streakCurrent: number): Promise<void> {
+  // Web demo: no-op (expo-notifications scheduling is native-only here).
+  if (Platform.OS === 'web') return;
   try {
     await cancelStreakReminders();
 

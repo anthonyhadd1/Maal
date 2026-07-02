@@ -35,7 +35,9 @@
     "empty": "Personne trouvé pour « {{q}} »",
     "emptyMessage": "Vérifie l'orthographe ou essaie un autre nom.",
     "add": "Ajouter",
-    "friends": "Amis"
+    "friends": "Amis",
+    "promptTitle": "Trouve tes amis",
+    "promptMessage": "Tape leur nom d'utilisateur pour les défier et grimper ensemble."
   },
   "challengeSheet": {
     "title": "Défier {{name}}",

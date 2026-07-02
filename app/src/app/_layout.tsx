@@ -23,6 +23,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { persistOptions, queryClient } from '@/api/queryClient';
 import { OfflineBanner } from '@/components/feedback/OfflineBanner';
 import { ToastProvider } from '@/components/feedback/Toast';
+import { WebFrame } from '@/components/layout/WebFrame';
 import { useAuthStore } from '@/stores/authStore';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { ThemeProvider } from '@/theme/ThemeProvider';
@@ -61,6 +62,7 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={styles.root}>
+      <WebFrame>
       <ThemeProvider>
         <PersistQueryClientProvider client={queryClient} persistOptions={persistOptions}>
           <BottomSheetModalProvider>
@@ -100,6 +102,7 @@ export default function RootLayout() {
           </BottomSheetModalProvider>
         </PersistQueryClientProvider>
       </ThemeProvider>
+      </WebFrame>
     </GestureHandlerRootView>
   );
 }

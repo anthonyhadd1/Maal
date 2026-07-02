@@ -65,10 +65,10 @@ export function QuestCard({ quest }: QuestCardProps) {
           </Text>
           <ProgressBar
             accent={quest.done ? colors.success : colors.primary[500]}
-            height={10}
+            height={8}
             progress={fraction}
           />
-          <Text style={styles.progressLabel}>
+          <Text style={[styles.progressLabel, quest.done && styles.progressLabelDone]}>
             {quest.done
               ? t('quests.done')
               : t('quests.progress', {
@@ -79,9 +79,9 @@ export function QuestCard({ quest }: QuestCardProps) {
         </View>
         {quest.done ? (
           <CheckCircle2
-            color={colors.success}
-            fill={colors.neutral[0]}
-            size={26}
+            color={colors.neutral[0]}
+            fill={colors.xpGold}
+            size={28}
             testID={`quest-${quest.code}-done`}
           />
         ) : null}
@@ -97,9 +97,9 @@ const styles = StyleSheet.create({
     gap: spacing.m,
   },
   iconBubble: {
-    width: 44,
-    height: 44,
-    borderRadius: radii.pill,
+    width: 46,
+    height: 46,
+    borderRadius: radii.s,
     backgroundColor: colors.primary[100],
     alignItems: 'center',
     justifyContent: 'center',
@@ -113,10 +113,15 @@ const styles = StyleSheet.create({
   },
   title: {
     ...typography.bodyMedium,
+    fontFamily: typography.bodyBold.fontFamily,
     color: colors.neutral[900],
   },
   progressLabel: {
     ...typography.caption,
     color: colors.neutral[500],
+  },
+  progressLabelDone: {
+    color: colors.successDeep,
+    fontFamily: typography.bodyBold.fontFamily,
   },
 });

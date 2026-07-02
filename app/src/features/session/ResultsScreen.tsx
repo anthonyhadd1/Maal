@@ -1,6 +1,18 @@
 import { Redirect, useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
-import { Crown, Star } from 'lucide-react-native';
+import {
+  CalendarCheck,
+  Check,
+  Crown,
+  Flame,
+  Medal,
+  Sparkles,
+  Star,
+  Target,
+  Timer,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
@@ -20,8 +32,10 @@ import { impactMedium, notifySuccess } from '@/lib/haptics';
 import { useReducedMotionPref } from '@/lib/motion';
 import { scheduleStreakReminders } from '@/lib/notifications';
 import { play } from '@/lib/sounds';
+import { withAlpha } from '@/lib/color';
 import { useSessionStore } from '@/stores/sessionStore';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { ClaySurface } from '@/components/clay/ClaySurface';
+import { colors, spacing, typography } from '@/theme/tokens';
 
 const STAR_STAGGER_MS = 380;
 const STAGE_DELAYS_MS = [0, 1300, 2000, 2400, 2800]; // stars, xp, confetti, stats, ctas
@@ -153,16 +167,32 @@ export function ResultsScreen() {
 
   return (
     <Screen edges={['top', 'left', 'right', 'bottom']} scroll>
-      {/* 1 — stars punch in */}
+      {/* 1 — stars punch in (arc: side stars tilted, middle raised) */}
       <View style={styles.starsRow} testID="results-stars">
-        {Array.from({ length: 3 }, (_, i) => (
+        <View style={[styles.starSide, styles.starLeft]}>
           <PunchStar
-            delay={i * STAR_STAGGER_MS}
-            earned={i < results.stars}
-            key={i}
+            delay={0}
+            earned={results.stars >= 1}
             reduceMotion={reduceMotion}
+            size={56}
           />
-        ))}
+        </View>
+        <View style={styles.starCenter}>
+          <PunchStar
+            delay={STAR_STAGGER_MS}
+            earned={results.stars >= 2}
+            reduceMotion={reduceMotion}
+            size={76}
+          />
+        </View>
+        <View style={[styles.starSide, styles.starRight]}>
+          <PunchStar
+            delay={STAR_STAGGER_MS * 2}
+            earned={results.stars >= 3}
+            reduceMotion={reduceMotion}
+            size={56}
+          />
+        </View>
       </View>
 
       <Text accessibilityRole="header" style={styles.title}>
@@ -191,16 +221,28 @@ export function ResultsScreen() {
         <Mascot size={132} state={results.passed ? 'celebrate' : 'sad'} />
       ) : null}
 
-      {/* 4 — stat rows */}
+      {/* 4 — stat chips */}
       {stage >= 3 ? (
         <View style={styles.stats} testID="results-stats">
-          <StatRow
+          <StatChip
+            color={colors.primary[600]}
+            icon={Target}
             label={t('results.accuracy')}
             value={formatPercent(results.score_pct)}
           />
-          <StatRow label={t('results.maxCombo')} value={formatNumber(snapshot.maxCombo)} />
+          <StatChip
+            color={colors.streakOrange}
+            icon={Flame}
+            label={t('results.maxCombo')}
+            value={formatNumber(snapshot.maxCombo)}
+          />
           {elapsed != null ? (
-            <StatRow label={t('results.time')} value={formatElapsedMs(elapsed)} />
+            <StatChip
+              color={colors.freezeBlue}
+              icon={Timer}
+              label={t('results.time')}
+              value={formatElapsedMs(elapsed)}
+            />
           ) : null}
         </View>
       ) : null}
@@ -249,10 +291,12 @@ function PunchStar({
   earned,
   delay,
   reduceMotion,
+  size = 64,
 }: {
   earned: boolean;
   delay: number;
   reduceMotion: boolean;
+  size?: number;
 }) {
   const scale = useSharedValue(reduceMotion || !earned ? 1 : 0);
 
@@ -274,7 +318,8 @@ function PunchStar({
       <Star
         color={earned ? colors.xpGold : colors.neutral[300]}
         fill={earned ? colors.xpGold : 'transparent'}
-        size={64}
+        size={size}
+        strokeWidth={earned ? 1.5 : 2}
       />
     </Animated.View>
   );
@@ -340,28 +385,34 @@ function XpBlock({ xp, reduceMotion }: { xp: XpBreakdown; reduceMotion: boolean 
     return () => timers.forEach(clearTimeout);
   }, [reduceMotion, xp.total]);
 
-  const rows: { label: string; amount: number | undefined }[] = [
-    { label: t('results.xp.base'), amount: xp.base },
-    { label: t('results.xp.perfect'), amount: xp.perfect_bonus },
-    { label: t('results.xp.combo'), amount: xp.combo_bonus },
-    { label: t('results.xp.firstClear'), amount: xp.first_clear_bonus },
-    { label: t('results.xp.streak'), amount: xp.streak_bonus },
-    { label: t('results.xp.legendary'), amount: xp.legendary_bonus },
+  const rows: { label: string; amount: number | undefined; icon: LucideIcon; color: string }[] = [
+    { label: t('results.xp.base'), amount: xp.base, icon: Check, color: colors.success },
+    { label: t('results.xp.perfect'), amount: xp.perfect_bonus, icon: Sparkles, color: colors.primary[500] },
+    { label: t('results.xp.combo'), amount: xp.combo_bonus, icon: Flame, color: colors.streakOrange },
+    { label: t('results.xp.firstClear'), amount: xp.first_clear_bonus, icon: Medal, color: colors.freezeBlue },
+    { label: t('results.xp.streak'), amount: xp.streak_bonus, icon: CalendarCheck, color: colors.streakOrange },
+    { label: t('results.xp.legendary'), amount: xp.legendary_bonus, icon: Crown, color: colors.xpGold },
   ];
+  const visible = rows.filter((row) => (row.amount ?? 0) > 0);
 
   return (
     <ClayCard style={styles.xpCard}>
-      <Text style={styles.xpTotal} testID="results-xp-total">
-        {t('results.xpEarned', { xp: formatNumber(value) })}
-      </Text>
-      {rows
-        .filter((row) => (row.amount ?? 0) > 0)
-        .map((row) => (
-          <View key={row.label} style={styles.xpRow}>
-            <Text style={styles.xpLabel}>{row.label}</Text>
-            <Text style={styles.xpAmount}>{t('results.xpEarned', { xp: row.amount })}</Text>
+      <View style={styles.xpTotalRow}>
+        <Zap color={colors.xpGold} fill={colors.xpGold} size={30} />
+        <Text style={styles.xpTotal} testID="results-xp-total">
+          {t('results.xpEarned', { xp: formatNumber(value) })}
+        </Text>
+      </View>
+      {visible.length > 0 ? <View style={styles.xpDivider} /> : null}
+      {visible.map((row) => (
+        <View key={row.label} style={styles.xpRow}>
+          <View style={[styles.xpIcon, { backgroundColor: withAlpha(row.color, 0.14) }]}>
+            <row.icon color={row.color} size={15} strokeWidth={2.6} />
           </View>
-        ))}
+          <Text style={styles.xpLabel}>{row.label}</Text>
+          <Text style={styles.xpAmount}>{t('results.xpEarned', { xp: row.amount })}</Text>
+        </View>
+      ))}
     </ClayCard>
   );
 }
@@ -387,27 +438,60 @@ function useCountUp(target: number, reduceMotion: boolean, durationMs = 900): nu
   return value;
 }
 
-function StatRow({ label, value }: { label: string; value: string }) {
+function StatChip({
+  label,
+  value,
+  icon: Icon,
+  color,
+}: {
+  label: string;
+  value: string;
+  icon: LucideIcon;
+  color: string;
+}) {
   return (
-    <View style={styles.statRow}>
-      <Text style={styles.statLabel}>{label}</Text>
+    <ClaySurface radius="m" style={styles.statChip}>
+      <View style={[styles.statIcon, { backgroundColor: withAlpha(color, 0.14) }]}>
+        <Icon color={color} size={17} strokeWidth={2.6} />
+      </View>
       <Text style={styles.statValue}>{value}</Text>
-    </View>
+      <Text numberOfLines={1} style={styles.statLabel}>
+        {label}
+      </Text>
+    </ClaySurface>
   );
 }
 
 const styles = StyleSheet.create({
   starsRow: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
     justifyContent: 'center',
-    gap: spacing.m,
     marginTop: spacing.xl,
+    minHeight: 96,
+  },
+  starCenter: {
+    marginTop: -6,
+    zIndex: 2,
+  },
+  starSide: {
+    marginTop: spacing.l,
+  },
+  starLeft: {
+    marginRight: -spacing.s,
+    transform: [{ rotate: '-16deg' }],
+  },
+  starRight: {
+    marginLeft: -spacing.s,
+    transform: [{ rotate: '16deg' }],
   },
   title: {
-    ...typography.h1,
+    ...typography.display,
+    fontSize: 28,
+    lineHeight: 34,
     color: colors.neutral[900],
     textAlign: 'center',
-    marginTop: spacing.l,
+    marginTop: spacing.m,
     marginBottom: spacing.l,
   },
   xpPlaceholder: {
@@ -433,41 +517,71 @@ const styles = StyleSheet.create({
     gap: spacing.s,
     marginBottom: spacing.l,
   },
+  xpTotalRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.s,
+  },
   xpTotal: {
     ...typography.display,
     color: colors.xpGold,
     textAlign: 'center',
   },
+  xpDivider: {
+    height: 1,
+    backgroundColor: colors.neutral[100],
+    marginVertical: spacing.xs,
+  },
   xpRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: spacing.s,
+  },
+  xpIcon: {
+    width: 26,
+    height: 26,
+    borderRadius: 9,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   xpLabel: {
-    ...typography.small,
-    color: colors.neutral[500],
+    ...typography.smallMedium,
+    color: colors.neutral[700],
+    flex: 1,
   },
   xpAmount: {
     ...typography.smallMedium,
+    fontFamily: typography.h2.fontFamily,
     color: colors.neutral[900],
   },
   stats: {
-    gap: spacing.s,
+    flexDirection: 'row',
+    gap: spacing.m,
     marginTop: spacing.l,
   },
-  statRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: colors.neutral[0],
-    borderRadius: radii.m,
-    paddingHorizontal: spacing.l,
+  statChip: {
+    flex: 1,
+    alignItems: 'center',
+    gap: 3,
     paddingVertical: spacing.m,
+    paddingHorizontal: spacing.s,
+  },
+  statIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 2,
   },
   statLabel: {
-    ...typography.bodyMedium,
+    ...typography.caption,
     color: colors.neutral[500],
   },
   statValue: {
     ...typography.bodyBold,
+    fontFamily: typography.h2.fontFamily,
     color: colors.neutral[900],
   },
   actions: {

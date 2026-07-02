@@ -1,15 +1,17 @@
-import { Clock } from 'lucide-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { ChevronsDown, ChevronsUp, Clock } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import type { LeagueTierInfo } from '@/api/types';
-import { ClaySurface } from '@/components/clay/ClaySurface';
 import { msToParts } from '@/lib/format';
 import { getLucideIcon } from '@/lib/lucide';
-import { colors, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, radii, shadows, spacing, typography } from '@/theme/tokens';
+import { darken, lighten, tint } from '@/features/leagues/tierColor';
 
-const MEDALLION_SIZE = 88;
+const MEDALLION_SIZE = 104;
+const MEDALLION_EDGE = 6;
 const TICK_MS = 60_000;
 
 interface LeagueBadgeProps {
@@ -20,8 +22,9 @@ interface LeagueBadgeProps {
 }
 
 /**
- * Tier badge header: clay medallion in the tier color + lucide icon,
- * tier name, promotion/demotion caption, live week countdown.
+ * Ligue hero: soft tier-tinted gradient band hosting a big clay medallion
+ * (tier color, moulded edge + top light), the tier name in Nunito 900,
+ * promote/demote captions and a live week-countdown chip.
  */
 export function LeagueBadge({ tier, promoteCount, demoteCount, weekEndsAt }: LeagueBadgeProps) {
   const { t } = useTranslation('leagues');
@@ -30,26 +33,57 @@ export function LeagueBadge({ tier, promoteCount, demoteCount, weekEndsAt }: Lea
 
   return (
     <View style={styles.root}>
-      <ClaySurface
-        backgroundColor={tier.color_hex}
-        radius="pill"
-        style={styles.medallion}
-        testID="league-medallion"
+      <LinearGradient
+        colors={[tint(tier.color_hex, 0.28), tint(tier.color_hex, 0.05)]}
+        end={{ x: 0.5, y: 1 }}
+        start={{ x: 0.5, y: 0 }}
+        style={styles.band}
       >
-        <Icon color={colors.neutral[0]} size={40} strokeWidth={2.2} />
-      </ClaySurface>
-      <Text accessibilityRole="header" style={styles.name}>
-        {tier.name}
-      </Text>
-      <Text style={styles.caption}>
-        {t('caption', { promote: promoteCount, demote: demoteCount })}
-      </Text>
-      <View style={styles.countdownRow}>
-        <Clock color={colors.neutral[500]} size={14} />
-        <Text style={styles.countdown} testID="league-countdown">
-          {t('countdown.endsIn', { time: countdown })}
+        <View
+          style={[
+            styles.medallion,
+            {
+              backgroundColor: tier.color_hex,
+              borderBottomColor: darken(tier.color_hex, 0.32),
+            },
+          ]}
+          testID="league-medallion"
+        >
+          <LinearGradient
+            colors={[lighten(tier.color_hex, 0.4), tint(tier.color_hex, 0)]}
+            pointerEvents="none"
+            style={styles.medallionSheen}
+          />
+          <Icon color={colors.neutral[0]} size={46} strokeWidth={2.2} />
+        </View>
+
+        <Text accessibilityRole="header" style={styles.name}>
+          {tier.name}
         </Text>
-      </View>
+
+        <View style={styles.zoneCaptions}>
+          <View style={styles.zoneCaption}>
+            <ChevronsUp color={colors.successDeep} size={14} strokeWidth={2.8} />
+            <Text style={[styles.zoneCaptionText, { color: colors.successDeep }]}>
+              {t('hero.promote', { count: promoteCount })}
+            </Text>
+          </View>
+          <View style={styles.zoneDot} />
+          <View style={styles.zoneCaption}>
+            <ChevronsDown color={colors.dangerDeep} size={14} strokeWidth={2.8} />
+            <Text style={[styles.zoneCaptionText, { color: colors.dangerDeep }]}>
+              {t('hero.demote', { count: demoteCount })}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.countdownChip}>
+          <Clock color={colors.neutral[700]} size={14} strokeWidth={2.4} />
+          <Text style={styles.countdown} testID="league-countdown">
+            {t('countdown.endsIn', { time: countdown })}
+          </Text>
+        </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -66,41 +100,85 @@ function useWeekCountdown(weekEndsAt: string): string {
 
   const ms = Math.max(0, Date.parse(weekEndsAt) - now);
   const { days, hours, minutes } = msToParts(ms);
-  if (days > 0) return t('countdown.daysHours', { days, hours });
+  if (days > 0) {
+    return hours > 0 ? t('countdown.daysHours', { days, hours }) : t('countdown.days', { days });
+  }
   if (hours > 0) return t('countdown.hoursMinutes', { hours, minutes });
   return t('countdown.minutes', { minutes });
 }
 
 const styles = StyleSheet.create({
   root: {
+    marginBottom: spacing.m,
+  },
+  band: {
     alignItems: 'center',
-    gap: spacing.xs,
-    paddingVertical: spacing.s,
+    gap: spacing.s,
+    borderRadius: radii.xl,
+    paddingVertical: spacing.xl,
+    paddingHorizontal: spacing.l,
   },
   medallion: {
     width: MEDALLION_SIZE,
-    height: MEDALLION_SIZE,
+    height: MEDALLION_SIZE + MEDALLION_EDGE,
+    borderRadius: MEDALLION_SIZE / 2,
+    borderBottomWidth: MEDALLION_EDGE,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: spacing.s,
+    overflow: 'hidden',
+    marginBottom: spacing.xs,
+    ...shadows.clayRaised,
+  },
+  medallionSheen: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '48%',
+    borderTopLeftRadius: MEDALLION_SIZE / 2,
+    borderTopRightRadius: MEDALLION_SIZE / 2,
+    opacity: 0.55,
   },
   name: {
-    ...typography.h1,
+    fontFamily: fonts.headingBlack,
+    fontSize: 26,
+    lineHeight: 32,
     color: colors.neutral[900],
   },
-  caption: {
-    ...typography.small,
-    color: colors.neutral[500],
-    textAlign: 'center',
+  zoneCaptions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.s,
   },
-  countdownRow: {
+  zoneCaption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
+  },
+  zoneCaptionText: {
+    ...typography.caption,
+    fontFamily: fonts.bodyBold,
+  },
+  zoneDot: {
+    width: 3,
+    height: 3,
+    borderRadius: radii.pill,
+    backgroundColor: colors.neutral[500],
+  },
+  countdownChip: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.xs,
+    backgroundColor: colors.neutral[0],
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    paddingVertical: 6,
     marginTop: spacing.xs,
+    ...shadows.clayPressed,
   },
   countdown: {
     ...typography.caption,
-    color: colors.neutral[500],
+    fontFamily: fonts.bodyBold,
+    color: colors.neutral[700],
   },
 });

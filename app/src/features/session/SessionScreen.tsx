@@ -15,6 +15,7 @@ import { FeedbackSheet } from '@/features/session/FeedbackSheet';
 import { QuestionRenderer } from '@/features/session/QuestionRenderer';
 import { SessionHeader } from '@/features/session/SessionHeader';
 import { useSessionEngine } from '@/features/session/useSessionEngine';
+import { shade, withAlpha } from '@/lib/color';
 import { useSessionStore } from '@/stores/sessionStore';
 import { colors, getSubjectAccent, radii, spacing, typography } from '@/theme/tokens';
 import { useSettingsStore } from '@/stores/settingsStore';
@@ -145,9 +146,11 @@ export function SessionScreen({ levelId, challengeId }: SessionScreenProps) {
             contentContainerStyle={styles.questionContent}
             showsVerticalScrollIndicator={false}
           >
-            <Text style={styles.counter}>
-              {t('questionCounter', { n: engine.currentIndex + 1, total: engine.total })}
-            </Text>
+            <View style={[styles.counterChip, { backgroundColor: withAlpha(accent, 0.12) }]}>
+              <Text style={[styles.counter, { color: shade(accent, -0.35) }]}>
+                {t('questionCounter', { n: engine.currentIndex + 1, total: engine.total })}
+              </Text>
+            </View>
             <QuestionRenderer
               accent={accent}
               disabled={engine.phase !== 'question'}
@@ -242,14 +245,22 @@ const styles = StyleSheet.create({
     color: colors.neutral[900],
     letterSpacing: 0.4,
   },
+  counterChip: {
+    alignSelf: 'flex-start',
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    paddingVertical: spacing.xs,
+    marginBottom: spacing.m,
+  },
   counter: {
     ...typography.caption,
-    color: colors.neutral[500],
-    marginBottom: spacing.s,
+    fontFamily: typography.h2.fontFamily,
+    letterSpacing: 0.4,
   },
   questionContent: {
     flexGrow: 1,
     paddingHorizontal: spacing.l,
+    paddingTop: spacing.s,
     paddingBottom: spacing.xxl,
   },
   footer: {

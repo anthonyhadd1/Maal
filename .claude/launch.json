@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "backend (Django API + Postgres, Docker)",
+      "runtimeExecutable": "docker",
+      "runtimeArgs": ["compose", "up"],
+      "port": 18000
+    },
+    {
+      "name": "app — phone (Expo Go, LAN)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "app", "run", "start", "--", "--port", "8081", "--lan"],
+      "port": 8081
+    },
+    {
+      "name": "app — web (browser demo)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "app", "run", "web", "--", "--port", "8082"],
+      "port": 8082
+    }
+  ]
+}

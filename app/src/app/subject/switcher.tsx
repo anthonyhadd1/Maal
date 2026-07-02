@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
-import { X } from 'lucide-react-native';
+import { Check, X } from 'lucide-react-native';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
+import Svg, { Circle } from 'react-native-svg';
 import { useTranslation } from 'react-i18next';
 
 import { useSubjects } from '@/api/queries/subjects';
@@ -10,11 +11,12 @@ import { ErrorState } from '@/components/feedback/ErrorState';
 import { Skeleton } from '@/components/feedback/Skeleton';
 import { PressableScale } from '@/components/layout/PressableScale';
 import type { Subject } from '@/api/types';
+import { shade, withAlpha } from '@/lib/color';
 import { getLucideIcon } from '@/lib/lucide';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { colors, getSubjectAccent, radii, spacing, typography } from '@/theme/tokens';
 
-/** formSheet modal: grid of subject clay cards (design_mobile.md §4a). */
+/** formSheet modal: grid of accent-tinted subject clay tiles (§4a). */
 export default function SubjectSwitcherRoute() {
   const { t } = useTranslation('map');
   const router = useRouter();
@@ -36,7 +38,7 @@ export default function SubjectSwitcherRoute() {
         <ClayIconButton
           accessibilityLabel={t('switcher.close')}
           onPress={() => router.back()}
-          size={40}
+          size={44}
         >
           <X color={colors.neutral[700]} size={20} />
         </ClayIconButton>
@@ -45,7 +47,7 @@ export default function SubjectSwitcherRoute() {
       {subjects.isPending ? (
         <View style={styles.grid}>
           {Array.from({ length: 4 }, (_, i) => (
-            <Skeleton height={132} key={i} radius={radii.l} style={styles.gridItem} width="47%" />
+            <Skeleton height={158} key={i} radius={radii.l} style={styles.gridItem} width="47%" />
           ))}
         </View>
       ) : subjects.isError ? (
@@ -67,6 +69,46 @@ export default function SubjectSwitcherRoute() {
         />
       )}
     </View>
+  );
+}
+
+const RING_SIZE = 68;
+const RING_STROKE = 4;
+
+/** Completion ring around the subject icon (SVG arc, top-anchored). */
+function CompletionRing({ pct, accent }: { pct: number; accent: string }) {
+  const radius = (RING_SIZE - RING_STROKE) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const clamped = Math.max(0, Math.min(pct, 100));
+  return (
+    <Svg
+      height={RING_SIZE}
+      pointerEvents="none"
+      style={styles.ringSvg}
+      width={RING_SIZE}
+    >
+      <Circle
+        cx={RING_SIZE / 2}
+        cy={RING_SIZE / 2}
+        fill="none"
+        r={radius}
+        stroke={withAlpha(accent, 0.18)}
+        strokeWidth={RING_STROKE}
+      />
+      {clamped > 0 ? (
+        <Circle
+          cx={RING_SIZE / 2}
+          cy={RING_SIZE / 2}
+          fill="none"
+          r={radius}
+          stroke={accent}
+          strokeDasharray={`${(circumference * clamped) / 100} ${circumference}`}
+          strokeLinecap="round"
+          strokeWidth={RING_STROKE}
+          transform={`rotate(-90 ${RING_SIZE / 2} ${RING_SIZE / 2})`}
+        />
+      ) : null}
+    </Svg>
   );
 }
 
@@ -93,18 +135,36 @@ function SubjectCard({
       testID={`subject-card-${subject.slug}`}
     >
       <ClaySurface
+        backgroundColor={withAlpha(accent, 0.08)}
         radius="l"
         shadow="none"
-        style={[styles.card, active && { borderColor: accent, borderWidth: 2.5 }]}
+        style={[
+          styles.card,
+          { borderColor: withAlpha(accent, 0.2) },
+          active && { borderColor: accent, borderWidth: 2.5, backgroundColor: withAlpha(accent, 0.12) },
+        ]}
       >
-        <View style={[styles.iconBubble, { backgroundColor: accent }]}>
-          <Icon color={colors.neutral[0]} size={26} strokeWidth={2.2} />
+        {active ? (
+          <View style={[styles.checkBadge, { backgroundColor: accent }]}>
+            <Check color={colors.neutral[0]} size={14} strokeWidth={3.5} />
+          </View>
+        ) : null}
+        <View style={styles.iconWrap}>
+          {typeof pct === 'number' ? <CompletionRing accent={accent} pct={pct} /> : null}
+          <View
+            style={[
+              styles.iconBubble,
+              { backgroundColor: accent, borderBottomColor: shade(accent, -0.28) },
+            ]}
+          >
+            <Icon color={colors.neutral[0]} size={24} strokeWidth={2.2} />
+          </View>
         </View>
         <Text numberOfLines={1} style={styles.cardName}>
           {subject.name}
         </Text>
         {typeof pct === 'number' ? (
-          <Text style={[styles.cardPct, { color: accent }]}>
+          <Text style={[styles.cardPct, { color: shade(accent, -0.32) }]}>
             {t('switcher.completed', { pct: Math.round(pct) })}
           </Text>
         ) : null}
@@ -128,6 +188,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...typography.h1,
+    fontFamily: typography.display.fontFamily,
     color: colors.neutral[900],
   },
   listContent: {
@@ -153,14 +214,37 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xl,
     paddingHorizontal: spacing.m,
     borderWidth: 1.5,
-    borderColor: colors.neutral[100],
+    overflow: 'hidden',
   },
-  iconBubble: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
+  checkBadge: {
+    position: 'absolute',
+    top: spacing.s,
+    right: spacing.s,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 2,
+  },
+  iconWrap: {
+    width: RING_SIZE,
+    height: RING_SIZE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ringSvg: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
+  iconBubble: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 3,
   },
   cardName: {
     ...typography.bodyBold,
@@ -169,5 +253,6 @@ const styles = StyleSheet.create({
   },
   cardPct: {
     ...typography.caption,
+    fontFamily: typography.h2.fontFamily,
   },
 });

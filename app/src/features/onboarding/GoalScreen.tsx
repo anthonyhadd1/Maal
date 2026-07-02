@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { GraduationCap, HelpCircle } from 'lucide-react-native';
+import { Check, GraduationCap, HelpCircle } from 'lucide-react-native';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -47,6 +47,7 @@ export function GoalScreen() {
         disabled: selection === undefined,
         loading: patchMe.isPending,
       }}
+      mascot="idle"
       onSkip={next}
       step={0}
       subtitle={t('goal.subtitle')}
@@ -107,8 +108,11 @@ function GoalCard({
       testID={testID}
     >
       <View style={[styles.card, selected && styles.cardSelected]}>
-        <View style={styles.cardIcon}>{icon}</View>
-        <Text style={styles.cardLabel}>{label}</Text>
+        <View style={[styles.cardIcon, selected && styles.cardIconSelected]}>{icon}</View>
+        <Text style={[styles.cardLabel, selected && styles.cardLabelSelected]}>{label}</Text>
+        <View style={[styles.check, selected && styles.checkSelected]}>
+          {selected ? <Check color={colors.neutral[0]} size={14} strokeWidth={3.5} /> : null}
+        </View>
       </View>
     </PressableScale>
   );
@@ -128,12 +132,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral[0],
     borderRadius: radii.l,
     borderWidth: 2.5,
-    borderColor: 'transparent',
+    borderColor: 'rgba(36, 31, 62, 0.06)',
+    borderBottomWidth: 3.5,
+    borderBottomColor: 'rgba(36, 31, 62, 0.10)',
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.l,
   },
   cardSelected: {
     borderColor: colors.primary[500],
+    borderBottomColor: colors.primary[600],
     backgroundColor: colors.primary[50],
   },
   cardIcon: {
@@ -144,9 +151,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  cardIconSelected: {
+    backgroundColor: colors.primary[100],
+  },
   cardLabel: {
     ...typography.bodyMedium,
     color: colors.neutral[900],
     flex: 1,
+  },
+  cardLabelSelected: {
+    fontFamily: typography.bodyBold.fontFamily,
+    color: colors.primary[700],
+  },
+  check: {
+    width: 24,
+    height: 24,
+    borderRadius: radii.pill,
+    borderWidth: 2,
+    borderColor: colors.neutral[300],
+    backgroundColor: colors.neutral[0],
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkSelected: {
+    borderColor: colors.primary[600],
+    backgroundColor: colors.primary[500],
   },
 });

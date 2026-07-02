@@ -5,7 +5,8 @@
     "endsIn": "Ends in {{time}}",
     "daysHours": "{{days}}d {{hours}}h",
     "hoursMinutes": "{{hours}}h {{minutes}}min",
-    "minutes": "{{minutes}} min"
+    "minutes": "{{minutes}} min",
+    "days": "{{days}}d"
   },
   "toggle": {
     "league": "League",
@@ -45,5 +46,9 @@
     "or": "Gold League",
     "diamant": "Diamond League",
     "cedre": "Cedar League"
+  },
+  "hero": {
+    "promote": "Top {{count}} move up",
+    "demote": "Bottom {{count}} move down"
   }
 }

@@ -88,7 +88,13 @@ export function FriendSearchScreen() {
       />
 
       <View style={styles.results}>
-        {tooShort ? null : search.isPending ? (
+        {tooShort ? (
+          <EmptyState
+            mascotState="idle"
+            message={t('search.promptMessage')}
+            title={t('search.promptTitle')}
+          />
+        ) : search.isPending ? (
           <View style={styles.skeleton} testID="search-skeleton">
             {Array.from({ length: 3 }, (_, i) => (
               <Skeleton height={64} key={i} radius={radii.m} width="100%" />
@@ -199,6 +205,10 @@ const styles = StyleSheet.create({
     borderRadius: radii.m,
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.m,
+    borderWidth: 1,
+    borderColor: 'rgba(36, 31, 62, 0.05)',
+    borderBottomWidth: 2,
+    borderBottomColor: 'rgba(36, 31, 62, 0.09)',
   },
   rowBody: {
     flex: 1,

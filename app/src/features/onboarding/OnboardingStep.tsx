@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { ClayButton } from '@/components/clay/ClayButton';
+import { Mascot } from '@/components/mascot/Mascot';
+import type { MascotState } from '@/components/mascot/mascotStates';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { Screen } from '@/components/layout/Screen';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
@@ -14,6 +16,8 @@ interface OnboardingStepProps {
   step: number;
   title: string;
   subtitle?: string;
+  /** Small mascot above the question (omit when the content hosts its own). */
+  mascot?: MascotState;
   /** Continue button. */
   cta: {
     label: string;
@@ -26,11 +30,12 @@ interface OnboardingStepProps {
   skipLabel?: string;
 }
 
-/** Shared onboarding shell: progress dots, title, content, CTA (+ skip). */
+/** Shared onboarding shell: progress dots, mascot, question, CTA (+ skip). */
 export function OnboardingStep({
   step,
   title,
   subtitle,
+  mascot,
   cta,
   onSkip,
   skipLabel,
@@ -49,6 +54,12 @@ export function OnboardingStep({
           />
         ))}
       </View>
+
+      {mascot ? (
+        <View style={styles.mascotWrap}>
+          <Mascot size={88} state={mascot} />
+        </View>
+      ) : null}
 
       <Text accessibilityRole="header" style={styles.title}>
         {title}
@@ -102,6 +113,10 @@ const styles = StyleSheet.create({
   dotActive: {
     backgroundColor: colors.primary[500],
     width: 24,
+  },
+  mascotWrap: {
+    alignItems: 'center',
+    marginBottom: spacing.m,
   },
   title: {
     ...typography.h1,

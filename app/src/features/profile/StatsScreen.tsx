@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { Lock } from 'lucide-react-native';
+import { BookOpenCheck, Flame, Lock, Sparkles, Zap, type LucideIcon } from 'lucide-react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -15,7 +15,8 @@ import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { XpBarChart } from '@/features/profile/XpBarChart';
 import { formatNumber, formatPercent } from '@/lib/format';
 import { getLucideIcon } from '@/lib/lucide';
-import { colors, getSubjectAccent, radii, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, getSubjectAccent, radii, spacing, typography } from '@/theme/tokens';
+import { tints } from '@/theme/tints';
 
 /**
  * PUSH /profile/stats — totals for everyone; per-subject accuracy +
@@ -39,19 +40,31 @@ export function StatsScreen() {
           {/* Totals — visible for everyone */}
           <View style={styles.summaryGrid}>
             <TotalCard
+              color={tints.goldText}
+              icon={Zap}
               label={t('summary.xpTotal')}
+              tintColor={tints.gold}
               value={formatNumber(stats.data.totals.xp_total)}
             />
             <TotalCard
+              color={colors.primary[600]}
+              icon={BookOpenCheck}
               label={t('summary.levels')}
+              tintColor={colors.primary[100]}
               value={formatNumber(stats.data.totals.levels_completed)}
             />
             <TotalCard
+              color={tints.successText}
+              icon={Sparkles}
               label={t('summary.perfect')}
+              tintColor={tints.success}
               value={formatNumber(stats.data.totals.perfect_levels)}
             />
             <TotalCard
+              color={tints.flameText}
+              icon={Flame}
               label={t('summary.bestStreak')}
+              tintColor={tints.flame}
               value={formatNumber(stats.data.totals.best_streak)}
             />
           </View>
@@ -89,9 +102,24 @@ export function StatsScreen() {
   );
 }
 
-function TotalCard({ label, value }: { label: string; value: string }) {
+function TotalCard({
+  label,
+  value,
+  icon: Icon,
+  color,
+  tintColor,
+}: {
+  label: string;
+  value: string;
+  icon: LucideIcon;
+  color: string;
+  tintColor: string;
+}) {
   return (
     <ClayCard radius="m" style={styles.summaryCard}>
+      <View style={[styles.summaryIcon, { backgroundColor: tintColor }]}>
+        <Icon color={color} size={18} strokeWidth={2.4} />
+      </View>
       <Text style={styles.summaryValue}>{value}</Text>
       <Text style={styles.summaryLabel}>{label}</Text>
     </ClayCard>
@@ -188,13 +216,23 @@ const styles = StyleSheet.create({
     gap: 2,
     paddingVertical: spacing.m,
   },
+  summaryIcon: {
+    width: 34,
+    height: 34,
+    borderRadius: radii.s,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.xs,
+  },
   summarySkeleton: {
     flexBasis: '45%',
     flexGrow: 1,
   },
   summaryValue: {
     ...typography.h2,
+    fontFamily: fonts.headingBlack,
     color: colors.neutral[900],
+    fontVariant: ['tabular-nums'],
   },
   summaryLabel: {
     ...typography.caption,

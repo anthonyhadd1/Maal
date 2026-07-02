@@ -1,6 +1,6 @@
 import { Check, Square, SquareCheckBig, X } from 'lucide-react-native';
 import { useEffect, useRef } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -11,9 +11,10 @@ import Animated, {
 
 import { MathText } from '@/components/content/MathText';
 import { PressableScale } from '@/components/layout/PressableScale';
+import { shade, withAlpha } from '@/lib/color';
 import { useReducedMotionPref } from '@/lib/motion';
 import { selection } from '@/lib/haptics';
-import { colors, radii, spacing } from '@/theme/tokens';
+import { colors, radii, spacing, typography } from '@/theme/tokens';
 import type { RevealState } from '@/features/session/QuestionRenderer/types';
 
 export interface AnswerOptionProps {
@@ -21,6 +22,8 @@ export interface AnswerOptionProps {
   imageUrl?: string | null;
   state: RevealState;
   accent: string;
+  /** Leading letter badge (A/B/C/D) — pass the choice index. */
+  index?: number;
   /** Checkbox affordance for multi-choice questions. */
   multi?: boolean;
   /** Big centered variant (Vrai/Faux side-by-side buttons). */
@@ -33,67 +36,94 @@ export interface AnswerOptionProps {
 interface Appearance {
   backgroundColor: string;
   borderColor: string;
+  /** Darker bottom lip — the clay depth of the card. */
+  edgeColor: string;
   textColor: string;
   opacity: number;
+  badgeBg: string;
+  badgeText: string;
 }
 
 function appearance(state: RevealState, accent: string): Appearance {
+  const accentDark = shade(accent, -0.35);
   switch (state) {
     case 'selected':
       return {
-        backgroundColor: colors.neutral[0],
+        backgroundColor: withAlpha(accent, 0.08),
         borderColor: accent,
+        edgeColor: shade(accent, -0.15),
         textColor: colors.neutral[900],
         opacity: 1,
+        badgeBg: accent,
+        badgeText: colors.neutral[0],
       };
     case 'correct':
       return {
         backgroundColor: colors.success,
         borderColor: colors.successDeep,
+        edgeColor: colors.successEdge,
         textColor: colors.neutral[0],
         opacity: 1,
+        badgeBg: 'rgba(255, 255, 255, 0.28)',
+        badgeText: colors.neutral[0],
       };
     case 'wrong':
       return {
         backgroundColor: colors.heartsRed,
         borderColor: colors.dangerDeep,
+        edgeColor: colors.dangerEdge,
         textColor: colors.neutral[0],
         opacity: 1,
+        badgeBg: 'rgba(255, 255, 255, 0.28)',
+        badgeText: colors.neutral[0],
       };
     case 'revealCorrect':
       return {
         backgroundColor: colors.neutral[0],
         borderColor: colors.success,
+        edgeColor: colors.successDeep,
         textColor: colors.successDeep,
         opacity: 1,
+        badgeBg: withAlpha(colors.success, 0.16),
+        badgeText: colors.successEdge,
       };
     case 'dimmed':
       return {
         backgroundColor: colors.neutral[0],
-        borderColor: colors.neutral[300],
+        borderColor: colors.neutral[200],
+        edgeColor: colors.neutral[300],
         textColor: colors.neutral[500],
         opacity: 0.55,
+        badgeBg: colors.neutral[100],
+        badgeText: colors.neutral[500],
       };
     case 'idle':
     default:
       return {
         backgroundColor: colors.neutral[0],
-        borderColor: colors.neutral[300],
+        borderColor: colors.neutral[200],
+        edgeColor: colors.neutral[300],
         textColor: colors.neutral[900],
         opacity: 1,
+        badgeBg: withAlpha(accent, 0.12),
+        badgeText: accentDark,
       };
   }
 }
 
+const LETTERS = 'ABCDEFGH';
+
 /**
- * One clay answer card: idle → selected (accent border + lift) → reveal
- * (correct pop / wrong shake / true-answer highlight), design_mobile.md §4b.
+ * One clay answer card: letter badge (A/B/C/D), idle → selected (accent
+ * border + lift) → reveal (correct pop / wrong shake / true-answer
+ * highlight), design_mobile.md §4b.
  */
 export function AnswerOption({
   text,
   imageUrl,
   state,
   accent,
+  index,
   multi = false,
   center = false,
   disabled = false,
@@ -141,6 +171,7 @@ export function AnswerOption({
   const showCheck = state === 'correct' || state === 'revealCorrect';
   const showCross = state === 'wrong';
   const iconOnDark = state === 'correct' || state === 'wrong';
+  const letter = !multi && !center && index != null ? LETTERS[index] : null;
 
   return (
     <Animated.View style={animatedStyle}>
@@ -159,11 +190,18 @@ export function AnswerOption({
           {
             backgroundColor: a.backgroundColor,
             borderColor: a.borderColor,
+            borderBottomColor: a.edgeColor,
             opacity: a.opacity,
           },
         ]}
         testID={testID}
       >
+        {letter != null ? (
+          <View style={[styles.letterBadge, { backgroundColor: a.badgeBg }]}>
+            <Text style={[styles.letterText, { color: a.badgeText }]}>{letter}</Text>
+          </View>
+        ) : null}
+
         {multi ? (
           <View testID={`${testID ?? 'option'}-checkbox`}>
             {state === 'selected' || state === 'correct' ? (
@@ -189,7 +227,7 @@ export function AnswerOption({
         <View style={[styles.textWrap, center && styles.textCenter]}>
           <MathText
             color={a.textColor}
-            fontSize={center ? 18 : 15}
+            fontSize={center ? 18 : 16}
             text={text}
             textStyle={center ? styles.centerText : undefined}
           />
@@ -220,14 +258,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.m,
     borderWidth: 2,
+    borderBottomWidth: 4,
     borderRadius: radii.m,
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.m,
-    minHeight: 56,
+    minHeight: 60,
   },
   center: {
     justifyContent: 'center',
     paddingVertical: spacing.xl,
+  },
+  letterBadge: {
+    width: 34,
+    height: 34,
+    borderRadius: radii.s,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  letterText: {
+    ...typography.smallMedium,
+    fontFamily: typography.h2.fontFamily,
+    fontSize: 15,
   },
   textWrap: {
     flex: 1,

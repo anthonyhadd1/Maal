@@ -34,7 +34,8 @@
       "title": "Detailed statistics",
       "body": "Accuracy per subject, day-by-day progress, trends — it's all in Premium.",
       "cta": "Discover Premium"
-    }
+    },
+    "today": "Today"
   },
   "achievementsScreen": {
     "title": "Trophies",

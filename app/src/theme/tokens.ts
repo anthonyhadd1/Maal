@@ -5,6 +5,8 @@
  * RULE: no raw hex anywhere else in the codebase — always import from here.
  */
 
+import { Platform } from 'react-native';
+
 // ---------------------------------------------------------------------------
 // Colors
 // ---------------------------------------------------------------------------
@@ -14,22 +16,32 @@ export const colors = {
   primary: {
     50: '#F5F3FF',
     100: '#EDE9FE',
+    200: '#DDD6FE',
     300: '#C4B5FD',
+    400: '#A78BFA',
     500: '#8B5CF6',
     600: '#7C3AED',
     700: '#6D28D9',
+    800: '#5B21B6',
   },
   xpGold: '#F59E0B',
+  /** Darker gold — bottom "clay edge" of gold buttons/chips. */
+  goldDeep: '#B45309',
   streakOrange: '#F97316',
   heartsRed: '#EF4444',
   success: '#22C55E',
   successDeep: '#16A34A',
+  /** Darker green — bottom "clay edge" of success buttons. */
+  successEdge: '#15803D',
   danger: '#EF4444',
   dangerDeep: '#DC2626',
+  /** Darker red — bottom "clay edge" of danger buttons. */
+  dangerEdge: '#991B1B',
   neutral: {
     0: '#FFFFFF',
     50: '#FAF9FC',
     100: '#F3F1F8',
+    200: '#E9E6F1',
     300: '#D8D4E3',
     500: '#8E8AA0',
     700: '#4B4763',
@@ -38,6 +50,25 @@ export const colors = {
   /** Streak-freeze snowflake chips. */
   freezeBlue: '#38BDF8',
 } as const;
+
+// ---------------------------------------------------------------------------
+// Gradients (expo-linear-gradient color tuples)
+// ---------------------------------------------------------------------------
+
+export const gradients = {
+  /** Brand backdrop — welcome hero, headers (600 → 400 diagonal). */
+  brand: [colors.primary[600], colors.primary[400]] as const,
+  /** Deeper brand variant for large full-bleed surfaces. */
+  brandDeep: [colors.primary[700], colors.primary[500]] as const,
+  /** Streak flame / crest: orange → gold. */
+  flame: [colors.streakOrange, colors.xpGold] as const,
+  /** XP gold shine. */
+  gold: [colors.xpGold, '#FBBF24'] as const,
+  /** Soft top sheen used on clay elements (white fade-out). */
+  sheen: ['rgba(255,255,255,0.32)', 'rgba(255,255,255,0)'] as const,
+} as const;
+
+export type GradientToken = keyof typeof gradients;
 
 /** Leaderboard rank medals (ranks 1–3). */
 export const medalColors = {
@@ -62,6 +93,32 @@ export const avatarPalette = [
 ] as const;
 
 export type AvatarPaletteEntry = (typeof avatarPalette)[number];
+
+/**
+ * Palette of the ACE mascot (young violet phoenix chick, SVG hand-drawn).
+ * Kept in tokens so the character stays on-brand everywhere.
+ */
+export const mascotPalette = {
+  bodyDeep: colors.primary[700],
+  body: colors.primary[500],
+  bodyLight: colors.primary[400],
+  wing: colors.primary[600],
+  belly: colors.primary[100],
+  bellyGlow: colors.neutral[0],
+  cheek: 'rgba(236, 72, 153, 0.32)',
+  eyeWhite: colors.neutral[0],
+  pupil: colors.neutral[900],
+  brow: colors.primary[800],
+  beak: colors.xpGold,
+  beakDeep: colors.goldDeep,
+  mouth: colors.primary[800],
+  crestBase: colors.streakOrange,
+  crestMid: colors.xpGold,
+  crestTip: '#FBBF24',
+  tongue: '#F472B6',
+  tear: colors.freezeBlue,
+  groundShadow: 'rgba(36, 31, 62, 0.12)',
+} as const;
 
 /** Inner top highlight used on raised clay surfaces. */
 export const clayHighlight = 'rgba(255, 255, 255, 0.65)';
@@ -155,34 +212,49 @@ export interface ClayShadow {
   shadowRadius: number;
   shadowOffset: { width: number; height: number };
   elevation: number;
+  /**
+   * Layered CSS shadow (soft ambient + tight contact) — react-native-web
+   * maps this straight to `box-shadow`, giving clay depth that actually
+   * reads on web. Native keeps the shadow* / elevation pair above.
+   */
+  boxShadow?: string;
 }
 
+const webShadow = (value: string): { boxShadow?: string } =>
+  Platform.OS === 'web' ? { boxShadow: value } : {};
+
 export const shadows = {
-  /** Resting clay surface. */
+  /** Resting clay surface: soft ambient + tight contact shadow. */
   clayRaised: {
     shadowColor: colors.neutral[900],
-    shadowOpacity: 0.14,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 8,
+    shadowOpacity: 0.16,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 7 },
+    elevation: 7,
+    ...webShadow('0 8px 18px rgba(36, 31, 62, 0.13), 0 2px 5px rgba(36, 31, 62, 0.09)'),
   },
   /** Swapped in while a clay element is pressed. */
   clayPressed: {
     shadowColor: colors.neutral[900],
     shadowOpacity: 0.14,
-    shadowRadius: 6,
+    shadowRadius: 5,
     shadowOffset: { width: 0, height: 2 },
     elevation: 2,
+    ...webShadow('0 2px 5px rgba(36, 31, 62, 0.12)'),
   },
-  /** Floating layers: modals, toasts, sheets. */
+  /** Floating layers: modals, toasts, sheets, the tab dock. */
   clayFloating: {
     shadowColor: colors.neutral[900],
-    shadowOpacity: 0.14,
-    shadowRadius: 24,
-    shadowOffset: { width: 0, height: 12 },
-    elevation: 12,
+    shadowOpacity: 0.2,
+    shadowRadius: 26,
+    shadowOffset: { width: 0, height: 14 },
+    elevation: 14,
+    ...webShadow('0 18px 40px rgba(36, 31, 62, 0.22), 0 5px 12px rgba(36, 31, 62, 0.10)'),
   },
 } as const satisfies Record<string, ClayShadow>;
+
+/** Focus ring around focused inputs (web `box-shadow`, transparent elsewhere). */
+export const focusRing = webShadow(`0 0 0 4px ${colors.primary[100]}`);
 
 // ---------------------------------------------------------------------------
 // Typography — Nunito 800/900 headings, DM Sans body
@@ -230,6 +302,7 @@ export type TypographyVariant = keyof typeof typography;
 
 export const theme = {
   colors,
+  gradients,
   spacing,
   radii,
   shadows,

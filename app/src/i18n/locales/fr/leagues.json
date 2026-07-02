@@ -5,7 +5,8 @@
     "endsIn": "Fin dans {{time}}",
     "daysHours": "{{days}} j {{hours}} h",
     "hoursMinutes": "{{hours}} h {{minutes}} min",
-    "minutes": "{{minutes}} min"
+    "minutes": "{{minutes}} min",
+    "days": "{{days}} j"
   },
   "toggle": {
     "league": "Ligue",
@@ -45,5 +46,9 @@
     "or": "Ligue Or",
     "diamant": "Ligue Diamant",
     "cedre": "Ligue Cèdre"
+  },
+  "hero": {
+    "promote": "Top {{count}} montent",
+    "demote": "{{count}} derniers descendent"
   }
 }

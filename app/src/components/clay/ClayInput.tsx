@@ -1,6 +1,7 @@
 import { Eye, EyeOff } from 'lucide-react-native';
 import { forwardRef, useState } from 'react';
 import {
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -12,7 +13,7 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { colors, focusRing, radii, spacing, typography } from '@/theme/tokens';
 
 export interface ClayInputProps extends TextInputProps {
   /** Visible label above the field (never placeholder-only). */
@@ -36,7 +37,11 @@ export const ClayInput = forwardRef<TextInput, ClayInputProps>(function ClayInpu
   const [focused, setFocused] = useState(false);
   const [hidden, setHidden] = useState(!!secureTextEntry);
 
-  const borderColor = error ? colors.danger : focused ? colors.primary[500] : 'transparent';
+  const borderColor = error
+    ? colors.danger
+    : focused
+      ? colors.primary[500]
+      : colors.neutral[200];
 
   return (
     <View style={containerStyle}>
@@ -46,6 +51,7 @@ export const ClayInput = forwardRef<TextInput, ClayInputProps>(function ClayInpu
           styles.field,
           { borderColor },
           focused && styles.fieldFocused,
+          error ? styles.fieldError : null,
         ]}
       >
         <TextInput
@@ -100,20 +106,28 @@ const styles = StyleSheet.create({
   field: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.neutral[100],
-    borderRadius: radii.s,
+    backgroundColor: colors.neutral[0],
+    borderRadius: radii.s + 2,
     borderWidth: 1.5,
+    borderBottomWidth: 2.5,
     minHeight: 52,
     paddingHorizontal: spacing.l,
   },
   fieldFocused: {
     backgroundColor: colors.neutral[0],
+    ...focusRing,
+  },
+  fieldError: {
+    backgroundColor: colors.danger + '0D',
   },
   input: {
     ...typography.body,
     flex: 1,
     color: colors.neutral[900],
     paddingVertical: spacing.m,
+    // The clay focus ring replaces the UA outline on web. RN's TextStyle
+    // typing doesn't know the react-native-web-only 'none' value.
+    ...(Platform.OS === 'web' ? ({ outlineStyle: 'none' } as unknown as object) : null),
   },
   eye: {
     padding: spacing.xs,

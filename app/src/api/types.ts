@@ -257,7 +257,8 @@ export interface MeGame {
   /** Streak freezes currently held (0–2). Optional: older payloads omit it. */
   streak_freezes?: number;
   league: {
-    tier: string;
+    /** Tier info object (older payloads sent the bare tier name as a string). */
+    tier: LeagueTierInfo | string;
     rank: number;
     xp_week: number;
   } | null;

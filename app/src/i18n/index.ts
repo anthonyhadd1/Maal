@@ -76,15 +76,21 @@ function isSupported(code: string | null | undefined): code is SupportedLocale {
 }
 
 /**
- * Resolution order: persisted user choice ?? device locale ?? fr.
- * The persisted choice lives in settingsStore (hydrated async) and is applied
- * by the store's rehydrate hook / setLocale action via i18n.changeLanguage.
+ * Résolution : choix persisté de l'utilisateur ?? fr.
+ * Produit French-first (public USJ francophone) : le français est TOUJOURS la
+ * langue par défaut, même sur un appareil configuré en anglais — l'anglais se
+ * choisit dans les réglages. (La locale APPAREIL reste utilisée pour les
+ * formats de nombres/dates via lib/format.)
  */
 export function detectInitialLocale(persisted?: string | null): SupportedLocale {
   if (isSupported(persisted)) return persisted;
-  const device = Localization.getLocales()[0]?.languageCode;
-  if (isSupported(device)) return device;
   return 'fr';
+}
+
+/** Locale appareil (pour les réglages : pré-suggérer English si l'appareil est en anglais). */
+export function deviceLocale(): SupportedLocale | null {
+  const device = Localization.getLocales()[0]?.languageCode;
+  return isSupported(device) ? device : null;
 }
 
 /** Resolves once i18next is initialized (bundled resources: effectively immediate). */

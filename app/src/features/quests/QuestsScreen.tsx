@@ -19,6 +19,7 @@ import { DailyGoalRing } from '@/features/quests/DailyGoalRing';
 import { QuestCard } from '@/features/quests/QuestCard';
 import { formatNumber } from '@/lib/format';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { tints } from '@/theme/tints';
 
 const MAX_FREEZES = 2;
 
@@ -111,10 +112,13 @@ export function QuestsScreen() {
                       testID={held ? 'freeze-held' : 'freeze-empty'}
                     >
                       <Snowflake
-                        color={held ? colors.freezeBlue : colors.neutral[300]}
-                        size={16}
+                        color={held ? tints.iceText : colors.neutral[300]}
+                        size={15}
                         strokeWidth={2.4}
                       />
+                      <Text style={[styles.freezeChipText, held && styles.freezeChipTextHeld]}>
+                        {i + 1}
+                      </Text>
                     </View>
                   );
                 })}
@@ -131,16 +135,18 @@ export function QuestsScreen() {
           testID="quests-achievements-row"
         >
           <View style={styles.trophyBubble}>
-            <Trophy color={colors.xpGold} fill={colors.xpGold} size={22} />
+            <Trophy color={tints.goldText} size={22} strokeWidth={2.2} />
           </View>
           <Text style={styles.achievementsLabel}>{t('achievements.row')}</Text>
           {unlockedCount != null && achievements.data ? (
-            <Text style={styles.achievementsCount}>
-              {t('achievements.count', {
-                unlocked: unlockedCount,
-                total: achievements.data.length,
-              })}
-            </Text>
+            <View style={styles.achievementsPill}>
+              <Text style={styles.achievementsCount}>
+                {t('achievements.count', {
+                  unlocked: unlockedCount,
+                  total: achievements.data.length,
+                })}
+              </Text>
+            </View>
           ) : null}
           <ChevronRight color={colors.neutral[500]} size={20} />
         </PressableScale>
@@ -222,15 +228,24 @@ const styles = StyleSheet.create({
     gap: spacing.s,
   },
   freezeChip: {
-    width: 32,
-    height: 32,
-    borderRadius: radii.pill,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    gap: spacing.xs,
+    minHeight: 30,
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
     backgroundColor: colors.neutral[100],
   },
   freezeChipHeld: {
-    backgroundColor: colors.primary[50],
+    backgroundColor: tints.ice,
+  },
+  freezeChipText: {
+    ...typography.caption,
+    fontFamily: typography.bodyBold.fontFamily,
+    color: colors.neutral[500],
+  },
+  freezeChipTextHeld: {
+    color: tints.iceText,
   },
   achievementsRow: {
     flexDirection: 'row',
@@ -240,23 +255,37 @@ const styles = StyleSheet.create({
     borderRadius: radii.l,
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.l,
+    borderWidth: 1,
+    borderColor: 'rgba(36, 31, 62, 0.05)',
+    borderBottomWidth: 2,
+    borderBottomColor: 'rgba(36, 31, 62, 0.09)',
+    marginTop: spacing.s,
   },
   trophyBubble: {
-    width: 44,
-    height: 44,
-    borderRadius: radii.pill,
-    backgroundColor: colors.neutral[100],
+    width: 46,
+    height: 46,
+    borderRadius: radii.s,
+    backgroundColor: tints.gold,
     alignItems: 'center',
     justifyContent: 'center',
   },
   achievementsLabel: {
     ...typography.bodyMedium,
+    fontFamily: typography.bodyBold.fontFamily,
     color: colors.neutral[900],
     flex: 1,
   },
+  achievementsPill: {
+    backgroundColor: tints.gold,
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    paddingVertical: 3,
+  },
   achievementsCount: {
-    ...typography.smallMedium,
-    color: colors.neutral[500],
+    ...typography.caption,
+    fontFamily: typography.bodyBold.fontFamily,
+    color: tints.goldText,
+    fontVariant: ['tabular-nums'],
   },
   skeleton: {
     gap: spacing.m,

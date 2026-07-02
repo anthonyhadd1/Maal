@@ -21,7 +21,8 @@ import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { SUPPORTED_LOCALES, type SupportedLocale } from '@/i18n';
 import { cancelStreakReminders, scheduleStreakReminders } from '@/lib/notifications';
 import { useSettingsStore } from '@/stores/settingsStore';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, radii, spacing, typography } from '@/theme/tokens';
+import { tints } from '@/theme/tints';
 
 /**
  * PUSH /profile/settings — Compte (name + avatar), Préférences (sons,
@@ -240,7 +241,7 @@ export function SettingsScreen() {
           <Text style={[styles.sectionTitle, styles.dangerTitle]}>
             {t('settings.sections.danger')}
           </Text>
-          <ClayCard style={styles.card}>
+          <ClayCard backgroundColor={tints.danger} highlight={false} style={[styles.card, styles.dangerCard]}>
             <PressableScale
               accessibilityLabel={t('logout')}
               clay={false}
@@ -388,7 +389,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.m,
   },
   dangerTitle: {
-    color: colors.danger,
+    color: tints.dangerText,
   },
   card: {
     gap: spacing.l,
@@ -452,22 +453,27 @@ const styles = StyleSheet.create({
   langLabelActive: {
     color: colors.primary[600],
   },
+  dangerCard: {
+    borderColor: 'rgba(239, 68, 68, 0.25)',
+    borderBottomColor: 'rgba(185, 28, 28, 0.35)',
+  },
   dangerRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.m,
-    minHeight: 32,
+    minHeight: 44,
   },
   dangerRowLabel: {
     ...typography.bodyMedium,
     color: colors.neutral[900],
   },
   deleteLabel: {
-    color: colors.danger,
+    color: tints.dangerText,
+    fontFamily: fonts.bodyBold,
   },
   dangerDivider: {
     height: 1,
-    backgroundColor: colors.neutral[100],
+    backgroundColor: 'rgba(185, 28, 28, 0.18)',
   },
   version: {
     ...typography.caption,

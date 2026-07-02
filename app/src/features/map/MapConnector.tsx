@@ -27,9 +27,9 @@ interface MapConnectorProps {
   accent: string;
 }
 
-const STROKE = 7;
-/** Stroke endpoints tucked just at the sphere edges (radius 38 of 76px node). */
-const EDGE_GAP = 40;
+const STROKE = 8;
+/** Stroke endpoints tucked just at the sphere edges (radius 39 of 78px node). */
+const EDGE_GAP = 46;
 
 export function MapConnector({
   fromX,
@@ -57,8 +57,9 @@ export function MapConnector({
         d={d}
         fill="none"
         stroke={color}
-        strokeDasharray={lockedTarget ? [1, 14] : undefined}
+        strokeDasharray={lockedTarget ? [1, 16] : undefined}
         strokeLinecap="round"
+        strokeOpacity={walked ? 0.9 : 1}
         strokeWidth={STROKE}
       />
     </Svg>

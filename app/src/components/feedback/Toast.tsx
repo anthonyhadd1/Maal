@@ -108,7 +108,9 @@ function ToastView({ toast }: { toast: ActiveToast }) {
           accessibilityRole="alert"
           style={styles.content}
         >
-          <Icon color={ICON_COLORS[toast.type]} size={20} />
+          <View style={[styles.iconChip, { backgroundColor: `${ICON_COLORS[toast.type]}1F` }]}>
+            <Icon color={ICON_COLORS[toast.type]} size={18} />
+          </View>
           <Text numberOfLines={2} style={styles.message}>
             {toast.message}
           </Text>
@@ -144,6 +146,13 @@ const styles = StyleSheet.create({
     gap: spacing.m,
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.m,
+  },
+  iconChip: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   message: {
     ...typography.smallMedium,

@@ -1,4 +1,4 @@
-import { Check, Crown, Lock, Play, Swords, type LucideIcon } from 'lucide-react-native';
+import { Crown, Lock, Star, Swords, type LucideIcon } from 'lucide-react-native';
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -15,12 +15,15 @@ import type { MapLevel } from '@/api/types';
 import { StarRating } from '@/components/game/StarRating';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { Mascot } from '@/components/mascot/Mascot';
+import { shade } from '@/lib/color';
 import { useReducedMotionPref } from '@/lib/motion';
-import { clayHighlight, colors, radii, shadows, spacing, typography } from '@/theme/tokens';
+import { colors, radii, shadows, spacing, typography } from '@/theme/tokens';
 import { ROW_HEIGHT } from '@/features/map/useMapLayout';
 
-export const NODE_SIZE = 76;
-export const BOSS_NODE_SIZE = 88;
+export const NODE_SIZE = 78;
+export const BOSS_NODE_SIZE = 90;
+/** Darker bottom lip that gives the sphere its clay depth. */
+const NODE_EDGE = 6;
 
 export type NodeVisual = 'locked' | 'premiumLocked' | 'unlocked' | 'completed';
 
@@ -53,7 +56,10 @@ interface LevelNodeProps {
   onPremium: (level: MapLevel) => void;
 }
 
-/** 76px clay sphere on the map path (88px for boss levels). */
+/**
+ * Layered clay sphere on the map path: accent face + darker bottom lip,
+ * inner tinted circle hosting the icon, star pips under completed nodes.
+ */
 export function LevelNode({
   level,
   accent,
@@ -100,10 +106,11 @@ export function LevelNode({
     transform: [{ translateX: shakeX.value }],
   }));
 
-  const { fill, iconColor, Icon } = nodeAppearance(visual, accent, isBoss, isLegendary);
+  const a = nodeAppearance(visual, accent, isBoss, isLegendary);
   const left = x - size / 2;
-  const top = (ROW_HEIGHT - size) / 2;
+  const top = (ROW_HEIGHT - size - NODE_EDGE) / 2;
   const mascotOnLeft = x > rowWidth / 2;
+  const innerSize = Math.round(size * 0.68);
 
   // Live-state label: title + status (+ stars when completed), i18n'd.
   const a11yKey = isLegendary
@@ -121,53 +128,83 @@ export function LevelNode({
 
   return (
     <View pointerEvents="box-none" style={styles.rowFill}>
-      {visual === 'unlocked' ? <PulseRing size={size} accent={accent} left={left} top={top} /> : null}
+      {visual === 'unlocked' ? (
+        <PulseRing accent={accent} left={left} size={size} top={top} />
+      ) : null}
 
       <Animated.View style={[styles.nodeWrap, { left, top }, shakeStyle]}>
         <PressableScale
           accessibilityLabel={a11yLabel}
           accessibilityState={{ disabled: visual === 'locked' }}
           onPress={handlePress}
-          pressedTranslateY={3}
+          pressedTranslateY={NODE_EDGE - 2}
           style={[
             styles.node,
             {
               width: size,
-              height: size,
+              height: size + NODE_EDGE,
               borderRadius: size / 2,
-              backgroundColor: fill,
-              opacity: visual === 'locked' ? 0.6 : 1,
+              backgroundColor: a.fill,
+              borderBottomWidth: NODE_EDGE,
+              borderBottomColor: a.edge,
             },
           ]}
           testID={`level-node-${level.id}`}
         >
+          {/* Top sheen — moulded volume, not a hairline. */}
           <View
             pointerEvents="none"
-            style={[styles.nodeHighlight, { width: size * 0.5, borderRadius: size / 4 }]}
+            style={[
+              styles.nodeSheen,
+              {
+                width: size * 0.52,
+                height: size * 0.18,
+                borderRadius: size / 3,
+                opacity: visual === 'locked' ? 0.5 : 1,
+              },
+            ]}
           />
-          <Icon
-            color={iconColor}
-            fill={visual === 'completed' || visual === 'unlocked' ? iconColor : 'transparent'}
-            size={isBoss ? 34 : 28}
-            strokeWidth={2.4}
-          />
+          {/* Inner tinted circle hosting the icon. */}
+          <View
+            style={[
+              styles.inner,
+              {
+                width: innerSize,
+                height: innerSize,
+                borderRadius: innerSize / 2,
+                backgroundColor: a.innerFill,
+              },
+            ]}
+          >
+            <a.Icon
+              color={a.iconColor}
+              fill={a.iconFilled ? a.iconColor : 'transparent'}
+              size={isBoss ? 36 : 30}
+              strokeWidth={2.4}
+            />
+          </View>
         </PressableScale>
       </Animated.View>
 
       {visual === 'completed' ? (
-        <View pointerEvents="none" style={[styles.stars, { left: x - 36, top: top + size - 6 }]}>
-          <StarRating size={16} stars={level.stars} />
+        <View
+          pointerEvents="none"
+          style={[styles.starsPill, { left: x - 40, top: top + size - 10 }]}
+        >
+          <View style={styles.starsInner}>
+            <StarRating size={13} stars={level.stars} />
+          </View>
         </View>
       ) : null}
 
       {isCurrent && visual === 'unlocked' ? (
         <>
-          <StartTooltip label={t('startTooltip')} x={x} top={top} />
+          <StartTooltip accent={accent} label={t('startTooltip')} rowWidth={rowWidth} top={top} x={x} />
           <View
             pointerEvents="none"
             style={[
               styles.mascot,
-              mascotOnLeft ? { left: left - 64 } : { left: left + size + 8 },
+              mascotOnLeft ? { left: left - 66 } : { left: left + size + 8 },
             ]}
           >
             <Mascot size={60} speed={0.6} state="idle" />
@@ -178,26 +215,70 @@ export function LevelNode({
   );
 }
 
+interface NodeSkin {
+  fill: string;
+  edge: string;
+  innerFill: string;
+  iconColor: string;
+  iconFilled: boolean;
+  Icon: LucideIcon;
+}
+
 function nodeAppearance(
   visual: NodeVisual,
   accent: string,
   isBoss: boolean,
   isLegendary: boolean,
-): { fill: string; iconColor: string; Icon: LucideIcon } {
+): NodeSkin {
   if (isLegendary) {
     // Gold crown skin — the legendary run has been earned on this level.
-    return { fill: colors.xpGold, iconColor: colors.neutral[0], Icon: Crown };
+    return {
+      fill: colors.xpGold,
+      edge: colors.goldDeep,
+      innerFill: 'rgba(255, 255, 255, 0.24)',
+      iconColor: colors.neutral[0],
+      iconFilled: true,
+      Icon: Crown,
+    };
   }
   switch (visual) {
     case 'premiumLocked':
-      return { fill: colors.primary[500], iconColor: colors.neutral[0], Icon: Crown };
+      return {
+        fill: colors.primary[500],
+        edge: colors.primary[700],
+        innerFill: 'rgba(255, 255, 255, 0.2)',
+        iconColor: colors.neutral[0],
+        iconFilled: false,
+        Icon: Crown,
+      };
     case 'locked':
-      return { fill: colors.neutral[300], iconColor: colors.neutral[500], Icon: Lock };
+      return {
+        fill: colors.neutral[200],
+        edge: colors.neutral[300],
+        innerFill: colors.neutral[100],
+        iconColor: colors.neutral[500],
+        iconFilled: false,
+        Icon: Lock,
+      };
     case 'completed':
-      return { fill: accent, iconColor: colors.neutral[0], Icon: isBoss ? Swords : Check };
+      return {
+        fill: accent,
+        edge: shade(accent, -0.32),
+        innerFill: 'rgba(255, 255, 255, 0.22)',
+        iconColor: colors.neutral[0],
+        iconFilled: true,
+        Icon: isBoss ? Swords : Star,
+      };
     case 'unlocked':
     default:
-      return { fill: accent, iconColor: colors.neutral[0], Icon: isBoss ? Swords : Play };
+      return {
+        fill: accent,
+        edge: shade(accent, -0.32),
+        innerFill: 'rgba(255, 255, 255, 0.22)',
+        iconColor: colors.neutral[0],
+        iconFilled: true,
+        Icon: isBoss ? Swords : Star,
+      };
   }
 }
 
@@ -230,7 +311,7 @@ function PulseRing({
     opacity: 0.45 - pulse.value * 0.25,
   }));
 
-  const ringSize = size + 20;
+  const ringSize = size + 22;
   return (
     <Animated.View
       pointerEvents="none"
@@ -241,8 +322,8 @@ function PulseRing({
           height: ringSize,
           borderRadius: ringSize / 2,
           backgroundColor: accent,
-          left: left - 10,
-          top: top - 10,
+          left: left - 11,
+          top: top - 8,
         },
         ringStyle,
       ]}
@@ -250,8 +331,20 @@ function PulseRing({
   );
 }
 
-/** Bobbing « COMMENCE » pill floating above the current node. */
-function StartTooltip({ label, x, top }: { label: string; x: number; top: number }) {
+/** Bobbing « COMMENCE » clay bubble (with tail) above the current node. */
+function StartTooltip({
+  label,
+  accent,
+  x,
+  top,
+  rowWidth,
+}: {
+  label: string;
+  accent: string;
+  x: number;
+  top: number;
+  rowWidth: number;
+}) {
   const reduceMotion = useReducedMotionPref();
   const bob = useSharedValue(0);
 
@@ -265,12 +358,15 @@ function StartTooltip({ label, x, top }: { label: string; x: number; top: number
     transform: [{ translateY: bob.value * -5 }],
   }));
 
+  // Clamp the bubble inside the row (nodes near the wave edges).
+  const left = Math.min(Math.max(spacing.s, x - 62), rowWidth - 124 - spacing.s);
+
   return (
-    <Animated.View
-      pointerEvents="none"
-      style={[styles.tooltip, { left: x - 62, top: top - 32 }, bobStyle]}
-    >
-      <Text style={styles.tooltipText}>{label}</Text>
+    <Animated.View pointerEvents="none" style={[styles.tooltipWrap, { left, top: top - 34 }, bobStyle]}>
+      <View style={styles.tooltip}>
+        <Text style={[styles.tooltipText, { color: shade(accent, -0.35) }]}>{label}</Text>
+      </View>
+      <View style={styles.tooltipTail} />
     </Animated.View>
   );
 }
@@ -290,39 +386,60 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  nodeHighlight: {
+  nodeSheen: {
     position: 'absolute',
     top: 6,
-    height: 3,
     alignSelf: 'center',
-    backgroundColor: clayHighlight,
+    backgroundColor: 'rgba(255, 255, 255, 0.32)',
+  },
+  inner: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   ring: {
     position: 'absolute',
   },
-  stars: {
+  starsPill: {
     position: 'absolute',
-    width: 72,
+    width: 80,
     alignItems: 'center',
+    zIndex: 3,
+  },
+  starsInner: {
+    backgroundColor: colors.neutral[0],
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.s,
+    paddingVertical: 3,
+    ...shadows.clayPressed,
   },
   mascot: {
     position: 'absolute',
-    top: 20,
+    top: 22,
   },
-  tooltip: {
+  tooltipWrap: {
     position: 'absolute',
     width: 124,
     alignItems: 'center',
+  },
+  tooltip: {
+    alignItems: 'center',
     backgroundColor: colors.neutral[0],
     borderRadius: radii.pill,
-    paddingVertical: spacing.xs,
+    paddingVertical: 6,
     paddingHorizontal: spacing.m,
     ...shadows.clayRaised,
   },
+  tooltipTail: {
+    width: 12,
+    height: 12,
+    marginTop: -7,
+    backgroundColor: colors.neutral[0],
+    borderRadius: 2,
+    transform: [{ rotate: '45deg' }],
+  },
   tooltipText: {
     ...typography.caption,
-    fontFamily: typography.caption.fontFamily,
-    color: colors.primary[600],
-    letterSpacing: 1,
+    fontFamily: typography.h2.fontFamily,
+    letterSpacing: 1.2,
   },
 });

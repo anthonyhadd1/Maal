@@ -11,8 +11,8 @@ import type { MapLevel, MapUnit } from '@/api/types';
  * No measurement, exact `getItemLayout`, instant `scrollToIndex`.
  */
 
-export const ROW_HEIGHT = 108;
-export const UNIT_HEADER_HEIGHT = 84;
+export const ROW_HEIGHT = 120;
+export const UNIT_HEADER_HEIGHT = 96;
 /** Node x-offset wave: centerX + amplitude * sin(globalIndex * WAVE_STEP). */
 export const WAVE_STEP = 0.9;
 /** Amplitude as a fraction of the usable width. */

@@ -16,7 +16,8 @@ import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { questFraction } from '@/features/quests/questLogic';
 import { formatDate, formatNumber } from '@/lib/format';
 import { getLucideIcon } from '@/lib/lucide';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, radii, shadows, spacing, typography } from '@/theme/tokens';
+import { tints } from '@/theme/tints';
 
 /**
  * PUSH /profile/achievements — the 21-trophy grid (design_gameplay.md §5):
@@ -101,7 +102,7 @@ function TrophyCard({
       <View style={[styles.cellCard, unlocked ? styles.cellUnlocked : styles.cellLocked]}>
         {achievement.is_premium_only ? (
           <View style={styles.crownCorner} testID={`trophy-${achievement.code}-crown`}>
-            <Crown color={colors.xpGold} fill={colors.xpGold} size={14} />
+            <Crown color={tints.goldText} size={12} strokeWidth={2.6} />
           </View>
         ) : null}
         <View style={[styles.iconBubble, unlocked ? styles.iconUnlocked : styles.iconLocked]}>
@@ -115,7 +116,7 @@ function TrophyCard({
           {achievement.title}
         </Text>
         {unlocked ? (
-          <Text style={styles.cellDate}>
+          <Text style={[styles.cellDate, styles.cellDateUnlocked]}>
             {formatDate(achievement.unlocked_at!)}
           </Text>
         ) : (
@@ -214,16 +215,27 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral[0],
     borderWidth: 2,
     borderColor: colors.xpGold,
+    borderBottomWidth: 3,
+    borderBottomColor: colors.goldDeep,
+    ...shadows.clayRaised,
   },
   cellLocked: {
-    backgroundColor: colors.neutral[50],
+    backgroundColor: colors.neutral[100],
     borderWidth: 1.5,
-    borderColor: colors.neutral[300],
+    borderColor: colors.neutral[200],
+    borderBottomWidth: 2.5,
+    borderBottomColor: colors.neutral[300],
   },
   crownCorner: {
     position: 'absolute',
     top: spacing.s,
     right: spacing.s,
+    width: 24,
+    height: 24,
+    borderRadius: radii.pill,
+    backgroundColor: tints.gold,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconBubble: {
     width: 52,
@@ -234,12 +246,15 @@ const styles = StyleSheet.create({
   },
   iconUnlocked: {
     backgroundColor: colors.xpGold,
+    borderBottomWidth: 3,
+    borderBottomColor: colors.goldDeep,
   },
   iconLocked: {
-    backgroundColor: colors.neutral[100],
+    backgroundColor: colors.neutral[200],
   },
   cellTitle: {
     ...typography.smallMedium,
+    fontFamily: fonts.bodyBold,
     color: colors.neutral[900],
     textAlign: 'center',
   },
@@ -249,6 +264,10 @@ const styles = StyleSheet.create({
   cellDate: {
     ...typography.caption,
     color: colors.neutral[500],
+  },
+  cellDateUnlocked: {
+    color: tints.goldText,
+    fontFamily: fonts.bodyBold,
   },
   skeletonGrid: {
     flexDirection: 'row',

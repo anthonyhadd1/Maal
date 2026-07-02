@@ -51,6 +51,7 @@ export function RhythmScreen() {
   return (
     <OnboardingStep
       cta={{ label: t('continue'), onPress: submit, loading: patchMe.isPending }}
+      mascot="thinking"
       step={1}
       subtitle={t('rhythm.subtitle')}
       title={t('rhythm.title')}
@@ -105,12 +106,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral[0],
     borderRadius: radii.l,
     borderWidth: 2.5,
-    borderColor: 'transparent',
+    borderColor: 'rgba(36, 31, 62, 0.06)',
+    borderBottomWidth: 3.5,
+    borderBottomColor: 'rgba(36, 31, 62, 0.10)',
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.l,
   },
   cardSelected: {
     borderColor: colors.primary[500],
+    borderBottomColor: colors.primary[600],
     backgroundColor: colors.primary[50],
   },
   cardIcon: {
@@ -139,8 +143,10 @@ const styles = StyleSheet.create({
   cardXp: {
     ...typography.smallMedium,
     color: colors.neutral[500],
+    fontVariant: ['tabular-nums'],
   },
   cardXpSelected: {
     color: colors.primary[600],
+    fontFamily: typography.bodyBold.fontFamily,
   },
 });

@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import * as SecureStore from 'expo-secure-store';
 
 import { api, authApi, REFRESH_TOKEN_KEY, setTokens } from '@/api/client';
+import * as SecureStore from '@/lib/secureStorage';
 import { ENDPOINTS } from '@/api/endpoints';
 import { keys } from '@/api/queries/keys';
 import { queryClient } from '@/api/queryClient';

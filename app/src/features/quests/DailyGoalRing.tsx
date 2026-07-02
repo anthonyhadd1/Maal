@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Svg, { Circle } from 'react-native-svg';
+import Svg, { Circle, Defs, LinearGradient as SvgLinearGradient, Stop } from 'react-native-svg';
 import { useTranslation } from 'react-i18next';
 
 import { Mascot } from '@/components/mascot/Mascot';
 import { dailyGoalMascotState, questFraction } from '@/features/quests/questLogic';
 import { formatNumber } from '@/lib/format';
-import { colors, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, spacing, typography } from '@/theme/tokens';
 
-const RING_SIZE = 148;
-const STROKE = 14;
+const RING_SIZE = 150;
+const STROKE = 15;
 
 interface DailyGoalRingProps {
   current: number;
@@ -17,7 +17,8 @@ interface DailyGoalRingProps {
 
 /**
  * SVG circular progress for the daily XP goal (goal picked at onboarding:
- * 20/40/60) + mascot reacting to progress.
+ * 20/40/60): accent-gradient stroke (gold → amber, green once done), the XP
+ * fraction centered, mascot beside it reacting to progress.
  */
 export function DailyGoalRing({ current, target }: DailyGoalRingProps) {
   const { t } = useTranslation('quests');
@@ -41,6 +42,12 @@ export function DailyGoalRing({ current, target }: DailyGoalRingProps) {
         testID="daily-goal-ring"
       >
         <Svg height={RING_SIZE} viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`} width={RING_SIZE}>
+          <Defs>
+            <SvgLinearGradient id="dailyGoalStroke" x1="0" x2="1" y1="0" y2="1">
+              <Stop offset="0" stopColor={done ? colors.successDeep : colors.xpGold} />
+              <Stop offset="1" stopColor={done ? '#4ADE80' : '#FBBF24'} />
+            </SvgLinearGradient>
+          </Defs>
           <Circle
             cx={RING_SIZE / 2}
             cy={RING_SIZE / 2}
@@ -54,7 +61,7 @@ export function DailyGoalRing({ current, target }: DailyGoalRingProps) {
             cy={RING_SIZE / 2}
             fill="none"
             r={radius}
-            stroke={done ? colors.success : colors.xpGold}
+            stroke="url(#dailyGoalStroke)"
             strokeDasharray={`${circumference} ${circumference}`}
             strokeDashoffset={circumference * (1 - fraction)}
             strokeLinecap="round"
@@ -96,11 +103,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   current: {
-    ...typography.display,
+    fontFamily: fonts.headingBlack,
+    fontSize: 34,
+    lineHeight: 40,
     color: colors.neutral[900],
   },
   target: {
     ...typography.caption,
+    fontFamily: fonts.bodyBold,
     color: colors.neutral[500],
   },
   side: {
@@ -110,6 +120,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     ...typography.small,
+    fontFamily: fonts.bodyMedium,
     color: colors.neutral[700],
     textAlign: 'center',
   },

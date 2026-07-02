@@ -1,3 +1,4 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import { useNetworkState } from 'expo-network';
 import { useRouter } from 'expo-router';
 import { Crown } from 'lucide-react-native';
@@ -30,6 +31,7 @@ import {
   type NodeRow,
 } from '@/features/map/useMapLayout';
 import { MapHeader } from '@/features/map/MapHeader';
+import { withAlpha } from '@/lib/color';
 import { isSessionResumable, useSessionStore } from '@/stores/sessionStore';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { colors, getSubjectAccent, spacing } from '@/theme/tokens';
@@ -274,6 +276,7 @@ export function LevelsMap() {
 
   return (
     <Screen edges={['top', 'left', 'right']} padded={false}>
+      <MapBackdrop accent={accent} />
       <MapHeader
         accent={accent}
         game={game.data}
@@ -425,6 +428,23 @@ export function LevelsMap() {
   );
 }
 
+/**
+ * Fixed soft backdrop behind the map: light brand gradient + two large
+ * accent-tinted blobs, so the path never sits on a dead-flat field.
+ */
+function MapBackdrop({ accent }: { accent: string }) {
+  return (
+    <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+      <LinearGradient
+        colors={[colors.primary[50], colors.neutral[50], colors.primary[50]]}
+        style={StyleSheet.absoluteFill}
+      />
+      <View style={[styles.blob, styles.blobTop, { backgroundColor: withAlpha(accent, 0.07) }]} />
+      <View style={[styles.blob, styles.blobBottom, { backgroundColor: withAlpha(accent, 0.06) }]} />
+    </View>
+  );
+}
+
 /** Loading placeholder: a column of node-sized circles on the wave. */
 function MapSkeleton({ width }: { width: number }) {
   const centerX = width / 2;
@@ -456,5 +476,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.xl,
     paddingTop: spacing.xl,
+  },
+  blob: {
+    position: 'absolute',
+    width: 340,
+    height: 340,
+    borderRadius: 170,
+  },
+  blobTop: {
+    top: 90,
+    right: -140,
+  },
+  blobBottom: {
+    bottom: 40,
+    left: -150,
   },
 });

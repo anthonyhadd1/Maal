@@ -1,7 +1,9 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import {
   BarChart3,
   Brain,
+  Check,
   Crown,
   Heart,
   Layers,
@@ -32,7 +34,8 @@ import {
   type PlanId,
 } from '@/features/paywall/entitlements';
 import { formatDate } from '@/lib/format';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, gradients, radii, shadows, spacing, typography } from '@/theme/tokens';
+import { tints } from '@/theme/tints';
 
 const BENEFITS: { key: string; Icon: LucideIcon }[] = [
   { key: 'allUnits', Icon: Layers },
@@ -106,11 +109,11 @@ export function PaywallScreen() {
           <Mascot size={140} state="celebrate" />
           <View style={styles.crownRow}>
             <Crown color={colors.xpGold} fill={colors.xpGold} size={26} />
-            <Text accessibilityRole="header" style={styles.title}>
+            <Text accessibilityRole="header" style={styles.titleDark}>
               {t('premium.title')}
             </Text>
           </View>
-          <Text style={styles.pitch}>{t('premium.body')}</Text>
+          <Text style={styles.pitchDark}>{t('premium.body')}</Text>
         </View>
         <ClayCard style={styles.statusCard}>
           <Text style={styles.statusLine}>
@@ -136,51 +139,67 @@ export function PaywallScreen() {
   }
 
   return (
-    <Screen edges={['top', 'left', 'right', 'bottom']} scroll>
-      {close}
-
-      {/* Hero */}
-      <View style={styles.hero}>
-        <View>
-          <Mascot size={132} state="celebrate" />
-          <View style={styles.heroCrown}>
-            <Crown color={colors.xpGold} fill={colors.xpGold} size={30} />
-          </View>
+    <Screen edges={['left', 'right', 'bottom']} padded={false} scroll>
+      {/* Hero — brand gradient band that sells */}
+      <LinearGradient
+        colors={gradients.brandDeep}
+        end={{ x: 1, y: 1 }}
+        start={{ x: 0, y: 0 }}
+        style={styles.heroBand}
+      >
+        <View style={styles.closeRow}>
+          <ClayIconButton
+            accessibilityLabel={tCommon('cta.close')}
+            onPress={() => router.back()}
+            size={40}
+            testID="paywall-close"
+          >
+            <X color={colors.neutral[700]} size={20} />
+          </ClayIconButton>
         </View>
-        <Text accessibilityRole="header" style={styles.title}>
-          {t('title')}
-        </Text>
-        <Text style={styles.pitch}>{t('pitch')}</Text>
-      </View>
-
-      {/* Benefits */}
-      <View style={styles.benefits}>
-        {BENEFITS.map(({ key, Icon }) => (
-          <View key={key} style={styles.benefitRow}>
-            <View style={styles.benefitIcon}>
-              <Icon color={colors.primary[600]} size={18} strokeWidth={2.2} />
+        <View style={styles.hero}>
+          <View>
+            <Mascot size={124} state="celebrate" />
+            <View style={styles.heroCrown}>
+              <Crown color={colors.xpGold} fill={colors.xpGold} size={34} />
             </View>
-            <Text style={styles.benefitText}>{t(`features.${key}`)}</Text>
           </View>
-        ))}
-      </View>
+          <Text accessibilityRole="header" style={styles.title}>
+            {t('title')}
+          </Text>
+          <Text style={styles.pitch}>{t('pitch')}</Text>
+        </View>
+      </LinearGradient>
 
-      {/* Plan selector */}
-      <View style={styles.plans}>
-        <PlanCard
-          onPress={() => setPlan('monthly')}
-          plan={PLANS.monthly}
-          selected={plan === 'monthly'}
-        />
-        <PlanCard
-          onPress={() => setPlan('annual')}
-          plan={PLANS.annual}
-          selected={plan === 'annual'}
-        />
-      </View>
+      <View style={styles.body}>
+        {/* Benefits */}
+        <View style={styles.benefits}>
+          {BENEFITS.map(({ key, Icon }) => (
+            <View key={key} style={styles.benefitRow}>
+              <View style={styles.benefitIcon}>
+                <Icon color={tints.goldText} size={18} strokeWidth={2.2} />
+              </View>
+              <Text style={styles.benefitText}>{t(`features.${key}`)}</Text>
+            </View>
+          ))}
+        </View>
 
-      {/* CTA + restore + legal */}
-      <View style={styles.actions}>
+        {/* Plan selector */}
+        <View style={styles.plans}>
+          <PlanCard
+            onPress={() => setPlan('monthly')}
+            plan={PLANS.monthly}
+            selected={plan === 'monthly'}
+          />
+          <PlanCard
+            onPress={() => setPlan('annual')}
+            plan={PLANS.annual}
+            selected={plan === 'annual'}
+          />
+        </View>
+
+        {/* CTA + restore + legal */}
+        <View style={styles.actions}>
         <ClayButton
           fullWidth
           loading={busy}
@@ -200,7 +219,8 @@ export function PaywallScreen() {
         >
           <Text style={styles.restoreText}>{t('restore')}</Text>
         </PressableScale>
-        <Text style={styles.legal}>{t('legal')}</Text>
+          <Text style={styles.legal}>{t('legal')}</Text>
+        </View>
       </View>
 
       {/* Purchases not wired yet (RevenueCat = later phase). */}
@@ -249,6 +269,9 @@ function PlanCard({
             <Text style={styles.ribbonText}>{t('plans.save', { pct: plan.savingsPct })}</Text>
           </View>
         ) : null}
+        <View style={[styles.planCheck, selected && styles.planCheckSelected]}>
+          {selected ? <Check color={colors.neutral[0]} size={13} strokeWidth={3.5} /> : null}
+        </View>
         <Text style={styles.planName}>{t(monthly ? 'plans.monthly' : 'plans.annual')}</Text>
         <Text style={styles.planPrice}>{plan.price}</Text>
         <Text style={styles.planPeriod}>{t(monthly ? 'plans.perMonth' : 'plans.perYear')}</Text>
@@ -266,15 +289,25 @@ const styles = StyleSheet.create({
   closeRow: {
     alignItems: 'flex-end',
   },
+  heroBand: {
+    borderBottomLeftRadius: radii.xl,
+    borderBottomRightRadius: radii.xl,
+    paddingTop: spacing.l,
+    paddingHorizontal: spacing.l,
+    paddingBottom: spacing.xl,
+  },
+  body: {
+    flex: 1,
+    paddingHorizontal: spacing.l,
+  },
   hero: {
     alignItems: 'center',
     gap: spacing.s,
-    marginTop: spacing.s,
   },
   heroCrown: {
     position: 'absolute',
-    top: -6,
-    right: -10,
+    top: -10,
+    right: -14,
     transform: [{ rotate: '18deg' }],
   },
   crownRow: {
@@ -283,13 +316,27 @@ const styles = StyleSheet.create({
     gap: spacing.s,
   },
   title: {
+    fontFamily: fonts.headingBlack,
+    fontSize: 28,
+    lineHeight: 34,
+    color: colors.neutral[0],
+    textAlign: 'center',
+  },
+  titleDark: {
     ...typography.h1,
     color: colors.neutral[900],
     textAlign: 'center',
   },
-  pitch: {
+  pitchDark: {
     ...typography.body,
     color: colors.neutral[700],
+    textAlign: 'center',
+    paddingHorizontal: spacing.l,
+  },
+  pitch: {
+    ...typography.body,
+    fontFamily: fonts.bodyMedium,
+    color: colors.primary[100],
     textAlign: 'center',
     paddingHorizontal: spacing.l,
   },
@@ -304,10 +351,10 @@ const styles = StyleSheet.create({
     gap: spacing.m,
   },
   benefitIcon: {
-    width: 34,
-    height: 34,
-    borderRadius: radii.pill,
-    backgroundColor: colors.primary[50],
+    width: 36,
+    height: 36,
+    borderRadius: radii.s,
+    backgroundColor: tints.gold,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -330,42 +377,66 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral[0],
     borderRadius: radii.l,
     borderWidth: 2.5,
-    borderColor: colors.neutral[100],
+    borderColor: colors.neutral[200],
     paddingVertical: spacing.l,
     paddingHorizontal: spacing.m,
-    minHeight: 132,
+    minHeight: 148,
   },
   planCardSelected: {
     borderColor: colors.xpGold,
-    backgroundColor: colors.neutral[50],
+    borderBottomWidth: 4,
+    borderBottomColor: colors.goldDeep,
+    backgroundColor: tints.gold,
+  },
+  planCheck: {
+    width: 22,
+    height: 22,
+    borderRadius: radii.pill,
+    borderWidth: 2,
+    borderColor: colors.neutral[300],
+    backgroundColor: colors.neutral[0],
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.xs,
+  },
+  planCheckSelected: {
+    borderColor: colors.goldDeep,
+    backgroundColor: colors.xpGold,
   },
   ribbon: {
     position: 'absolute',
     top: -12,
-    backgroundColor: colors.success,
+    backgroundColor: colors.successDeep,
     borderRadius: radii.pill,
     paddingHorizontal: spacing.m,
-    paddingVertical: 2,
+    paddingVertical: 3,
+    ...shadows.clayPressed,
   },
   ribbonText: {
     ...typography.caption,
+    fontFamily: fonts.bodyBold,
     color: colors.neutral[0],
   },
   planName: {
     ...typography.smallMedium,
+    fontFamily: fonts.bodyBold,
     color: colors.neutral[700],
-    marginTop: spacing.xs,
   },
   planPrice: {
-    ...typography.h1,
+    fontFamily: fonts.headingBlack,
+    fontSize: 26,
+    lineHeight: 32,
     color: colors.neutral[900],
+    fontVariant: ['tabular-nums'],
   },
   planPeriod: {
     ...typography.caption,
     color: colors.neutral[500],
   },
   trialPill: {
-    backgroundColor: colors.primary[100],
+    backgroundColor: colors.neutral[0],
+    borderWidth: 1.5,
+    borderColor: colors.goldDeep,
     borderRadius: radii.pill,
     paddingHorizontal: spacing.m,
     paddingVertical: 2,
@@ -373,7 +444,8 @@ const styles = StyleSheet.create({
   },
   trialText: {
     ...typography.caption,
-    color: colors.primary[700],
+    fontFamily: fonts.bodyBold,
+    color: tints.goldText,
   },
   statusCard: {
     alignItems: 'center',

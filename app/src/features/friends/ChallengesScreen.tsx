@@ -31,7 +31,8 @@ import {
   type ChallengeDirection,
 } from '@/features/friends/challengeStatus';
 import { msToParts } from '@/lib/format';
-import { colors, getSubjectAccent, radii, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, getSubjectAccent, radii, spacing, typography } from '@/theme/tokens';
+import { tints } from '@/theme/tints';
 
 /**
  * PUSH /friends/challenges — Reçus / Envoyés inbox (design_gameplay.md §6):
@@ -51,6 +52,8 @@ export function ChallengesScreen() {
   const [detailId, setDetailId] = useState<number | null>(null);
 
   const myUsername = me.data?.username ?? '';
+  const myName = me.data?.profile.display_name || myUsername;
+  const myAvatarId = me.data?.profile.avatar_id ?? null;
   const onError = () => toast.show({ type: 'error', message: tErrors('server') });
 
   const empty =
@@ -88,6 +91,8 @@ export function ChallengesScreen() {
                     challenge={challenge}
                     direction="incoming"
                     key={challenge.id}
+                    myAvatarId={myAvatarId}
+                    myName={myName}
                     myUsername={myUsername}
                     onAccept={() => acceptChallenge.mutate(challenge.id, { onError })}
                     onDecline={() => declineChallenge.mutate(challenge.id, { onError })}
@@ -114,6 +119,8 @@ export function ChallengesScreen() {
                     challenge={challenge}
                     direction="outgoing"
                     key={challenge.id}
+                    myAvatarId={myAvatarId}
+                    myName={myName}
                     myUsername={myUsername}
                     onOpenDetail={() => setDetailId(challenge.id)}
                     pending={false}
@@ -135,12 +142,12 @@ export function ChallengesScreen() {
 }
 
 const CHIP_TONES: Record<ChallengeChip, { bg: string; fg: string }> = {
-  pending: { bg: colors.neutral[100], fg: colors.neutral[700] },
+  pending: { bg: tints.gold, fg: tints.goldText },
   inProgress: { bg: colors.primary[100], fg: colors.primary[700] },
   expired: { bg: colors.neutral[100], fg: colors.neutral[500] },
   declined: { bg: colors.neutral[100], fg: colors.neutral[500] },
-  won: { bg: colors.success, fg: colors.neutral[0] },
-  lost: { bg: colors.danger, fg: colors.neutral[0] },
+  won: { bg: tints.success, fg: tints.successText },
+  lost: { bg: tints.danger, fg: tints.dangerText },
   tie: { bg: colors.primary[100], fg: colors.primary[700] },
 };
 
@@ -148,6 +155,8 @@ function ChallengeCard({
   challenge,
   direction,
   myUsername,
+  myName,
+  myAvatarId,
   pending,
   onAccept,
   onDecline,
@@ -157,6 +166,8 @@ function ChallengeCard({
   challenge: IncomingChallenge | OutgoingChallenge;
   direction: ChallengeDirection;
   myUsername: string;
+  myName: string;
+  myAvatarId: string | null;
   pending: boolean;
   onAccept?: () => void;
   onDecline?: () => void;
@@ -202,10 +213,10 @@ function ChallengeCard({
           </View>
         </View>
 
-        {/* VS row: the other player vs me */}
+        {/* VS row: the other player vs me — both avatars, scores when done */}
         <View style={styles.vsRow}>
           <View style={styles.vsSide}>
-            <Avatar avatarId={oriented.other.avatar_id} name={otherName} size={36} />
+            <Avatar avatarId={oriented.other.avatar_id} name={otherName} size={38} />
             <Text numberOfLines={1} style={styles.vsName}>
               {otherName}
             </Text>
@@ -215,12 +226,17 @@ function ChallengeCard({
               {oriented.otherScore ?? 0} – {oriented.myScore ?? 0}
             </Text>
           ) : (
-            <Text style={styles.vsLabel}>{t('challenges.vs')}</Text>
+            <View style={styles.vsPill}>
+              <Text style={styles.vsLabel}>{t('challenges.vs')}</Text>
+            </View>
           )}
-          <View style={styles.vsSide}>
+          <View style={[styles.vsSide, styles.vsSideMe]}>
             <Text numberOfLines={1} style={[styles.vsName, styles.vsNameMe]}>
               {t('challenges.you')}
             </Text>
+            <View style={styles.meAvatarRing}>
+              <Avatar avatarId={myAvatarId} name={myName} size={34} />
+            </View>
           </View>
         </View>
 
@@ -399,6 +415,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral[0],
     borderRadius: radii.l,
     overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: 'rgba(36, 31, 62, 0.05)',
+    borderBottomWidth: 2,
+    borderBottomColor: 'rgba(36, 31, 62, 0.09)',
   },
   accentBar: {
     width: 6,
@@ -431,6 +451,7 @@ const styles = StyleSheet.create({
   },
   chipText: {
     ...typography.caption,
+    fontFamily: fonts.bodyBold,
   },
   vsRow: {
     flexDirection: 'row',
@@ -443,6 +464,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.s,
   },
+  vsSideMe: {
+    justifyContent: 'flex-end',
+  },
   vsName: {
     ...typography.smallMedium,
     color: colors.neutral[700],
@@ -450,16 +474,34 @@ const styles = StyleSheet.create({
   },
   vsNameMe: {
     textAlign: 'right',
-    flex: 1,
     color: colors.primary[600],
+    fontFamily: typography.bodyBold.fontFamily,
+  },
+  meAvatarRing: {
+    borderRadius: radii.pill,
+    borderWidth: 2,
+    borderColor: colors.primary[400],
+    padding: 2,
+    backgroundColor: colors.neutral[0],
   },
   vsScore: {
     ...typography.h2,
+    fontFamily: fonts.headingBlack,
     color: colors.neutral[900],
+    fontVariant: ['tabular-nums'],
+  },
+  vsPill: {
+    backgroundColor: colors.neutral[100],
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    paddingVertical: 3,
   },
   vsLabel: {
     ...typography.caption,
+    fontFamily: fonts.headingBlack,
     color: colors.neutral[500],
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
   },
   expiry: {
     ...typography.caption,

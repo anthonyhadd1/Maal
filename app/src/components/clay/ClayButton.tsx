@@ -1,10 +1,20 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import type { ReactNode } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { PressableScale, type PressableScaleProps } from '@/components/layout/PressableScale';
-import { clayHighlight, colors, fonts, radii, spacing } from '@/theme/tokens';
+import { colors, fonts, gradients, radii, spacing } from '@/theme/tokens';
 
-export type ClayButtonVariant = 'primary' | 'secondary' | 'success' | 'danger' | 'gold';
+export type ClayButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'gold'
+  /** White pill with violet label — CTAs sitting on brand gradients. */
+  | 'inverted'
+  /** Translucent white outline — secondary action on brand gradients. */
+  | 'ghost';
 export type ClayButtonSize = 'm' | 'l';
 
 export interface ClayButtonProps extends Omit<PressableScaleProps, 'children'> {
@@ -21,27 +31,69 @@ export interface ClayButtonProps extends Omit<PressableScaleProps, 'children'> {
 interface VariantStyle {
   backgroundColor: string;
   labelColor: string;
+  /** Darker bottom "clay edge" (the pressed-down 3D lip). */
+  edgeColor: string;
   borderColor?: string;
+  /** Skip the white top sheen (pointless on white/translucent buttons). */
+  sheen?: boolean;
+  spinnerColor?: string;
 }
 
 const VARIANTS: Record<ClayButtonVariant, VariantStyle> = {
-  primary: { backgroundColor: colors.primary[500], labelColor: colors.neutral[0] },
+  primary: {
+    backgroundColor: colors.primary[600],
+    labelColor: colors.neutral[0],
+    edgeColor: colors.primary[800],
+  },
   secondary: {
     backgroundColor: colors.neutral[0],
     labelColor: colors.primary[600],
-    borderColor: colors.neutral[300],
+    edgeColor: colors.neutral[300],
+    borderColor: colors.neutral[200],
+    sheen: false,
   },
-  success: { backgroundColor: colors.success, labelColor: colors.neutral[0] },
-  danger: { backgroundColor: colors.danger, labelColor: colors.neutral[0] },
-  gold: { backgroundColor: colors.xpGold, labelColor: colors.neutral[900] },
+  success: {
+    backgroundColor: colors.successDeep,
+    labelColor: colors.neutral[0],
+    edgeColor: colors.successEdge,
+  },
+  danger: {
+    backgroundColor: colors.dangerDeep,
+    labelColor: colors.neutral[0],
+    edgeColor: colors.dangerEdge,
+  },
+  gold: {
+    backgroundColor: colors.xpGold,
+    labelColor: colors.neutral[900],
+    edgeColor: colors.goldDeep,
+    spinnerColor: colors.neutral[900],
+  },
+  inverted: {
+    backgroundColor: colors.neutral[0],
+    labelColor: colors.primary[700],
+    edgeColor: colors.primary[200],
+    sheen: false,
+  },
+  ghost: {
+    backgroundColor: 'rgba(255, 255, 255, 0.14)',
+    labelColor: colors.neutral[0],
+    edgeColor: 'rgba(255, 255, 255, 0.22)',
+    borderColor: 'rgba(255, 255, 255, 0.45)',
+    sheen: false,
+  },
 };
+
+const EDGE = 4;
 
 const SIZES: Record<ClayButtonSize, { height: number; fontSize: number; paddingH: number; radius: number }> = {
   m: { height: 48, fontSize: 16, paddingH: spacing.xl, radius: radii.m },
   l: { height: 56, fontSize: 18, paddingH: spacing.xxl, radius: radii.l },
 };
 
-/** Primary tappable: clay pill button with press spring + haptic. */
+/**
+ * Primary tappable: claymorphic 3D pill — solid face, darker bottom edge,
+ * soft top sheen, press spring (translates down onto its edge) + haptic.
+ */
 export function ClayButton({
   title,
   variant = 'primary',
@@ -62,24 +114,38 @@ export function ClayButton({
       accessibilityRole="button"
       accessibilityState={{ disabled: !!isDisabled, busy: loading }}
       disabled={isDisabled}
+      pressedTranslateY={EDGE - 1}
       style={[
         styles.base,
         {
           backgroundColor: v.backgroundColor,
-          height: s.height,
+          height: s.height + EDGE,
           paddingHorizontal: s.paddingH,
           borderRadius: s.radius,
+          borderBottomWidth: EDGE,
+          borderBottomColor: v.edgeColor,
         },
-        v.borderColor ? { borderWidth: 1.5, borderColor: v.borderColor } : undefined,
+        v.borderColor
+          ? { borderWidth: 1.5, borderColor: v.borderColor, borderBottomWidth: EDGE, borderBottomColor: v.edgeColor }
+          : undefined,
         fullWidth && styles.fullWidth,
         isDisabled && styles.disabled,
         style,
       ]}
       {...rest}
     >
-      <View pointerEvents="none" style={[styles.highlight, { borderRadius: s.radius / 2 }]} />
+      {v.sheen !== false ? (
+        <LinearGradient
+          colors={gradients.sheen}
+          pointerEvents="none"
+          style={[
+            styles.sheen,
+            { borderTopLeftRadius: s.radius, borderTopRightRadius: s.radius },
+          ]}
+        />
+      ) : null}
       {loading ? (
-        <ActivityIndicator testID="clay-button-spinner" color={v.labelColor} />
+        <ActivityIndicator testID="clay-button-spinner" color={v.spinnerColor ?? v.labelColor} />
       ) : (
         <View style={styles.content}>
           {icon}
@@ -100,6 +166,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'flex-start',
+    overflow: 'hidden',
   },
   fullWidth: {
     alignSelf: 'stretch',
@@ -114,13 +181,13 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: fonts.heading,
+    letterSpacing: 0.2,
   },
-  highlight: {
+  sheen: {
     position: 'absolute',
-    top: 3,
-    left: 16,
-    right: 16,
-    height: 2,
-    backgroundColor: clayHighlight,
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '55%',
   },
 });

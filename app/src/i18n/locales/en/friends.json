@@ -35,7 +35,9 @@
     "empty": "No one found for \"{{q}}\"",
     "emptyMessage": "Check the spelling or try another name.",
     "add": "Add",
-    "friends": "Friends"
+    "friends": "Friends",
+    "promptTitle": "Find your friends",
+    "promptMessage": "Type their username to challenge them and climb together."
   },
   "challengeSheet": {
     "title": "Challenge {{name}}",
