@@ -7,6 +7,44 @@
     "streak": "Série",
     "hearts": "Cœurs"
   },
+  "summary": {
+    "xpTotal": "XP total",
+    "levels": "Niveaux terminés",
+    "perfect": "Sans-faute",
+    "bestStreak": "Meilleure série"
+  },
+  "premium": {
+    "active": "Membre Premium",
+    "activeUntil": "Jusqu'au {{date}}",
+    "upsell": "Passe en Premium pour tout débloquer"
+  },
+  "rows": {
+    "stats": "Mes statistiques",
+    "achievements": "Trophées",
+    "friends": "Amis",
+    "settings": "Réglages"
+  },
+  "statsScreen": {
+    "title": "Mes statistiques",
+    "bySubject": "Précision par matière",
+    "xpByDay": "XP des 14 derniers jours",
+    "maxXp": "max {{xp}} XP",
+    "subjectMeta": "{{answered}} réponses · {{levels}} niveaux · {{stars}} étoiles",
+    "locked": {
+      "title": "Statistiques détaillées",
+      "body": "Précision par matière, progression jour par jour, tendances — tout est dans Premium.",
+      "cta": "Découvrir Premium"
+    }
+  },
+  "achievementsScreen": {
+    "title": "Trophées",
+    "unlockedCount": "{{unlocked}}/{{total}} débloqués",
+    "unlockedAt": "Débloqué le {{date}}",
+    "locked": "Encore verrouillé",
+    "progress": "{{progress}}/{{threshold}}",
+    "premiumOnly": "Trophée exclusif Premium",
+    "empty": "Les trophées arrivent bientôt !"
+  },
   "email": "E-mail",
   "noEmail": "Aucun e-mail enregistré",
   "logout": "Se déconnecter",
@@ -15,10 +53,40 @@
   },
   "settings": {
     "title": "Réglages",
+    "sections": {
+      "account": "Compte",
+      "preferences": "Préférences",
+      "league": "Ligue",
+      "danger": "Zone de danger"
+    },
+    "displayName": "Nom affiché",
+    "avatar": "Avatar",
+    "avatarOption": "Avatar {{id}}",
+    "save": "Enregistrer",
+    "saved": "Profil mis à jour !",
     "sound": "Sons",
     "haptics": "Vibrations",
     "reduceMotion": "Réduire les animations",
     "language": "Langue",
-    "deleteAccount": "Supprimer mon compte"
+    "locales": {
+      "fr": "FR",
+      "en": "EN"
+    },
+    "leaguesOptIn": "Participer aux ligues",
+    "logoutConfirm": {
+      "title": "Se déconnecter ?",
+      "body": "Tu pourras te reconnecter quand tu veux, ta progression est sauvegardée."
+    },
+    "deleteAccount": "Supprimer mon compte",
+    "delete": {
+      "title": "Supprimer ton compte ?",
+      "body": "Ton compte, ta progression, tes trophées et tes amis seront définitivement supprimés.",
+      "confirm": "Continuer",
+      "confirmTitle": "Dernière vérification",
+      "confirmBody": "Cette action est irréversible. On supprime vraiment tout ?",
+      "final": "Supprimer définitivement"
+    },
+    "cancel": "Annuler",
+    "version": "Version {{version}}"
   }
 }

@@ -81,13 +81,19 @@ def _scored_today(user) -> int:
 
 
 def _challenge_payload(challenge: Challenge, user) -> dict:
+    subject = challenge.level.unit.subject
     return {
         "id": challenge.pk,
         "status": challenge.status,
         "level": {
             "id": challenge.level_id,
             "title": challenge.level.title,
-            "subject": challenge.level.unit.subject.slug,
+            "subject": {
+                "name": subject.name,
+                "slug": subject.slug,
+                "color_hex": subject.color_hex,
+                "icon": subject.icon,
+            },
         },
         "challenger": _user_brief(challenge.challenger),
         "opponent": _user_brief(challenge.opponent),
@@ -96,13 +102,14 @@ def _challenge_payload(challenge: Challenge, user) -> dict:
         "opponent_score": challenge.opponent_score,
         "total_questions": len(challenge.question_ids),
         "winner_id": challenge.winner_id,
+        "winner_username": challenge.winner.username if challenge.winner_id else None,
         "xp_awarded": challenge.xp_awarded,
         "created_at": challenge.created_at,
         "expires_at": challenge.expires_at,
     }
 
 
-_CHALLENGE_RELATED = ["level__unit__subject", "challenger__profile", "opponent__profile"]
+_CHALLENGE_RELATED = ["level__unit__subject", "challenger__profile", "opponent__profile", "winner"]
 
 
 # --- Cycle de vie -------------------------------------------------------------
@@ -331,15 +338,20 @@ def on_attempt_completed(attempt: LevelAttempt, now=None) -> dict:
 # --- Lectures ------------------------------------------------------------------
 
 
-def list_mine(user) -> list[dict]:
-    """GET /challenges/ : envoyés + reçus, expiration paresseuse appliquée."""
+def list_mine(user) -> dict:
+    """GET /challenges/ : {incoming, outgoing} (contrat mobile), expiration
+    paresseuse appliquée."""
     _expire_due_for(user)
     challenges = (
         Challenge.objects.filter(Q(challenger=user) | Q(opponent=user))
         .select_related(*_CHALLENGE_RELATED)
         .order_by("-created_at")
     )
-    return [_challenge_payload(challenge, user) for challenge in challenges]
+    incoming, outgoing = [], []
+    for challenge in challenges:
+        payload = _challenge_payload(challenge, user)
+        (outgoing if challenge.challenger_id == user.pk else incoming).append(payload)
+    return {"incoming": incoming, "outgoing": outgoing}
 
 
 def detail(user, challenge_id: int, request=None) -> dict:
@@ -370,7 +382,9 @@ def detail(user, challenge_id: int, request=None) -> dict:
         payload["questions"] = attempts_service._questions_payload(questions, request)
 
     if challenge.status == Challenge.Status.COMPLETED:
-        payload["comparison"] = _comparison(challenge)
+        # Clé `questions` sur le détail complété (contrat mobile) — ne cohabite
+        # jamais avec les questions jouables ci-dessus (statuts disjoints).
+        payload["questions"] = _comparison(challenge)
     return payload
 
 

@@ -1,14 +1,38 @@
 {
   "title": "Ligue",
-  "empty": {
-    "title": "La ligue ouvre bientôt !",
-    "message": "Chaque semaine, affronte 29 autres candidat·e·s. Les 10 premiers montent, les 5 derniers descendent."
+  "caption": "Top {{promote}} montent · Les {{demote}} derniers descendent",
+  "countdown": {
+    "endsIn": "Fin dans {{time}}",
+    "daysHours": "{{days}} j {{hours}} h",
+    "hoursMinutes": "{{hours}} h {{minutes}} min",
+    "minutes": "{{minutes}} min"
   },
+  "toggle": {
+    "league": "Ligue",
+    "friends": "Amis"
+  },
+  "empty": {
+    "title": "Rejoins la ligue !",
+    "message": "Gagne de l'XP pour rejoindre la ligue de la semaine !",
+    "cta": "Gagner de l'XP"
+  },
+  "optOut": {
+    "title": "Ligues désactivées",
+    "message": "Tu as choisi de ne pas participer aux ligues. Tu peux les réactiver quand tu veux dans les réglages.",
+    "cta": "Ouvrir les réglages"
+  },
+  "friendsEmpty": {
+    "title": "Aucun ami dans le classement",
+    "message": "Ajoute tes amis et montre-leur qui est le futur médecin.",
+    "cta": "Ajouter des amis"
+  },
+  "xpWeek": "{{xp}} XP",
   "promoted": "Promu·e en Ligue {{league}} !",
   "demotionWarning": "Attention, tu es dans la zone rouge…",
   "weekEnd": "La semaine se termine dimanche à minuit !",
   "promotionZone": "Zone de promotion",
   "demotionZone": "Zone de relégation",
+  "dangerZone": "Zone de danger",
   "you": "Toi",
   "challenge": {
     "received": "{{name}} te défie !",

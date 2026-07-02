@@ -20,10 +20,12 @@ import { useSettingsStore } from '@/stores/settingsStore';
 
 interface SessionScreenProps {
   levelId: number;
+  /** Friend-challenge mode: starts via POST /challenges/{id}/attempts/. */
+  challengeId?: number;
 }
 
 /** MODAL /session/:levelId — the question loop (hero screen §4b). */
-export function SessionScreen({ levelId }: SessionScreenProps) {
+export function SessionScreen({ levelId, challengeId }: SessionScreenProps) {
   const { t } = useTranslation('session');
   const { t: tCommon } = useTranslation('common');
   const { t: tErrors } = useTranslation('errors');
@@ -33,12 +35,16 @@ export function SessionScreen({ levelId }: SessionScreenProps) {
   const activeSlug = useSettingsStore((s) => s.activeSubjectSlug);
   const accent = getSubjectAccent(activeSlug ?? '');
 
-  const engine = useSessionEngine(levelId, {
-    onHeartsDepleted: () =>
-      toast.show({ type: 'error', message: t('hearts.emptyMidSession') }),
-    onRequestError: (info) =>
-      toast.show({ type: 'error', message: info.detail ?? tErrors('server') }),
-  });
+  const engine = useSessionEngine(
+    levelId,
+    {
+      onHeartsDepleted: () =>
+        toast.show({ type: 'error', message: t('hearts.emptyMidSession') }),
+      onRequestError: (info) =>
+        toast.show({ type: 'error', message: info.detail ?? tErrors('server') }),
+    },
+    { challengeId: challengeId ?? null },
+  );
 
   const attemptId = useSessionStore((s) => s.attemptId);
   const [selected, setSelected] = useState<number[]>([]);

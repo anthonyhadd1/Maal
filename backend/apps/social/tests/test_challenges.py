@@ -248,7 +248,7 @@ class TestLifecycleAndExpiry:
         hours = settings.GAME["CHALLENGE_EXPIRY_HOURS"]
         with freeze_time(timezone.datetime(2026, 7, 1, 10, 0, 0, tzinfo=timezone.timezone.utc) + timedelta(hours=hours + 1)):
             rows = challenge_service.list_mine(opponent)
-            assert rows[0]["status"] == Challenge.Status.EXPIRED
+            assert rows["incoming"][0]["status"] == Challenge.Status.EXPIRED
             with pytest.raises(GameError) as exc:
                 challenge_service.accept(opponent, challenge.pk)
             assert exc.value.code == "challenge_expired"
@@ -292,8 +292,9 @@ class TestApiWiring:
         assert created.data["total_questions"] == 4
 
         listed = opponent_client.get("/api/v1/challenges/")
-        assert [row["id"] for row in listed.data] == [challenge_id]
-        assert listed.data[0]["is_challenger"] is False
+        assert [row["id"] for row in listed.data["incoming"]] == [challenge_id]
+        assert listed.data["outgoing"] == []
+        assert listed.data["incoming"][0]["is_challenger"] is False
 
         assert opponent_client.post(f"/api/v1/challenges/{challenge_id}/accept/", {}, format="json").status_code == 200
 
@@ -322,7 +323,7 @@ class TestApiWiring:
         final = opponent_client.get(f"/api/v1/challenges/{challenge_id}/")
         assert final.data["status"] == "completed"
         assert final.data["winner_id"] == opponent.pk
-        comparison = final.data["comparison"]
+        comparison = final.data["questions"]
         assert len(comparison) == 4
         assert all(set(row) == {"question_id", "challenger_correct", "opponent_correct"} for row in comparison)
         assert [row["opponent_correct"] for row in comparison] == [True, True, True, True]

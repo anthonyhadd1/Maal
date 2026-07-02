@@ -56,6 +56,22 @@ export function formatDurationMs(ms: number): string {
   return `${totalSeconds} s`;
 }
 
+export interface DurationParts {
+  days: number;
+  hours: number;
+  minutes: number;
+}
+
+/** Split a duration into calendar-ish parts (league week countdown). */
+export function msToParts(ms: number): DurationParts {
+  const totalMinutes = Math.max(0, Math.floor(ms / 60_000));
+  return {
+    days: Math.floor(totalMinutes / (24 * 60)),
+    hours: Math.floor((totalMinutes % (24 * 60)) / 60),
+    minutes: totalMinutes % 60,
+  };
+}
+
 /** Clock-style elapsed time: "4:37" (session results). */
 export function formatElapsedMs(ms: number): string {
   const totalSeconds = Math.max(0, Math.round(ms / 1000));

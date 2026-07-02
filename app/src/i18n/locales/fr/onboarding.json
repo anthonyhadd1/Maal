@@ -1,0 +1,26 @@
+{
+  "skip": "Plus tard",
+  "continue": "Continuer",
+  "goal": {
+    "title": "Tu vises quoi ?",
+    "subtitle": "On personnalise ton parcours — tu pourras changer plus tard.",
+    "unknown": "Je ne sais pas encore"
+  },
+  "rhythm": {
+    "title": "Ton rythme quotidien ?",
+    "subtitle": "Ton objectif d'XP par jour. Modifiable quand tu veux.",
+    "casual": "Tranquille",
+    "casualDesc": "≈ 1 niveau par jour",
+    "serious": "Sérieux·se",
+    "seriousDesc": "Le rythme recommandé",
+    "intense": "Intensif",
+    "intenseDesc": "Mode concours activé",
+    "xpPerDay": "{{xp}} XP"
+  },
+  "notifications": {
+    "title": "On garde ta série ?",
+    "pitch": "Je te rappellerai de garder ta série. Un petit rappel par jour, jamais de spam.",
+    "yes": "Oui, motive-moi !",
+    "later": "Plus tard"
+  }
+}

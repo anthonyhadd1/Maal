@@ -30,6 +30,15 @@ export interface Me {
   email: string;
   date_joined: string;
   profile: Profile;
+  /** Premium entitlement summary — included on /me/ (backend doc §4). */
+  entitlement?: Entitlement;
+}
+
+export interface Entitlement {
+  is_premium: boolean;
+  /** null = no expiry (admin grant) or free user. */
+  premium_until: string | null;
+  source: string;
 }
 
 export interface RegisterPayload {
@@ -132,6 +141,26 @@ export interface StartAttemptResponse {
   questions: AttemptQuestion[];
 }
 
+/** POST /levels/{id}/attempts/ body — {"legendary": true} starts legendary mode. */
+export interface StartAttemptPayload {
+  legendary?: boolean;
+}
+
+/** One already-graded answer inside the attempt resume payload. */
+export interface AttemptAnsweredEntry {
+  question_id: number;
+  selected_choice_ids: number[];
+  is_correct: boolean;
+}
+
+/** GET /attempts/{id}/ — resume payload: questions + answered verdicts. */
+export interface AttemptDetailResponse {
+  attempt_id: number;
+  level_id: number;
+  questions: AttemptQuestion[];
+  answered: AttemptAnsweredEntry[];
+}
+
 export interface AnswerPayload {
   question_id: number;
   selected_choice_ids: number[];
@@ -214,11 +243,210 @@ export interface MeGame {
   next_heart_at: string | null;
   streak_current: number;
   streak_longest: number;
+  /** Streak freezes currently held (0–2). Optional: older payloads omit it. */
+  streak_freezes?: number;
   league: {
     tier: string;
     rank: number;
     xp_week: number;
   } | null;
+}
+
+// ---------------------------------------------------------------------------
+// Leagues / leaderboards
+// ---------------------------------------------------------------------------
+
+export interface LeagueTierInfo {
+  name: string;
+  /** Lucide icon name (kebab-case). */
+  icon: string;
+  color_hex: string;
+}
+
+export interface LeaderboardRow {
+  rank: number;
+  username: string;
+  display_name: string;
+  avatar_id: string;
+  xp_week: number;
+  is_me: boolean;
+}
+
+/**
+ * GET /league/ — rows may be [] with rank null when the user hasn't earned
+ * XP this week (« Gagne de l'XP pour rejoindre la ligue de la semaine ! »).
+ */
+export interface LeagueResponse {
+  tier: LeagueTierInfo | null;
+  rank: number | null;
+  xp_week: number;
+  week_ends_at: string;
+  promote_count: number;
+  demote_count: number;
+  rows: LeaderboardRow[];
+}
+
+// ---------------------------------------------------------------------------
+// Quests / achievements / stats
+// ---------------------------------------------------------------------------
+
+export interface DailyGoalProgress {
+  target: number;
+  current: number;
+}
+
+export interface QuestItem {
+  code: string;
+  title: string;
+  target: number;
+  current: number;
+  done: boolean;
+}
+
+export interface QuestsToday {
+  daily_goal: DailyGoalProgress;
+  quests: QuestItem[];
+}
+
+export interface AchievementItem {
+  code: string;
+  title: string;
+  description: string;
+  /** Lucide icon name (kebab-case). */
+  icon: string;
+  order: number;
+  is_premium_only: boolean;
+  unlocked_at: string | null;
+  threshold: number;
+  /** Optional current progress toward `threshold` — render a bar only when present. */
+  progress?: number | null;
+}
+
+/** Lightweight subject reference used in stats payloads. */
+export interface SubjectRef {
+  name: string;
+  slug: string;
+  color_hex: string;
+  icon: string;
+}
+
+export interface StatsTotals {
+  xp_total: number;
+  levels_completed: number;
+  perfect_levels: number;
+  best_streak: number;
+}
+
+export interface SubjectStat {
+  subject: SubjectRef;
+  accuracy_pct: number;
+  answered: number;
+  levels_completed: number;
+  stars_total: number;
+}
+
+export interface XpByDayEntry {
+  date: string;
+  xp: number;
+}
+
+/** GET /me/stats/ — per_subject/xp_by_day only when `detailed` (premium). */
+export interface MeStats {
+  detailed: boolean;
+  totals: StatsTotals;
+  per_subject?: SubjectStat[];
+  xp_by_day?: XpByDayEntry[];
+}
+
+// ---------------------------------------------------------------------------
+// Friends / user search
+// ---------------------------------------------------------------------------
+
+export interface PublicUser {
+  user_id: number;
+  username: string;
+  display_name: string;
+  avatar_id: string;
+}
+
+export interface Friend extends PublicUser {
+  xp_week: number;
+}
+
+export interface FriendRequestIncoming {
+  id: number;
+  from: PublicUser;
+}
+
+export interface FriendRequestOutgoing {
+  id: number;
+  to: PublicUser;
+}
+
+export interface FriendRequests {
+  incoming: FriendRequestIncoming[];
+  outgoing: FriendRequestOutgoing[];
+}
+
+export type FriendshipStatus = 'none' | 'friends' | 'pending_out' | 'pending_in';
+
+export interface UserSearchResult extends PublicUser {
+  friendship_status: FriendshipStatus;
+}
+
+// ---------------------------------------------------------------------------
+// Challenges
+// ---------------------------------------------------------------------------
+
+export type ChallengeStatus = 'pending' | 'accepted' | 'declined' | 'expired' | 'completed';
+
+export interface ChallengeLevelRef {
+  id: number;
+  title: string;
+  subject: SubjectRef;
+}
+
+interface ChallengeBase {
+  id: number;
+  level: ChallengeLevelRef;
+  status: ChallengeStatus;
+  challenger_score: number | null;
+  opponent_score: number | null;
+  winner_username: string | null;
+  expires_at: string;
+}
+
+/** Challenge someone sent ME — the other player is the challenger. */
+export interface IncomingChallenge extends ChallengeBase {
+  challenger: PublicUser;
+}
+
+/** Challenge I sent — the other player is the opponent. */
+export interface OutgoingChallenge extends ChallengeBase {
+  opponent: PublicUser;
+}
+
+export interface ChallengesResponse {
+  incoming: IncomingChallenge[];
+  outgoing: OutgoingChallenge[];
+}
+
+/** Per-question comparison — present on the detail payload after completion. */
+export interface ChallengeQuestionCompare {
+  challenger_correct: boolean;
+  opponent_correct: boolean;
+  text?: string | null;
+}
+
+export interface ChallengeDetail extends ChallengeBase {
+  challenger?: PublicUser;
+  opponent?: PublicUser;
+  questions?: ChallengeQuestionCompare[];
+}
+
+export interface CreateChallengePayload {
+  opponent_id: number;
+  level_id: number;
 }
 
 // ---------------------------------------------------------------------------

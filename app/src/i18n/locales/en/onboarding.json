@@ -1,0 +1,26 @@
+{
+  "skip": "Later",
+  "continue": "Continue",
+  "goal": {
+    "title": "What are you aiming for?",
+    "subtitle": "We'll personalize your journey — you can change this later.",
+    "unknown": "I don't know yet"
+  },
+  "rhythm": {
+    "title": "Your daily rhythm?",
+    "subtitle": "Your daily XP goal. Change it whenever you want.",
+    "casual": "Casual",
+    "casualDesc": "≈ 1 level a day",
+    "serious": "Serious",
+    "seriousDesc": "The recommended pace",
+    "intense": "Intense",
+    "intenseDesc": "Exam mode: on",
+    "xpPerDay": "{{xp}} XP"
+  },
+  "notifications": {
+    "title": "Keep your streak alive?",
+    "pitch": "I'll remind you to keep your streak. One small nudge a day, never spam.",
+    "yes": "Yes, motivate me!",
+    "later": "Later"
+  }
+}

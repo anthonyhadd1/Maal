@@ -1,0 +1,26 @@
+{
+  "title": "Quests",
+  "dailyGoal": {
+    "title": "Daily goal",
+    "target": "of {{target}} XP",
+    "progressA11y": "Daily goal: {{current}} XP of {{target}}",
+    "done": "Goal reached! You're on fire.",
+    "keepGoing": "{{remaining}} XP to go, almost there!",
+    "start": "Start a level to earn your first XP."
+  },
+  "quests": {
+    "title": "Today's quests",
+    "done": "Done!",
+    "progress": "{{current}} / {{target}}"
+  },
+  "streak": {
+    "title": "Your streak",
+    "current": "Current streak",
+    "longest": "Record",
+    "freezes": "Streak freezes"
+  },
+  "achievements": {
+    "row": "Trophies",
+    "count": "{{unlocked}}/{{total}}"
+  }
+}

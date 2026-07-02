@@ -35,7 +35,33 @@ export const colors = {
     700: '#4B4763',
     900: '#241F3E',
   },
+  /** Streak-freeze snowflake chips. */
+  freezeBlue: '#38BDF8',
 } as const;
+
+/** Leaderboard rank medals (ranks 1–3). */
+export const medalColors = {
+  gold: '#F59E0B',
+  silver: '#94A3B8',
+  bronze: '#B45309',
+} as const;
+
+/**
+ * Preset avatar palette: deterministic pastel background + readable foreground.
+ * Indexed by hashing the avatar_id (see components/game/Avatar).
+ */
+export const avatarPalette = [
+  { bg: '#EDE9FE', fg: '#6D28D9' }, // violet
+  { bg: '#DCFCE7', fg: '#15803D' }, // green
+  { bg: '#DBEAFE', fg: '#1D4ED8' }, // blue
+  { bg: '#FCE7F3', fg: '#BE185D' }, // pink
+  { bg: '#FEF3C7', fg: '#B45309' }, // amber
+  { bg: '#CFFAFE', fg: '#0E7490' }, // cyan
+  { bg: '#FFE4E6', fg: '#BE123C' }, // rose
+  { bg: '#D1FAE5', fg: '#047857' }, // emerald
+] as const;
+
+export type AvatarPaletteEntry = (typeof avatarPalette)[number];
 
 /** Inner top highlight used on raised clay surfaces. */
 export const clayHighlight = 'rgba(255, 255, 255, 0.65)';

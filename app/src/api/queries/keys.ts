@@ -13,9 +13,18 @@ export const keys = {
   hearts: ['hearts'] as const,
   league: ['league', 'current'] as const,
   leaderboard: (leagueId: number | string) => ['leaderboard', leagueId] as const,
+  leaderboardFriends: ['leaderboard', 'friends'] as const,
   friends: ['friends'] as const,
   friendRequests: ['friends', 'requests'] as const,
   achievements: ['achievements'] as const,
   quests: ['quests'] as const,
   stats: (subjectSlug?: string) => ['stats', subjectSlug ?? 'all'] as const,
+  entitlement: ['entitlement'] as const,
+  faculties: ['faculties'] as const,
+  /** Root key — invalidates the list AND every detail at once. */
+  challenges: ['challenges'] as const,
+  challengeDetail: (id: number) => ['challenges', 'detail', id] as const,
+  /** Root key — invalidates every cached search term after a friend action. */
+  userSearchRoot: ['users', 'search'] as const,
+  userSearch: (q: string) => ['users', 'search', q] as const,
 } as const;

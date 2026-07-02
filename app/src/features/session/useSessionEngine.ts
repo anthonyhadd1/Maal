@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { parseApiError, type ApiErrorInfo } from '@/api/errors';
+import { useStartChallengeAttempt } from '@/api/queries/challenges';
 import {
   useAbandonAttempt,
   useCompleteAttempt,
   useStartAttempt,
   useSubmitAnswer,
 } from '@/api/queries/session';
-import type { AnswerResponse } from '@/api/types';
+import type { AnswerResponse, StartAttemptResponse } from '@/api/types';
 import { notifyError, notifySuccess } from '@/lib/haptics';
 import { useSessionStore } from '@/stores/sessionStore';
 
@@ -40,7 +41,21 @@ export interface SessionEngineCallbacks {
   onRequestError?: (info: ApiErrorInfo) => void;
 }
 
-export function useSessionEngine(levelId: number, callbacks: SessionEngineCallbacks = {}) {
+export interface SessionEngineOptions {
+  /**
+   * Start source: when set, the attempt is created via
+   * POST /challenges/{id}/attempts/ instead of the level start — everything
+   * downstream (answers/complete) is identical.
+   */
+  challengeId?: number | null;
+}
+
+export function useSessionEngine(
+  levelId: number,
+  callbacks: SessionEngineCallbacks = {},
+  options: SessionEngineOptions = {},
+) {
+  const challengeId = options.challengeId ?? null;
   const [phase, setPhase] = useState<SessionPhase>('loading');
   const [lastAnswer, setLastAnswer] = useState<AnswerResponse | null>(null);
   const [startError, setStartError] = useState<ApiErrorInfo | null>(null);
@@ -54,6 +69,7 @@ export function useSessionEngine(levelId: number, callbacks: SessionEngineCallba
   const heartsUnlimited = useSessionStore((s) => s.heartsUnlimited);
 
   const startAttempt = useStartAttempt();
+  const startChallengeAttempt = useStartChallengeAttempt();
   const submitAnswer = useSubmitAnswer(attemptId);
   const completeAttempt = useCompleteAttempt();
   const abandonAttempt = useAbandonAttempt();
@@ -104,28 +120,35 @@ export function useSessionEngine(levelId: number, callbacks: SessionEngineCallba
     setStartError(null);
     const s = useSessionStore.getState();
     const matchesStore =
-      s.status === 'inProgress' && s.levelId === levelId && s.attemptId != null;
+      s.status === 'inProgress' &&
+      s.levelId === levelId &&
+      s.attemptId != null &&
+      s.challengeId === challengeId;
     if (matchesStore && enterFromStore()) return;
 
     setPhase('loading');
-    startAttempt.mutate(levelId, {
-      onSuccess: (data) => {
-        useSessionStore.getState().startSession({
-          attemptId: data.attempt_id,
-          levelId,
-          questions: data.questions,
-        });
-        shownAtRef.current = Date.now();
-        setPhase('question');
-      },
-      onError: (error) => {
-        const info = parseApiError(error);
-        setStartError(info);
-        setPhase('error');
-      },
-    });
+    const onSuccess = (data: StartAttemptResponse) => {
+      useSessionStore.getState().startSession({
+        attemptId: data.attempt_id,
+        levelId,
+        questions: data.questions,
+        challengeId,
+      });
+      shownAtRef.current = Date.now();
+      setPhase('question');
+    };
+    const onError = (error: unknown) => {
+      const info = parseApiError(error);
+      setStartError(info);
+      setPhase('error');
+    };
+    if (challengeId != null) {
+      startChallengeAttempt.mutate(challengeId, { onSuccess, onError });
+    } else {
+      startAttempt.mutate(levelId, { onSuccess, onError });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [levelId, enterFromStore]);
+  }, [levelId, challengeId, enterFromStore]);
 
   const initialized = useRef(false);
   useEffect(() => {

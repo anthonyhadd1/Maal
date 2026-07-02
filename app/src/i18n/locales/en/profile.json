@@ -7,6 +7,44 @@
     "streak": "Streak",
     "hearts": "Hearts"
   },
+  "summary": {
+    "xpTotal": "Total XP",
+    "levels": "Levels completed",
+    "perfect": "Perfect levels",
+    "bestStreak": "Best streak"
+  },
+  "premium": {
+    "active": "Premium member",
+    "activeUntil": "Until {{date}}",
+    "upsell": "Go Premium to unlock everything"
+  },
+  "rows": {
+    "stats": "My statistics",
+    "achievements": "Trophies",
+    "friends": "Friends",
+    "settings": "Settings"
+  },
+  "statsScreen": {
+    "title": "My statistics",
+    "bySubject": "Accuracy by subject",
+    "xpByDay": "XP over the last 14 days",
+    "maxXp": "max {{xp}} XP",
+    "subjectMeta": "{{answered}} answers · {{levels}} levels · {{stars}} stars",
+    "locked": {
+      "title": "Detailed statistics",
+      "body": "Accuracy per subject, day-by-day progress, trends — it's all in Premium.",
+      "cta": "Discover Premium"
+    }
+  },
+  "achievementsScreen": {
+    "title": "Trophies",
+    "unlockedCount": "{{unlocked}}/{{total}} unlocked",
+    "unlockedAt": "Unlocked on {{date}}",
+    "locked": "Still locked",
+    "progress": "{{progress}}/{{threshold}}",
+    "premiumOnly": "Premium-exclusive trophy",
+    "empty": "Trophies are coming soon!"
+  },
   "email": "Email",
   "noEmail": "No email on file",
   "logout": "Log out",
@@ -15,10 +53,40 @@
   },
   "settings": {
     "title": "Settings",
+    "sections": {
+      "account": "Account",
+      "preferences": "Preferences",
+      "league": "League",
+      "danger": "Danger zone"
+    },
+    "displayName": "Display name",
+    "avatar": "Avatar",
+    "avatarOption": "Avatar {{id}}",
+    "save": "Save",
+    "saved": "Profile updated!",
     "sound": "Sound",
     "haptics": "Haptics",
     "reduceMotion": "Reduce motion",
     "language": "Language",
-    "deleteAccount": "Delete my account"
+    "locales": {
+      "fr": "FR",
+      "en": "EN"
+    },
+    "leaguesOptIn": "Take part in leagues",
+    "logoutConfirm": {
+      "title": "Log out?",
+      "body": "You can log back in any time — your progress is saved."
+    },
+    "deleteAccount": "Delete my account",
+    "delete": {
+      "title": "Delete your account?",
+      "body": "Your account, progress, trophies and friends will be permanently deleted.",
+      "confirm": "Continue",
+      "confirmTitle": "Last check",
+      "confirmBody": "This cannot be undone. Really delete everything?",
+      "final": "Delete permanently"
+    },
+    "cancel": "Cancel",
+    "version": "Version {{version}}"
   }
 }

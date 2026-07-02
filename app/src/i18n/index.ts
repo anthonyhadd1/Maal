@@ -5,18 +5,24 @@ import { initReactI18next } from 'react-i18next';
 import enAuth from '@/i18n/locales/en/auth.json';
 import enCommon from '@/i18n/locales/en/common.json';
 import enErrors from '@/i18n/locales/en/errors.json';
+import enFriends from '@/i18n/locales/en/friends.json';
 import enLeagues from '@/i18n/locales/en/leagues.json';
 import enMap from '@/i18n/locales/en/map.json';
+import enOnboarding from '@/i18n/locales/en/onboarding.json';
 import enPaywall from '@/i18n/locales/en/paywall.json';
 import enProfile from '@/i18n/locales/en/profile.json';
+import enQuests from '@/i18n/locales/en/quests.json';
 import enSession from '@/i18n/locales/en/session.json';
 import frAuth from '@/i18n/locales/fr/auth.json';
 import frCommon from '@/i18n/locales/fr/common.json';
 import frErrors from '@/i18n/locales/fr/errors.json';
+import frFriends from '@/i18n/locales/fr/friends.json';
 import frLeagues from '@/i18n/locales/fr/leagues.json';
 import frMap from '@/i18n/locales/fr/map.json';
+import frOnboarding from '@/i18n/locales/fr/onboarding.json';
 import frPaywall from '@/i18n/locales/fr/paywall.json';
 import frProfile from '@/i18n/locales/fr/profile.json';
+import frQuests from '@/i18n/locales/fr/quests.json';
 import frSession from '@/i18n/locales/fr/session.json';
 
 export const SUPPORTED_LOCALES = ['fr', 'en'] as const;
@@ -28,7 +34,10 @@ export const namespaces = [
   'map',
   'session',
   'leagues',
+  'quests',
+  'friends',
   'profile',
+  'onboarding',
   'errors',
   'paywall',
 ] as const;
@@ -40,7 +49,10 @@ export const resources = {
     map: frMap,
     session: frSession,
     leagues: frLeagues,
+    quests: frQuests,
+    friends: frFriends,
     profile: frProfile,
+    onboarding: frOnboarding,
     errors: frErrors,
     paywall: frPaywall,
   },
@@ -50,7 +62,10 @@ export const resources = {
     map: enMap,
     session: enSession,
     leagues: enLeagues,
+    quests: enQuests,
+    friends: enFriends,
     profile: enProfile,
+    onboarding: enOnboarding,
     errors: enErrors,
     paywall: enPaywall,
   },

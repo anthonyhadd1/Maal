@@ -14,6 +14,7 @@ import { ClayCard } from '@/components/clay/ClayCard';
 import { useToast } from '@/components/feedback/Toast';
 import { Screen } from '@/components/layout/Screen';
 import { Mascot } from '@/components/mascot/Mascot';
+import { ChallengeResultBlock } from '@/features/session/ChallengeResultBlock';
 import { formatElapsedMs, formatNumber, formatPercent } from '@/lib/format';
 import { impactMedium } from '@/lib/haptics';
 import { useReducedMotionPref } from '@/lib/motion';
@@ -46,6 +47,7 @@ export function ResultsScreen() {
       startedAt: s.startedAt,
       completedAt: s.completedAt,
       levelId: s.levelId,
+      challengeId: s.challengeId,
     };
   });
 
@@ -130,6 +132,11 @@ export function ResultsScreen() {
         {title}
       </Text>
 
+      {/* Challenge mode: VS outcome block (fetched fresh after completion). */}
+      {snapshot.challengeId != null ? (
+        <ChallengeResultBlock challengeId={snapshot.challengeId} />
+      ) : null}
+
       {/* 2 — XP count-up + breakdown */}
       {stage >= 1 ? (
         <XpBlock reduceMotion={reduceMotion} xp={results.xp} />
@@ -167,14 +174,17 @@ export function ResultsScreen() {
             title={tCommon('cta.continue')}
             variant={results.passed ? 'success' : 'primary'}
           />
-          <ClayButton
-            fullWidth
-            loading={startAttempt.isPending}
-            onPress={onReplay}
-            testID="results-replay"
-            title={t('results.replay')}
-            variant="secondary"
-          />
+          {/* Replay would start a NORMAL level attempt — hidden in challenge mode. */}
+          {snapshot.challengeId == null ? (
+            <ClayButton
+              fullWidth
+              loading={startAttempt.isPending}
+              onPress={onReplay}
+              testID="results-replay"
+              title={t('results.replay')}
+              variant="secondary"
+            />
+          ) : null}
         </View>
       ) : null}
 

@@ -30,6 +30,8 @@ export interface SessionAnswerRecord {
 interface SessionStateData {
   attemptId: number | null;
   levelId: number | null;
+  /** Non-null when this attempt was started from a friend challenge. */
+  challengeId: number | null;
   questions: AttemptQuestion[];
   /** Index of the question currently on screen (forward-only). */
   currentIndex: number;
@@ -56,6 +58,8 @@ interface SessionStateActions {
     attemptId: number;
     levelId: number;
     questions: AttemptQuestion[];
+    /** Friend-challenge attempts carry the challenge id (default null). */
+    challengeId?: number | null;
   }) => void;
   /** Records ONE server verdict. Ignores duplicates (no re-answer, no re-queue). */
   recordAnswer: (questionId: number, selected: number[], response: AnswerResponse) => void;
@@ -73,6 +77,7 @@ export type SessionState = SessionStateData & SessionStateActions;
 const INITIAL: Omit<SessionStateData, 'hasHydrated'> = {
   attemptId: null,
   levelId: null,
+  challengeId: null,
   questions: [],
   currentIndex: 0,
   answers: {},
@@ -92,11 +97,12 @@ export const useSessionStore = create<SessionState>()(
       ...INITIAL,
       hasHydrated: false,
 
-      startSession: ({ attemptId, levelId, questions }) =>
+      startSession: ({ attemptId, levelId, questions, challengeId = null }) =>
         set({
           ...INITIAL,
           attemptId,
           levelId,
+          challengeId,
           questions,
           startedAt: Date.now(),
           status: 'inProgress',

@@ -1,0 +1,26 @@
+{
+  "title": "Quêtes",
+  "dailyGoal": {
+    "title": "Objectif du jour",
+    "target": "sur {{target}} XP",
+    "progressA11y": "Objectif du jour : {{current}} XP sur {{target}}",
+    "done": "Objectif atteint ! Trop fort·e.",
+    "keepGoing": "Encore {{remaining}} XP, tu y es presque !",
+    "start": "Lance un niveau pour gagner tes premiers XP."
+  },
+  "quests": {
+    "title": "Quêtes du jour",
+    "done": "Terminée !",
+    "progress": "{{current}} / {{target}}"
+  },
+  "streak": {
+    "title": "Ta série",
+    "current": "Série actuelle",
+    "longest": "Record",
+    "freezes": "Gels de série"
+  },
+  "achievements": {
+    "row": "Trophées",
+    "count": "{{unlocked}}/{{total}}"
+  }
+}

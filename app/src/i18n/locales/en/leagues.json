@@ -1,14 +1,38 @@
 {
   "title": "League",
-  "empty": {
-    "title": "The league opens soon!",
-    "message": "Every week, face 29 other candidates. Top 10 move up, bottom 5 move down."
+  "caption": "Top {{promote}} move up · Bottom {{demote}} move down",
+  "countdown": {
+    "endsIn": "Ends in {{time}}",
+    "daysHours": "{{days}}d {{hours}}h",
+    "hoursMinutes": "{{hours}}h {{minutes}}min",
+    "minutes": "{{minutes}} min"
   },
+  "toggle": {
+    "league": "League",
+    "friends": "Friends"
+  },
+  "empty": {
+    "title": "Join the league!",
+    "message": "Earn XP to join this week's league!",
+    "cta": "Earn XP"
+  },
+  "optOut": {
+    "title": "Leagues disabled",
+    "message": "You chose not to take part in leagues. You can turn them back on any time in settings.",
+    "cta": "Open settings"
+  },
+  "friendsEmpty": {
+    "title": "No friends on the board",
+    "message": "Add your friends and show them who the future doctor is.",
+    "cta": "Add friends"
+  },
+  "xpWeek": "{{xp}} XP",
   "promoted": "Promoted to {{league}} League!",
   "demotionWarning": "Careful, you're in the red zone…",
   "weekEnd": "The week ends Sunday at midnight!",
   "promotionZone": "Promotion zone",
   "demotionZone": "Demotion zone",
+  "dangerZone": "Danger zone",
   "you": "You",
   "challenge": {
     "received": "{{name}} is challenging you!",

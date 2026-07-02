@@ -7,9 +7,31 @@
   "perMonth": "{{price}} / mois",
   "perYear": "{{price}} / an",
   "features": {
-    "allUnits": "Toutes les unités, tous les niveaux",
+    "allUnits": "Tous les niveaux de toutes les matières",
     "unlimitedHearts": "Cœurs illimités",
-    "smartReview": "Révision illimitée et ciblée",
-    "detailedStats": "Statistiques détaillées"
+    "smartReview": "Révision intelligente illimitée",
+    "detailedStats": "Statistiques détaillées",
+    "exclusiveTrophies": "2 trophées exclusifs",
+    "streakFreezes": "2 gels de série"
+  },
+  "plans": {
+    "monthly": "Mensuel",
+    "annual": "Annuel",
+    "perMonth": "/ mois",
+    "perYear": "/ an",
+    "save": "Économise {{pct}}%",
+    "trial": "{{days}} jours gratuits"
+  },
+  "legal": "Abonnement renouvelé automatiquement. Annule quand tu veux dans les réglages de ton store.",
+  "comingSoon": {
+    "title": "Bientôt disponible !",
+    "body": "Les achats arrivent très vite."
+  },
+  "premium": {
+    "title": "Tu es Premium !",
+    "body": "Profite de tout ACE sans limite. Merci de nous soutenir.",
+    "until": "Actif jusqu'au {{date}}",
+    "lifetime": "Actif sans limite",
+    "source": "Abonnement : {{source}}"
   }
 }

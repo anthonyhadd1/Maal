@@ -108,15 +108,15 @@ class TestRespondAndRemove:
         rows = social_service.friends_payload(alice)
         assert len(rows) == 1
         assert rows[0]["username"] == "bob"
-        assert set(rows[0]) == {"id", "username", "display_name", "avatar_id", "xp_total"}
+        assert set(rows[0]) == {"user_id", "username", "display_name", "avatar_id", "xp_week"}
 
     def test_pending_lists_both_directions(self, alice, bob):
         stranger = UserFactory(username="charlie")
         social_service.send_request(alice, "bob")
         social_service.send_request(stranger, "alice")
         payload = social_service.pending_requests_payload(alice)
-        assert [row["to"]["username"] for row in payload["sent"]] == ["bob"]
-        assert [row["from"]["username"] for row in payload["received"]] == ["charlie"]
+        assert [row["to"]["username"] for row in payload["outgoing"]] == ["bob"]
+        assert [row["from"]["username"] for row in payload["incoming"]] == ["charlie"]
 
 
 class TestSearch:
@@ -126,12 +126,12 @@ class TestSearch:
         rows = social_service.search_users(alice, "bob")
         assert all(row["username"] != "alice" for row in rows)
         by_username = {row["username"]: row["friendship_status"] for row in rows}
-        assert by_username == {"bob": "pending_sent", "bobby": "none"}
+        assert by_username == {"bob": "pending_out", "bobby": "none"}
 
     def test_pending_received_status(self, alice, bob):
         social_service.send_request(bob, "alice")
         rows = social_service.search_users(alice, "bob")
-        assert rows[0]["friendship_status"] == "pending_received"
+        assert rows[0]["friendship_status"] == "pending_in"
 
     def test_blocked_pairs_excluded(self, alice, bob):
         Friendship.objects.create(requester=bob, addressee=alice, status=Friendship.Status.BLOCKED)
@@ -175,7 +175,7 @@ class TestApiWiring:
         assert created.status_code == 201
         request_id = created.data["id"]
 
-        received = bob_client.get("/api/v1/friends/requests/").data["received"]
+        received = bob_client.get("/api/v1/friends/requests/").data["incoming"]
         assert [row["id"] for row in received] == [request_id]
 
         accepted = bob_client.post(f"/api/v1/friends/requests/{request_id}/accept/", {}, format="json")

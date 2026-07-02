@@ -1,0 +1,88 @@
+{
+  "title": "Friends",
+  "requests": {
+    "title": "Requests",
+    "pending": "Pending",
+    "sent": "Request sent",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "list": {
+    "title": "Your friends",
+    "xpWeek": "{{xp}} XP this week"
+  },
+  "empty": {
+    "title": "No friends yet",
+    "message": "Add your friends and show them who the future doctor is.",
+    "cta": "Find friends"
+  },
+  "actions": {
+    "more": "Actions for {{name}}",
+    "challenge": "Challenge",
+    "remove": "Remove",
+    "cancel": "Cancel"
+  },
+  "remove": {
+    "title": "Remove {{name}}?",
+    "body": "You will no longer be friends. You can send a new request later.",
+    "confirm": "Remove"
+  },
+  "search": {
+    "title": "Find friends",
+    "label": "Username",
+    "placeholder": "e.g. rita.k",
+    "hint": "Type at least 2 characters.",
+    "empty": "No one found for \"{{q}}\"",
+    "emptyMessage": "Check the spelling or try another name.",
+    "add": "Add",
+    "friends": "Friends"
+  },
+  "challengeSheet": {
+    "title": "Challenge {{name}}",
+    "subtitle": "Pick a level you've already passed: same questions for both of you.",
+    "empty": "Finish a level first to challenge your friends!",
+    "sent": "Challenge sent to {{name}}!"
+  },
+  "countdown": {
+    "daysHours": "{{days}}d {{hours}}h",
+    "hoursMinutes": "{{hours}}h {{minutes}}min",
+    "minutes": "{{minutes}} min"
+  },
+  "challenges": {
+    "title": "Challenges",
+    "received": "Received",
+    "sent": "Sent",
+    "you": "You",
+    "them": "Opponent",
+    "vs": "VS",
+    "expiresIn": "Expires in {{time}}",
+    "accept": "Accept",
+    "decline": "Decline",
+    "play": "Play",
+    "empty": {
+      "title": "No challenges",
+      "message": "Challenge a friend from your friends list: same questions, may the best one win!"
+    },
+    "emptyCta": "See my friends",
+    "status": {
+      "pending": "Pending",
+      "inProgress": "In progress",
+      "expired": "Expired",
+      "declined": "Declined",
+      "won": "Won",
+      "lost": "Lost",
+      "tie": "Tie"
+    },
+    "result": {
+      "won": "You beat {{name}} {{a}}–{{b}}!",
+      "lost": "{{name}} beat you {{b}}–{{a}}. Rematch?",
+      "tie": "Tie {{a}}–{{b}} against {{name}}!"
+    },
+    "detail": {
+      "title": "Challenge on \"{{level}}\"",
+      "perQuestion": "Question by question",
+      "questionN": "Question {{n}}",
+      "error": "Couldn't load this challenge. Try again."
+    }
+  }
+}

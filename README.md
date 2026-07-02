@@ -18,6 +18,9 @@ cp .env.example .env          # adjust if needed
 docker compose up --build     # migrates + seeds French demo data + serves :8000
 ```
 
+> Port taken? Set `BACKEND_PORT=18000` (or any free port) in `.env` — another
+> local project may already hold `:8000`.
+
 - API: `http://localhost:8000/api/v1/` (OpenAPI docs at `/api/v1/docs/` in dev)
 - Admin CMS: `http://localhost:8000/admin/` — dev login `admin` / `Admin123!`
 - Demo data: 4 subjects (Biologie, Chimie, Physique, Culture Générale) with units, levels, French MCQs, demo users, leagues, achievements.

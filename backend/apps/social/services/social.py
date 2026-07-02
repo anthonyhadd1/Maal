@@ -88,7 +88,7 @@ def accepted_friends(user) -> list:
 def _user_brief(user) -> dict:
     profile = getattr(user, "profile", None)
     return {
-        "id": user.pk,
+        "user_id": user.pk,
         "username": user.username,
         "display_name": profile.display_name if profile else user.username,
         "avatar_id": profile.avatar_id if profile else "",
@@ -96,15 +96,18 @@ def _user_brief(user) -> dict:
 
 
 def friends_payload(user) -> list[dict]:
-    """GET /friends/ : amis acceptés avec profil + XP total."""
-    from apps.gamification.models import PlayerState
+    """GET /friends/ : amis acceptés avec profil + XP de la semaine (compté ligue)."""
+    from apps.gamification.models import LeagueMembership
+    from apps.gamification.services.leagues import current_week
 
     friends = accepted_friends(user)
     xp_map = dict(
-        PlayerState.objects.filter(user__in=friends).values_list("user_id", "xp_total")
+        LeagueMembership.objects.filter(
+            user__in=friends, group__week=current_week()
+        ).values_list("user_id", "xp_week_counted")
     )
     return [
-        {**_user_brief(friend), "xp_total": xp_map.get(friend.pk, 0)} for friend in friends
+        {**_user_brief(friend), "xp_week": xp_map.get(friend.pk, 0)} for friend in friends
     ]
 
 
@@ -113,15 +116,15 @@ def pending_requests_payload(user) -> dict:
     pending = Friendship.objects.filter(status=Friendship.Status.PENDING).select_related(
         "requester__profile", "addressee__profile"
     )
-    received = [
+    incoming = [
         {"id": edge.pk, "from": _user_brief(edge.requester), "created_at": edge.created_at}
         for edge in pending.filter(addressee=user)
     ]
-    sent = [
+    outgoing = [
         {"id": edge.pk, "to": _user_brief(edge.addressee), "created_at": edge.created_at}
         for edge in pending.filter(requester=user)
     ]
-    return {"received": received, "sent": sent}
+    return {"incoming": incoming, "outgoing": outgoing}
 
 
 def search_users(user, query: str, limit: int = 20) -> list[dict]:
@@ -142,21 +145,24 @@ def search_users(user, query: str, limit: int = 20) -> list[dict]:
     edges = Friendship.objects.filter(
         Q(requester=user, addressee__in=candidates) | Q(addressee=user, requester__in=candidates)
     )
+    # Vocabulaire du contrat mobile : none | friends | pending_out | pending_in.
     status_by_user: dict[int, str] = {}
+    blocked_ids: set[int] = set()
     for edge in edges:
         other_id = edge.addressee_id if edge.requester_id == user.pk else edge.requester_id
         if edge.status == Friendship.Status.ACCEPTED:
-            status_by_user[other_id] = "accepted"
+            status_by_user[other_id] = "friends"
         elif edge.status == Friendship.Status.PENDING:
             status_by_user[other_id] = (
-                "pending_sent" if edge.requester_id == user.pk else "pending_received"
+                "pending_out" if edge.requester_id == user.pk else "pending_in"
             )
         elif edge.status == Friendship.Status.BLOCKED:
-            status_by_user[other_id] = "blocked"
+            blocked_ids.add(other_id)  # paire bloquée → exclue des résultats
         else:
             status_by_user[other_id] = "none"  # declined → re-demande possible
     return [
         {**_user_brief(candidate), "friendship_status": status_by_user.get(candidate.pk, "none")}
         for candidate in candidates
+        if candidate.pk not in blocked_ids
         if status_by_user.get(candidate.pk) != "blocked"
     ]

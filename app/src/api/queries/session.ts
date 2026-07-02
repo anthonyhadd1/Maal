@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { api } from '@/api/client';
 import { ENDPOINTS } from '@/api/endpoints';
@@ -7,9 +7,11 @@ import { queryClient } from '@/api/queryClient';
 import type {
   AnswerPayload,
   AnswerResponse,
+  AttemptDetailResponse,
   CompleteResponse,
   StartAttemptResponse,
 } from '@/api/types';
+import { useAuthStore } from '@/stores/authStore';
 
 /**
  * Attempt trio + abandon (PLAN reconciled decision 1) — server-authoritative
@@ -19,10 +21,33 @@ import type {
  * client-side — correct answers are never shipped to the app).
  */
 
+/** number = plain start (back-compat); object form opts into legendary mode. */
+export type StartAttemptInput = number | { levelId: number; legendary?: boolean };
+
 export function useStartAttempt() {
   return useMutation({
-    mutationFn: async (levelId: number) =>
-      (await api.post<StartAttemptResponse>(ENDPOINTS.levelAttempts(levelId), {})).data,
+    mutationFn: async (input: StartAttemptInput) => {
+      const levelId = typeof input === 'number' ? input : input.levelId;
+      const legendary = typeof input === 'number' ? false : (input.legendary ?? false);
+      return (
+        await api.post<StartAttemptResponse>(
+          ENDPOINTS.levelAttempts(levelId),
+          legendary ? { legendary: true } : {},
+        )
+      ).data;
+    },
+  });
+}
+
+/** GET /attempts/{id}/ — resume payload (questions + answered verdicts). */
+export function useAttemptDetail(attemptId: number | null) {
+  const status = useAuthStore((s) => s.status);
+  return useQuery({
+    queryKey: ['attempts', 'detail', attemptId ?? -1] as const,
+    queryFn: async () =>
+      (await api.get<AttemptDetailResponse>(ENDPOINTS.attemptDetail(attemptId!))).data,
+    staleTime: 0,
+    enabled: status === 'authed' && attemptId != null,
   });
 }
 

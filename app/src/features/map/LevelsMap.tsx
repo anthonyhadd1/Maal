@@ -173,7 +173,16 @@ export function LevelsMap() {
     setResumeVisible(false);
     setConflict(null);
     const session = useSessionStore.getState();
-    if (session.levelId != null) launchSession(session.levelId);
+    if (session.challengeId != null) {
+      // Challenge attempts resume through the challenge entry route so the
+      // engine matches the persisted start source (Phase 7).
+      router.push({
+        pathname: '/session/challenge/[challengeId]',
+        params: { challengeId: String(session.challengeId) },
+      });
+    } else if (session.levelId != null) {
+      launchSession(session.levelId);
+    }
   };
 
   const abandonAndReset = (thenStart?: MapLevel) => {

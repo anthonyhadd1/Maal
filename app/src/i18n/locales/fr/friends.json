@@ -1,0 +1,88 @@
+{
+  "title": "Amis",
+  "requests": {
+    "title": "Demandes",
+    "pending": "En attente",
+    "sent": "Demande envoyée",
+    "accept": "Accepter",
+    "decline": "Refuser"
+  },
+  "list": {
+    "title": "Tes amis",
+    "xpWeek": "{{xp}} XP cette semaine"
+  },
+  "empty": {
+    "title": "Aucun ami pour l'instant",
+    "message": "Ajoute tes amis et montre-leur qui est le futur médecin.",
+    "cta": "Chercher des amis"
+  },
+  "actions": {
+    "more": "Actions pour {{name}}",
+    "challenge": "Défier",
+    "remove": "Retirer",
+    "cancel": "Annuler"
+  },
+  "remove": {
+    "title": "Retirer {{name}} ?",
+    "body": "Vous ne serez plus amis. Tu pourras renvoyer une demande plus tard.",
+    "confirm": "Retirer"
+  },
+  "search": {
+    "title": "Chercher des amis",
+    "label": "Nom d'utilisateur",
+    "placeholder": "ex. rita.k",
+    "hint": "Tape au moins 2 caractères.",
+    "empty": "Personne trouvé pour « {{q}} »",
+    "emptyMessage": "Vérifie l'orthographe ou essaie un autre nom.",
+    "add": "Ajouter",
+    "friends": "Amis"
+  },
+  "challengeSheet": {
+    "title": "Défier {{name}}",
+    "subtitle": "Choisis un niveau que tu as déjà réussi : mêmes questions pour vous deux.",
+    "empty": "Termine d'abord un niveau pour pouvoir défier tes amis !",
+    "sent": "Défi envoyé à {{name}} !"
+  },
+  "countdown": {
+    "daysHours": "{{days}} j {{hours}} h",
+    "hoursMinutes": "{{hours}} h {{minutes}} min",
+    "minutes": "{{minutes}} min"
+  },
+  "challenges": {
+    "title": "Défis",
+    "received": "Reçus",
+    "sent": "Envoyés",
+    "you": "Toi",
+    "them": "Adversaire",
+    "vs": "VS",
+    "expiresIn": "Expire dans {{time}}",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "play": "Jouer",
+    "empty": {
+      "title": "Aucun défi",
+      "message": "Défie un ami depuis ta liste d'amis : mêmes questions, que le meilleur gagne !"
+    },
+    "emptyCta": "Voir mes amis",
+    "status": {
+      "pending": "En attente",
+      "inProgress": "En cours",
+      "expired": "Expiré",
+      "declined": "Refusé",
+      "won": "Gagné",
+      "lost": "Perdu",
+      "tie": "Égalité"
+    },
+    "result": {
+      "won": "Tu as battu {{name}} {{a}}–{{b}} !",
+      "lost": "{{name}} t'a battu·e {{b}}–{{a}}. Revanche ?",
+      "tie": "Égalité {{a}}–{{b}} contre {{name}} !"
+    },
+    "detail": {
+      "title": "Défi sur « {{level}} »",
+      "perQuestion": "Question par question",
+      "questionN": "Question {{n}}",
+      "error": "Impossible de charger ce défi. Réessaie."
+    }
+  }
+}

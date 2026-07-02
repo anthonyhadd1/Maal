@@ -7,9 +7,31 @@
   "perMonth": "{{price}} / month",
   "perYear": "{{price}} / year",
   "features": {
-    "allUnits": "All units, all levels",
+    "allUnits": "Every level of every subject",
     "unlimitedHearts": "Unlimited hearts",
-    "smartReview": "Unlimited, targeted review",
-    "detailedStats": "Detailed statistics"
+    "smartReview": "Unlimited smart review",
+    "detailedStats": "Detailed statistics",
+    "exclusiveTrophies": "2 exclusive trophies",
+    "streakFreezes": "2 streak freezes"
+  },
+  "plans": {
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "perMonth": "/ month",
+    "perYear": "/ year",
+    "save": "Save {{pct}}%",
+    "trial": "{{days}} days free"
+  },
+  "legal": "Subscription renews automatically. Cancel any time in your store settings.",
+  "comingSoon": {
+    "title": "Coming soon!",
+    "body": "Purchases are arriving very soon."
+  },
+  "premium": {
+    "title": "You're Premium!",
+    "body": "Enjoy all of ACE without limits. Thanks for the support.",
+    "until": "Active until {{date}}",
+    "lifetime": "Active with no end date",
+    "source": "Subscription: {{source}}"
   }
 }
