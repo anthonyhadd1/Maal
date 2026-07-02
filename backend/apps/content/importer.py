@@ -335,13 +335,35 @@ class ExamImporter:
     def _get_or_create_level(self, unit: Unit, spec: dict) -> Level:
         order = int(spec["order"])
         title = spec.get("title_fr") or ""
+        kind = spec.get("kind") or Level.Kind.NORMAL
+        if kind not in Level.Kind.values:
+            self.errors.append(f"{unit} : kind de niveau inconnu : {kind!r} (normal|boss).")
+            kind = Level.Kind.NORMAL
+        # Boss = examen blanc de l'unité : cible 15 questions (gameplay §1.1).
+        boss_target = round(settings.GAME["QUESTIONS_PER_LEVEL"] * 1.5)
         level = Level.objects.filter(unit=unit, order=order).first()
         if level is None:
-            level = Level.objects.create(unit=unit, title=title or f"Niveau {order}", order=order)
+            level = Level.objects.create(
+                unit=unit,
+                title=title or f"Niveau {order}",
+                order=order,
+                kind=kind,
+                question_count_target=boss_target if kind == Level.Kind.BOSS else 10,
+            )
             self.report.levels_created += 1
-        elif title and level.title != title:
-            level.title = title
-            level.save(update_fields=["title", "updated_at"])
+        else:
+            updates = []
+            if title and level.title != title:
+                level.title = title
+                updates.append("title")
+            if spec.get("kind") and level.kind != kind:
+                level.kind = kind
+                updates.append("kind")
+                if kind == Level.Kind.BOSS and level.question_count_target < boss_target:
+                    level.question_count_target = boss_target
+                    updates.append("question_count_target")
+            if updates:
+                level.save(update_fields=[*updates, "updated_at"])
         return level
 
     def _get_or_create_exam(self, spec: dict) -> Exam | None:

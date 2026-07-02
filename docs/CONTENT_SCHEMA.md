@@ -73,6 +73,7 @@ After import, everything is editable in the Django admin (questions, choices, le
 | `correct` | Always an **array** of choice keys — `["A"]` for `single`/`true_false`, `["A","C"]` for `multi`. |
 | `explanation` | The #1 learning feature — please provide one per question if at all possible. |
 | Levels | ~**10 questions per level**, ordered easy → hard within a unit. If unsure how to slice, just group questions per unit and note it — levels can be arranged in the admin afterwards. |
+| `kind` (on a level) | Optional: `"boss"` marks the unit's final mock-exam level («examen blanc», 15 questions — its own questions plus a random draw from the unit). Default `"normal"`. |
 
 Image quality: minimum ~1200 px wide, clean PNG/JPG (re-shot rather than raw scan photos, if possible).
 

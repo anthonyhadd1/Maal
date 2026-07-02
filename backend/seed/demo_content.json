@@ -666,7 +666,7 @@
             },
             {
               "order": 3,
-              "title_fr": "Métabolisme cellulaire",
+              "title_fr": "Examen blanc — La cellule",
               "questions": [
                 {
                   "external_id": "bio-met-01",
@@ -986,7 +986,8 @@
                     "enzymes"
                   ]
                 }
-              ]
+              ],
+              "kind": "boss"
             }
           ]
         },
@@ -1647,7 +1648,7 @@
             },
             {
               "order": 3,
-              "title_fr": "Hérédité mendélienne",
+              "title_fr": "Examen blanc — Génétique",
               "questions": [
                 {
                   "external_id": "bio-her-01",
@@ -1967,7 +1968,8 @@
                     "heredite"
                   ]
                 }
-              ]
+              ],
+              "kind": "boss"
             }
           ]
         }
@@ -2640,7 +2642,7 @@
             },
             {
               "order": 3,
-              "title_fr": "Stœchiométrie",
+              "title_fr": "Examen blanc — Chimie générale",
               "questions": [
                 {
                   "external_id": "chim-stoe-01",
@@ -2968,7 +2970,8 @@
                     "latex"
                   ]
                 }
-              ]
+              ],
+              "kind": "boss"
             }
           ]
         },
@@ -3633,7 +3636,7 @@
             },
             {
               "order": 3,
-              "title_fr": "Cinétique chimique",
+              "title_fr": "Examen blanc — Chimie des solutions",
               "questions": [
                 {
                   "external_id": "chim-cin-01",
@@ -3954,7 +3957,8 @@
                     "cinetique"
                   ]
                 }
-              ]
+              ],
+              "kind": "boss"
             }
           ]
         }
@@ -4628,7 +4632,7 @@
             },
             {
               "order": 3,
-              "title_fr": "Énergie et travail",
+              "title_fr": "Examen blanc — Mécanique",
               "questions": [
                 {
                   "external_id": "phys-ener-01",
@@ -4956,7 +4960,8 @@
                     "energie"
                   ]
                 }
-              ]
+              ],
+              "kind": "boss"
             }
           ]
         },
@@ -5621,7 +5626,7 @@
             },
             {
               "order": 3,
-              "title_fr": "Ondes",
+              "title_fr": "Examen blanc — Électricité et ondes",
               "questions": [
                 {
                   "external_id": "phys-onde-01",
@@ -5945,7 +5950,8 @@
                     "ondes"
                   ]
                 }
-              ]
+              ],
+              "kind": "boss"
             }
           ]
         }
@@ -6614,7 +6620,7 @@
             },
             {
               "order": 3,
-              "title_fr": "Santé publique (document)",
+              "title_fr": "Examen blanc — Sciences et société",
               "questions": [
                 {
                   "external_id": "cg-sp-01",
@@ -6948,7 +6954,8 @@
                     "sante"
                   ]
                 }
-              ]
+              ],
+              "kind": "boss"
             }
           ]
         },
@@ -7607,7 +7614,7 @@
             },
             {
               "order": 3,
-              "title_fr": "Histoire et institutions",
+              "title_fr": "Examen blanc — Logique et monde contemporain",
               "questions": [
                 {
                   "external_id": "cg-hist-01",
@@ -7927,7 +7934,8 @@
                     "institutions"
                   ]
                 }
-              ]
+              ],
+              "kind": "boss"
             }
           ]
         }
