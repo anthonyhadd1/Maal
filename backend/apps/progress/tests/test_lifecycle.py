@@ -178,6 +178,7 @@ class TestApiWiring:
         assert set(complete.data) == {
             "score_pct", "correct_count", "total_count", "stars", "passed", "xp",
             "hearts", "streak", "unlocked_level_id", "achievements_unlocked", "review",
+            "legendary",
         }
         assert complete.data["review"] == []  # sans-faute → rien à revoir
 

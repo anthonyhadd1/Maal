@@ -48,7 +48,7 @@ def _progress_by_level(user, subject: Subject) -> dict[int, dict]:
     except ImportError:
         return {}
     rows = LevelProgress.objects.filter(user=user, level__unit__subject=subject).values(
-        "level_id", "status", "stars"
+        "level_id", "status", "stars", "is_legendary"
     )
     return {row["level_id"]: row for row in rows}
 
@@ -112,6 +112,7 @@ def subject_map(user, subject: Subject) -> dict:
                     "kind": level.kind,
                     "status": status,
                     "stars": row["stars"] if row else 0,
+                    "is_legendary": bool(row["is_legendary"]) if row else False,
                     "is_free_for_me": premium or level_is_free(level),
                 }
             )

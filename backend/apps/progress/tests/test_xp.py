@@ -29,6 +29,7 @@ class TestFirstCompletionFormula:
             "perfect_bonus": 0,
             "combo_bonus": 2,
             "first_clear_bonus": 10,
+            "legendary_bonus": 0,
             "total": 26,
         }
         assert _xp_total(user) == 26
@@ -42,6 +43,7 @@ class TestFirstCompletionFormula:
             "perfect_bonus": 10,
             "combo_bonus": 8,
             "first_clear_bonus": 10,
+            "legendary_bonus": 0,
             "total": 48,
         }
 
@@ -62,6 +64,7 @@ class TestFirstCompletionFormula:
             "perfect_bonus": 0,
             "combo_bonus": 0,
             "first_clear_bonus": 0,
+            "legendary_bonus": 0,
             "total": 10,
         }
 
@@ -84,6 +87,7 @@ class TestReplayRates:
             "perfect_bonus": 0,
             "combo_bonus": 0,
             "first_clear_bonus": 0,
+            "legendary_bonus": 0,
             "total": 6,
         }
 

@@ -127,8 +127,37 @@ def _resolve_existing_active(user, now) -> None:
 # --- 1. Démarrage d'un niveau ---------------------------------------------------
 
 
+def _level_question_set(level) -> list:
+    """Questions servies pour un niveau. Boss (« examen blanc de l'unité ») :
+    les questions liées forment la base fixe, complétée jusqu'à la cible par un
+    tirage aléatoire dans le reste de la banque de l'unité (gameplay §1.1)."""
+    linked = (
+        LevelQuestion.objects.filter(level=level, question__is_active=True)
+        .select_related("question__passage", "question__exam")
+        .prefetch_related("question__choices")
+        .order_by("order")[: level.question_count_target]
+    )
+    questions = [lq.question for lq in linked]
+    missing = level.question_count_target - len(questions)
+    if level.kind == Level.Kind.BOSS and missing > 0:
+        pool = (
+            Question.objects.filter(
+                is_active=True,
+                level_links__level__unit=level.unit,
+            )
+            .exclude(pk__in=[q.pk for q in questions])
+            .select_related("passage", "exam")
+            .prefetch_related("choices")
+            .distinct()
+        )
+        pool = list(pool)
+        random.shuffle(pool)
+        questions.extend(pool[:missing])
+    return questions
+
+
 @transaction.atomic
-def start_level_attempt(user, level_id: int, request=None) -> dict:
+def start_level_attempt(user, level_id: int, request=None, legendary: bool = False) -> dict:
     level = (
         Level.objects.select_related("unit__subject")
         .filter(pk=level_id, is_active=True, unit__is_active=True, unit__subject__is_active=True)
@@ -145,6 +174,13 @@ def start_level_attempt(user, level_id: int, request=None) -> dict:
     if not (level_is_free(level) or user_is_premium(user)):
         raise GameError("premium_required", "Contenu réservé aux membres Premium.", status_code=402)
 
+    if legendary:
+        progress = LevelProgress.objects.filter(user=user, level=level).first()
+        if progress is None or progress.stars < 3:
+            raise GameError(
+                "legendary_locked", "Décroche d'abord 3 étoiles sur ce niveau.", status_code=403
+            )
+
     if not economy.heart_exempt(user):
         hearts, next_heart_at = economy.hearts_effective(state, now)
         if hearts < 1:
@@ -157,20 +193,27 @@ def start_level_attempt(user, level_id: int, request=None) -> dict:
 
     _resolve_existing_active(user, now)
 
-    level_questions = (
-        LevelQuestion.objects.filter(level=level, question__is_active=True)
-        .select_related("question__passage")
-        .prefetch_related("question__choices")
-        .order_by("order")[: level.question_count_target]
-    )
-    questions = [lq.question for lq in level_questions]
+    questions = _level_question_set(level)
     if not questions:
         raise GameError("level_empty", "Ce niveau n'a pas encore de questions.", status_code=409)
 
+    if legendary and not economy.heart_exempt(user):
+        # Le run légendaire coûte 1 cœur d'entrée (gameplay §1.5) —
+        # les erreurs en cours de run ne coûtent ensuite plus rien.
+        economy.spend_heart(state, now)
+
     attempt = LevelAttempt.objects.create(
-        user=user, level=level, question_ids=[q.id for q in questions], started_at=now
+        user=user,
+        level=level,
+        is_legendary=legendary,
+        question_ids=[q.id for q in questions],
+        started_at=now,
     )
-    return {"attempt_id": attempt.id, "questions": _questions_payload(questions, request)}
+    return {
+        "attempt_id": attempt.id,
+        "is_legendary": legendary,
+        "questions": _questions_payload(questions, request),
+    }
 
 
 # --- 2. Réponse à une question --------------------------------------------------
@@ -300,20 +343,29 @@ def submit_answer(user, attempt_id: int, question_id: int, selected_choice_ids: 
 
     exempt = economy.heart_exempt(user)
     # Les cœurs ne se perdent qu'en NIVEAU réel — jamais en révision ni en défi
-    # (gameplay §2 et §6).
-    if not is_correct and not attempt.is_practice and attempt.challenge_id is None and not exempt:
+    # (gameplay §2 et §6) ; le run légendaire a payé son cœur à l'entrée (§1.5).
+    if (
+        not is_correct
+        and not attempt.is_practice
+        and not attempt.is_legendary
+        and attempt.challenge_id is None
+        and not exempt
+    ):
         _, spent = economy.spend_heart(state, now)
         if spent:
             attempt.hearts_lost = (attempt.hearts_lost or 0) + 1
             attempt.save(update_fields=["hearts_lost"])
 
     hearts_remaining, next_heart_at = (None, None) if exempt else economy.hearts_effective(state, now)
+    # Légendaire : pas d'explications avant la fin du run (gameplay §1.5) —
+    # elles reviennent dans le récapitulatif de complétion.
+    withhold = attempt.is_legendary
     return {
         "is_correct": is_correct,
         "correct_choice_ids": sorted(correct_ids),
-        "explanation_text": question.explanation_text,
-        "explanation_media_url": _absolute_media(request, question.explanation_media),
-        "explanation_media_type": question.explanation_media_type or None,
+        "explanation_text": None if withhold else question.explanation_text,
+        "explanation_media_url": None if withhold else _absolute_media(request, question.explanation_media),
+        "explanation_media_type": None if withhold else (question.explanation_media_type or None),
         "hearts_remaining": hearts_remaining,
         "hearts_unlimited": exempt,
         "next_heart_at": next_heart_at,
@@ -416,6 +468,7 @@ def complete_attempt(user, attempt_id: int, request=None) -> dict:
     score_pct = round(100 * correct / total)
     exempt = economy.heart_exempt(user)
     heart_earned = False
+    legendary_earned = False
     unlocked_level_id = None
 
     if attempt.challenge_id is not None:
@@ -491,16 +544,31 @@ def complete_attempt(user, attempt_id: int, request=None) -> dict:
             base += boosted - subtotal
             meta["boss_multiplier"] = settings.GAME["BOSS_XP_MULTIPLIER"]
 
+        # Run légendaire (gameplay §1.5) : ≥ seuil sur un niveau 3★ pas encore
+        # couronné → bonus unique + couronne sur la carte. Sinon barème replay.
+        legendary_bonus = 0
+        if (
+            attempt.is_legendary
+            and score_pct >= settings.GAME["LEGENDARY_MIN_SCORE_PCT"]
+            and not progress.is_legendary
+        ):
+            legendary_bonus = settings.GAME["LEGENDARY_XP"]
+            progress.is_legendary = True
+            legendary_earned = True
+            meta["legendary"] = True
+
         xp_parts = {
             "base": base,
             "perfect_bonus": perfect,
             "combo_bonus": combo,
             "first_clear_bonus": first_clear,
+            "legendary_bonus": legendary_bonus,
         }
         economy.award_xp(user, base, XpEvent.EventType.LEVEL_COMPLETE, attempt=attempt, meta=meta)
         economy.award_xp(user, perfect, XpEvent.EventType.PERFECT_BONUS, attempt=attempt, meta=meta)
         economy.award_xp(user, combo, XpEvent.EventType.COMBO_BONUS, attempt=attempt, meta=meta)
         economy.award_xp(user, first_clear, XpEvent.EventType.FIRST_CLEAR_BONUS, attempt=attempt, meta=meta)
+        economy.award_xp(user, legendary_bonus, XpEvent.EventType.LEGENDARY, attempt=attempt, meta=meta)
 
         progress.attempts_count += 1
         progress.best_score_pct = max(progress.best_score_pct, score_pct)
@@ -582,6 +650,7 @@ def complete_attempt(user, attempt_id: int, request=None) -> dict:
         "unlocked_level_id": unlocked_level_id,
         "achievements_unlocked": achievements_unlocked,
         "review": _review_payload(answers, request),
+        "legendary": {"attempted": attempt.is_legendary, "earned": legendary_earned},
     }
     if challenge_info is not None:
         payload["challenge"] = challenge_info

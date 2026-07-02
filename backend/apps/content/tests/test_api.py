@@ -94,7 +94,7 @@ class TestSubjectMap:
         assert level_states[l2.id] == "locked"
         assert level_states[l3.id] == "locked"
         first = units[0]["levels"][0]
-        assert set(first) == {"id", "title", "order", "kind", "status", "stars", "is_free_for_me"}
+        assert set(first) == {"id", "title", "order", "kind", "status", "stars", "is_legendary", "is_free_for_me"}
         assert first["stars"] == 0
 
     def test_unit_two_not_free_for_free_user(self, auth_client, settings):

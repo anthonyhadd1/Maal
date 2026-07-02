@@ -9,7 +9,10 @@ from .services import attempts, stats
 
 class StartLevelAttemptView(APIView):
     def post(self, request, level_id: int):
-        payload = attempts.start_level_attempt(request.user, level_id, request=request)
+        legendary = bool(request.data.get("legendary", False))
+        payload = attempts.start_level_attempt(
+            request.user, level_id, request=request, legendary=legendary
+        )
         return Response(payload, status=status.HTTP_201_CREATED)
 
 

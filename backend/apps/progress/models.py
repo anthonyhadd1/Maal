@@ -27,6 +27,7 @@ class LevelProgress(TimeStampedModel):
     best_score_pct = models.PositiveSmallIntegerField(default=0)
     attempts_count = models.PositiveSmallIntegerField(default=0)
     first_completed_at = models.DateTimeField(null=True, blank=True)
+    is_legendary = models.BooleanField(default=False)  # couronne : run ≥90 % après 3★
 
     class Meta:
         constraints = [
@@ -64,6 +65,7 @@ class LevelAttempt(models.Model):
     )
     status = models.CharField(max_length=10, choices=Status.choices, default=Status.ACTIVE)
     is_practice = models.BooleanField(default=False)
+    is_legendary = models.BooleanField(default=False)  # 1 cœur payé au départ, pas d'explications en cours de run
     challenge = models.ForeignKey(
         "social.Challenge",
         null=True,
