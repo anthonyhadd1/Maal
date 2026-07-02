@@ -71,4 +71,16 @@ Re-imports are idempotent (upsert by `external_id`, unchanged questions skipped 
 docker compose exec backend pytest          # backend
 cd app && npm test                          # mobile
 cd app && npx tsc --noEmit                  # types
+python scripts/e2e_smoke.py http://localhost:8000/api/v1   # full loop over HTTP
 ```
+
+## Feature status (v1)
+
+**Working end-to-end** — auth + onboarding (goal/rhythm/notifications), subjects → units → levels map with per-user progress, server-graded question sessions (single/multi/vrai-faux/image/passage, LaTeX via KaTeX), immediate feedback with explanations + exam provenance, hearts economy (regen 1/4h, 3-day grace, practice earn-back), XP ledger with combo/perfect/first-clear bonuses + replay caps, boss levels («examen blanc», 15 questions sampled from the unit), legendary runs (≥9/10, gold crown, +40 XP), streaks with freezes (Beirut days) + local reminders, Révision intelligente (Leitner 1/3/7 days), weekly leagues (Bronze→Cèdre, top 10 up / bottom 5 down, anti-grind daily cap), 21 trophies, daily quests, friends + search + level challenges (48h, snapshot, VS results), freemium gates (unit 1 free per subject), premium entitlements, full French UI (i18n-ready EN), Django-admin CMS + idempotent content import.
+
+**Stubbed until accounts/credentials exist**
+- Payments: paywall UI is live but `purchase()`/`restore()` show «Bientôt disponible» — drop in RevenueCat + App Store/Play products (webhook endpoint already implemented: `POST /api/v1/billing/revenuecat/webhook/`).
+- Password reset email: needs an SMTP provider (until then, recovery via support).
+- Push notifications (challenge received, league end): local notifications only in v1.
+
+**Before store submission** — real exam data (see `docs/CONTENT_SCHEMA.md`), branded mascot/icon/splash art (placeholders ship), EAS build profiles + store accounts, RevenueCat products, `close_league_week` weekly cron on the host, production settings (S3-compatible media, gunicorn, real SECRET_KEY).

@@ -328,3 +328,58 @@ class TestApiWiring:
         assert all(set(row) == {"question_id", "challenger_correct", "opponent_correct"} for row in comparison)
         assert [row["opponent_correct"] for row in comparison] == [True, True, True, True]
         assert comparison[0]["challenger_correct"] is False  # sa première réponse était fausse
+
+
+class TestFreemiumGate:
+    """La barrière premium s'applique en mode défi (revue adversariale 2026-07-02)."""
+
+    def _premium_level_pair(self, challenger):
+        """Niveau en unité 2 (premium pour un compte gratuit) que le challenger
+        a réussi pendant qu'il était premium."""
+        from apps.billing.models import Entitlement
+        from apps.content.tests.factories import UnitFactory
+
+        unit2 = UnitFactory(order=2)  # FREE_UNITS_PER_SUBJECT = 1 → premium
+        level, questions = make_level(unit=unit2, order=1, n_questions=4)
+        # niveau 1 de l'unité 2 : déverrouillé implicitement ? Non — mais le
+        # challenger premium doit d'abord réussir l'unité 1 de la matière.
+        unit1 = UnitFactory(subject=unit2.subject, order=1)
+        level1, questions1 = make_level(unit=unit1, order=1, n_questions=4)
+        entitlement = Entitlement.objects.get(user=challenger)
+        entitlement.is_premium_override = True
+        entitlement.save(update_fields=["is_premium_override"])
+        play_level(challenger, level1, questions1)
+        play_level(challenger, level, questions)
+        return level, entitlement
+
+    def test_free_opponent_blocked_on_premium_level(self, duo):
+        challenger, opponent = duo
+        level, _ = self._premium_level_pair(challenger)
+        challenge = challenge_service.create(challenger, opponent.pk, level.pk)
+        challenge_service.accept(opponent, challenge.pk)
+        with pytest.raises(GameError) as exc:
+            challenge_service.start_attempt(opponent, challenge.pk)
+        assert exc.value.code == "premium_required"
+        assert exc.value.status_code == 402
+
+    def test_premium_opponent_allowed(self, duo):
+        from apps.billing.models import Entitlement
+
+        challenger, opponent = duo
+        level, _ = self._premium_level_pair(challenger)
+        challenge = challenge_service.create(challenger, opponent.pk, level.pk)
+        opp_ent = Entitlement.objects.get(user=opponent)
+        opp_ent.is_premium_override = True
+        opp_ent.save(update_fields=["is_premium_override"])
+        challenge_service.accept(opponent, challenge.pk)
+        start = challenge_service.start_attempt(opponent, challenge.pk)
+        assert start["attempt_id"]
+
+    def test_lapsed_challenger_cannot_create_on_premium_level(self, duo):
+        challenger, opponent = duo
+        level, entitlement = self._premium_level_pair(challenger)
+        entitlement.is_premium_override = False  # abonnement expiré
+        entitlement.save(update_fields=["is_premium_override"])
+        with pytest.raises(GameError) as exc:
+            challenge_service.create(challenger, opponent.pk, level.pk)
+        assert exc.value.code == "premium_required"

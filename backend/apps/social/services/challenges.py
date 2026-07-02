@@ -33,6 +33,7 @@ from django.utils import timezone
 from apps.accounts.models import User
 from apps.common.exceptions import GameError
 from apps.content.models import Level, LevelQuestion, Question
+from apps.content.services import level_is_free, user_is_premium
 from apps.gamification.models import XpEvent
 from apps.gamification.services import achievements, economy
 from apps.progress.models import LevelAttempt, LevelProgress
@@ -133,6 +134,10 @@ def create(challenger, opponent_id: int, level_id: int) -> Challenge:
     )
     if level is None:
         raise GameError("level_not_found", "Niveau introuvable.", status_code=404)
+    # Le lanceur doit avoir accès au niveau AUJOURD'HUI (le gating peut avoir
+    # changé depuis sa complétion) — même barrière que start_level_attempt.
+    if not (level_is_free(level) or user_is_premium(challenger)):
+        raise GameError("premium_required", "Contenu réservé aux membres Premium.", status_code=402)
     passed = LevelProgress.objects.filter(user=challenger, level=level, stars__gte=1).exists()
     best_attempt = (
         LevelAttempt.objects.filter(
@@ -225,6 +230,10 @@ def start_attempt(user, challenge_id: int, request=None) -> dict:
         raise GameError(
             "challenge_not_accepted", "Accepte d'abord le défi pour le jouer.", status_code=409
         )
+    # La barrière freemium s'applique aussi en mode défi : un défi n'est pas
+    # une porte dérobée vers le contenu premium (revue adversariale 2026-07-02).
+    if not (level_is_free(challenge.level) or user_is_premium(user)):
+        raise GameError("premium_required", "Contenu réservé aux membres Premium.", status_code=402)
 
     attempts_service._resolve_existing_active(user, now)  # une seule tentative active
 
