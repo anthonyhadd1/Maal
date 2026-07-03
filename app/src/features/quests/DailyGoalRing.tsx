@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { Mascot } from '@/components/mascot/Mascot';
 import { dailyGoalMascotState, questFraction } from '@/features/quests/questLogic';
+import { shade } from '@/lib/color';
 import { formatNumber } from '@/lib/format';
-import { colors, fonts, spacing, typography } from '@/theme/tokens';
+import { colors, fonts, gradients, spacing, typography } from '@/theme/tokens';
 
 const RING_SIZE = 150;
 const STROKE = 15;
@@ -45,7 +46,7 @@ export function DailyGoalRing({ current, target }: DailyGoalRingProps) {
           <Defs>
             <SvgLinearGradient id="dailyGoalStroke" x1="0" x2="1" y1="0" y2="1">
               <Stop offset="0" stopColor={done ? colors.successDeep : colors.xpGold} />
-              <Stop offset="1" stopColor={done ? '#4ADE80' : '#FBBF24'} />
+              <Stop offset="1" stopColor={done ? shade(colors.success, 0.2) : gradients.gold[1]} />
             </SvgLinearGradient>
           </Defs>
           <Circle

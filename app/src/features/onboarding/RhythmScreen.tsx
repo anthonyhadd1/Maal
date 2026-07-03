@@ -5,9 +5,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { usePatchMe } from '@/api/queries/profile';
+import { ClaySurface } from '@/components/clay/ClaySurface';
 import { useToast } from '@/components/feedback/Toast';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
+import { shade } from '@/lib/color';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
 interface RhythmOption {
@@ -63,12 +65,17 @@ export function RhythmScreen() {
             <PressableScale
               accessibilityRole="button"
               accessibilityState={{ selected }}
+              clay={false}
               key={key}
               onPress={() => setGoalXp(xp)}
               style={styles.cardWrap}
               testID={`rhythm-${key}`}
             >
-              <View style={[styles.card, selected && styles.cardSelected]}>
+              <ClaySurface
+                radius="l"
+                shadow={selected ? 'raised' : 'pressed'}
+                style={[styles.card, selected && styles.cardSelected]}
+              >
                 <View style={[styles.cardIcon, selected && styles.cardIconSelected]}>
                   <Icon
                     color={selected ? colors.neutral[0] : colors.primary[600]}
@@ -83,7 +90,7 @@ export function RhythmScreen() {
                 <Text style={[styles.cardXp, selected && styles.cardXpSelected]}>
                   {t('rhythm.xpPerDay', { xp })}
                 </Text>
-              </View>
+              </ClaySurface>
             </PressableScale>
           );
         })}
@@ -103,12 +110,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.m,
-    backgroundColor: colors.neutral[0],
-    borderRadius: radii.l,
-    borderWidth: 2.5,
-    borderColor: 'rgba(36, 31, 62, 0.06)',
-    borderBottomWidth: 3.5,
-    borderBottomColor: 'rgba(36, 31, 62, 0.10)',
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.l,
   },
@@ -127,6 +128,8 @@ const styles = StyleSheet.create({
   },
   cardIconSelected: {
     backgroundColor: colors.primary[500],
+    borderBottomWidth: 3,
+    borderBottomColor: shade(colors.primary[500], -0.28),
   },
   cardBody: {
     flex: 1,

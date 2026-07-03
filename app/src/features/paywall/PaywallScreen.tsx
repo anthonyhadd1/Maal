@@ -375,6 +375,8 @@ const styles = StyleSheet.create({
     backgroundColor: tints.gold,
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 2.5,
+    borderBottomColor: shade(tints.gold, -0.15),
   },
   benefitText: {
     ...typography.bodyMedium,
@@ -399,12 +401,14 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.l,
     paddingHorizontal: spacing.m,
     minHeight: 148,
+    ...shadows.clayPressed,
   },
   planCardSelected: {
     borderColor: colors.xpGold,
     borderBottomWidth: 4,
     borderBottomColor: colors.goldDeep,
     backgroundColor: tints.gold,
+    ...shadows.clayRaised,
   },
   planCheck: {
     width: 22,

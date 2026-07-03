@@ -13,6 +13,7 @@ import type { QuestItem } from '@/api/types';
 import { ClayCard } from '@/components/clay/ClayCard';
 import { ProgressBar } from '@/components/game/ProgressBar';
 import { questFraction, questIconName } from '@/features/quests/questLogic';
+import { shade } from '@/lib/color';
 import { formatNumber } from '@/lib/format';
 import { getLucideIcon } from '@/lib/lucide';
 import { useReducedMotionPref } from '@/lib/motion';
@@ -103,9 +104,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary[100],
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 3,
+    borderBottomColor: shade(colors.primary[100], -0.15),
   },
   iconBubbleDone: {
     backgroundColor: colors.success,
+    borderBottomColor: shade(colors.success, -0.22),
   },
   body: {
     flex: 1,

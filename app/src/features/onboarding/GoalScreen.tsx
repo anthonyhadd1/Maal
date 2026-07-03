@@ -5,11 +5,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useFaculties, usePatchMe } from '@/api/queries/profile';
+import { ClaySurface } from '@/components/clay/ClaySurface';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import { Skeleton } from '@/components/feedback/Skeleton';
 import { useToast } from '@/components/feedback/Toast';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
+import { shade } from '@/lib/color';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
 /** null = « Je ne sais pas encore » (explicit choice) — undefined = untouched. */
@@ -103,17 +105,22 @@ function GoalCard({
     <PressableScale
       accessibilityRole="button"
       accessibilityState={{ selected }}
+      clay={false}
       onPress={onPress}
       style={styles.cardWrap}
       testID={testID}
     >
-      <View style={[styles.card, selected && styles.cardSelected]}>
+      <ClaySurface
+        radius="l"
+        shadow={selected ? 'raised' : 'pressed'}
+        style={[styles.card, selected && styles.cardSelected]}
+      >
         <View style={[styles.cardIcon, selected && styles.cardIconSelected]}>{icon}</View>
         <Text style={[styles.cardLabel, selected && styles.cardLabelSelected]}>{label}</Text>
         <View style={[styles.check, selected && styles.checkSelected]}>
           {selected ? <Check color={colors.neutral[0]} size={14} strokeWidth={3.5} /> : null}
         </View>
-      </View>
+      </ClaySurface>
     </PressableScale>
   );
 }
@@ -129,12 +136,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.m,
-    backgroundColor: colors.neutral[0],
-    borderRadius: radii.l,
-    borderWidth: 2.5,
-    borderColor: 'rgba(36, 31, 62, 0.06)',
-    borderBottomWidth: 3.5,
-    borderBottomColor: 'rgba(36, 31, 62, 0.10)',
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.l,
   },
@@ -153,6 +154,8 @@ const styles = StyleSheet.create({
   },
   cardIconSelected: {
     backgroundColor: colors.primary[100],
+    borderBottomWidth: 3,
+    borderBottomColor: shade(colors.primary[100], -0.15),
   },
   cardLabel: {
     ...typography.bodyMedium,

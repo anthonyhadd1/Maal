@@ -10,6 +10,7 @@ import { keys } from '@/api/queries/keys';
 import { useQuestsToday } from '@/api/queries/quests';
 import { queryClient } from '@/api/queryClient';
 import { ClayCard } from '@/components/clay/ClayCard';
+import { ClaySurface } from '@/components/clay/ClaySurface';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import { Skeleton } from '@/components/feedback/Skeleton';
 import { StreakFlame } from '@/components/game/StreakFlame';
@@ -17,6 +18,7 @@ import { PressableScale } from '@/components/layout/PressableScale';
 import { Screen } from '@/components/layout/Screen';
 import { DailyGoalRing } from '@/features/quests/DailyGoalRing';
 import { QuestCard } from '@/features/quests/QuestCard';
+import { shade } from '@/lib/color';
 import { formatNumber } from '@/lib/format';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 import { tints } from '@/theme/tints';
@@ -130,25 +132,28 @@ export function QuestsScreen() {
         {/* Achievements entry */}
         <PressableScale
           accessibilityLabel={t('achievements.row')}
+          clay={false}
           onPress={() => router.push('/profile/achievements')}
-          style={styles.achievementsRow}
+          style={styles.achievementsRowWrap}
           testID="quests-achievements-row"
         >
-          <View style={styles.trophyBubble}>
-            <Trophy color={tints.goldText} size={22} strokeWidth={2.2} />
-          </View>
-          <Text style={styles.achievementsLabel}>{t('achievements.row')}</Text>
-          {unlockedCount != null && achievements.data ? (
-            <View style={styles.achievementsPill}>
-              <Text style={styles.achievementsCount}>
-                {t('achievements.count', {
-                  unlocked: unlockedCount,
-                  total: achievements.data.length,
-                })}
-              </Text>
+          <ClaySurface radius="l" shadow="pressed" style={styles.achievementsRow}>
+            <View style={styles.trophyBubble}>
+              <Trophy color={tints.goldText} size={22} strokeWidth={2.2} />
             </View>
-          ) : null}
-          <ChevronRight color={colors.neutral[500]} size={20} />
+            <Text style={styles.achievementsLabel}>{t('achievements.row')}</Text>
+            {unlockedCount != null && achievements.data ? (
+              <View style={styles.achievementsPill}>
+                <Text style={styles.achievementsCount}>
+                  {t('achievements.count', {
+                    unlocked: unlockedCount,
+                    total: achievements.data.length,
+                  })}
+                </Text>
+              </View>
+            ) : null}
+            <ChevronRight color={colors.neutral[500]} size={20} />
+          </ClaySurface>
         </PressableScale>
       </ScrollView>
     </Screen>
@@ -247,19 +252,15 @@ const styles = StyleSheet.create({
   freezeChipTextHeld: {
     color: tints.iceText,
   },
+  achievementsRowWrap: {
+    marginTop: spacing.s,
+  },
   achievementsRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.m,
-    backgroundColor: colors.neutral[0],
-    borderRadius: radii.l,
     paddingHorizontal: spacing.l,
     paddingVertical: spacing.l,
-    borderWidth: 1,
-    borderColor: 'rgba(36, 31, 62, 0.05)',
-    borderBottomWidth: 2,
-    borderBottomColor: 'rgba(36, 31, 62, 0.09)',
-    marginTop: spacing.s,
   },
   trophyBubble: {
     width: 46,
@@ -268,6 +269,8 @@ const styles = StyleSheet.create({
     backgroundColor: tints.gold,
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 3,
+    borderBottomColor: shade(tints.gold, -0.15),
   },
   achievementsLabel: {
     ...typography.bodyMedium,
