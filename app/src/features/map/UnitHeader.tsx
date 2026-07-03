@@ -32,7 +32,7 @@ export function UnitHeader({ unit, done, total, accent }: UnitHeaderProps) {
         />
         <PatternDots />
         <View style={styles.content}>
-          <Text numberOfLines={1} style={styles.title}>
+          <Text numberOfLines={2} style={styles.title}>
             {unit.title}
           </Text>
           <View style={styles.pill}>
@@ -77,17 +77,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: spacing.m,
     paddingHorizontal: spacing.l,
-    paddingVertical: spacing.l,
+    paddingVertical: spacing.m,
   },
   title: {
     ...typography.h2,
     fontFamily: typography.display.fontFamily,
-    fontSize: 21,
-    lineHeight: 26,
+    fontSize: 18,
+    lineHeight: 22,
     color: colors.neutral[0],
     flexShrink: 1,
   },
   pill: {
+    flexShrink: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.24)',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.35)',

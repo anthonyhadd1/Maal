@@ -221,7 +221,7 @@ function SubjectCard({
             <Icon color={colors.neutral[0]} size={24} strokeWidth={2.2} />
           </View>
         </View>
-        <Text numberOfLines={1} style={styles.cardName}>
+        <Text numberOfLines={2} style={styles.cardName}>
           {subject.name}
         </Text>
         {typeof pct === 'number' ? (
@@ -320,6 +320,7 @@ const styles = StyleSheet.create({
     ...typography.bodyBold,
     fontFamily: typography.h2.fontFamily,
     color: colors.neutral[900],
+    textAlign: 'center',
   },
   cardPct: {
     ...typography.caption,

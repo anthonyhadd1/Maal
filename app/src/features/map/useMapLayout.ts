@@ -12,7 +12,7 @@ import type { MapLevel, MapUnit } from '@/api/types';
  */
 
 export const ROW_HEIGHT = 120;
-export const UNIT_HEADER_HEIGHT = 96;
+export const UNIT_HEADER_HEIGHT = 116;
 /** Node x-offset wave: centerX + amplitude * sin(globalIndex * WAVE_STEP). */
 export const WAVE_STEP = 0.9;
 /** Amplitude as a fraction of the usable width. */
