@@ -17,15 +17,16 @@ interface MapHeaderProps {
   accent: string;
   game: MeGame | undefined;
   onSwitchSubject: () => void;
-  /** Track icon prefix + tap target — opens the track switcher (§4a bis). */
+  /** Track name/icon + tap target — opens the track switcher (§4a bis). */
   trackIcon?: string;
+  trackName?: string;
   onSwitchTrack?: () => void;
 }
 
 /**
- * Floating clay card above the map list: a two-level breadcrumb chip
- * (track icon prefix -> track switcher, subject name -> subject switcher),
- * hearts (live), streak flame and XP — evenly spaced on one row.
+ * Floating clay card above the map list: a labeled track chip ("Concours
+ * d'entrée ⌄") on its own row so the second-category feature is impossible
+ * to miss, then the existing subject pill + hearts/streak/XP row below.
  */
 export function MapHeader({
   subjectName,
@@ -33,6 +34,7 @@ export function MapHeader({
   game,
   onSwitchSubject,
   trackIcon,
+  trackName,
   onSwitchTrack,
 }: MapHeaderProps) {
   const { t } = useTranslation('map');
@@ -40,6 +42,24 @@ export function MapHeader({
 
   return (
     <View style={styles.wrap}>
+      {onSwitchTrack && trackName ? (
+        <PressableScale
+          accessibilityLabel={t('trackSwitcher.title')}
+          onPress={onSwitchTrack}
+          pressedTranslateY={1}
+          style={styles.trackRow}
+          testID="map-track-switcher"
+        >
+          <View style={styles.trackIconWrap}>
+            <TrackIcon color={colors.primary[600]} size={13} strokeWidth={2.6} />
+          </View>
+          <Text numberOfLines={1} style={styles.trackName}>
+            {trackName}
+          </Text>
+          <ChevronDown color={colors.neutral[500]} size={14} strokeWidth={3} />
+        </PressableScale>
+      ) : null}
+
       <ClaySurface radius="l" shadow="floating" style={styles.card}>
         <View
           style={[
@@ -47,19 +67,6 @@ export function MapHeader({
             { backgroundColor: accent, borderBottomColor: shade(accent, -0.28) },
           ]}
         >
-          {onSwitchTrack ? (
-            <PressableScale
-              accessibilityLabel={t('trackSwitcher.title')}
-              clay={false}
-              hitSlop={8}
-              onPress={onSwitchTrack}
-              pressedTranslateY={1}
-              style={styles.trackTap}
-              testID="map-track-switcher"
-            >
-              <TrackIcon color={colors.neutral[0]} size={15} strokeWidth={2.4} />
-            </PressableScale>
-          ) : null}
           <PressableScale
             accessibilityLabel={t('switcher.title')}
             clay={false}
@@ -117,10 +124,32 @@ const styles = StyleSheet.create({
     maxWidth: 176,
     borderBottomWidth: 3,
   },
-  trackTap: {
-    paddingVertical: spacing.s,
-    paddingRight: spacing.xs,
-    marginRight: 2,
+  trackRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    gap: 6,
+    paddingHorizontal: spacing.s,
+    paddingVertical: 6,
+    marginBottom: spacing.xs,
+    minHeight: 32,
+    borderRadius: radii.pill,
+    backgroundColor: colors.neutral[0],
+    borderWidth: 1,
+    borderColor: colors.primary[200],
+  },
+  trackIconWrap: {
+    width: 20,
+    height: 20,
+    borderRadius: radii.pill,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.primary[50],
+  },
+  trackName: {
+    ...typography.caption,
+    fontFamily: typography.smallMedium.fontFamily,
+    color: colors.primary[700],
   },
   subjectTap: {
     flexDirection: 'row',

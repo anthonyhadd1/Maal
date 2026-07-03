@@ -362,6 +362,7 @@ export function LevelsMap() {
         onSwitchTrack={() => router.push('/track/switcher')}
         subjectName={subjectName}
         trackIcon={activeTrack?.icon}
+        trackName={activeTrack?.name}
       />
 
       {isLoading ? (
