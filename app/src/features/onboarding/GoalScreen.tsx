@@ -28,7 +28,10 @@ export function GoalScreen() {
 
   const [selection, setSelection] = useState<Selection>(undefined);
 
-  const next = () => router.push('/onboarding/rhythm');
+  // replace (not push): see TrackScreen's onSuccess comment — onboarding is
+  // linear/one-way, and pushing leaves this screen mounted under the next
+  // one, where its content can still intercept taps on web.
+  const next = () => router.replace('/onboarding/rhythm');
 
   const submit = () => {
     if (selection === undefined || patchMe.isPending) return;

@@ -44,7 +44,8 @@ export function RhythmScreen() {
     patchMe.mutate(
       { profile: { daily_goal_xp: goalXp } },
       {
-        onSuccess: () => router.push('/onboarding/notifications'),
+        // replace (not push): see TrackScreen's onSuccess comment.
+        onSuccess: () => router.replace('/onboarding/notifications'),
         onError: () => toast.show({ type: 'error', message: tErrors('server') }),
       },
     );

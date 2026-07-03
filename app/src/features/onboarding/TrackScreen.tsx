@@ -38,7 +38,13 @@ export function TrackScreen() {
       { profile: { active_track: track.slug } },
       {
         onSuccess: () => {
-          router.push(track.slug === 'concours' ? '/onboarding/goal' : '/onboarding/rhythm');
+          // replace (not push): onboarding is linear/one-way (gestureEnabled
+          // is off in the Stack, there's no back button) and a push here
+          // leaves this screen mounted UNDER the next one — on web the stack
+          // renderer doesn't fully disable hit-testing on non-top screens,
+          // so its content can still intercept taps on later steps (e.g. the
+          // "Plus tard" skip on the notifications step).
+          router.replace(track.slug === 'concours' ? '/onboarding/goal' : '/onboarding/rhythm');
         },
         onError: () => toast.show({ type: 'error', message: tErrors('server') }),
       },

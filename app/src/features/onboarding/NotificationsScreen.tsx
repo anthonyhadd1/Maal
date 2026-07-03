@@ -39,7 +39,16 @@ export function NotificationsScreen() {
     try {
       // Dynamic import keeps expo-notifications out of the test/module graph.
       const Notifications = await import('expo-notifications');
-      const result = await Notifications.requestPermissionsAsync();
+      // The underlying browser/OS permission prompt is not guaranteed to
+      // settle (observed hanging indefinitely on web in some environments) —
+      // race it against a timeout so a stalled prompt can never strand the
+      // user mid-onboarding with no way forward.
+      const result = await Promise.race([
+        Notifications.requestPermissionsAsync(),
+        new Promise<{ granted: false }>((resolve) =>
+          setTimeout(() => resolve({ granted: false }), 5000),
+        ),
+      ]);
       if (result.granted) {
         // Seed the daily reminder right away (no-streak copy); every
         // completed session reschedules it with the live streak value.
