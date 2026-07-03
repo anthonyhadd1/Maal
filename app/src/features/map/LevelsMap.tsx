@@ -36,6 +36,7 @@ import { ErrorState } from '@/components/feedback/ErrorState';
 import { Skeleton } from '@/components/feedback/Skeleton';
 import { useToast } from '@/components/feedback/Toast';
 import { Screen } from '@/components/layout/Screen';
+import { useEffectiveScreenWidth } from '@/components/layout/WebFrame';
 import { HeartsModal } from '@/features/map/HeartsModal';
 import { LevelNode, NODE_SIZE, offersLegendary } from '@/features/map/LevelNode';
 import { MapConnector } from '@/features/map/MapConnector';
@@ -69,7 +70,8 @@ export function LevelsMap() {
   const router = useRouter();
   const toast = useToast();
   const networkState = useNetworkState();
-  const { width, height } = useWindowDimensions();
+  const { height } = useWindowDimensions();
+  const width = useEffectiveScreenWidth();
 
   const storedSlug = useSettingsStore((s) => s.activeSubjectSlug);
   const setActiveSubjectSlug = useSettingsStore((s) => s.setActiveSubjectSlug);

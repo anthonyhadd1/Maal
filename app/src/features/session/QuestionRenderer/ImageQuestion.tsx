@@ -6,6 +6,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 import { useTranslation } from 'react-i18next';
 
 import { ClayIconButton } from '@/components/clay/ClayIconButton';
+import { useEffectiveScreenWidth } from '@/components/layout/WebFrame';
 import type { RendererProps } from '@/features/session/QuestionRenderer/types';
 import { OptionsByType } from '@/features/session/QuestionRenderer/optionsByType';
 import { backdropDark, colors, radii, spacing } from '@/theme/tokens';
@@ -51,7 +52,8 @@ function ImageZoomModal({
   onClose: () => void;
 }) {
   const { t } = useTranslation('session');
-  const { width, height } = useWindowDimensions();
+  const { height } = useWindowDimensions();
+  const width = useEffectiveScreenWidth();
   const scale = useSharedValue(1);
   const savedScale = useSharedValue(1);
 
