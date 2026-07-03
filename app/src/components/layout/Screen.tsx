@@ -45,8 +45,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.neutral[50],
   },
+  // flexShrink+minHeight:0 (not just flexGrow) so this View is actually
+  // height-bounded on web when a child renders its own ScrollView/FlatList
+  // (padded={false}, scroll left false) — otherwise it grows to the list's
+  // full intrinsic content height instead of the viewport's, the list never
+  // becomes internally scrollable, and content past the fold is unreachable.
   grow: {
     flexGrow: 1,
+    flexShrink: 1,
+    minHeight: 0,
   },
   padded: {
     paddingHorizontal: spacing.l,
