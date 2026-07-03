@@ -27,6 +27,7 @@ import { keys } from '@/api/queries/keys';
 import { useSubjectMap } from '@/api/queries/map';
 import { useAbandonAttempt, useStartAttempt } from '@/api/queries/session';
 import { useSubjects } from '@/api/queries/subjects';
+import { containsSubjectSlug, firstSubjectSlug } from '@/api/queries/subjectsHelpers';
 import { useTracks } from '@/api/queries/tracks';
 import { queryClient } from '@/api/queryClient';
 import type { MapLevel } from '@/api/types';
@@ -81,18 +82,24 @@ export function LevelsMap() {
   const tracks = useTracks();
   const activeTrack = tracks.data?.find((track) => track.slug === activeTrackSlug);
 
-  // Flat track: subjects.data is an array. Tiered: the map itself always
-  // resolves to ONE active subject (the subject switcher renders the
-  // grouped view) — fall back to the first flat subject when nothing is
-  // stored yet; tiered tracks always have a stored/defaulted slug by the
-  // time the track switcher hands off (see track/switcher.tsx).
+  // settingsStore is a single global (per-device) key — a slug picked under
+  // a DIFFERENT account, or under a different track, can persist and leak in
+  // here (e.g. a specialty subject left over from a previous session showing
+  // up under "Concours d'entrée"). Only trust storedSlug once we know it's
+  // actually a member of the CURRENT track's subject list; otherwise fall
+  // back to that track's first subject, same as the "nothing stored yet"
+  // case below.
   const firstFlatSubject = Array.isArray(subjects.data) ? subjects.data[0] : undefined;
-  const activeSlug = storedSlug ?? firstFlatSubject?.slug ?? null;
+  const storedSlugValid = subjects.data ? containsSubjectSlug(subjects.data, storedSlug) : true;
+  const activeSlug = storedSlugValid
+    ? (storedSlug ?? firstFlatSubject?.slug ?? null)
+    : (firstSubjectSlug(subjects.data) ?? firstFlatSubject?.slug ?? null);
 
-  // Persist the defaulted subject so the switcher highlights it consistently.
+  // Persist the defaulted/corrected subject so the switcher highlights it
+  // consistently and future renders don't need to keep re-deriving it.
   useEffect(() => {
-    if (!storedSlug && activeSlug) setActiveSubjectSlug(activeSlug);
-  }, [storedSlug, activeSlug, setActiveSubjectSlug]);
+    if ((!storedSlug || !storedSlugValid) && activeSlug) setActiveSubjectSlug(activeSlug);
+  }, [storedSlug, storedSlugValid, activeSlug, setActiveSubjectSlug]);
 
   const map = useSubjectMap(activeSlug);
   const game = useMeGame();

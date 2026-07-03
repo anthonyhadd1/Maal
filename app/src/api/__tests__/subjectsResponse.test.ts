@@ -1,4 +1,4 @@
-import { firstSubjectSlug } from '@/api/queries/subjectsHelpers';
+import { containsSubjectSlug, firstSubjectSlug } from '@/api/queries/subjectsHelpers';
 import { isTieredSubjects, type SubjectFlat, type TieredSubjectsResponse } from '@/api/types';
 
 /**
@@ -95,5 +95,41 @@ describe('firstSubjectSlug', () => {
         years: [{ id: 1, name: 'M1', order: 1, semesters: [] }],
       }),
     ).toBeNull();
+  });
+});
+
+/**
+ * Regression: settingsStore.activeSubjectSlug is a single global (per-device)
+ * persisted key — a slug picked under a DIFFERENT account, or under a
+ * DIFFERENT track, can otherwise leak into a track that doesn't have it (e.g.
+ * a leftover "specialite-gynecologie" slug silently rendering under
+ * "Concours d'entrée" for a brand-new user who never touched that track).
+ * containsSubjectSlug is what LevelsMap uses to detect and correct this.
+ */
+describe('containsSubjectSlug', () => {
+  test('undefined data -> false', () => {
+    expect(containsSubjectSlug(undefined, 'urologie')).toBe(false);
+  });
+
+  test('null slug -> false', () => {
+    expect(containsSubjectSlug([flatSubject({ slug: 'biologie' })], null)).toBe(false);
+  });
+
+  test('flat: slug present -> true', () => {
+    const data = [flatSubject({ slug: 'biologie' }), flatSubject({ slug: 'chimie' })];
+    expect(containsSubjectSlug(data, 'chimie')).toBe(true);
+  });
+
+  test('flat: slug absent (stale/foreign slug) -> false', () => {
+    const data = [flatSubject({ slug: 'biologie' }), flatSubject({ slug: 'chimie' })];
+    expect(containsSubjectSlug(data, 'specialite-gynecologie')).toBe(false);
+  });
+
+  test('tiered: slug present in a non-first semester -> true', () => {
+    expect(containsSubjectSlug(tieredResponse(), 'nephrologie')).toBe(true);
+  });
+
+  test('tiered: slug absent (e.g. a concours slug leaking into specialite) -> false', () => {
+    expect(containsSubjectSlug(tieredResponse(), 'biologie')).toBe(false);
   });
 });
