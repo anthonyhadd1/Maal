@@ -1,6 +1,9 @@
 """Quêtes v1 (PLAN décision 8) : PAS de moteur rotatif — un anneau d'objectif
 quotidien + 3 quêtes statiques calculées depuis les XpEvents / tentatives du
-jour Beyrouth courant. Titres FR dans un petit dictionnaire (i18n plus tard).
+jour Beyrouth courant. `title` reste en FR ici et sert de repli pour un
+`code` que le client ne reconnaîtrait pas encore — le mobile localise déjà
+les 3 codes connus via ses propres clés i18n (questTitleKey côté client),
+donc ce champ n'est plus la source de vérité pour l'affichage normal.
 """
 from django.db.models import Sum
 

@@ -11,7 +11,12 @@
   "quests": {
     "title": "Quêtes du jour",
     "done": "Terminée !",
-    "progress": "{{current}} / {{target}}"
+    "progress": "{{current}} / {{target}}",
+    "titles": {
+      "earn_xp": "Gagne {{target}} XP",
+      "complete_levels": "Termine {{target}} niveaux",
+      "review_session": "Fais une session de révision"
+    }
   },
   "streak": {
     "title": "Ta série",

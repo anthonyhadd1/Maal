@@ -2,6 +2,7 @@ import {
   dailyGoalMascotState,
   questFraction,
   questIconName,
+  questTitleKey,
 } from '@/features/quests/questLogic';
 
 describe('questFraction', () => {
@@ -31,6 +32,18 @@ describe('questIconName (the 3 static v1 quests — PLAN decision 8)', () => {
 
   test('unknown codes fall back to target', () => {
     expect(questIconName('mystery_quest')).toBe('target');
+  });
+});
+
+describe('questTitleKey (localizes the 3 known quests, not the server FR fallback)', () => {
+  test('known codes map to an i18n key', () => {
+    expect(questTitleKey('earn_xp')).toBe('quests.titles.earn_xp');
+    expect(questTitleKey('complete_levels')).toBe('quests.titles.complete_levels');
+    expect(questTitleKey('review_session')).toBe('quests.titles.review_session');
+  });
+
+  test('unrecognized codes return null (caller falls back to quest.title)', () => {
+    expect(questTitleKey('mystery_quest')).toBeNull();
   });
 });
 

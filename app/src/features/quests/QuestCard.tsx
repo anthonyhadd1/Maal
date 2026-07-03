@@ -14,7 +14,12 @@ import type { QuestItem } from '@/api/types';
 import { ClayCard } from '@/components/clay/ClayCard';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { ProgressBar } from '@/components/game/ProgressBar';
-import { isReviewQuest, questFraction, questIconName } from '@/features/quests/questLogic';
+import {
+  isReviewQuest,
+  questFraction,
+  questIconName,
+  questTitleKey,
+} from '@/features/quests/questLogic';
 import { shade } from '@/lib/color';
 import { formatNumber } from '@/lib/format';
 import { getLucideIcon } from '@/lib/lucide';
@@ -38,6 +43,8 @@ export function QuestCard({ quest }: QuestCardProps) {
   const Icon = getLucideIcon(questIconName(quest.code));
   const fraction = questFraction(quest.current, quest.target);
   const actionable = isReviewQuest(quest.code) && !quest.done;
+  const titleKey = questTitleKey(quest.code);
+  const title = titleKey ? t(titleKey, { target: quest.target }) : quest.title;
 
   // Celebrate pulse when `done` transitions false → true (skip at reduced motion).
   const scale = useSharedValue(1);
@@ -67,7 +74,7 @@ export function QuestCard({ quest }: QuestCardProps) {
       </View>
       <View style={styles.body}>
         <Text numberOfLines={2} style={styles.title}>
-          {quest.title}
+          {title}
         </Text>
         <ProgressBar
           accent={quest.done ? colors.success : colors.primary[500]}

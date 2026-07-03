@@ -26,6 +26,20 @@ export function isReviewQuest(code: string): boolean {
   return c.includes('review') || c.includes('revision');
 }
 
+const KNOWN_QUEST_CODES = ['earn_xp', 'complete_levels', 'review_session'];
+
+/**
+ * i18n key for a quest's title, or null for a code this build doesn't
+ * recognize. The server still sends a French `title` string (its docstring:
+ * "Titres FR dans un petit dictionnaire (i18n plus tard)") — that field is
+ * meant as a fallback for forward-compat with quest types not in
+ * KNOWN_QUEST_CODES yet, not the source of truth for known ones, or the
+ * quest card would stay in French regardless of the app's language setting.
+ */
+export function questTitleKey(code: string): string | null {
+  return KNOWN_QUEST_CODES.includes(code) ? `quests.titles.${code}` : null;
+}
+
 /** Mascot beside the daily ring: cheering once the goal is reached. */
 export function dailyGoalMascotState(fraction: number): MascotState {
   if (fraction >= 1) return 'celebrate';
