@@ -204,6 +204,12 @@ export interface StartAttemptResponse {
   questions: AttemptQuestion[];
 }
 
+/** GET /practice/mistakes/ — counter + truncated preview, never answers. */
+export interface PracticeMistakesPreview {
+  count: number;
+  questions: { id: number; subject: string; text: string }[];
+}
+
 /** POST /levels/{id}/attempts/ body — {"legendary": true} starts legendary mode. */
 export interface StartAttemptPayload {
   legendary?: boolean;
@@ -261,7 +267,11 @@ export interface XpBreakdown {
 export interface HeartsState {
   lost: number;
   remaining: number;
+  /** True during signup grace / premium — `remaining` doesn't apply. */
+  unlimited: boolean;
   next_heart_at: string | null;
+  /** True when this (practice) attempt earned a heart back (≥ threshold score). */
+  earned: boolean;
 }
 
 export interface StreakState {
@@ -293,8 +303,9 @@ export interface CompleteResponse {
   score_pct: number;
   correct_count: number;
   total_count: number;
-  stars: number;
-  passed: boolean;
+  /** null on challenge/practice attempts — no stars/pass-fail framing there. */
+  stars: number | null;
+  passed: boolean | null;
   xp: XpBreakdown;
   hearts: HeartsState;
   streak: StreakState;

@@ -29,9 +29,12 @@ export interface SessionAnswerRecord {
 
 interface SessionStateData {
   attemptId: number | null;
+  /** null for practice attempts (level=None server-side — no fixed level). */
   levelId: number | null;
   /** Non-null when this attempt was started from a friend challenge. */
   challengeId: number | null;
+  /** True for spaced-repetition mistake-review attempts (no stars/pass-fail). */
+  isPractice: boolean;
   /** True for legendary runs (≥9/10, explanations withheld, gold chrome). */
   legendary: boolean;
   questions: AttemptQuestion[];
@@ -58,12 +61,15 @@ interface SessionStateData {
 interface SessionStateActions {
   startSession: (payload: {
     attemptId: number;
-    levelId: number;
+    /** null for practice attempts (level=None server-side). */
+    levelId: number | null;
     questions: AttemptQuestion[];
     /** Friend-challenge attempts carry the challenge id (default null). */
     challengeId?: number | null;
     /** Legendary-mode attempts flag the whole session (default false). */
     legendary?: boolean;
+    /** Spaced-repetition mistake-review attempt (default false). */
+    isPractice?: boolean;
   }) => void;
   /** Records ONE server verdict. Ignores duplicates (no re-answer, no re-queue). */
   recordAnswer: (questionId: number, selected: number[], response: AnswerResponse) => void;
@@ -82,6 +88,7 @@ const INITIAL: Omit<SessionStateData, 'hasHydrated'> = {
   attemptId: null,
   levelId: null,
   challengeId: null,
+  isPractice: false,
   legendary: false,
   questions: [],
   currentIndex: 0,
@@ -102,12 +109,20 @@ export const useSessionStore = create<SessionState>()(
       ...INITIAL,
       hasHydrated: false,
 
-      startSession: ({ attemptId, levelId, questions, challengeId = null, legendary = false }) =>
+      startSession: ({
+        attemptId,
+        levelId,
+        questions,
+        challengeId = null,
+        legendary = false,
+        isPractice = false,
+      }) =>
         set({
           ...INITIAL,
           attemptId,
           levelId,
           challengeId,
+          isPractice,
           legendary,
           questions,
           startedAt: Date.now(),

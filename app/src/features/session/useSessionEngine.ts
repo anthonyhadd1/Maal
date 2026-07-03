@@ -6,6 +6,7 @@ import {
   useAbandonAttempt,
   useCompleteAttempt,
   useStartAttempt,
+  useStartPracticeAttempt,
   useSubmitAnswer,
 } from '@/api/queries/session';
 import type { AnswerResponse, StartAttemptResponse } from '@/api/types';
@@ -52,14 +53,23 @@ export interface SessionEngineOptions {
    * downstream (answers/complete) is identical.
    */
   challengeId?: number | null;
+  /**
+   * Start source: when true, the attempt is created via
+   * POST /practice/attempts/ (spaced-repetition mistake review) instead of
+   * the level start — `levelId` is ignored/null in this mode. Everything
+   * downstream (answers/complete) is identical; complete() returns
+   * stars/passed = null (no pass-fail framing for a review run).
+   */
+  practice?: boolean;
 }
 
 export function useSessionEngine(
-  levelId: number,
+  levelId: number | null,
   callbacks: SessionEngineCallbacks = {},
   options: SessionEngineOptions = {},
 ) {
   const challengeId = options.challengeId ?? null;
+  const practice = options.practice ?? false;
   const [phase, setPhase] = useState<SessionPhase>('loading');
   const [lastAnswer, setLastAnswer] = useState<AnswerResponse | null>(null);
   const [startError, setStartError] = useState<ApiErrorInfo | null>(null);
@@ -74,6 +84,7 @@ export function useSessionEngine(
 
   const startAttempt = useStartAttempt();
   const startChallengeAttempt = useStartChallengeAttempt();
+  const startPracticeAttempt = useStartPracticeAttempt();
   const submitAnswer = useSubmitAnswer(attemptId);
   const completeAttempt = useCompleteAttempt();
   const abandonAttempt = useAbandonAttempt();
@@ -125,6 +136,7 @@ export function useSessionEngine(
     const s = useSessionStore.getState();
     const matchesStore =
       s.status === 'inProgress' &&
+      s.isPractice === practice &&
       s.levelId === levelId &&
       s.attemptId != null &&
       s.challengeId === challengeId;
@@ -134,9 +146,10 @@ export function useSessionEngine(
     const onSuccess = (data: StartAttemptResponse) => {
       useSessionStore.getState().startSession({
         attemptId: data.attempt_id,
-        levelId,
+        levelId: practice ? null : levelId,
         questions: data.questions,
         challengeId,
+        isPractice: practice,
       });
       shownAtRef.current = Date.now();
       setPhase('question');
@@ -146,13 +159,15 @@ export function useSessionEngine(
       setStartError(info);
       setPhase('error');
     };
-    if (challengeId != null) {
+    if (practice) {
+      startPracticeAttempt.mutate(undefined, { onSuccess, onError });
+    } else if (challengeId != null) {
       startChallengeAttempt.mutate(challengeId, { onSuccess, onError });
     } else {
-      startAttempt.mutate(levelId, { onSuccess, onError });
+      startAttempt.mutate(levelId!, { onSuccess, onError });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [levelId, challengeId, enterFromStore]);
+  }, [levelId, challengeId, practice, enterFromStore]);
 
   const initialized = useRef(false);
   useEffect(() => {

@@ -78,7 +78,18 @@
   },
   "review": {
     "title": "Révision",
-    "subtitle": "Tes erreurs, transformées en points forts."
+    "subtitle": "Tes erreurs, transformées en points forts.",
+    "banner": "Révision",
+    "done": "Révision terminée !",
+    "doneSubtitle": "{{count}}/{{total}} bonnes réponses",
+    "start": "Commencer la révision",
+    "queueCount_one": "{{count}} question à revoir",
+    "queueCount_other": "{{count}} questions à revoir",
+    "emptyTitle": "Rien à réviser !",
+    "emptyMessage": "Dès que tu rates une question, elle atterrit ici — reviens plus tard.",
+    "emptyMidLaunch": "Ta file de révision vient de se vider.",
+    "premiumTitle": "Déjà fait aujourd'hui",
+    "premiumMessage": "Une session de révision gratuite par jour. Passe en Premium pour réviser sans limite."
   },
   "provenance": "Concours {{year}}",
   "provenanceFull": "Concours {{year}} · {{session}}",

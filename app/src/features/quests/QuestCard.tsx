@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { CheckCircle2 } from 'lucide-react-native';
 import { useEffect, useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -11,8 +12,9 @@ import { useTranslation } from 'react-i18next';
 
 import type { QuestItem } from '@/api/types';
 import { ClayCard } from '@/components/clay/ClayCard';
+import { PressableScale } from '@/components/layout/PressableScale';
 import { ProgressBar } from '@/components/game/ProgressBar';
-import { questFraction, questIconName } from '@/features/quests/questLogic';
+import { isReviewQuest, questFraction, questIconName } from '@/features/quests/questLogic';
 import { shade } from '@/lib/color';
 import { formatNumber } from '@/lib/format';
 import { getLucideIcon } from '@/lib/lucide';
@@ -25,13 +27,17 @@ interface QuestCardProps {
 
 /**
  * One of the 3 static daily quests: icon, title, progress bar,
- * checkmark + subtle celebrate pulse when it flips to done.
+ * checkmark + subtle celebrate pulse when it flips to done. The « fais une
+ * révision » quest is the one actionable quest — tapping it jumps straight
+ * into /practice, the others have no single screen to act on.
  */
 export function QuestCard({ quest }: QuestCardProps) {
   const { t } = useTranslation('quests');
+  const router = useRouter();
   const reduceMotion = useReducedMotionPref();
   const Icon = getLucideIcon(questIconName(quest.code));
   const fraction = questFraction(quest.current, quest.target);
+  const actionable = isReviewQuest(quest.code) && !quest.done;
 
   // Celebrate pulse when `done` transitions false → true (skip at reduced motion).
   const scale = useSharedValue(1);
@@ -50,43 +56,57 @@ export function QuestCard({ quest }: QuestCardProps) {
     transform: [{ scale: scale.value }],
   }));
 
+  const card = (
+    <ClayCard style={styles.card} testID={`quest-${quest.code}`}>
+      <View style={[styles.iconBubble, quest.done && styles.iconBubbleDone]}>
+        <Icon
+          color={quest.done ? colors.neutral[0] : colors.primary[600]}
+          size={22}
+          strokeWidth={2.2}
+        />
+      </View>
+      <View style={styles.body}>
+        <Text numberOfLines={2} style={styles.title}>
+          {quest.title}
+        </Text>
+        <ProgressBar
+          accent={quest.done ? colors.success : colors.primary[500]}
+          height={8}
+          progress={fraction}
+        />
+        <Text style={[styles.progressLabel, quest.done && styles.progressLabelDone]}>
+          {quest.done
+            ? t('quests.done')
+            : t('quests.progress', {
+                current: formatNumber(quest.current),
+                target: formatNumber(quest.target),
+              })}
+        </Text>
+      </View>
+      {quest.done ? (
+        <CheckCircle2
+          color={colors.neutral[0]}
+          fill={colors.xpGold}
+          size={28}
+          testID={`quest-${quest.code}-done`}
+        />
+      ) : null}
+    </ClayCard>
+  );
+
   return (
     <Animated.View style={animatedStyle}>
-      <ClayCard style={styles.card} testID={`quest-${quest.code}`}>
-        <View style={[styles.iconBubble, quest.done && styles.iconBubbleDone]}>
-          <Icon
-            color={quest.done ? colors.neutral[0] : colors.primary[600]}
-            size={22}
-            strokeWidth={2.2}
-          />
-        </View>
-        <View style={styles.body}>
-          <Text numberOfLines={2} style={styles.title}>
-            {quest.title}
-          </Text>
-          <ProgressBar
-            accent={quest.done ? colors.success : colors.primary[500]}
-            height={8}
-            progress={fraction}
-          />
-          <Text style={[styles.progressLabel, quest.done && styles.progressLabelDone]}>
-            {quest.done
-              ? t('quests.done')
-              : t('quests.progress', {
-                  current: formatNumber(quest.current),
-                  target: formatNumber(quest.target),
-                })}
-          </Text>
-        </View>
-        {quest.done ? (
-          <CheckCircle2
-            color={colors.neutral[0]}
-            fill={colors.xpGold}
-            size={28}
-            testID={`quest-${quest.code}-done`}
-          />
-        ) : null}
-      </ClayCard>
+      {actionable ? (
+        <PressableScale
+          accessibilityLabel={quest.title}
+          clay={false}
+          onPress={() => router.push('/practice')}
+        >
+          {card}
+        </PressableScale>
+      ) : (
+        card
+      )}
     </Animated.View>
   );
 }

@@ -16,8 +16,14 @@ export function questIconName(code: string): string {
   const c = code.toLowerCase();
   if (c.includes('xp')) return 'zap';
   if (c.includes('level')) return 'graduation-cap';
-  if (c.includes('review') || c.includes('revision')) return 'brain';
+  if (isReviewQuest(code)) return 'brain';
   return 'target';
+}
+
+/** The « fais une révision » quest is the one with a single screen to jump to. */
+export function isReviewQuest(code: string): boolean {
+  const c = code.toLowerCase();
+  return c.includes('review') || c.includes('revision');
 }
 
 /** Mascot beside the daily ring: cheering once the goal is reached. */

@@ -78,7 +78,18 @@
   },
   "review": {
     "title": "Review",
-    "subtitle": "Your mistakes, turned into strengths."
+    "subtitle": "Your mistakes, turned into strengths.",
+    "banner": "Review",
+    "done": "Review complete!",
+    "doneSubtitle": "{{count}}/{{total}} correct answers",
+    "start": "Start the review",
+    "queueCount_one": "{{count}} question to review",
+    "queueCount_other": "{{count}} questions to review",
+    "emptyTitle": "Nothing to review!",
+    "emptyMessage": "As soon as you miss a question, it lands here — check back later.",
+    "emptyMidLaunch": "Your review queue just emptied out.",
+    "premiumTitle": "Already done today",
+    "premiumMessage": "One free review session a day. Go Premium to review without limits."
   },
   "provenance": "Exam {{year}}",
   "provenanceFull": "Exam {{year}} · {{session}}",

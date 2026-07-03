@@ -65,6 +65,7 @@ export function ResultsScreen() {
       completedAt: s.completedAt,
       levelId: s.levelId,
       challengeId: s.challengeId,
+      isPractice: s.isPractice,
     };
   });
 
@@ -113,18 +114,40 @@ export function ResultsScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Practice's "révision-pour-gagner": a good-enough review run earns a
+  // heart back — surface it, it's otherwise invisible (no stars/pass-fail UI).
+  useEffect(() => {
+    if (snapshot.results?.hearts.earned) {
+      notifySuccess();
+      toast.show({ type: 'success', message: t('hearts.earned') });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const results = snapshot.results;
   if (!results) {
     // Direct navigation without a completed attempt.
     return <Redirect href="/" />;
   }
 
+  // Practice/challenge attempts carry stars=null/passed=null (no pass-fail
+  // framing server-side). Practice gets its own neutral, always-positive
+  // "review done" treatment; challenge keeps its existing behavior (the VS
+  // outcome is what actually matters there, via ChallengeResultBlock below).
+  const isPractice = snapshot.isPractice;
+
   const perfect = results.score_pct >= 100;
-  const title = perfect
-    ? t('results.perfect')
-    : results.passed
-      ? t('results.passed')
-      : t('results.failed');
+  const title = isPractice
+    ? t('review.done')
+    : perfect
+      ? t('results.perfect')
+      : results.passed
+        ? t('results.passed')
+        : t('results.failed');
+  // Practice is framed as inherently positive (mistakes reviewed = progress),
+  // never as a pass/fail outcome — drives mascot state, button variant and
+  // whether confetti fires.
+  const positive = isPractice ? true : Boolean(results.passed);
 
   const elapsed =
     snapshot.completedAt != null && snapshot.startedAt != null
@@ -183,43 +206,52 @@ export function ResultsScreen() {
     <Screen edges={['top', 'left', 'right', 'bottom']} scroll>
       {/* 1 — stars punch in (arc: side stars tilted, middle raised),
              wrapped by the reward scene: slow-turning light rays behind
-             the arc + a one-shot burst of clay particles drifting up. */}
-      <View style={styles.starsRow} testID="results-stars">
-        {results.passed ? (
-          <RadialRays durationMs={60000} opacity={0.2} size={340} style={styles.rays} />
-        ) : null}
-        {results.passed ? (
-          <ParticleBurst height={240} style={styles.particles} width={340} />
-        ) : null}
-        <View style={[styles.starSide, styles.starLeft]}>
-          <PunchStar
-            delay={0}
-            earned={results.stars >= 1}
-            reduceMotion={reduceMotion}
-            size={56}
-          />
+             the arc + a one-shot burst of clay particles drifting up.
+             Skipped for practice — stars/passed are null server-side, and a
+             review run isn't a pass-fail moment. */}
+      {!isPractice ? (
+        <View style={styles.starsRow} testID="results-stars">
+          {results.passed ? (
+            <RadialRays durationMs={60000} opacity={0.2} size={340} style={styles.rays} />
+          ) : null}
+          {results.passed ? (
+            <ParticleBurst height={240} style={styles.particles} width={340} />
+          ) : null}
+          <View style={[styles.starSide, styles.starLeft]}>
+            <PunchStar
+              delay={0}
+              earned={(results.stars ?? 0) >= 1}
+              reduceMotion={reduceMotion}
+              size={56}
+            />
+          </View>
+          <View style={styles.starCenter}>
+            <PunchStar
+              delay={STAR_STAGGER_MS}
+              earned={(results.stars ?? 0) >= 2}
+              reduceMotion={reduceMotion}
+              size={76}
+            />
+          </View>
+          <View style={[styles.starSide, styles.starRight]}>
+            <PunchStar
+              delay={STAR_STAGGER_MS * 2}
+              earned={(results.stars ?? 0) >= 3}
+              reduceMotion={reduceMotion}
+              size={56}
+            />
+          </View>
         </View>
-        <View style={styles.starCenter}>
-          <PunchStar
-            delay={STAR_STAGGER_MS}
-            earned={results.stars >= 2}
-            reduceMotion={reduceMotion}
-            size={76}
-          />
-        </View>
-        <View style={[styles.starSide, styles.starRight]}>
-          <PunchStar
-            delay={STAR_STAGGER_MS * 2}
-            earned={results.stars >= 3}
-            reduceMotion={reduceMotion}
-            size={56}
-          />
-        </View>
-      </View>
+      ) : null}
 
       <Text accessibilityRole="header" style={styles.title}>
         {title}
       </Text>
+      {isPractice ? (
+        <Text style={styles.subtitle}>
+          {t('review.doneSubtitle', { count: results.correct_count, total: results.total_count })}
+        </Text>
+      ) : null}
 
       {/* Challenge mode: VS outcome block (fetched fresh after completion). */}
       {snapshot.challengeId != null ? (
@@ -241,7 +273,7 @@ export function ResultsScreen() {
       {/* 3 — mascot on a small clay podium (+ confetti overlay below) */}
       {stage >= 2 ? (
         <View style={styles.mascotScene}>
-          <Mascot size={132} state={results.passed ? 'celebrate' : 'sad'} style={styles.mascotOnPodium} />
+          <Mascot size={132} state={positive ? 'celebrate' : 'sad'} style={styles.mascotOnPodium} />
           <PodiumDisc width={158} />
         </View>
       ) : null}
@@ -281,10 +313,13 @@ export function ResultsScreen() {
             size="l"
             testID="results-continue"
             title={tCommon('cta.continue')}
-            variant={results.passed ? 'success' : 'primary'}
+            variant={positive ? 'success' : 'primary'}
           />
-          {/* Replay would start a NORMAL level attempt — hidden in challenge mode. */}
-          {snapshot.challengeId == null ? (
+          {/* Replay would start a NORMAL level attempt at snapshot.levelId —
+              hidden in challenge mode (its own resolution flow) and practice
+              mode (no fixed levelId; a fresh révision pulls from the queue
+              via the map/quests entry point instead). */}
+          {snapshot.challengeId == null && snapshot.levelId != null ? (
             <ClayButton
               fullWidth
               loading={startAttempt.isPending}
@@ -534,6 +569,13 @@ const styles = StyleSheet.create({
     color: colors.neutral[900],
     textAlign: 'center',
     marginTop: spacing.m,
+    marginBottom: spacing.l,
+  },
+  subtitle: {
+    ...typography.body,
+    color: colors.neutral[500],
+    textAlign: 'center',
+    marginTop: -spacing.m,
     marginBottom: spacing.l,
   },
   xpPlaceholder: {

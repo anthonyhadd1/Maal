@@ -129,7 +129,7 @@ describe('sessionStore', () => {
       stars: 3,
       passed: true,
       xp: { base: 6, perfect_bonus: 10, first_clear_bonus: 10, total: 26 },
-      hearts: { lost: 0, remaining: 5, next_heart_at: null },
+      hearts: { lost: 0, remaining: 5, unlimited: false, next_heart_at: null, earned: false },
       streak: { current: 1, extended_today: true },
       unlocked_level_id: 8,
       achievements_unlocked: [],

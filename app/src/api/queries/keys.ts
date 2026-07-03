@@ -20,6 +20,7 @@ export const keys = {
   friendRequests: ['friends', 'requests'] as const,
   achievements: ['achievements'] as const,
   quests: ['quests'] as const,
+  practiceMistakes: ['practice', 'mistakes'] as const,
   stats: (subjectSlug?: string) => ['stats', subjectSlug ?? 'all'] as const,
   entitlement: ['entitlement'] as const,
   faculties: ['faculties'] as const,

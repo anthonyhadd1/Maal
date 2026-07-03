@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { Crown } from 'lucide-react-native';
+import { Brain, Crown } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -21,13 +21,16 @@ import { colors, getSubjectAccent, radii, spacing, typography } from '@/theme/to
 import { useSettingsStore } from '@/stores/settingsStore';
 
 interface SessionScreenProps {
-  levelId: number;
+  /** Omitted in practice mode — the attempt has no fixed level. */
+  levelId?: number;
   /** Friend-challenge mode: starts via POST /challenges/{id}/attempts/. */
   challengeId?: number;
+  /** Spaced-repetition mistake review: starts via POST /practice/attempts/. */
+  practice?: boolean;
 }
 
-/** MODAL /session/:levelId — the question loop (hero screen §4b). */
-export function SessionScreen({ levelId, challengeId }: SessionScreenProps) {
+/** MODAL /session/:levelId (or /session/practice) — the question loop (hero screen §4b). */
+export function SessionScreen({ levelId, challengeId, practice }: SessionScreenProps) {
   const { t } = useTranslation('session');
   const { t: tCommon } = useTranslation('common');
   const { t: tErrors } = useTranslation('errors');
@@ -38,14 +41,14 @@ export function SessionScreen({ levelId, challengeId }: SessionScreenProps) {
   const accent = getSubjectAccent(activeSlug ?? '');
 
   const engine = useSessionEngine(
-    levelId,
+    levelId ?? null,
     {
       onHeartsDepleted: () =>
         toast.show({ type: 'error', message: t('hearts.emptyMidSession') }),
       onRequestError: (info) =>
         toast.show({ type: 'error', message: info.detail ?? tErrors('server') }),
     },
-    { challengeId: challengeId ?? null },
+    { challengeId: challengeId ?? null, practice: practice ?? false },
   );
 
   const attemptId = useSessionStore((s) => s.attemptId);
@@ -73,6 +76,17 @@ export function SessionScreen({ levelId, challengeId }: SessionScreenProps) {
     ) {
       router.replace('/paywall');
     }
+  }, [engine.phase, engine.startError, router]);
+
+  // Practice queue emptied between the preview screen and launch (another
+  // device, or a race with the daily cap) — bounce back rather than show a
+  // bare error screen for a session that was never really available.
+  useEffect(() => {
+    if (engine.phase === 'error' && engine.startError?.code === 'nothing_to_review') {
+      toast.show({ type: 'error', message: t('review.emptyMidLaunch') });
+      router.back();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [engine.phase, engine.startError, router]);
 
   const question = engine.question;
@@ -134,6 +148,11 @@ export function SessionScreen({ levelId, challengeId }: SessionScreenProps) {
           <View accessibilityRole="text" style={styles.legendaryBanner} testID="legendary-banner">
             <Crown color={colors.neutral[900]} fill={colors.neutral[900]} size={14} />
             <Text style={styles.legendaryBannerText}>{t('legendary.banner')}</Text>
+          </View>
+        ) : practice ? (
+          <View accessibilityRole="text" style={styles.practiceBanner} testID="practice-banner">
+            <Brain color={colors.neutral[0]} size={14} />
+            <Text style={styles.practiceBannerText}>{t('review.banner')}</Text>
           </View>
         ) : null}
       </View>
@@ -243,6 +262,23 @@ const styles = StyleSheet.create({
   legendaryBannerText: {
     ...typography.caption,
     color: colors.neutral[900],
+    letterSpacing: 0.4,
+  },
+  practiceBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.xs,
+    alignSelf: 'center',
+    backgroundColor: colors.primary[500],
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    paddingVertical: 3,
+    marginTop: spacing.xs,
+  },
+  practiceBannerText: {
+    ...typography.caption,
+    color: colors.neutral[0],
     letterSpacing: 0.4,
   },
   counterChip: {

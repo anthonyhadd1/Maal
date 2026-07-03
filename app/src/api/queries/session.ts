@@ -9,6 +9,7 @@ import type {
   AnswerResponse,
   AttemptDetailResponse,
   CompleteResponse,
+  PracticeMistakesPreview,
   StartAttemptResponse,
 } from '@/api/types';
 import { useAuthStore } from '@/stores/authStore';
@@ -83,6 +84,25 @@ export function useCompleteAttempt() {
         queryClient.invalidateQueries({ queryKey: keys.mapRoot }),
       ]);
     },
+  });
+}
+
+/** GET /practice/mistakes/ — due-item counter + truncated preview (no answers). */
+export function usePracticeMistakes() {
+  const status = useAuthStore((s) => s.status);
+  return useQuery({
+    queryKey: keys.practiceMistakes,
+    queryFn: async () =>
+      (await api.get<PracticeMistakesPreview>(ENDPOINTS.practiceMistakes)).data,
+    enabled: status === 'authed',
+  });
+}
+
+/** POST /practice/attempts/ — same {attempt_id, questions[]} shape as a level start. */
+export function useStartPracticeAttempt() {
+  return useMutation({
+    mutationFn: async () =>
+      (await api.post<StartAttemptResponse>(ENDPOINTS.practiceAttempts, {})).data,
   });
 }
 

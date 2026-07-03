@@ -428,7 +428,7 @@ export function LevelsMap() {
         }}
         onGoReview={() => {
           setHeartsModalVisible(false);
-          router.push('/quests');
+          router.push('/practice');
         }}
         visible={heartsModalVisible}
       />
