@@ -1,0 +1,1622 @@
+{
+  "schema_version": "1.0",
+  "subjects": [
+    {
+      "slug": "specialite-anesthesie",
+      "name_fr": "Anesthésie",
+      "track": "specialite",
+      "program_year": { "name": "M1 - 4e année", "order": 1 },
+      "program_semester": { "name": "S2", "order": 2 },
+      "units": [
+        {
+          "order": 1,
+          "title_fr": "CM1 - Introduction à l'anesthésie et consultation pré-anesthésique",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Historique, types d'anesthésie et parcours du patient",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-real-1",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelle date est considérée comme la journée mondiale de l'anesthésie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "16 octobre 1846", "image": null },
+                    { "key": "B", "text": "10 décembre 1844", "image": null },
+                    { "key": "C", "text": "21 novembre 1846", "image": null },
+                    { "key": "D", "text": "7 avril 1853", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le 16 octobre 1846, William Morton a réalisé la première démonstration publique de l'anesthésie à l'éther à l'hôpital de Massachusetts (chirurgien John Warren, patient Gilbert Abbott). C'est pour cela que chaque 16 octobre est la journée mondiale de l'anesthésie.",
+                  "explanation_media": null,
+                  "tags": ["CM1", "historique"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-2",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Qui est considéré comme le premier anesthésiste ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Dr John Snow", "image": null },
+                    { "key": "B", "text": "William Morton", "image": null },
+                    { "key": "C", "text": "Horace Wells", "image": null },
+                    { "key": "D", "text": "Claude Bernard", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le Dr John Snow (né en 1813) est retenu comme le premier anesthésiste. Retiens qu'avant lui, c'étaient souvent les chirurgiens ou même leur chauffeur qui pratiquaient l'anesthésie.",
+                  "explanation_media": null,
+                  "tags": ["CM1", "historique"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-3",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Depuis quelle date la consultation d'anesthésie est-elle devenue obligatoire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "1994", "image": null },
+                    { "key": "B", "text": "1942", "image": null },
+                    { "key": "C", "text": "1959", "image": null },
+                    { "key": "D", "text": "1932", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "En 1994, la consultation d'anesthésie devient obligatoire : elle consiste à voir et évaluer le patient avant la chirurgie, au moins 48h avant un acte programmé.",
+                  "explanation_media": null,
+                  "tags": ["CM1", "consultation-anesthesie"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-4",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quels sont les deux grands types d'anesthésie générale selon la voie d'administration ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Intra-veineuse", "image": null },
+                    { "key": "B", "text": "Inhalatoire", "image": null },
+                    { "key": "C", "text": "Péri-médullaire", "image": null },
+                    { "key": "D", "text": "Bloc nerveux périphérique", "image": null }
+                  ],
+                  "correct": ["A", "B"],
+                  "explanation": "L'anesthésie générale peut être donnée par voie intra-veineuse ou inhalatoire (IV + inhalatoire = anesthésie balancée). Péri-médullaire et blocs nerveux relèvent de l'anesthésie loco-régionale.",
+                  "explanation_media": null,
+                  "tags": ["CM1", "types-anesthesie"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-5",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Concernant l'anesthésie locale assistée, laquelle de ces affirmations est correcte ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le chirurgien fait une anesthésie locale et l'anesthésiste sédate un peu le patient, qui respire tout seul et reste éveillé", "image": null },
+                    { "key": "B", "text": "Elle nécessite systématiquement une intubation trachéale", "image": null },
+                    { "key": "C", "text": "Elle est réservée aux chirurgies de plus de 3 heures", "image": null },
+                    { "key": "D", "text": "Elle supprime totalement la conscience du patient", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Dans l'anesthésie locale assistée, c'est le patient lui-même qui respire et il est réveillé ; le chirurgien fait l'anesthésie locale pendant que l'anesthésiste apporte une sédation légère. Elle convient aux interventions mineures de 10 à 15 minutes.",
+                  "explanation_media": null,
+                  "tags": ["CM1", "anesthesie-locale-assistee"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-6",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "En cas d'urgence chirurgicale vitale, un patient peut être admis directement au bloc opératoire sans passer par une visite pré-anesthésique.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Normalement, aucun patient ne rentre au bloc sans être vu par un anesthésiste. Mais si l'urgence est vitale (ex. accident du 4 août, catastrophe des pagers), le patient est admis directement au bloc sans visite pré-anesthésique : c'est vraiment exceptionnel.",
+                  "explanation_media": null,
+                  "tags": ["CM1", "parcours-patient"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-7",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Combien de temps un patient doit-il rester surveillé en salle de surveillance post-interventionnelle (SSPI) après le réveil, avant de rejoindre l'étage ou l'HDJ ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "1 à 2 heures", "image": null },
+                    { "key": "B", "text": "10 à 15 minutes", "image": null },
+                    { "key": "C", "text": "12 heures", "image": null },
+                    { "key": "D", "text": "24 heures", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Quand on réveille le patient, on ne l'envoie pas tout de suite à l'étage : il est obligatoirement surveillé 1 à 2 heures en SSPI, où l'on contrôle respiration, saturation, tension, saignement, douleur et nausées/vomissements.",
+                  "explanation_media": null,
+                  "tags": ["CM1", "SSPI", "parcours-patient"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-8",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel monitorage est obligatoire pour toute anesthésie, qu'elle soit générale ou loco-régionale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "ECG", "image": null },
+                    { "key": "B", "text": "Saturation périphérique SaO2", "image": null },
+                    { "key": "C", "text": "Pression artérielle (Dinamap)", "image": null },
+                    { "key": "D", "text": "Cathéter de Swan-Ganz", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Pour toute anesthésie (générale ou loco-régionale) on est obligé de mettre : ECG, saturation périphérique SaO2 et Dinamap pour la tension ; en plus, sous anesthésie générale, on surveille aussi les paramètres respiratoires et la capnographie. Le Swan-Ganz n'est utilisé que dans des situations spécifiques (insuffisance cardiaque, chirurgies majeures).",
+                  "explanation_media": null,
+                  "tags": ["CM1", "monitorage"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-9",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient présente un score de Lee ≥ 3. Que cela signifie-t-il ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Il a environ 11 % de risque de complications cardiovasculaires majeures péri-opératoires", "image": null },
+                    { "key": "B", "text": "Il a un risque de syndrome d'apnée du sommeil élevé", "image": null },
+                    { "key": "C", "text": "Il doit obligatoirement être opéré sous anesthésie générale", "image": null },
+                    { "key": "D", "text": "Il n'a aucun risque particulier", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le score de Lee estime le risque cardiaque périopératoire à partir de 6 facteurs cliniques (ATCD coronarien, insuffisance cardiaque, AVC/AIT, diabète insulino-requérant, insuffisance rénale, chirurgie à haut risque). Un score ≥3 correspond à 11% d'incidence de complications cardiovasculaires majeures, il faut alors prévenir le patient de ce risque.",
+                  "explanation_media": null,
+                  "tags": ["CM1", "risque-cardiaque", "score-de-Lee"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-10",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Selon les règles du jeûne préopératoire enseignées en cours, jusqu'à quand peut-on autoriser un liquide clair (thé ou café non sucré) avant l'heure prévue de la chirurgie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Jusqu'à 2h avant", "image": null },
+                    { "key": "B", "text": "Jusqu'à 6h avant", "image": null },
+                    { "key": "C", "text": "Jusqu'à 12h avant", "image": null },
+                    { "key": "D", "text": "Aucune restriction n'est nécessaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Pour les liquides clairs (thé, café non sucré, jus sans pulpe), le jeûne peut être limité à 2h avant l'heure prévue de la chirurgie. Pour les solides et liquides non clairs, il faut au moins 6h.",
+                  "explanation_media": null,
+                  "tags": ["CM1", "jeune-preoperatoire"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "title_fr": "CM2 - Anesthésie générale : principes, médicaments et complications",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Les 3 composantes et les agents hypnotiques",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-real-11",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelles sont les composantes qui définissent l'état d'anesthésie générale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'inconscience", "image": null },
+                    { "key": "B", "text": "L'analgésie", "image": null },
+                    { "key": "C", "text": "Le relâchement musculaire", "image": null },
+                    { "key": "D", "text": "L'augmentation du débit urinaire", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "L'anesthésie générale est un processus qui combine perte de conscience (hypnose), analgésie (les morphiniques) et relâchement musculaire (les curares), avec une atténuation des réflexes.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "definition-AG"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-12",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quels sont les deux hypnotiques préférés pour l'induction d'une anesthésie générale en neurochirurgie, du fait de leur effet de protection cérébrale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Étomidate et thiopental", "image": null },
+                    { "key": "B", "text": "Propofol et kétamine", "image": null },
+                    { "key": "C", "text": "Midazolam et propofol", "image": null },
+                    { "key": "D", "text": "Kétamine et thiopental", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "En neurochirurgie, les deux produits préférés sont l'étomidate et le thiopental : tous deux diminuent le métabolisme cérébral et procurent une protection cérébrale.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "hypnotiques", "thiopental", "etomidate"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-13",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quel hypnotique est surnommé le « Michael Jackson killer » et est également utilisé pour traiter les nausées-vomissements postopératoires ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le propofol", "image": null },
+                    { "key": "B", "text": "Le thiopental", "image": null },
+                    { "key": "C", "text": "L'étomidate", "image": null },
+                    { "key": "D", "text": "La kétamine", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le propofol, surnommé « Michael Jackson killer » car il en est mort après auto-injection sans surveillance, diminue les nausées et vomissements postopératoires et est même utilisé pour les traiter.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "propofol"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-14",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez un malade hémodynamiquement instable (par exemple un patient choqué), quel hypnotique d'induction est préféré car il garde une stabilité hémodynamique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'étomidate", "image": null },
+                    { "key": "B", "text": "Le propofol", "image": null },
+                    { "key": "C", "text": "Le thiopental", "image": null },
+                    { "key": "D", "text": "Le midazolam à haute dose", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'étomidate garde une stabilité hémodynamique et empêche l'hypotension et la bradycardie, c'est pourquoi il est indiqué chez un malade choqué ou en chirurgie cardiaque. Il ne doit pas être mis en perfusion continue car il risque une insuffisance cortico-surrénale.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "etomidate"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-15",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quels effets sont caractéristiques de la kétamine ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Augmente la fréquence cardiaque, la pression artérielle et le débit cardiaque", "image": null },
+                    { "key": "B", "text": "A des qualités analgésiques", "image": null },
+                    { "key": "C", "text": "Déprime peu la respiration, gardant une ventilation spontanée", "image": null },
+                    { "key": "D", "text": "Diminue systématiquement la pression artérielle", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "La kétamine augmente le tonus sympathique (fréquence cardiaque, pression artérielle, débit cardiaque), a des propriétés analgésiques et déprime peu la respiration, permettant de garder le malade en ventilation spontanée. Elle peut cependant donner des hallucinations et des cauchemars au réveil.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "ketamine"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-16",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel est l'avantage principal de la Dexmédétomidine (« DEX ») par rapport au midazolam en sédation ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Elle garde le patient calme mais réveillable, sans effet amnésiant", "image": null },
+                    { "key": "B", "text": "Elle est administrée en bolus uniquement", "image": null },
+                    { "key": "C", "text": "Elle a un effet amnésiant plus puissant", "image": null },
+                    { "key": "D", "text": "Elle provoque systématiquement une hypertension", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La Dexmédétomidine est un alpha-2 agoniste intéressant pour la sédation car elle garde un patient calme et réveillable, sans effet amnésiant contrairement au midazolam, et se donne toujours en perfusion continue.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "dexmedetomidine"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-17",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "La succinylcholine, seul curare dépolarisant, est particulièrement utile pour :",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'intubation trachéale d'un patient à risque d'inhalation du contenu gastrique, du fait de son début d'action très rapide (1 à 1,5 min)", "image": null },
+                    { "key": "B", "text": "L'analgésie post-opératoire de longue durée", "image": null },
+                    { "key": "C", "text": "La sédation prolongée en réanimation", "image": null },
+                    { "key": "D", "text": "La protection cérébrale en neurochirurgie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La succinylcholine agit très rapidement (1 à 1,5 min) et brièvement (5 à 10 min), ce qui la rend utile pour la curarisation rapide des cordes vocales lors d'une intubation chez un patient à risque d'inhalation du contenu gastrique (intubation en séquence rapide).",
+                  "explanation_media": null,
+                  "tags": ["CM2", "curares", "succinylcholine"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-18",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel médicament permet une antagonisation spécifique et rapide du rocuronium (curare non dépolarisant) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le Sugammadex", "image": null },
+                    { "key": "B", "text": "La néostigmine", "image": null },
+                    { "key": "C", "text": "L'atropine", "image": null },
+                    { "key": "D", "text": "Le dantrolène", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le rocuronium peut être spécifiquement antagonisé par le Sugammadex, avec un effet plus rapide et plus radical que la néostigmine, mais plus cher, donc non utilisé systématiquement.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "curares", "sugammadex"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-19",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quel est le premier signe clinique évocateur d'une hyperthermie maligne chez un patient sous anesthésie générale, curarisé, avec un volume courant et une fréquence respiratoire adéquats ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une augmentation brutale de la capnographie", "image": null },
+                    { "key": "B", "text": "Une bradycardie", "image": null },
+                    { "key": "C", "text": "Une hypotension", "image": null },
+                    { "key": "D", "text": "Un myosis", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Si la capnographie qui était normale (environ 30) monte brutalement à 35-40-43 alors que le volume courant et la fréquence sont corrects, il faut penser à une hyperthermie maligne débutante, favorisée par les gaz halogénés ou la succinylcholine. Le traitement est le Dantrolène.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "hyperthermie-maligne"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-20",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "L'anesthésie générale nécessite systématiquement une intubation trachéale avec aucun contact verbal possible, contrairement à une sédation profonde où une ventilation spontanée est préservée.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Anesthésie générale = anesthésie profonde + intubation trachéale, sans contact verbal possible ; sédation profonde = ventilation spontanée préservée, avec un contact verbal parfois possible selon le niveau, et sans curares car le patient n'est pas assez profond pour ne pas respirer.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "sedation-vs-AG"]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Opiacés, curares, halogénés et complications",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-real-21",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi la péthidine (Dolosal) a-t-elle été retirée de l'arsenal thérapeutique de plusieurs hôpitaux ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Elle a les mêmes effets secondaires que la morphine, avec un pouvoir addictif plus important et un effet tachycardisant", "image": null },
+                    { "key": "B", "text": "Elle n'a aucun effet analgésique", "image": null },
+                    { "key": "C", "text": "Elle ne peut être administrée que par voie orale", "image": null },
+                    { "key": "D", "text": "Elle est un opioïde faible sans risque de dépression respiratoire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "10 mg de morphine équivaut à 100 mg de péthidine ; les gens en donnaient facilement 100 mg pensant que c'était moins grave que la morphine, alors que c'est la même chose avec en plus un pouvoir addictif et un effet tachycardisant plus importants.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "opiaces", "pethidine"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-22",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Devant un patient trouvé confus, avec une fréquence respiratoire basse et un myosis, à quelle classe de médicaments faut-il toujours penser ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Aux morphiniques", "image": null },
+                    { "key": "B", "text": "Aux curares", "image": null },
+                    { "key": "C", "text": "Aux anti-inflammatoires", "image": null },
+                    { "key": "D", "text": "Aux anesthésiques locaux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Quand on voit un malade non réveillé avec une fréquence respiratoire basse et un myosis, il faut toujours penser aux morphiniques (le myosis oriente vers l'intoxication morphinique, alors qu'un drogué avec une mydriase n'est pas sous morphiniques).",
+                  "explanation_media": null,
+                  "tags": ["CM2", "opiaces", "myosis"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-23",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel gaz anesthésique par inhalation, aussi appelé « laughing gas », peut diffuser dans les espaces clos (tube digestif, oreille moyenne) et contribuer à la formation du trou dans la couche d'ozone ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le protoxyde d'azote (N2O)", "image": null },
+                    { "key": "B", "text": "Le sévoflurane", "image": null },
+                    { "key": "C", "text": "Le desflurane", "image": null },
+                    { "key": "D", "text": "L'isoflurane", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le protoxyde d'azote (N2O) a des propriétés analgésiques et sédatives, réduit les concentrations d'halogénés nécessaires, mais diffuse dans les espaces clos et participe à l'effet de serre, ce qui explique qu'on ne l'utilise plus systématiquement.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "halogenes", "protoxyde-azote"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-24",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelles sont des complications possibles de l'anesthésie générale décrites en cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Intubation difficile", "image": null },
+                    { "key": "B", "text": "Laryngospasme, surtout chez l'enfant", "image": null },
+                    { "key": "C", "text": "Hypothermie peropératoire, surtout chez le petit enfant et le sujet âgé", "image": null },
+                    { "key": "D", "text": "Une augmentation systématique de la fonction rénale", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Les complications possibles incluent l'intubation difficile, le laryngospasme (surtout chez l'enfant), le bronchospasme, l'hypoxémie, l'hypotension/hypertension, l'hypothermie peropératoire (fréquente chez le petit enfant et le sujet âgé), l'allergie/anaphylaxie et les arythmies.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "complications"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-25",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la fréquence rapportée des arrêts cardiaques liés à l'anesthésie dans le cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Entre 1,7 et 4,6 pour 10 000 anesthésies", "image": null },
+                    { "key": "B", "text": "1 pour 100 anesthésies", "image": null },
+                    { "key": "C", "text": "1 pour 1 000 000 anesthésies", "image": null },
+                    { "key": "D", "text": "1 pour 500 anesthésies", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le cours rapporte un décès pour moins de 1 pour 10 000 anesthésies et des arrêts cardiaques entre 1,7 et 4,6 pour 10 000 anesthésies (par hypoxie, infarctus, hémorragie), d'où la nécessité d'être vigilant et de prévenir les complications.",
+                  "explanation_media": null,
+                  "tags": ["CM2", "complications-majeures"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "title_fr": "CM - Monitorage de l'opéré",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "ECG, pression artérielle et saturation",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-real-26",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pour un ECG per-opératoire à 3 électrodes (le minimum), quelles dérivations utilise-t-on chez un patient coronarien avec 5 électrodes ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "DII et V5", "image": null },
+                    { "key": "B", "text": "V1 et V2 uniquement", "image": null },
+                    { "key": "C", "text": "aVr et aVl uniquement", "image": null },
+                    { "key": "D", "text": "DI et DIII uniquement", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Avec le câble à 5 électrodes, on choisit DII (rôle majeur pour analyser les troubles du rythme et détecter l'ischémie postérieure) et V5 (détection de l'ischémie antérolatérale, territoire de l'IVA). L'association DII + V5 détecte plus de 80% des épisodes ischémiques per-opératoires.",
+                  "explanation_media": null,
+                  "tags": ["CM-monitorage", "ECG"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-27",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Que signifie SpO2 et en quoi diffère-t-elle de la SaO2 ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "SpO2 est la saturation pulsée calculée au niveau des capillaires ; SaO2 est la saturation artérielle mesurée par gaz du sang", "image": null },
+                    { "key": "B", "text": "SpO2 et SaO2 sont exactement la même mesure", "image": null },
+                    { "key": "C", "text": "SpO2 mesure la fréquence cardiaque uniquement", "image": null },
+                    { "key": "D", "text": "SaO2 est mesurée par le saturomètre au doigt", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "SpO2 (saturation pulsée en oxygène) est mesurée par le saturomètre au niveau du lit capillaire par oxymétrie de pouls ; SaO2 est la saturation artérielle en oxygène, obtenue par un gaz du sang (GDS). SpO2 est mesurée, SaO2 est... mesurée directement par prélèvement artériel.",
+                  "explanation_media": null,
+                  "tags": ["CM-monitorage", "SpO2"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-28",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quels facteurs peuvent fausser la lecture de la SpO2 au bloc opératoire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le vernis à ongles", "image": null },
+                    { "key": "B", "text": "L'injection de bleu patenté ou d'indigo carmin (colorants)", "image": null },
+                    { "key": "C", "text": "Une vasoconstriction liée au froid", "image": null },
+                    { "key": "D", "text": "Une augmentation normale de la température corporelle", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Les limites de la SpO2 incluent la vasoconstriction/bas débit local (souvent lié au froid), les mouvements du patient, les néons/scialytiques, les arythmies, et les colorants (vernis à ongles, bleu de méthylène, indigo carmin, bleu patenté) qui donnent de fausses lectures basses (ex. 88-89%) alors que le GDS montre 100%.",
+                  "explanation_media": null,
+                  "tags": ["CM-monitorage", "SpO2", "limites"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-29",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Chez un malade sous anesthésie générale, si la courbe de capnographie baisse progressivement (sans disparaître) alors que le malade respire normalement avec le même volume courant, que faut-il évoquer en premier ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une baisse du débit cardiaque, signe plus précoce que l'hypotension", "image": null },
+                    { "key": "B", "text": "Une déconnexion des tubulures", "image": null },
+                    { "key": "C", "text": "Une intubation œsophagienne", "image": null },
+                    { "key": "D", "text": "Une anesthésie insuffisante", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Si la courbe persiste mais baisse, cela reflète une baisse du débit cardiaque (moins de sang qui passe dans les poumons pour épurer le CO2) : c'est un signe plus précoce que l'hypotension et la tachycardie en cas d'hémorragie. La disparition complète de la courbe, elle, évoque une déconnexion.",
+                  "explanation_media": null,
+                  "tags": ["CM-monitorage", "capnographie"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-30",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle artère ne doit-on jamais ponctionner pour un cathéter artériel, car elle est l'artère nourricière de la main ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'artère cubitale", "image": null },
+                    { "key": "B", "text": "L'artère radiale", "image": null },
+                    { "key": "C", "text": "L'artère fémorale", "image": null },
+                    { "key": "D", "text": "L'artère humérale", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'artère cubitale n'est jamais piquée car elle est l'artère nourricière de la main : une thrombose ou un spasme entraînerait une ischémie de la main. L'artère fémorale, de calibre plus important, tolère mieux une petite thrombose.",
+                  "explanation_media": null,
+                  "tags": ["CM-monitorage", "PA-invasive"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-31",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la diurèse normale attendue chez un adulte ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "0,5 à 1 mL/kg/h", "image": null },
+                    { "key": "B", "text": "5 à 10 mL/kg/h", "image": null },
+                    { "key": "C", "text": "0,1 mL/kg/h", "image": null },
+                    { "key": "D", "text": "2 à 3 mL/kg/h", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La diurèse normale chez l'adulte est de 0,5 à 1 mL/kg/h (donc un adulte de 80 kg produit 40 à 80 cc/h). Une diurèse inférieure définit une oligurie, signe de dysfonction rénale intrinsèque ou de perfusion rénale inadéquate (hypotension, hypovolémie, bas débit cardiaque).",
+                  "explanation_media": null,
+                  "tags": ["CM-monitorage", "diurese"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-32",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Le monitorage de la curarisation par le « train de quatre » (TOF) sert notamment à :",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Indiquer le bon moment pour la réversion pharmacologique des curares", "image": null },
+                    { "key": "B", "text": "Mesurer la pression artérielle moyenne", "image": null },
+                    { "key": "C", "text": "Détecter une ischémie myocardique", "image": null },
+                    { "key": "D", "text": "Mesurer la profondeur de l'anesthésie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le TOF (Train Of Four) est utile pour l'intubation trachéale, pour adapter la curarisation aux contraintes chirurgicales et pour indiquer la réversion pharmacologique : un malade complètement curarisé (0 réponse sur 4) ne peut pas être décurarisé tout de suite, il faut attendre au moins 1 réponse au TOF.",
+                  "explanation_media": null,
+                  "tags": ["CM-monitorage", "curarisation", "TOF"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-33",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle valeur de l'indice bispectral (BIS) correspond à un malade sous anesthésie générale qui dort correctement ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Entre 40 et 60", "image": null },
+                    { "key": "B", "text": "100", "image": null },
+                    { "key": "C", "text": "0", "image": null },
+                    { "key": "D", "text": "Entre 80 et 100", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Un malade qui dort correctement sous anesthésie générale doit avoir un BIS entre 40 et 60. Un malade réveillé a un BIS proche de 100 ; un ECG presque plat (silence électrique cortical) correspond à 0.",
+                  "explanation_media": null,
+                  "tags": ["CM-monitorage", "BIS"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "title_fr": "CM - Produits de remplissage vasculaire",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Cristalloïdes, colloïdes et sérums hypertoniques",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-real-34",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quels sont les deux grands facteurs qui déterminent le pouvoir d'expansion volémique d'un produit de remplissage ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La tonicité (teneur en sodium) et le pouvoir oncotique (teneur en protéines)", "image": null },
+                    { "key": "B", "text": "La couleur du produit et sa température", "image": null },
+                    { "key": "C", "text": "Le pH uniquement", "image": null },
+                    { "key": "D", "text": "La teneur en glucose uniquement", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Plus un produit est riche en sel, plus son pouvoir d'expansion volémique et sa durée d'action sont importants (tonicité). Le pouvoir oncotique, lié à la teneur en protéines (colloïdes), retient aussi l'eau dans les vaisseaux.",
+                  "explanation_media": null,
+                  "tags": ["CM-remplissage", "cristalloides"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-35",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Combien de fois le volume perdu doit-on administrer en sérum isotonique pour compenser une perte sanguine ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "3 à 5 fois le volume perdu", "image": null },
+                    { "key": "B", "text": "Exactement le même volume perdu", "image": null },
+                    { "key": "C", "text": "10 fois le volume perdu", "image": null },
+                    { "key": "D", "text": "La moitié du volume perdu", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Pour un sérum isotonique, il faut administrer 3 à 5 fois le volume perdu pour compenser une perte sanguine (ex. si le patient perd 500 mL de sang). C'est différent pour le sérum hypertonique (environ 200 mL pour 500 mL perdus) et pour les colloïdes (quasi volume pour volume).",
+                  "explanation_media": null,
+                  "tags": ["CM-remplissage", "cristalloides-isotoniques"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-36",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la principale contre-indication du lactate ringer, décrite en cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le trauma crânien (car légèrement hypotonique, risque d'œdème cérébral)", "image": null },
+                    { "key": "B", "text": "L'insuffisance rénale légère", "image": null },
+                    { "key": "C", "text": "Le choc hémorragique", "image": null },
+                    { "key": "D", "text": "L'obésité modérée", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le lactate ringer, un peu plus hypotonique que le sérum salé, est contre-indiqué dans les traumas crâniens : tout ce qui est hypotonique rentre dans les cellules et peut former des œdèmes cérébraux. Il est aussi contre-indiqué dans les traumas rachidiens, l'insuffisance hépatique et l'insuffisance rénale terminale.",
+                  "explanation_media": null,
+                  "tags": ["CM-remplissage", "lactate-ringer"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-37",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi le lactate ringer ne provoque-t-il pas d'acidose hyperchlorémique, contrairement au sérum salé isotonique à 0,9% ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le lactate se transforme par le cycle de Krebs en bicarbonate", "image": null },
+                    { "key": "B", "text": "Il ne contient aucun électrolyte", "image": null },
+                    { "key": "C", "text": "Il est totalement hypertonique", "image": null },
+                    { "key": "D", "text": "Il contient du glucose", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le lactate ringer contient du lactate qui se transforme via le cycle de Krebs en bicarbonate, donnant un pH neutre voire légèrement alcalin. Le sérum salé isotonique, riche uniquement en NaCl, risque une acidose hyperchlorémique à trou anionique normal.",
+                  "explanation_media": null,
+                  "tags": ["CM-remplissage", "lactate-ringer", "acidose"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-38",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "On ne peut pas redonner du sérum salé hypertonique une deuxième fois dans la même journée, car il peut provoquer une déshydratation intracellulaire et une natrémie très élevée.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le sérum salé hypertonique peut donner une déshydratation intracellulaire et une natrémie très élevée : une fois donné dans la journée, on ne peut pas le redonner. Le monitorage se fait par dosage de la natrémie.",
+                  "explanation_media": null,
+                  "tags": ["CM-remplissage", "serum-hypertonique"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-39",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quels sont des avantages des cristalloïdes par rapport aux colloïdes ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Peu chers", "image": null },
+                    { "key": "B", "text": "Aucun risque allergique", "image": null },
+                    { "key": "C", "text": "N'interfèrent pas avec la coagulation en usage normal", "image": null },
+                    { "key": "D", "text": "N'ont jamais de posologie maximale, quel que soit le type", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Les cristalloïdes sont peu chers, sans risque allergique, sans effet secondaire rénal spécifique et n'interfèrent pas avec la coagulation, sauf en cas de remplissage massif entraînant une coagulopathie dilutionnelle. Les cristalloïdes isotoniques n'ont pas de posologie maximale, mais les hypertoniques sont limités à 250 mL/jour.",
+                  "explanation_media": null,
+                  "tags": ["CM-remplissage", "cristalloides", "avantages"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-40",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Parmi les colloïdes artificiels, lequel a une prédominance d'effets allergiques par histaminolibération non spécifique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La gélatine", "image": null },
+                    { "key": "B", "text": "Le dextran", "image": null },
+                    { "key": "C", "text": "L'hydroxyéthylamidon", "image": null },
+                    { "key": "D", "text": "L'albumine à 4%", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La gélatine a une prédominance d'effets anaphylactoïdes (0,345%, soit 6 fois plus que l'HEA et l'albumine) par histaminolibération non spécifique ; le dextran a une prédominance d'insulte rénale et de coagulopathie de Von Willebrand, et les HEA de coagulopathie de Von Willebrand.",
+                  "explanation_media": null,
+                  "tags": ["CM-remplissage", "colloides", "gelatine"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-41",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi ne peut-on pas commencer un remplissage par colloïdes chez un patient en choc hémorragique avant de connaître son groupe sanguin ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Les colloïdes peuvent perturber le groupage sanguin, contrairement au sérum salé", "image": null },
+                    { "key": "B", "text": "Les colloïdes sont toujours contre-indiqués en urgence", "image": null },
+                    { "key": "C", "text": "Les colloïdes provoquent systématiquement une hyperkaliémie", "image": null },
+                    { "key": "D", "text": "Les colloïdes doivent être réchauffés au préalable", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le cours souligne que les colloïdes peuvent perturber le groupage sanguin (erreur d'appréciation du facteur Rhésus), alors qu'un sérum salé peut être débuté directement sans attendre le groupage en cas de choc hémorragique.",
+                  "explanation_media": null,
+                  "tags": ["CM-remplissage", "colloides", "groupage"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "title_fr": "CM5 - Surveillance post-interventionnelle et complications post-opératoires",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "SSPI et complications respiratoires, cardiaques et générales",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-real-42",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Que signifie SSPI, terme préféré à « salle de réveil » ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Salle de surveillance post-interventionnelle", "image": null },
+                    { "key": "B", "text": "Salle de soins post-immédiats", "image": null },
+                    { "key": "C", "text": "Service de surveillance péri-interventionnelle", "image": null },
+                    { "key": "D", "text": "Salle de soins post-infectieux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le terme adéquat est « salle de surveillance post-interventionnelle » (SSPI), car le but n'est pas seulement de réveiller le malade mais aussi d'évaluer les complications qui peuvent survenir après l'intervention.",
+                  "explanation_media": null,
+                  "tags": ["CM5", "SSPI"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-43",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "La période de réveil est une phase critique au cours de laquelle survient près de la moitié des accidents imputables à l'anesthésie.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le cours insiste : la période de réveil est la phase la plus critique car c'est là que surviennent près de la moitié des accidents liés à l'anesthésie, en raison des effets résiduels de l'anesthésie, des conséquences de l'acte pratiqué et du terrain (ASA) du patient.",
+                  "explanation_media": null,
+                  "tags": ["CM5", "reveil"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-44",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelle est la complication respiratoire post-opératoire la plus fréquente ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'obstruction des voies aériennes par hypotonie de la musculature oropharyngée", "image": null },
+                    { "key": "B", "text": "L'inhalation du contenu gastrique", "image": null },
+                    { "key": "C", "text": "L'œdème pulmonaire", "image": null },
+                    { "key": "D", "text": "Le bronchospasme", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'obstruction des voies aériennes est la complication respiratoire postopératoire la plus fréquente, liée à l'hypotonie de la musculature oropharyngée et à la dépression des mécanorécepteurs. Elle se traite par canule de Guedel, hyperextension de la tête, antagonistes des curares ou des morphiniques, voire réintubation.",
+                  "explanation_media": null,
+                  "tags": ["CM5", "obstruction-VAS"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-45",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient en post-opératoire a une respiration ample et lente, inférieure à 8/min. À quelle cause de dépression respiratoire cela oriente-t-il ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une dépression respiratoire due aux morphiniques", "image": null },
+                    { "key": "B", "text": "Une curarisation résiduelle", "image": null },
+                    { "key": "C", "text": "Un pneumothorax", "image": null },
+                    { "key": "D", "text": "Une intubation sélective", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Un malade avec une respiration ample et lente (moins de 8/min) évoque une dépression respiratoire due aux morphiniques, à différencier cliniquement de la curarisation résiduelle (Prostigmine) ou des morphiniques (Naloxone).",
+                  "explanation_media": null,
+                  "tags": ["CM5", "depression-respiratoire"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-46",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient qui reste hypotherme après une anesthésie (température < 34-35°C) chez un sujet âgé coronarien : quelle est la conduite adaptée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Ne pas le réveiller, le garder intubé et endormi, et le réchauffer avant de l'extuber", "image": null },
+                    { "key": "B", "text": "Le réveiller immédiatement pour limiter la sédation", "image": null },
+                    { "key": "C", "text": "Lui donner de l'atropine pour prévenir la bradycardie", "image": null },
+                    { "key": "D", "text": "Augmenter les doses de curares", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Chez les sujets âgés et coronariens hypothermes, il ne faut pas les réveiller s'ils sont en hypothermie : on les garde intubés et endormis en SSPI, et on les réchauffe avant de les extuber et de les réveiller, car les frissons du réveil augmentent de 400% la consommation d'O2 du myocarde (risque d'infarctus).",
+                  "explanation_media": null,
+                  "tags": ["CM5", "hypothermie", "frissons"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-47",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez un patient qui présente une hypotension artérielle en SSPI par hypovolémie relative (effet vasoplégiant résiduel), quel traitement est indiqué ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Des vasoconstricteurs", "image": null },
+                    { "key": "B", "text": "Un remplissage vasculaire massif uniquement", "image": null },
+                    { "key": "C", "text": "De l'atropine", "image": null },
+                    { "key": "D", "text": "Des diurétiques", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Si l'hypovolémie est absolue (pertes sanguines/insensibles), on traite par remplissage ; si elle est relative (effet vasoplégiant résiduel des anesthésiants), on traite par vasoconstricteurs, utiles dans environ 20% des cas.",
+                  "explanation_media": null,
+                  "tags": ["CM5", "hypotension-SSPI"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-48",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quels sont des facteurs de risque de nausées et vomissements post-opératoires (NVPO) cités en cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Jeune âge", "image": null },
+                    { "key": "B", "text": "Femme en période d'activité génitale", "image": null },
+                    { "key": "C", "text": "Antécédent de mal des transports", "image": null },
+                    { "key": "D", "text": "Tabagisme actif", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Les facteurs de risque de NVPO sont : le jeune âge, la femme en période d'activité génitale, le sujet anxieux en préopératoire, l'antécédent de mal des transports et l'absence de tabagisme (le tabagisme diminue le risque de NVPO).",
+                  "explanation_media": null,
+                  "tags": ["CM5", "NVPO"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-49",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Pourquoi une rachianesthésie peut-elle provoquer une rétention urinaire, alors qu'elle bloque le système sympathique dont l'action devrait plutôt favoriser cette rétention ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Elle bloque aussi le parasympathique sacré, dont le blocage entraîne la rétention urinaire", "image": null },
+                    { "key": "B", "text": "Elle stimule directement la vessie", "image": null },
+                    { "key": "C", "text": "Elle provoque toujours une hyperkaliémie", "image": null },
+                    { "key": "D", "text": "Elle n'a aucun lien avec la rétention urinaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'anesthésie rachidienne bloque le système parasympathique sacré (souvent oublié, distinct du nerf vague), dont le blocage entraîne la rétention urinaire — et non le blocage sympathique lui-même, qui donne plutôt hypotension et bradycardie.",
+                  "explanation_media": null,
+                  "tags": ["CM5", "retention-urinaire", "rachianesthesie"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-50",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel score, avec une valeur ≥ 9, autorise la sortie de la SSPI après le réveil immédiat ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le score d'Aldrete modifié", "image": null },
+                    { "key": "B", "text": "Le score de Lee", "image": null },
+                    { "key": "C", "text": "Le score de Bromage", "image": null },
+                    { "key": "D", "text": "Le score de Cormack-Lehane", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le score d'Aldrete modifié évalue activité motrice, respiration, activité circulatoire, conscience et SpO2. Une valeur ≥ 9 autorise la sortie de la SSPI, mais ce score ne tient pas compte de la douleur, des nausées ou des vomissements.",
+                  "explanation_media": null,
+                  "tags": ["CM5", "score-Aldrete"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "title_fr": "ED1 - Anesthésie locorégionale (ALR)",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Rachianesthésie et péridurale : anatomie et technique",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-real-51",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "À l'âge adulte, jusqu'où descend la moelle épinière, et pourquoi doit-on piquer en dessous de ce niveau pour une rachianesthésie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Jusqu'à L1-L2, car le rachis et la dure-mère grandissent plus vite que la moelle épinière", "image": null },
+                    { "key": "B", "text": "Jusqu'à S1, car la moelle grandit plus vite que le rachis", "image": null },
+                    { "key": "C", "text": "Jusqu'à D10 uniquement", "image": null },
+                    { "key": "D", "text": "Jusqu'au sacrum", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "À l'âge adulte, la moelle épinière se termine à L1-L2 car le rachis et la dure-mère grandissent plus vite que la moelle. Pour être safe en rachianesthésie, on doit donc piquer au-dessous de L2 (en dessous du cône terminal).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "anatomie-rachis"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-52",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la principale différence anatomique entre rachianesthésie et péridurale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La rachianesthésie injecte le produit directement dans le LCR après avoir dépassé la dure-mère, alors que la péridurale injecte dans l'espace péridural sans dépasser la dure-mère", "image": null },
+                    { "key": "B", "text": "La péridurale se pratique uniquement au niveau cervical", "image": null },
+                    { "key": "C", "text": "La rachianesthésie se pratique à n'importe quel niveau du rachis", "image": null },
+                    { "key": "D", "text": "Les deux techniques injectent dans le même espace", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La rachianesthésie dépasse la dure-mère et injecte dans le LCR (espace sous-arachnoïdien), alors que la péridurale dépasse le ligament jaune sans dépasser la dure-mère et injecte dans l'espace péridural (repérage par mandrin liquide/gazeux, perte de résistance).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "rachianesthesie-vs-peridurale"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-53",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi la dose d'anesthésique local nécessaire pour une péridurale est-elle environ 10 fois supérieure à celle d'une rachianesthésie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Car il faut traverser la dure-mère, une barrière importante à franchir, alors qu'en rachianesthésie le produit est en contact direct avec la moelle", "image": null },
+                    { "key": "B", "text": "Car la péridurale est toxique par nature", "image": null },
+                    { "key": "C", "text": "Car la péridurale nécessite un métabolisme hépatique du produit", "image": null },
+                    { "key": "D", "text": "Car les aiguilles de péridurale sont plus fines", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "En péridurale, il faut traverser la dure-mère pour atteindre les récepteurs à bloquer, ce qui nécessite beaucoup plus de produit (environ 10 fois la dose). En rachianesthésie, le contact direct avec le LCR/la moelle rend la dose plus faible et l'action plus rapide et plus complète.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "dosage-AL"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-54",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quel est l'ordre correct d'installation du bloc lors d'une anesthésie péri-médullaire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Bloc sympathique, puis sensitif, puis moteur", "image": null },
+                    { "key": "B", "text": "Bloc moteur, puis sensitif, puis sympathique", "image": null },
+                    { "key": "C", "text": "Tous les blocs s'installent simultanément", "image": null },
+                    { "key": "D", "text": "Bloc sensitif, puis moteur, puis sympathique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le bloc sympathique s'installe en premier (et se lève en dernier), suivi du bloc sensitif, puis du bloc moteur en dernier. La régression se fait en sens inverse. C'est ce qu'on appelle le bloc décrémentiel.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "progression-bloc"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-55",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Pourquoi doit-on surveiller particulièrement le niveau du bloc sympathique par rapport à D4 lors d'une rachianesthésie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Car D4 est le niveau sensitif du cœur : si le bloc sympathique dépasse D4, il y a un risque de bradycardie sévère en plus de l'hypotension", "image": null },
+                    { "key": "B", "text": "Car D4 correspond au niveau moteur des membres inférieurs", "image": null },
+                    { "key": "C", "text": "Car au-delà de D4 il n'y a plus aucun risque hémodynamique", "image": null },
+                    { "key": "D", "text": "Car D4 est le niveau où l'on insère systématiquement l'aiguille", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "D4 est le niveau sensitif du cœur. Le bloc sympathique dépasse de 3 à 4 métamères le bloc sensitif en rachianesthésie. Si le bloc sympathique dépasse D4, il y a sympatholyse cardiaque et prédominance parasympathique : risque de bradycardie en plus de l'hypotension.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "bloc-sympathique", "D4"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-56",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel est le traitement de première intention de l'hypotension par bloc sympathique lors d'une rachianesthésie, sachant que le remplissage/Trendelenburg n'a pas prouvé d'efficacité clinique suffisante ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une drogue vasoconstrictrice comme l'éphédrine ou la phényléphrine", "image": null },
+                    { "key": "B", "text": "L'atropine systématique", "image": null },
+                    { "key": "C", "text": "Un remplissage massif uniquement", "image": null },
+                    { "key": "D", "text": "L'arrêt immédiat de l'anesthésie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le remplissage et le Trendelenburg sont faisables mais n'ont pas prouvé d'efficacité clinique suffisante : l'hypotension doit être corrigée par une drogue vasoactive, comme l'éphédrine (sympathomimétique indirect) ou la phényléphrine (effet alpha pur, avec un risque de bradycardie réflexe si dose trop élevée).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "hypotension", "vasopresseurs"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-57",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel est l'avantage principal de la Ropivacaïne pour l'analgésie post-opératoire, grâce à son « bloc différentiel » ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Elle peut bloquer les fibres sensitives sans bloquer le moteur, en diminuant la concentration", "image": null },
+                    { "key": "B", "text": "Elle bloque uniquement les fibres motrices", "image": null },
+                    { "key": "C", "text": "Elle a le même délai d'action que la lidocaïne", "image": null },
+                    { "key": "D", "text": "Elle est toujours plus toxique que la bupivacaïne", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La Ropivacaïne, moins lipophile, agit préférentiellement sur les fibres sensitives : à faible concentration, elle procure un bloc sensitif sans bloc moteur, ce qui permet par exemple à une parturiente de continuer à pousser lors d'un accouchement.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "ropivacaine", "bloc-differentiel"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-58",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel est le risque d'échec approximatif d'une anesthésie loco-régionale, quel que soit son type (rachianesthésie, péridurale, ALR périphérique), justifiant de toujours préparer le patient comme pour une anesthésie générale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Environ 20%", "image": null },
+                    { "key": "B", "text": "Moins de 1%", "image": null },
+                    { "key": "C", "text": "Environ 50%", "image": null },
+                    { "key": "D", "text": "0%", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Quel que soit le type d'ALR, le risque d'échec global est d'environ 20%, d'où la nécessité d'avoir toujours un plan B pour une anesthésie générale. La rachianesthésie seule est la technique la plus fiable, avec un taux d'échec inférieur à 1%.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "risque-echec-ALR"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-59",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pour une chirurgie de prothèse totale de genou (PTG), on préfère bloquer le nerf fémoral plutôt que le nerf sciatique en analgésie complémentaire, car cela permet au patient de garder une meilleure fonction motrice pour marcher.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Dans le cas d'une PTG, on préfère le nerf fémoral (innervation cutanée, musculaire et osseuse prédominante en antérieur), et on peut même le faire un peu plus bas en épargnant les racines du quadriceps, pour que le patient puisse plier les jambes et marcher pour sa kinésithérapie.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "bloc-femoral", "PTG"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-60",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "L'anesthésie péridurale est utilisable, entre autres, pour l'analgésie de laquelle de ces chirurgies ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La chirurgie thoracique (thoracotomie)", "image": null },
+                    { "key": "B", "text": "La chirurgie cardiaque à cœur ouvert", "image": null },
+                    { "key": "C", "text": "Toute chirurgie sans exception", "image": null },
+                    { "key": "D", "text": "Uniquement la chirurgie ophtalmologique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La péridurale est utilisable en chirurgie thoracique (thoracotomie), abdominale haute (œsophagectomie, gastrectomie, pancréatectomie) et basse, et en chirurgie des membres inférieurs. Elle n'est pas utilisée en chirurgie cardiaque.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "peridurale-indications"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 7,
+          "title_fr": "ED2 - Prise en charge de la douleur post-opératoire (DPO)",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Physiopathologie, retentissement et paliers analgésiques",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-real-61",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Combien de temps la douleur post-opératoire (DPO) doit-elle persister, au maximum, pour être considérée comme normale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "48 à 72 heures", "image": null },
+                    { "key": "B", "text": "1 semaine", "image": null },
+                    { "key": "C", "text": "24 heures", "image": null },
+                    { "key": "D", "text": "10 jours", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La DPO est transitoire et ne doit pas persister au-delà de 48 à 72 heures. Au-delà, ou si son caractère change (nouvelle localisation, intensité différente), il faut suspecter une complication.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "definition-DPO"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-62",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient opéré d'une chirurgie abdominale se plaint initialement d'une douleur au ventre, puis développe une douleur au mollet. Que faut-il suspecter ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une phlébite", "image": null },
+                    { "key": "B", "text": "Une simple évolution normale de la DPO", "image": null },
+                    { "key": "C", "text": "Une constipation liée aux morphiniques", "image": null },
+                    { "key": "D", "text": "Une hypoglycémie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le changement de localisation de la douleur (nouveau site) doit être considéré comme un signal d'alarme : ici, une douleur au mollet après chirurgie abdominale évoque une phlébite, qui peut évoluer vers une embolie pulmonaire.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "signal-alarme", "phlebite"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-63",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelles sont des répercussions de la douleur post-opératoire non traitée sur le plan cardiovasculaire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Tachycardie", "image": null },
+                    { "key": "B", "text": "Hypertension artérielle", "image": null },
+                    { "key": "C", "text": "Risque d'infarctus du myocarde", "image": null },
+                    { "key": "D", "text": "Bradycardie systématique", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Le stress chirurgical (libération excessive de catécholamines) donne tachycardie, hypertension et risque d'infarctus, avec un risque accru chez un patient coronarien (augmentation de la consommation d'oxygène myocardique).",
+                  "explanation_media": null,
+                  "tags": ["ED2", "retentissement-cardiovasculaire"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-64",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi la spirométrie incitative en post-opératoire nécessite-t-elle une bonne analgésie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Car un patient qui a mal ne peut pas réaliser correctement la spirométrie ni bien tousser, ce qui favorise l'atélectasie et l'encombrement pulmonaire", "image": null },
+                    { "key": "B", "text": "Car la spirométrie augmente la douleur abdominale", "image": null },
+                    { "key": "C", "text": "Car la spirométrie nécessite une anesthésie générale", "image": null },
+                    { "key": "D", "text": "Il n'y a aucun lien entre douleur et spirométrie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Pour que le patient réalise correctement la spirométrie (qui favorise la ventilation et évite l'atélectasie) et puisse tousser efficacement, il ne doit pas avoir mal. Sinon, l'atélectasie peut évoluer vers une pneumonie, créant un cercle vicieux de morbidité.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "retentissement-respiratoire"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-65",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Selon les paliers de l'OMS enseignés, peut-on associer un opioïde faible (palier 2) et un opioïde fort (palier 3) chez le même patient ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Non, car il y aurait une compétition sur les mêmes récepteurs", "image": null },
+                    { "key": "B", "text": "Oui, c'est la combinaison recommandée en première intention", "image": null },
+                    { "key": "C", "text": "Oui, mais seulement chez l'enfant", "image": null },
+                    { "key": "D", "text": "Cette association n'existe pas dans la pratique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "On peut associer palier 1+2 ou palier 1+3, mais pas palier 2+3, car il y aurait une compétition sur les récepteurs. Le but de l'analgésie multimodale est d'associer des mécanismes d'action différents pour un effet synergique.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "paliers-OMS", "analgesie-multimodale"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-66",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Concernant la titration de morphine en salle de réveil, quelle est la conduite correcte ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Donner 2 à 3 mg de morphine toutes les 7 à 10 minutes chez un patient réveillable, tant que son score de douleur reste supérieur à 3/10", "image": null },
+                    { "key": "B", "text": "Donner toute la dose de morphine en une seule injection", "image": null },
+                    { "key": "C", "text": "Donner de la morphine même si le patient n'est pas réveillable à l'appel", "image": null },
+                    { "key": "D", "text": "Attendre 1 heure entre chaque injection", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La titration se fait par doses de 2-3 mg de morphine toutes les 7-10 minutes (délai d'action de la morphine IV), en évaluant douleur (>3/10) et sédation. Si le malade n'est pas réveillable à l'appel, on n'a pas le droit de donner la morphine même si son EVA reste élevée, car il est trop sédaté.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "titration-morphine"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-67",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi la PCA (analgésie contrôlée par le patient) est-elle considérée comme la meilleure méthode d'administration de la morphine, quand elle est disponible ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Elle évite le délai de 55 à 90 minutes de l'administration classique et maintient la morphine dans le corridor analgésique", "image": null },
+                    { "key": "B", "text": "Elle donne toujours une dose plus élevée que l'administration systématique", "image": null },
+                    { "key": "C", "text": "Elle ne nécessite aucune surveillance", "image": null },
+                    { "key": "D", "text": "Elle ne peut être utilisée qu'en péridurale", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La PCA évite le délai de 55 à 90 minutes typique de l'administration classique « au besoin » et maintient la concentration plasmatique dans le corridor analgésique via un délai réfractaire (7-12 min) évitant le surdosage. Une étude citée montre que les patients sous PCA sont plus satisfaits même avec une dose moyenne de morphine plus faible.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "PCA"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-68",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pour l'hystérectomie du cas clinique de l'ED, quelle technique analgésique est présentée comme idéale car plus efficace sur la douleur dynamique et accélérant le transit ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La péridurale analgésique", "image": null },
+                    { "key": "B", "text": "La voie intramusculaire", "image": null },
+                    { "key": "C", "text": "La PCA seule sans autre association", "image": null },
+                    { "key": "D", "text": "Le paracétamol seul", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Pour cette patiente (hystérectomie abdominale), la péridurale analgésique est idéale : plus efficace sur la douleur dynamique, elle bloque les influx douloureux, accélère le transit (moins d'iléus), améliore la fonction diaphragmatique et diminue la morbidité respiratoire.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "peridurale-analgesique"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-69",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelle est la meilleure échelle d'évaluation de la douleur post-opératoire décrite en cours, réglette millimétrique à deux faces ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'échelle visuelle analogique (EVA)", "image": null },
+                    { "key": "B", "text": "L'échelle verbale simple", "image": null },
+                    { "key": "C", "text": "Le score de Lee", "image": null },
+                    { "key": "D", "text": "Le score de Bromage", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'EVA est une réglette à deux faces (une graduée pour le soignant, l'autre avec un curseur pour le malade) : elle est sensible au changement, reproductible et sans risque de mémorisation, mais un peu plus difficile à comprendre que l'échelle verbale simple ou numérique.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "EVA"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-70",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "La douleur doit être considérée comme un cinquième signe vital, tracée sur le dossier au même titre que la température, la fréquence cardiaque, la fréquence respiratoire et la tension artérielle.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le cours rapporte l'idée du président de l'American Society of Pain Management dans les années 90 : traiter la douleur comme un cinquième signe vital lui donne une meilleure chance d'être traitée, avec une traçabilité systématique (courbe de douleur) sur le dossier.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "cinquieme-signe-vital"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 8,
+          "title_fr": "ED3 - États de choc",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Classification, physiopathologie et prise en charge",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-real-71",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelle est la définition d'un état de choc donnée en cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une défaillance aiguë et généralisée de la circulation sanguine, entraînant un déficit en apport d'oxygène et une accumulation intracellulaire de CO2 et d'acide", "image": null },
+                    { "key": "B", "text": "Une simple chute isolée de la pression artérielle", "image": null },
+                    { "key": "C", "text": "Une infection localisée sans retentissement systémique", "image": null },
+                    { "key": "D", "text": "Une augmentation chronique du débit cardiaque", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Un état de choc est une défaillance aiguë et généralisée de la circulation sanguine touchant tous les organes, entraînant un déficit en apport d'oxygène (métabolisme anaérobe) et une accumulation de CO2/acide. Une hypotension isolée ne veut pas toujours dire « choc », et « choc » ne veut pas toujours dire hypotension.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "definition-choc"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-72",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelles sont les 4 grandes classes étiologiques des états de choc ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Hypovolémique", "image": null },
+                    { "key": "B", "text": "Cardiogénique", "image": null },
+                    { "key": "C", "text": "Obstructif", "image": null },
+                    { "key": "D", "text": "Nutritionnel", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Les états de choc sont classés en choc hypovolémique, choc cardiogénique, choc obstructif et choc distributif (vasoplégique : anaphylactique, septique, neurogénique, intoxications, insuffisance surrénalienne).",
+                  "explanation_media": null,
+                  "tags": ["ED3", "classification-choc"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-73",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez un patient présentant des marbrures des membres inférieurs remontant à mi-cuisse et un temps de recoloration cutanée allongé à 4 secondes, quel mécanisme physiopathologique est en cause ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une vasoconstriction périphérique qui draine le sang vers les organes nobles (cerveau, cœur, foie, reins)", "image": null },
+                    { "key": "B", "text": "Une vasodilatation périphérique isolée", "image": null },
+                    { "key": "C", "text": "Une hyperthermie maligne", "image": null },
+                    { "key": "D", "text": "Un simple effet du froid ambiant", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Les marbrures et le temps de recoloration allongé (normal = 2 sec) traduisent une vasoconstriction du tissu musculo-cutané, mécanisme compensateur qui redirige le sang vers les organes nobles. Le choc anaphylactique fait exception : il donne une rougeur/érythème plutôt que des marbrures.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "marbrures", "signes-cliniques"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-74",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Pourquoi observe-t-on une hyperlactatémie dans un état de choc ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'hypoperfusion diminue l'apport d'oxygène, favorisant un métabolisme anaérobie qui produit du lactate au lieu du métabolisme aérobie mitochondrial", "image": null },
+                    { "key": "B", "text": "Les reins produisent directement du lactate", "image": null },
+                    { "key": "C", "text": "L'hyperglycémie est la seule cause de l'hyperlactatémie", "image": null },
+                    { "key": "D", "text": "Le foie cesse totalement de fonctionner", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "En hypoperfusion, moins d'oxygène est livré aux tissus : le métabolisme bascule vers la voie anaérobie (1 glucose → 2 pyruvate → 2 lactate + 2 ATP, contre 36 ATP en aérobie), donnant une hyperlactatémie. On tolère un chiffre de lactate jusqu'à 2 mmol/L ; au-delà, c'est élevé.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "lactates", "metabolisme-anaerobe"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-75",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Dans le choc septique, à quoi correspond la 'phase hyperkinétique' initiale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vasodilatation, hypovolémie relative et tachycardie compensatrice", "image": null },
+                    { "key": "B", "text": "Diminution isolée de la contractilité myocardique sans vasodilatation", "image": null },
+                    { "key": "C", "text": "Bradycardie sévère d'emblée", "image": null },
+                    { "key": "D", "text": "Arrêt cardiaque immédiat", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le choc septique inclut une phase hyperkinétique (vasodilatation, hypovolémie par stagnation du sang en périphérie, tachycardie compensatrice via SRAA/ADH/système sympathique) suivie, si non traitée, d'une phase hypokinétique avec diminution de la contractilité myocardique biventriculaire.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "choc-septique", "phases"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-76",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Dans un état de choc hémorragique, si la fréquence cardiaque d'un patient tachycarde commence à diminuer progressivement (par exemple de 100 à 80 puis à 60/min) sans amélioration clinique, c'est un bon signe de récupération.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["B"],
+                  "explanation": "C'est faux et dangereux : un malade en choc hémorragique qui devient bradycarde alors qu'il était tachycarde n'est pas en train de récupérer, mais prépare son arrêt cardiaque — c'est un signe annonciateur d'arrêt cardiaque, pas une amélioration.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "bradycardie", "arret-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-77",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel est le délai des « golden hours » dans la prise en charge d'un état de choc, au-delà duquel le risque de défaillance multiviscérale devient important ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "2 heures", "image": null },
+                    { "key": "B", "text": "30 minutes", "image": null },
+                    { "key": "C", "text": "24 heures", "image": null },
+                    { "key": "D", "text": "12 heures", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Les « golden hours » sont les 2 premières heures : il faut stabiliser la pression artérielle du malade dans ce délai, sinon on rentre dans les séquelles et le risque de défaillance multiviscérale devient important.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "golden-hours"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-78",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel vasopresseur est privilégié en cas d'état de choc réfractaire au remplissage, plutôt que l'adrénaline ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La noradrénaline, car elle est vasoconstrictrice sans donner autant de tachycardie que l'adrénaline", "image": null },
+                    { "key": "B", "text": "L'adrénaline systématiquement", "image": null },
+                    { "key": "C", "text": "L'atropine", "image": null },
+                    { "key": "D", "text": "Le bicarbonate de sodium seul", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Si le remplissage ne suffit pas (l'état de choc est par définition une hypovolémie réfractaire au remplissage), on administre des vasopresseurs, idéalement la noradrénaline, vasoconstrictrice ; on évite l'adrénaline car elle donne aussi une tachycardie par effet alpha et bêta.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "vasopresseurs", "noradrenaline"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-79",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel organe est décrit comme le plus sensible à l'hypoperfusion et souvent le premier atteint en cas de défaillance multiviscérale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le rein", "image": null },
+                    { "key": "B", "text": "La peau", "image": null },
+                    { "key": "C", "text": "Les os", "image": null },
+                    { "key": "D", "text": "Les muscles squelettiques", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le premier organe qui pourrait être touché est le rein car il est très sensible à l'hypotension, l'hypoperfusion et l'hypoxie. Les organes les plus vulnérables à l'hypoperfusion sont les reins, le foie, la muqueuse gastro-intestinale, le pancréas et les poumons.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "defaillance-multiviscerale"]
+                },
+                {
+                  "external_id": "specialite-anesthesie-real-80",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Concernant la prise en charge initiale d'un patient suspecté d'état de choc aux urgences, quels gestes sont indiqués en parallèle des examens ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Mettre au moins 2 bonnes voies veineuses (18-20 Gauge)", "image": null },
+                    { "key": "B", "text": "Commencer un remplissage vasculaire et une oxygénation", "image": null },
+                    { "key": "C", "text": "Déplacer immédiatement le patient au scanner avant toute voie veineuse", "image": null },
+                    { "key": "D", "text": "Rechercher les lactates artériels et faire un bilan orienté par le contexte clinique", "image": null }
+                  ],
+                  "correct": ["A", "B", "D"],
+                  "explanation": "Devant un état de choc, il faut mettre 2 bonnes voies veineuses (18-20 Gauge), commencer remplissage et oxygénation, et demander un bilan orienté (lactates, FNS, bilan rénal/hépatique, hémocultures/ECBU si suspicion septique...). Il ne faut surtout pas déplacer un patient hypotendu (scanner, radiologie) avant d'avoir posé des voies veineuses.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "prise-en-charge-initiale"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

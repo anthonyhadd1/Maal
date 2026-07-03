@@ -1,0 +1,1012 @@
+{
+  "schema_version": "1.0",
+  "subjects": [
+    {
+      "slug": "specialite-nephrologie",
+      "name_fr": "Néphrologie",
+      "track": "specialite",
+      "program_year": { "name": "M1 - 4e année", "order": 1 },
+      "program_semester": { "name": "S2", "order": 2 },
+      "units": [
+        {
+          "order": 1,
+          "title_fr": "ED1 - Rein et Diabète",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Néphropathie diabétique : reconnaître et raisonner",
+              "questions": [
+                {
+                  "external_id": "specialite-nephrologie-real-1",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Chez un patient diabétique, à quoi correspond un rapport albumine/créatinine urinaire compris entre 30 et 300 mg/g ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Microalbuminurie", "image": null },
+                    { "key": "B", "text": "Macroalbuminurie", "image": null },
+                    { "key": "C", "text": "Protéinurie néphrotique", "image": null },
+                    { "key": "D", "text": "Absence d'atteinte glomérulaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la micro-albuminurie se définit entre 30 et 300 mg/24h (ou par gramme de créatinine) ; au-delà de 300 mg, on parle de macroalbuminurie.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "nephropathie-diabetique"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-2",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Pourquoi une bandelette urinaire standard ne permet-elle pas de détecter une micro-albuminurie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Elle ne devient positive qu'à partir d'environ 300 mg d'albumine (macro-albuminurie)", "image": null },
+                    { "key": "B", "text": "Elle ne détecte que les globules blancs", "image": null },
+                    { "key": "C", "text": "Elle nécessite une urine alcaline pour réagir", "image": null },
+                    { "key": "D", "text": "Elle est positive uniquement en cas d'infection urinaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'une bandelette urinaire ne détecte pas une micro-albuminurie : elle ne commence à détecter l'albumine qu'à partir de 300 mg (macro-albuminurie).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "examen-urines"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-3",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "L'hématurie microscopique est un signe classique (hallmark) de la néphropathie diabétique.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["B"],
+                  "explanation": "Retiens qu'en général, dans la néphropathie diabétique, l'hématurie n'est pas un hallmark : ce n'est pas une pathologie inflammatoire, donc pas d'afflux de globules rouges/cellules inflammatoires comme dans une glomérulonéphrite.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "hematurie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-4",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient diabétique de longue date, mal contrôlé, présente une hématurie microscopique isolée après un bilan urologique complet (scanner, cystoscopie) négatif. Quelle est la conduite à tenir ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Accepter l'hématurie comme compatible avec le diagnostic de néphropathie diabétique sans biopsie", "image": null },
+                    { "key": "B", "text": "Biopsier systématiquement le rein", "image": null },
+                    { "key": "C", "text": "Remettre en cause le diagnostic de néphropathie diabétique", "image": null },
+                    { "key": "D", "text": "Répéter le scanner injecté tous les mois", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que si on a éliminé les causes urologiques et qu'il n'y a pas d'autre suspicion d'atteinte rénale, la présence d'une hématurie microscopique isolée ne remet pas en cause le diagnostic de néphropathie diabétique et ne justifie pas de biopsie.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "biopsie-renale"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-5",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Parmi les situations suivantes, lesquelles constituent une indication de biopsie rénale chez un patient diabétique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Diabète de type 1 avec néphropathie mais sans rétinopathie", "image": null },
+                    { "key": "B", "text": "Évolution atypique de la fonction rénale ou de la protéinurie", "image": null },
+                    { "key": "C", "text": "Hématurie sans tableau classique de diabète", "image": null },
+                    { "key": "D", "text": "Découverte d'une microalbuminurie stable depuis 10 ans", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Retiens les indications de biopsie : diabète type 1 sans rétinopathie (corrélation de 90% entre les deux), évolution atypique (ex. passage rapide du stade 2 au stade 4), ou hématurie sans tableau classique — pas une microalbuminurie stable qui suit une évolution logique.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "biopsie-renale"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-6",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Dans quelle proportion des diabétiques de type 1 sans néphropathie diabétique retrouve-t-on une rétinopathie associée, selon la corrélation classiquement enseignée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Environ 90% des cas", "image": null },
+                    { "key": "B", "text": "Environ 40% des cas", "image": null },
+                    { "key": "C", "text": "Environ 10% des cas", "image": null },
+                    { "key": "D", "text": "Aucune corrélation connue", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans le diabète de type 1, il y a une corrélation de 90% entre rétinopathie et néphropathie diabétique : si un diabétique de type 1 a une néphropathie sans rétinopathie, il faut biopsier. Dans le diabète de type 2, la corrélation n'est que de 40%.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "retinopathie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-7",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "À l'échographie, quel aspect rénal est classiquement attendu chez un patient en insuffisance rénale chronique due à une néphropathie diabétique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Reins de taille normale et d'aspect normal", "image": null },
+                    { "key": "B", "text": "Petits reins dédifférenciés", "image": null },
+                    { "key": "C", "text": "Reins de très grande taille avec kystes multiples", "image": null },
+                    { "key": "D", "text": "Rein unique agénésique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la néphropathie diabétique est une des exceptions où l'insuffisance rénale chronique s'accompagne de reins de taille et d'aspect normaux à l'échographie, contrairement à la plupart des autres néphropathies chroniques où les reins deviennent petits et dédifférenciés.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "echographie-renale"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-8",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel mécanisme explique le renal tubular acidosis type 4 souvent observé chez le patient diabétique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un hyporéninisme avec hypoaldostéronisme entraînant une résistance à l'aldostérone", "image": null },
+                    { "key": "B", "text": "Une perte de bicarbonate exclusivement d'origine digestive", "image": null },
+                    { "key": "C", "text": "Un syndrome de Fanconi complet", "image": null },
+                    { "key": "D", "text": "Une hyperaldostéronisme primaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que chez le diabétique, un hyporéninisme-hypoaldostéronisme entraîne une résistance à l'aldostérone : l'élimination du potassium (K+) et des ions H+ est diminuée, ce qui donne acidose et hyperkaliémie même à un DFG encore correct (40-50 mL/min).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "acidose-tubulaire"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-9",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Tous les patients diabétiques développent une néphropathie diabétique.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["B"],
+                  "explanation": "Retiens que seuls environ 40% des diabétiques développent une néphropathie diabétique, et parmi eux, une petite proportion seulement évoluera vers l'insuffisance rénale terminale — le facteur génétique joue un rôle important dans cette évolution.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "epidemiologie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-10",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Un patient diabétique connu a une microalbuminurie stable autour de 400-500 mg/g depuis plusieurs années. Il revient 6 mois plus tard avec une protéinurie à 3 g/24h. Que doit évoquer cette évolution ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une autre cause surajoutée (ex. protéinurie post-infectieuse) car l'évolution est trop rapide pour une néphropathie diabétique seule", "image": null },
+                    { "key": "B", "text": "Une évolution normale et attendue de la néphropathie diabétique", "image": null },
+                    { "key": "C", "text": "Un simple problème de dilution urinaire", "image": null },
+                    { "key": "D", "text": "Une hypertension artérielle non traitée suffit à l'expliquer entièrement", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'on ne peut pas passer d'un chiffre très bas à 3 g en 2-3 mois de façon logique dans l'histoire naturelle du diabète : une telle évolution rapide doit faire chercher une autre cause (ex. une endocardite donnant une protéinurie post-infectieuse).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "raisonnement-clinique"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "title_fr": "ED2 - Néphropathies Interstitielles Chroniques (NIC)",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Reconnaître le profil tubulo-interstitiel",
+              "questions": [
+                {
+                  "external_id": "specialite-nephrologie-real-11",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quel volume urinaire quotidien définit une polyurie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Plus de 3 L/jour", "image": null },
+                    { "key": "B", "text": "Plus de 1 L/jour", "image": null },
+                    { "key": "C", "text": "Plus de 500 mL/jour", "image": null },
+                    { "key": "D", "text": "Plus de 5 L/jour uniquement", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la polyurie se définit par un volume urinaire supérieur à 3 L/jour, à distinguer de la pollakiurie (fréquence augmentée), plutôt en faveur d'une infection.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "polyurie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-12",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez une patiente présentant polyurie, polydipsie et nycturie, quelle structure rénale est le plus probablement en cause ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La médullaire (atteinte tubulo-interstitielle)", "image": null },
+                    { "key": "B", "text": "Le glomérule", "image": null },
+                    { "key": "C", "text": "L'artère rénale", "image": null },
+                    { "key": "D", "text": "La vessie exclusivement", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la polyurie-polydipsie avec nycturie oriente vers un problème tubulo-interstitiel : c'est la médullaire qui régule la concentration des urines. Les pathologies glomérulaires (diabète, lupus) ne donnent en général pas de polyurie.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "polyurie", "medullaire"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-13",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle association d'analgésiques est la plus corrélée à la néphropathie chronique des analgésiques ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La prise combinée de plusieurs analgésiques (ex. aspirine, AINS, paracétamol) au long cours", "image": null },
+                    { "key": "B", "text": "Une seule prise ponctuelle de paracétamol", "image": null },
+                    { "key": "C", "text": "La prise isolée d'antibiotiques", "image": null },
+                    { "key": "D", "text": "La prise d'IEC au long cours", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la toxicité de la néphropathie des analgésiques dépend de la dose, de la durée et surtout de l'association de plusieurs analgésiques pris de façon chronique (souvent chez des migraineux).",
+                  "explanation_media": null,
+                  "tags": ["ED2", "nephropathie-analgesiques"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-14",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelles sont les causes classiques de nécrose papillaire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Diabète", "image": null },
+                    { "key": "B", "text": "AINS prolongés", "image": null },
+                    { "key": "C", "text": "Drépanocytose", "image": null },
+                    { "key": "D", "text": "Hyperthyroïdie", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Retiens les 4 causes classiques de nécrose papillaire : diabète, AINS prolongés, drépanocytose et analgésiques — toutes provoquent une ischémie de la médullaire interne, zone la plus sensible à l'hypoxie.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "necrose-papillaire"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-15",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez une patiente avec une créatinine à 190 µmol/L (DFG estimé à 25 mL/min), l'hémoglobine est très basse à 7,8 g/dL, ce qui est disproportionné par rapport au degré d'insuffisance rénale attendu. Quelle pathologie doit-on évoquer ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une néphropathie tubulo-interstitielle chronique", "image": null },
+                    { "key": "B", "text": "Une néphropathie diabétique typique", "image": null },
+                    { "key": "C", "text": "Un syndrome néphrotique isolé", "image": null },
+                    { "key": "D", "text": "Une lithiase urinaire simple", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'une des particularités des néphrites interstitielles chroniques est une anémie disproportionnée par rapport au degré d'insuffisance rénale (une créatinine à 190-250 µmol/L ne devrait pas donner une Hb aussi basse que 7,8).",
+                  "explanation_media": null,
+                  "tags": ["ED2", "anemie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-16",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Comment est classiquement décrite la protéinurie dans les pathologies tubulo-interstitielles par rapport aux pathologies glomérulaires ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Protéinurie de faible débit (inférieure à 1-2 g/24h), non albuminurique", "image": null },
+                    { "key": "B", "text": "Protéinurie de haut débit supérieure à 2 g/24h, essentiellement de l'albumine", "image": null },
+                    { "key": "C", "text": "Absence totale de toute protéinurie", "image": null },
+                    { "key": "D", "text": "Protéinurie identique à celle du syndrome néphrotique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans les pathologies tubulo-interstitielles, la protéinurie est de faible débit (moins de 1-2 g/24h) et ce n'est pas de l'albumine, contrairement aux pathologies glomérulaires où la protéinurie de haut débit est surtout albuminurique.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "proteinurie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-17",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Dans une néphrite interstitielle chronique, la présence de globules blancs dans les urines sans infection documentée correspond à une « leucocyturie stérile ».",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens le terme de leucocyturie stérile : il y a des globules blancs dans les urines mais ce n'est pas une pathologie infectieuse, c'est une inflammation au niveau des tubules.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "leucocyturie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-18",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quel aspect échographique rénal est classiquement associé à une néphrite interstitielle chronique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Petits reins, corticale amincie et échogène, dédifférenciation cortico-médullaire, parfois néphrocalcinose", "image": null },
+                    { "key": "B", "text": "Reins de taille normale sans anomalie", "image": null },
+                    { "key": "C", "text": "Gros reins polykystiques bilatéraux uniquement", "image": null },
+                    { "key": "D", "text": "Dilatation isolée des cavités pyélocalicielles sans autre anomalie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens l'aspect typique à l'échographie d'une NIC : reins de petite taille, amincissement et hyperéchogénicité de la corticale, encoches, dédifférenciation cortico-médullaire, et parfois néphrocalcinose.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "echographie-renale"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-19",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle molécule utilisée en psychiatrie est classiquement associée à une néphropathie tubulo-interstitielle chronique en cas de prise prolongée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le lithium", "image": null },
+                    { "key": "B", "text": "Les benzodiazépines", "image": null },
+                    { "key": "C", "text": "Les antidépresseurs tricycliques", "image": null },
+                    { "key": "D", "text": "Les antipsychotiques atypiques", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que le lithium, utilisé chez les patients maniaco-dépressifs au long cours, peut donner une néphropathie chronique avec polyurie-polydipsie majeure (parfois 8L/jour), en plus de sa toxicité neurologique et digestive aiguë.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "lithium"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-20",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une patiente vivant dans une zone industrielle dense présente une anémie, une insuffisance rénale et un profil tubulo-interstitiel avec suspicion d'intoxication au plomb. Comment confirme-t-on ce diagnostic ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Par le dosage du plomb dans les urines", "image": null },
+                    { "key": "B", "text": "Par une biopsie rénale systématique", "image": null },
+                    { "key": "C", "text": "Par une simple radiographie osseuse", "image": null },
+                    { "key": "D", "text": "Par le dosage de la créatinine seule", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que le diagnostic d'intoxication au plomb se fait par dosage du plomb dans les urines ; on peut aussi retrouver un syndrome de Fanconi (glycosurie, phosphaturie, hypokaliémie, acidose) et des crises de goutte précoces et répétitives évocatrices.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "intoxication-plomb"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "title_fr": "ED3 - Glomérulopathies",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Syndrome néphrotique : diagnostic positif et étiologique",
+              "questions": [
+                {
+                  "external_id": "specialite-nephrologie-real-21",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quels sont les 3 critères qui définissent un syndrome néphrotique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Protéinurie > 3 g/24h, hypoalbuminémie < 30 g/L, œdèmes des membres inférieurs", "image": null },
+                    { "key": "B", "text": "Hématurie, hypertension, insuffisance rénale aiguë", "image": null },
+                    { "key": "C", "text": "Hyperkaliémie, acidose, oligurie", "image": null },
+                    { "key": "D", "text": "Protéinurie isolée sans autre anomalie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens la triade du syndrome néphrotique : protéinurie > 3 g/24h, hypoalbuminémie < 30 g/L et œdèmes des membres inférieurs — à distinguer de la simple « protéinurie néphrotique » où l'albumine reste normale.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "syndrome-nephrotique"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-22",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient avec un syndrome néphrotique développe une douleur lombaire sourde avec nausées et hématurie. Quelle complication doit-on évoquer en premier ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une thrombose de la veine rénale", "image": null },
+                    { "key": "B", "text": "Une pyélonéphrite aiguë simple", "image": null },
+                    { "key": "C", "text": "Une lithiase vésicale", "image": null },
+                    { "key": "D", "text": "Une cystite banale", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'état d'hypercoagulabilité du syndrome néphrotique (perte d'antithrombine III) prédispose aux thromboses, en particulier de la veine rénale, qui se manifeste par une douleur lombaire sourde avec nausées, vomissements et hématurie.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "thrombose-veine-renale"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-23",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est l'atteinte glomérulaire la plus typiquement associée à l'hépatite B chronique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Glomérulopathie membraneuse", "image": null },
+                    { "key": "B", "text": "Glomérulopathie membrano-proliférative", "image": null },
+                    { "key": "C", "text": "Glomérulosclérose focale et segmentaire collabante", "image": null },
+                    { "key": "D", "text": "Minimal change disease", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens l'association classique : hépatite B → glomérulopathie membraneuse ; hépatite C → membrano-proliférative ; HIV → glomérulosclérose focale et segmentaire de type collabante.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "serologies-virales"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-24",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez un patient de 37 ans se présentant avec un syndrome néphrotique et un anticorps anti-PLA2R positif, quelle est la conduite classiquement proposée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "On peut se contenter de la biopsie pour confirmer et du bilan de base, sans bilan extensif de néoplasie", "image": null },
+                    { "key": "B", "text": "Un bilan extensif de recherche de néoplasie est obligatoire malgré l'âge jeune", "image": null },
+                    { "key": "C", "text": "Il faut d'emblée traiter comme un lupus", "image": null },
+                    { "key": "D", "text": "L'anti-PLA2R n'a aucune valeur diagnostique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'anti-PLA2R est positif dans 60 à 70% des membraneuses primitives ; chez un patient jeune avec anti-PLA2R positif, on peut se contenter du bilan de base sans rechercher de néoplasie, contrairement à un sujet âgé où le bilan extensif de néoplasie reste indiqué même si l'anti-PLA2R est positif.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "anti-pla2r"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-25",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un complément (C3-C4) abaissé oriente davantage vers quelle pathologie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le lupus", "image": null },
+                    { "key": "B", "text": "La glomérulopathie membraneuse", "image": null },
+                    { "key": "C", "text": "Le diabète", "image": null },
+                    { "key": "D", "text": "La néphropathie des analgésiques", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'un complément bas ne fait pas penser à la membraneuse (peu inflammatoire, peu de consommation du complément), alors que dans le lupus, le complément est en général abaissé du fait de son caractère inflammatoire.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "complement"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-26",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Un patient présente 3 g/24h de protéines urinaires mais seulement 200 mg/24h d'albumine urinaire. Que doit faire évoquer cette grande différence entre protéinurie et albuminurie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une gammapathie monoclonale (myélome multiple, chaînes légères)", "image": null },
+                    { "key": "B", "text": "Une néphropathie diabétique typique", "image": null },
+                    { "key": "C", "text": "Une simple erreur de dosage à répéter", "image": null },
+                    { "key": "D", "text": "Une hypertension artérielle non contrôlée uniquement", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'une grande différence entre protéinurie totale et albuminurie oriente vers une gammapathie monoclonale (myélome multiple) : les chaînes légères qui composent la différence ne sont pas de l'albumine.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "gammapathie-monoclonale"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-27",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Pour le suivi et le pronostic d'une néphropathie à IgA ou d'un lupus, on privilégie la mesure de la protéinurie plutôt que celle de l'albuminurie seule.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans la néphropathie à IgA, le lupus ou les vascularites à ANCA, la protéinurie n'est pas sélective : l'albumine n'est qu'une partie de la protéinurie totale, donc le pronostic et le suivi thérapeutique se basent sur la protéinurie et non l'albuminurie.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "proteinurie", "iga"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-28",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel type de présentation clinique est le plus caractéristique d'une glomérulopathie membraneuse par rapport au minimal change disease ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une installation progressive et lente, sur plusieurs mois voire années", "image": null },
+                    { "key": "B", "text": "Une installation « full-blown » très rapide en quelques jours", "image": null },
+                    { "key": "C", "text": "Une hématurie macroscopique isolée sans protéinurie", "image": null },
+                    { "key": "D", "text": "Une absence totale d'œdèmes à tous les stades", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la présentation du syndrome néphrotique membraneux est classiquement lente et progressive, alors que le minimal change disease ou la focale et segmentaire primaire donnent une présentation « full-blown » très rapide.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "membraneuse"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-29",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez un patient vivant en zone d'endémie du paludisme, quel type d'atteinte rénale un paludisme récurrent peut-il entraîner sur le plan glomérulaire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une glomérulopathie membraneuse (extra-membraneuse)", "image": null },
+                    { "key": "B", "text": "Une néphroangiosclérose", "image": null },
+                    { "key": "C", "text": "Une acidose tubulaire proximale", "image": null },
+                    { "key": "D", "text": "Une sténose de l'artère rénale", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans les infections chroniques comme le paludisme récurrent, la production répétée de complexes antigène-anticorps peut se déposer en sous-épithélial et donner une glomérulopathie extra-membraneuse ; le paludisme sévère aigu, lui, peut donner une nécrose tubulaire aiguë toxique par hémoglobinurie.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "paludisme"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-30",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle démarche est correcte face à un syndrome néphrotique dont on suspecte l'origine médicamenteuse (ex. AINS avec lésions glomérulaires optiquement normales à la biopsie) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Arrêter le médicament en cause avant d'envisager un traitement immunosuppresseur", "image": null },
+                    { "key": "B", "text": "Démarrer d'emblée des corticoïdes à haute dose", "image": null },
+                    { "key": "C", "text": "Continuer le médicament et surveiller uniquement", "image": null },
+                    { "key": "D", "text": "Réaliser une splénectomie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que si la biopsie montre des glomérules optiquement normaux chez un patient prenant des AINS, il faut vérifier la prise médicamenteuse : l'arrêt du médicament en cause peut suffire à la guérison, sans nécessiter de corticoïdes.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "medicaments"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "title_fr": "ED4 - Insuffisance Rénale Aiguë",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "IRA fonctionnelle vs nécrose tubulaire aiguë",
+              "questions": [
+                {
+                  "external_id": "specialite-nephrologie-real-31",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Selon la définition classique enseignée, quelle augmentation de créatinine en 48h définit une insuffisance rénale aiguë ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Augmentation d'au moins 0,3 mg/dL", "image": null },
+                    { "key": "B", "text": "Augmentation d'au moins 1 mg/dL", "image": null },
+                    { "key": "C", "text": "Augmentation d'au moins 3 mg/dL", "image": null },
+                    { "key": "D", "text": "Toute augmentation, même minime, sur 6 mois", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens la définition de l'IRA : augmentation d'au moins 0,3 mg/dL de créatinine en 48h, OU augmentation de 50% en une semaine par rapport au chiffre de base, OU débit urinaire < 0,5 mL/kg/h pendant au moins 6h.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "definition-ira"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-32",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez une patiente avec IRA, une natriurèse inférieure à 20 mmol/L oriente vers quel mécanisme ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une IRA fonctionnelle (pré-rénale) avec rein encore capable de réabsorber le sodium", "image": null },
+                    { "key": "B", "text": "Une nécrose tubulaire aiguë établie", "image": null },
+                    { "key": "C", "text": "Une IRA obstructive avec dilatation", "image": null },
+                    { "key": "D", "text": "Une glomérulonéphrite rapidement progressive", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans l'IRA fonctionnelle, le rein est encore capable de réabsorber le sodium (natriurèse < 20 mmol/L), alors qu'une lésion de l'épithélium tubulaire (nécrose tubulaire aiguë) empêche cette réabsorption, donnant une natriurèse > 20 mmol/L.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "ionogramme-urinaire"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-33",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel est le tout premier examen à demander pour distinguer une IRA fonctionnelle d'une nécrose tubulaire aiguë ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'ionogramme urinaire (sodium et potassium urinaires)", "image": null },
+                    { "key": "B", "text": "La biopsie rénale systématique", "image": null },
+                    { "key": "C", "text": "L'IRM rénale", "image": null },
+                    { "key": "D", "text": "Le dosage de la PTH", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'ionogramme urinaire est le premier examen à faire pour confirmer le mécanisme d'une IRA : sodium urinaire, rapport Na/K urinaire et densité des urines orientent vers fonctionnelle ou organique (nécrose tubulaire aiguë).",
+                  "explanation_media": null,
+                  "tags": ["ED4", "ionogramme-urinaire"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-34",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "L'échographie rénale permet toujours de différencier de façon fiable une insuffisance rénale aiguë d'une insuffisance rénale chronique, y compris chez le patient diabétique.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["B"],
+                  "explanation": "Retiens que l'échographie fait partie des critères aigu/chronique, sauf en cas de diabète : le rein diabétique reste de taille normale même en cas d'IRC, donc l'échographie n'est pas contributive dans ce cas pour trancher.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "echographie-renale"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-35",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la première urgence à corriger chez un patient admis en IRA avec une kaliémie à 6,9 mEq/L ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Corriger l'hyperkaliémie et évaluer le risque d'arythmie (ECG)", "image": null },
+                    { "key": "B", "text": "Attendre les résultats de la biopsie rénale avant tout traitement", "image": null },
+                    { "key": "C", "text": "Débuter d'emblée la dialyse sans autre bilan", "image": null },
+                    { "key": "D", "text": "Ne rien faire tant que l'étiologie n'est pas confirmée", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'urgence en IRA, c'est la correction des troubles hydroélectrolytiques (hyperkaliémie, hypovolémie), à traiter le plus tôt possible — même avant d'avoir terminé la recherche étiologique complète.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "hyperkaliemie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-36",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Une patiente diabétique et hypertendue, récemment mise sous majoration de diurétiques et restriction hydrosodée pour une suspicion de décompensation cardiaque, présente une hypotension orthostatique, une tachycardie et une perte de 4 kg. Quel diagnostic est le plus probable ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une hypovolémie réelle induite par l'intensification du traitement diurétique", "image": null },
+                    { "key": "B", "text": "Une authentique décompensation cardiaque non traitée", "image": null },
+                    { "key": "C", "text": "Une glomérulonéphrite rapidement progressive", "image": null },
+                    { "key": "D", "text": "Une pyélonéphrite aiguë obstructive", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'une hypotension orthostatique, une tachycardie compatible et une perte de poids de 4 kg (perte d'eau, pas de poids sec) orientent vers une vraie hypovolémie, ici causée par l'excès de diurétiques : une vraie décompensation cardiaque s'améliore sous diurétique, elle ne s'aggrave pas.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "hypovolemie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-37",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi le rapport urée/créatinine plasmatique augmente-t-il en cas d'hypovolémie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Il y a une rétrodiffusion de l'urée dans les tubes collecteurs en situation de contraction volémique", "image": null },
+                    { "key": "B", "text": "La créatinine plasmatique diminue toujours en premier", "image": null },
+                    { "key": "C", "text": "L'urée est totalement éliminée dans les selles", "image": null },
+                    { "key": "D", "text": "Ce rapport n'a aucune signification physiopathologique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'augmentation du rapport urée/créatinine plasmatique en cas d'hypovolémie s'explique par la rétrodiffusion de l'urée au niveau du tubule distal, contrairement à la nécrose tubulaire aiguë où ce mécanisme de concentration est perdu.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "uree-creatinine"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-38",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quel signe biologique n'est PLUS considéré comme un critère fiable pour distinguer une IRA d'une IRC ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'anémie", "image": null },
+                    { "key": "B", "text": "L'échographie rénale montrant des petits reins", "image": null },
+                    { "key": "C", "text": "Le chiffre de créatinine antérieur (3 mois)", "image": null },
+                    { "key": "D", "text": "L'ionogramme urinaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'anémie n'est plus considérée comme un critère fiable pour distinguer IRA et IRC : une IRA peut durer 1 à 2 semaines pendant lesquelles l'EPO baisse déjà, et une IRA s'accompagne aussi d'un état inflammatoire propice à l'anémie.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "anemie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-39",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Parmi les signes suivants, lesquels indiquent qu'un patient en nécrose tubulaire aiguë est en phase de récupération ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Reprise de la diurèse qui double d'un jour à l'autre", "image": null },
+                    { "key": "B", "text": "La créatinine urinaire commence à augmenter avant que la créatinine plasmatique ne baisse", "image": null },
+                    { "key": "C", "text": "Apparition d'une polyneuropathie périphérique", "image": null },
+                    { "key": "D", "text": "Élévation brutale de la PTH en quelques heures", "image": null }
+                  ],
+                  "correct": ["A", "B"],
+                  "explanation": "Retiens que la reprise de la diurèse (doublant chaque jour) et l'augmentation de la créatinine urinaire précèdent la baisse de la créatinine plasmatique (décalage de 3-4 jours) : ce sont les signes précoces de récupération après une NTA.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "recuperation-nta"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-40",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez un patient en IRA, quel signe clinique permet de différencier cliniquement une IRA d'une IRC, car il nécessite du temps pour apparaître ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La polyneuropathie périphérique", "image": null },
+                    { "key": "B", "text": "Les nausées et vomissements", "image": null },
+                    { "key": "C", "text": "L'hyperkaliémie", "image": null },
+                    { "key": "D", "text": "L'acidose", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que même si les toxines urémiques sont présentes en IRA, la polyneuropathie périphérique nécessite du temps pour s'installer : elle existe dans l'IRC mais pas dans l'IRA, ce qui en fait un signe de distinction clinique utile.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "manifestations-neurologiques"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "title_fr": "ED6 - Hypertension Artérielle",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Diagnostic, mesure et HTA secondaire",
+              "questions": [
+                {
+                  "external_id": "specialite-nephrologie-real-41",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Selon les recommandations actuelles citées en ED, à partir de quel chiffre de pression artérielle systolique parle-t-on d'hypertension artérielle ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "13/8 (130/80 mmHg)", "image": null },
+                    { "key": "B", "text": "14/9 (140/90 mmHg) uniquement", "image": null },
+                    { "key": "C", "text": "16/9 (160/90 mmHg)", "image": null },
+                    { "key": "D", "text": "18/10 (180/100 mmHg)", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que les recommandations actuelles (suite à des études comme le SPRINT trial) définissent l'HTA à partir de 13/8, avec une catégorie intermédiaire « elevated blood pressure » entre le normal (< 12/8) et l'HTA.",
+                  "explanation_media": null,
+                  "tags": ["ED6", "definition-hta"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-42",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la définition classique de l'hypertension artérielle maligne ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une diastolique supérieure à 110 mmHg avec une atteinte d'organe aiguë (end-organ damage)", "image": null },
+                    { "key": "B", "text": "Toute tension supérieure à 14/9 sans autre critère", "image": null },
+                    { "key": "C", "text": "Une tension systolique isolée supérieure à 16", "image": null },
+                    { "key": "D", "text": "Une tension mesurée une seule fois au cabinet médical", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'HTA maligne se définit par une diastolique > 110 mmHg associée à une atteinte d'organe aiguë (AVC, IRA, infarctus, dissection, OAP, encéphalopathie hypertensive, rétinopathie stade 3-4) — sans atteinte d'organe aiguë, on parle plutôt d'HTA accélérée.",
+                  "explanation_media": null,
+                  "tags": ["ED6", "hta-maligne"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-43",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelles sont les 2 situations qui justifient classiquement de rechercher une HTA secondaire même en dehors du bilan de base ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "HTA maligne et HTA résistante au traitement", "image": null },
+                    { "key": "B", "text": "Toute HTA légère chez un patient de plus de 60 ans", "image": null },
+                    { "key": "C", "text": "Une seule mesure élevée au cabinet médical", "image": null },
+                    { "key": "D", "text": "Une TA normale avec facteurs de risque cardiovasculaires", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'HTA maligne et l'HTA résistante sont 2 indications classiques de recherche d'HTA secondaire, ainsi que l'HTA chez le sujet jeune (< 30 ans), l'HTA soudaine, ou une clinique orientant vers une cause précise (hypokaliémie, alcalose, etc.).",
+                  "explanation_media": null,
+                  "tags": ["ED6", "hta-secondaire"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-44",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la définition d'une hypertension résistante au traitement ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Non contrôlée malgré 3 anti-hypertenseurs à doses maximales dont un diurétique thiazidique, ou contrôlée sous 4 molécules", "image": null },
+                    { "key": "B", "text": "Non contrôlée sous une seule molécule anti-hypertensive", "image": null },
+                    { "key": "C", "text": "Toute HTA qui persiste malgré un régime pauvre en sel seul", "image": null },
+                    { "key": "D", "text": "Une TA qui varie d'une consultation à l'autre", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens la définition de l'HTA résistante : non contrôlée malgré 3 anti-hypertenseurs à doses maximales incluant un diurétique thiazidique, ou contrôlée uniquement sous 4 molécules — après avoir vérifié l'observance et éliminé une diète salée.",
+                  "explanation_media": null,
+                  "tags": ["ED6", "hta-resistante"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-45",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Après introduction d'un IEC chez un hypertendu, une augmentation de la créatinine de plus de 30% par rapport au chiffre de base doit faire suspecter :",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une sténose de l'artère rénale", "image": null },
+                    { "key": "B", "text": "Une réaction allergique bénigne sans conséquence", "image": null },
+                    { "key": "C", "text": "Un surdosage en anticalciques", "image": null },
+                    { "key": "D", "text": "Une hyperthyroïdie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans un rein sténosé, l'angiotensine II maintient la filtration glomérulaire par vasoconstriction de l'artériole efférente ; un IEC ou ARA2 inhibe ce mécanisme de compensation et peut démasquer une insuffisance rénale, surtout en cas de sténose bilatérale ou sur rein unique.",
+                  "explanation_media": null,
+                  "tags": ["ED6", "stenose-artere-renale"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-46",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez une femme jeune (25 ans) hypertendue avec suspicion de sténose de l'artère rénale, quelle est la cause la plus probable ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La dysplasie fibromusculaire (aspect en « chapelet »)", "image": null },
+                    { "key": "B", "text": "L'athérosclérose", "image": null },
+                    { "key": "C", "text": "Le diabète de type 2", "image": null },
+                    { "key": "D", "text": "La coarctation de l'aorte", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que chez la femme jeune, la sténose de l'artère rénale est le plus souvent due à une dysplasie fibromusculaire, généralement unilatérale avec un aspect typique en « chapelet », alors que chez le sujet âgé tabagique/diabétique, elle est proximale et d'origine athéroscléreuse.",
+                  "explanation_media": null,
+                  "tags": ["ED6", "dysplasie-fibromusculaire"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-47",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une néphrolithiase à répétition avec hypertension artérielle doit faire évoquer une hyperparathyroïdie primaire liée à une hypercalcémie.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que des lithiases à répétition évoquent une hypercalcémie, et l'association hypercalcémie + HTA + lithiases oriente vers une hyperparathyroïdie primaire : le traitement (ablation de l'adénome) peut faire guérir l'hypertension au lieu de poursuivre un traitement anti-hypertenseur seul.",
+                  "explanation_media": null,
+                  "tags": ["ED6", "hyperparathyroidie"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-48",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel signe biologique associé à une alcalose métabolique et une hypokaliémie oriente vers un hyperaldostéronisme ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une réserve alcaline élevée avec kaliémie basse ou ne s'élevant pas malgré un IEC", "image": null },
+                    { "key": "B", "text": "Une hyperkaliémie franche", "image": null },
+                    { "key": "C", "text": "Une acidose métabolique sévère", "image": null },
+                    { "key": "D", "text": "Une hypercalcémie isolée", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'hyperaldostéronisme (primaire type adénome de Conn/hyperplasie surrénalienne, ou secondaire type sténose de l'artère rénale) se caractérise par une alcalose métabolique avec hypokaliémie — mais retiens aussi que l'hypokaliémie n'est pas constante (50% des cas ont une kaliémie normale au diagnostic).",
+                  "explanation_media": null,
+                  "tags": ["ED6", "hyperaldosteronisme"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-49",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Chez un patient jeune, une pression artérielle plus élevée aux membres supérieurs qu'aux membres inférieurs doit faire évoquer :",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une coarctation de l'aorte", "image": null },
+                    { "key": "B", "text": "Une sténose iliaque du sujet âgé athéroscléreux", "image": null },
+                    { "key": "C", "text": "Une hyperthyroïdie isolée", "image": null },
+                    { "key": "D", "text": "Une simple erreur de mesure sans signification", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que chez le sujet jeune, une TA aux membres supérieurs supérieure à celle des membres inférieurs oriente vers une coarctation de l'aorte (à confirmer par angioscanner ou échocardiographie) ; chez le sujet âgé, on recherchera plutôt une sténose iliaque ou fémorale athéroscléreuse.",
+                  "explanation_media": null,
+                  "tags": ["ED6", "coarctation-aorte"]
+                },
+                {
+                  "external_id": "specialite-nephrologie-real-50",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelles conditions de mesure de la pression artérielle sont recommandées pour un diagnostic fiable d'HTA ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Position assise, dos droit adossé, pieds par terre", "image": null },
+                    { "key": "B", "text": "Au repos depuis au moins 5-10 minutes, sans avoir fumé ni bu de café", "image": null },
+                    { "key": "C", "text": "Bras positionné au niveau du cœur, brassard adapté", "image": null },
+                    { "key": "D", "text": "Immédiatement après un effort physique intense pour standardiser la mesure", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Retiens les conditions optimales de mesure : position assise dos droit, pieds par terre, au repos depuis 5-10 min, sans café/tabac/parole, bras au niveau du cœur, brassard adapté à la corpulence — l'effort physique récent fausse au contraire la mesure.",
+                  "explanation_media": null,
+                  "tags": ["ED6", "mesure-ta"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

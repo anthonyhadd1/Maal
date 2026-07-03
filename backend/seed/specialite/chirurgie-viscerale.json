@@ -1,0 +1,1161 @@
+{
+  "schema_version": "1.0",
+  "subjects": [
+    {
+      "slug": "specialite-chirurgie-viscerale",
+      "name_fr": "Chirurgie Viscérale",
+      "track": "specialite",
+      "program_year": { "name": "M1 - 4e année", "order": 1 },
+      "program_semester": { "name": "S1", "order": 1 },
+      "units": [
+        {
+          "order": 1,
+          "title_fr": "ED1 - Abdomen aigu",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Douleur abdominale : reconnaître l'urgence",
+              "questions": [
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-1",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Selon le Dr Sleilaty, quel est le « maître symptôme » de l'abdomen aigu ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La douleur abdominale", "image": null },
+                    { "key": "B", "text": "La fièvre", "image": null },
+                    { "key": "C", "text": "Les vomissements", "image": null },
+                    { "key": "D", "text": "L'arrêt des matières et des gaz", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que « l'abdomen aigu n'existe pas sans douleur » : on ne peut pas avoir un problème abdominal aigu et urgent sans douleur abdominale, c'est le maître symptôme.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "abdomen-aigu", "douleur"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-2",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez quels types de patients la douleur abdominale peut-elle être absente malgré une pathologie grave sous-jacente ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Les diabétiques", "image": null },
+                    { "key": "B", "text": "Les personnes âgées démentes", "image": null },
+                    { "key": "C", "text": "Les toxicomanes (sous morphine)", "image": null },
+                    { "key": "D", "text": "Les jeunes sportifs", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Le cours cite trois catégories chez qui on ne retrouve pas de douleur : diabétiques, personnes âgées/démentes et drogués (qui prennent de la morphine). Ce sont des cas particuliers où l'abdomen aigu peut passer inaperçu.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "abdomen-aigu", "cas-particuliers"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-3",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Dans quelle proportion des cas la douleur abdominale aiguë, très fréquente, s'avère-t-elle finalement sans conséquence grave ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Environ 80 % des cas", "image": null },
+                    { "key": "B", "text": "Environ 20 % des cas", "image": null },
+                    { "key": "C", "text": "Environ 50 % des cas", "image": null },
+                    { "key": "D", "text": "Presque 100 % des cas", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le cours précise : « La douleur abdominale est très fréquente, dans 80 % des cas c'est rien. » Les 20 % restants peuvent être graves.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "abdomen-aigu", "epidemiologie"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-4",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient se présente avec une douleur épigastrique. Quelle est, selon le Dr Sleilaty, la première cause extra-digestive à évoquer devant ce tableau, souvent confondue avec une colique hépatique ou une pancréatite ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'infarctus (inférieur) du myocarde", "image": null },
+                    { "key": "B", "text": "La torsion testiculaire", "image": null },
+                    { "key": "C", "text": "La dissection aortique", "image": null },
+                    { "key": "D", "text": "La pyélonéphrite", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« La première cause de douleur abdominale extra-digestive est l'infarctus du myocarde. Ça peut mimer une colique hépatique ou une pancréatite » — d'où l'importance de procéder scientifiquement et par élimination avant de sauter au premier diagnostic.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "abdomen-aigu", "diagnostics-differentiels"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-5",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Vrai ou faux : d'après le cours, la cholécystite et l'angiocholite relèvent d'une prise en charge chirurgicale.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le cours insiste : « Attention : la cholécystite, sa prise en charge est chirurgicale. L'angiocholite s'approche de la chirurgie aussi. »",
+                  "explanation_media": null,
+                  "tags": ["ED1", "abdomen-aigu", "causes-medicales"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-6",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quelles sont, selon le cours, les 3 urgences vasculaires extrêmes de l'abdomen aigu où l'on peut perdre le patient instantanément ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Anévrisme rompu, dissection de l'aorte, infarctus mésentérique", "image": null },
+                    { "key": "B", "text": "Colique néphrétique, pyélonéphrite, rétention urinaire", "image": null },
+                    { "key": "C", "text": "Torsion de l'ovaire, GEU, salpingite", "image": null },
+                    { "key": "D", "text": "Appendicite, diverticulite, hernie étranglée", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le cours liste les causes vasculaires : anévrisme rompu, dissection de l'aorte et infarctus mésentérique, en précisant « 3 urgences extrêmes, on peut perdre le patient instantanément ».",
+                  "explanation_media": null,
+                  "tags": ["ED1", "abdomen-aigu", "causes-vasculaires"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-7",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Par définition, une hernie étranglée qui reste non traitée au-delà de combien de temps risque de provoquer une ischémie de l'intestin dans la hernie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Plus de 3 heures", "image": null },
+                    { "key": "B", "text": "Plus de 24 heures", "image": null },
+                    { "key": "C", "text": "Plus de 30 minutes", "image": null },
+                    { "key": "D", "text": "Plus d'une semaine", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Si on laisse durer une hernie étranglée pour plus de 3 heures, on peut avoir une ischémie de l'intestin dans la hernie », ce qui impose alors une résection intestinale au lieu d'une simple réduction.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "abdomen-aigu", "hernie-etranglee"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-8",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient présente à la palpation abdominale une véritable contracture (« abdomen en bois »). Que faut-il faire selon le cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Passer directement à la chirurgie", "image": null },
+                    { "key": "B", "text": "Simplement appeler le chirurgien pour un avis différé", "image": null },
+                    { "key": "C", "text": "Donner des antalgiques et surveiller 24 h", "image": null },
+                    { "key": "D", "text": "Faire un lavement évacuateur", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le cours résume : « En cas de contracture : on passe à la chirurgie. En cas de défense : on appelle le chirurgien. » La contracture évoque généralement une péritonite.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "abdomen-aigu", "examen-clinique"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-9",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel examen d'imagerie est décrit comme « l'examen le plus utilisé aux urgences » devant un abdomen aigu, sauf contre-indication (enfants, femmes enceintes) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le scanner abdomino-pelvien", "image": null },
+                    { "key": "B", "text": "L'IRM abdominale", "image": null },
+                    { "key": "C", "text": "L'ASP systématique", "image": null },
+                    { "key": "D", "text": "L'artériographie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Le scan est l'examen le plus utilisé aux urgences car il est rapide, donne beaucoup de renseignements... mais malheureusement on ne peut pas le faire chez les enfants » (écho/IRM alors privilégiées) « ni beaucoup chez les femmes enceintes ».",
+                  "explanation_media": null,
+                  "tags": ["ED1", "abdomen-aigu", "examens-paracliniques"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "title_fr": "ED2 - Pathologies anales",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Hémorroïdes, fissure, abcès/fistule et sinus pilonidal (1)",
+              "questions": [
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-10",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Parmi les hémorroïdes, lesquelles sont douloureuses ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Les hémorroïdes externes", "image": null },
+                    { "key": "B", "text": "Les hémorroïdes internes", "image": null },
+                    { "key": "C", "text": "Les deux de façon équivalente", "image": null },
+                    { "key": "D", "text": "Aucune des deux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que « les hémorroïdes internes sont non douloureuses alors que les hémorroïdes externes sont douloureuses » — les internes se manifestent plutôt par un saignement.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "hemorroides"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-11",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Vrai ou faux : les hémorroïdes sont des veines normales, présentes dès la vie embryonnaire chez tout le monde, et ne deviennent une « maladie » que lorsqu'elles causent un prolapsus, une douleur ou un saignement.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Les hémorroïdes sont des veines normales de la marge anale et du canal anal... on en a tous. Le fait qu'elles deviennent symptomatiques -> ANORMAL. »",
+                  "explanation_media": null,
+                  "tags": ["ED2", "hemorroides", "physiopathologie"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-12",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient présente une thrombose hémorroïdaire externe très douloureuse depuis moins de 48 heures, sans complication. Quel est le traitement de première intention recommandé par le Dr Gharios ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Bains de siège à l'eau chaude, antalgiques/AINS, régulation du transit", "image": null },
+                    { "key": "B", "text": "Chirurgie d'emblée avant tout essai médical", "image": null },
+                    { "key": "C", "text": "Anticoagulants pour dissoudre le caillot", "image": null },
+                    { "key": "D", "text": "Antibiothérapie systématique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Recommander de faire un bain d'eau chaude, qui entraîne une vasodilatation, ce qui fait que la thrombose chute. » On se donne 24-48h pour soulager le patient avant d'envisager la chirurgie ; un traitement anticoagulant n'est pas indiqué.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "hemorroides", "traitement"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-13",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une hémorroïde interne stade 3 selon Goligher se caractérise par :",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un prolapsus aux efforts de poussée nécessitant une réintégration manuelle", "image": null },
+                    { "key": "B", "text": "Un prolapsus se réintégrant spontanément après l'effort", "image": null },
+                    { "key": "C", "text": "Aucun prolapsus, juste une congestion", "image": null },
+                    { "key": "D", "text": "Un prolapsus permanent, non réductible", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Classification de Goligher : « Stade 3 : mobilisation vers l'intérieur de l'hémorroïde par le patient » — le patient doit la repousser manuellement, contrairement au stade 2 (réintégration spontanée) et au stade 4 (irréductible).",
+                  "explanation_media": null,
+                  "tags": ["ED2", "hemorroides", "classification-goligher"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-14",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Un homme de 80 ans se présente avec une rectorragie (sang rouge vif, indolore, après la défécation) et une anémie. Quel diagnostic doit systématiquement être évoqué et éliminé avant de conclure à de simples hémorroïdes ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le cancer du côlon droit", "image": null },
+                    { "key": "B", "text": "Une fissure anale", "image": null },
+                    { "key": "C", "text": "Un kyste pilonidal", "image": null },
+                    { "key": "D", "text": "Une maladie de Crohn", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Qu'est-ce qu'on fait chez un patient de 80 ans qui se présente avec une anémie, on pense à quoi : CANCER DU COLON DROIT !! » Une colonoscopie systématique après 40-45 ans est requise devant une rectorragie.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "hemorroides", "diagnostics-differentiels"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-15",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Vrai ou faux : le facteur de risque numéro 1 de la fissure anale est la constipation, qui crée un « cercle vicieux » (blessure → constipation réflexe → aggravation de la fissure).",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Le facteur de risque numéro 1 de la fissure anale est la constipation... c'est un cercle vicieux qu'il faut couper quelque part et très probablement d'une façon chirurgicale. »",
+                  "explanation_media": null,
+                  "tags": ["ED2", "fissure-anale"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-16",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Comment le Dr Gharios apprend-il à ses étudiants à distinguer un saignement dû à une fissure anale d'un saignement dû à une hémorroïde interne ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Sang + douleur = fissure ; sang + absence de douleur = hémorroïde interne", "image": null },
+                    { "key": "B", "text": "Le volume du saignement (fissure = abondant, hémorroïde = minime)", "image": null },
+                    { "key": "C", "text": "La couleur du sang (fissure = noir, hémorroïde = rouge vif)", "image": null },
+                    { "key": "D", "text": "Il n'existe aucun moyen clinique de les distinguer", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Sang + absence de douleur -> hémorroïde interne. Sang + douleur -> fissure. » La fissure suit la « douleur typique en 3 temps » du syndrome fissuraire déclenchée par le passage des selles.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "fissure-anale", "diagnostic"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-17",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Selon le cours, qu'est-ce qui révèle le plus souvent la présence d'une fistule anale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un abcès anal", "image": null },
+                    { "key": "B", "text": "Un prurit isolé", "image": null },
+                    { "key": "C", "text": "Une douleur rythmée par les selles", "image": null },
+                    { "key": "D", "text": "Une constipation chronique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« En fait, l'abcès est révélateur de fistule. » Le patient arrive aux urgences pour un abcès anal douloureux ; après drainage, on cherche la fistule sous-jacente (souvent par IRM).",
+                  "explanation_media": null,
+                  "tags": ["ED2", "abces-fistule"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-18",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Pourquoi une fistule anale trans-sphinctérienne est-elle particulièrement redoutée par rapport à une fistule basse ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Parce qu'elle dépasse les sphincters et son traitement radical risque de provoquer une incontinence", "image": null },
+                    { "key": "B", "text": "Parce qu'elle ne peut jamais être diagnostiquée par IRM", "image": null },
+                    { "key": "C", "text": "Parce qu'elle ne s'associe jamais à un abcès", "image": null },
+                    { "key": "D", "text": "Parce qu'elle guérit toujours spontanément", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« La trans-sphinctérienne... elle dépasse les sphincters, elle est difficile à gérer et cela car on peut avoir une incontinence » si on coupe la partie musculaire concernée ; une fistule basse, sans muscle dessous, peut être sectionnée sans ce risque.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "abces-fistule", "chirurgie"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-19",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la véritable nature anatomique du « kyste pilonidal », terme jugé impropre par le Dr Gharios ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un sinus (conduit/fistule) contenant des poils, situé au niveau du sillon interfessier", "image": null },
+                    { "key": "B", "text": "Un véritable kyste épidermique encapsulé", "image": null },
+                    { "key": "C", "text": "Une hernie de la paroi abdominale", "image": null },
+                    { "key": "D", "text": "Un abcès d'origine hémorroïdaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« On dit kyste pilonidal. Est-ce qu'il y a un kyste ? Il n'y a pas de kyste. La vraie nomination, c'est un sinus pilonidal... c'est un conduit, c'est une fistule », historiquement appelée « Jeep Drivers disease ».",
+                  "explanation_media": null,
+                  "tags": ["ED2", "sinus-pilonidal"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "title_fr": "CM - Tumeurs gastriques",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Épidémiologie, HP et lésions précancéreuses",
+              "questions": [
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-20",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelle règle fondamentale le Dr Daher retient-il concernant un ulcère gastrique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un ulcère gastrique est un cancer jusqu'à preuve du contraire", "image": null },
+                    { "key": "B", "text": "Un ulcère gastrique ne dégénère jamais", "image": null },
+                    { "key": "C", "text": "Un ulcère gastrique est toujours dû à Helicobacter pylori seul", "image": null },
+                    { "key": "D", "text": "Un ulcère gastrique guérit toujours spontanément sans biopsie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que « un ulcère gastrique est un cancer jusqu'à la preuve du contraire », contrairement à l'ulcère duodénal dont la physiopathologie est différente et où un cancer sous-jacent est rare.",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "ulcere"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-21",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la différence physiopathologique fondamentale entre l'ulcère duodénal et la vulnérabilité gastrique évoquée en cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'ulcère duodénal vient d'un excès d'agression acide ; l'estomac, lui, souffre d'une baisse de ses défenses car il est normalement protégé de l'acide", "image": null },
+                    { "key": "B", "text": "Les deux viennent uniquement d'une hyperacidité gastrique", "image": null },
+                    { "key": "C", "text": "L'ulcère gastrique vient d'un excès d'acide alors que le duodénum n'est jamais exposé à l'acide", "image": null },
+                    { "key": "D", "text": "Il n'y a aucune différence physiopathologique entre les deux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Ce n'est pas une augmentation de l'agression, c'est une diminution des défenses plutôt au niveau de la muqueuse gastrique... lui, habituellement, il vit dans l'acide et il est protégé fondamentalement de l'acide. » Pour le duodénum, c'est un déséquilibre agresseurs/protecteurs classique.",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "ulcere", "physiopathologie"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-22",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Sur 100 personnes ayant une gastrite chronique active à Hp, combien développeront finalement un cancer selon le schéma de carcinogenèse présenté en cours (gastrite → atrophie → métaplasie → dysplasie → cancer) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "1", "image": null },
+                    { "key": "B", "text": "8", "image": null },
+                    { "key": "C", "text": "40", "image": null },
+                    { "key": "D", "text": "50", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le schéma cité : 100 (gastrite) → 50 (atrophie) → 40 (métaplasie) → 8 (dysplasie) → 1 (cancer). C'est pourquoi on n'éradique pas systématiquement Hp chez tout porteur asymptomatique — le rôle des autres facteurs de risque prime.",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "helicobacter-pylori", "epidemiologie"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-23",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Le Japon a un dépistage systématique du cancer gastrique par endoscopie dès l'âge de 40 ans. Pourquoi cette politique de santé est-elle justifiée là-bas plutôt que dans un pays à faible incidence ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le cancer de l'estomac y est particulièrement fréquent (rapport coût-efficacité favorable)", "image": null },
+                    { "key": "B", "text": "Helicobacter pylori n'existe pas au Japon", "image": null },
+                    { "key": "C", "text": "Le cancer de l'estomac n'y donne jamais de symptômes", "image": null },
+                    { "key": "D", "text": "Le dépistage se fait uniquement par coloscopie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Plus l'incidence et la prévalence sont importantes dans un pays sur une certaine pathologie, plus cette pathologie est cherchée -> dépistage plus efficace. » Le Japon (Extrême-Orient) a la plus forte incidence mondiale.",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "epidemiologie", "depistage"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-24",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Parmi les lésions suivantes, lesquelles sont citées en cours comme précancéreuses ou prédisposant au cancer gastrique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Maladie de Biermer (gastrite atrophique auto-immune)", "image": null },
+                    { "key": "B", "text": "Maladie de Ménétrier (gastrite hypertrophique géante)", "image": null },
+                    { "key": "C", "text": "Le polype adénomateux gastrique", "image": null },
+                    { "key": "D", "text": "Le polype glandulo-kystique fundique", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Le cours cite la maladie de Biermer (« risque d'adénocarcinome x20 »), la maladie de Ménétrier (« risque estimé à 10 % à 10 ans ») et les polypes adénomateux (précancéreux, à retirer). Les polypes glandulo-kystiques, eux, « ne dégénèrent jamais ».",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "lesions-precancereuses"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-25",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Un patient a un ulcère gastrique dont la première série de biopsies revient négative pour la malignité. Quelle est l'attitude correcte selon le cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Ne pas se rassurer, refaire des biopsies (voire une écho-endoscopie), surveiller jusqu'à cicatrisation et rebiopsier la cicatrice", "image": null },
+                    { "key": "B", "text": "Conclure définitivement à un ulcère bénin", "image": null },
+                    { "key": "C", "text": "Ne plus jamais refaire de gastroscopie", "image": null },
+                    { "key": "D", "text": "Traiter uniquement par IPP sans surveillance endoscopique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Si on ne trouve rien, on n'y croit pas -> on revient, on rebiopsie. On donne un traitement, il cicatrise -> on rebiopsie la cicatrice. S'il ne cicatrise pas... on rebiopsie, parce que c'est un cancer. » Le cancer peut se développer dans l'épaisseur de la paroi et échapper à une biopsie superficielle.",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "ulcere", "diagnostic"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-26",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Comment définit-on, selon le cours, si une tumeur au niveau de la jonction œso-gastrique est classée « cancer du cardia » plutôt que cancer de l'œsophage ou de l'estomac proprement dit ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Selon la position du centre de la tumeur par rapport à la ligne Z (plus de 2 cm en aval = estomac ; moins de 2 cm = cardia)", "image": null },
+                    { "key": "B", "text": "Selon la taille de la tumeur uniquement", "image": null },
+                    { "key": "C", "text": "Selon la présence ou non de symptômes", "image": null },
+                    { "key": "D", "text": "Selon le taux de CA 19-9", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« C'est le centre de la tumeur qui compte. Lorsque le centre de la tumeur est à plus de 2 cm en aval de la ligne Z, on est dans l'estomac, autrement on le considère comme un cardia » (et un épidermoïde ne se voit jamais à plus de 2 cm en aval de la ligne Z).",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "cancer-cardia", "anatomie"]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Adénocarcinome gastrique : diagnostic, extension, traitement",
+              "questions": [
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-27",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une patiente présente une linite gastrique (forme diffuse infiltrante). Que constate-t-on typiquement à l'endoscopie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "On insuffle de l'air et l'estomac ne se distend pas (rigidité pariétale, « microgastrie »), la muqueuse pouvant sembler normale en surface", "image": null },
+                    { "key": "B", "text": "Une masse polypoïde volumineuse et bourgeonnante bien visible", "image": null },
+                    { "key": "C", "text": "Un ulcère creusant de plus de 10 mm, facilement biopsié en une seule fois", "image": null },
+                    { "key": "D", "text": "Un aspect parfaitement normal ne nécessitant aucune biopsie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« On insuffle de l'air. L'estomac ne s'expand pas. C'est ce qu'on appelle une microgastrite... la muqueuse semble être normale » : il faut biopsier en profondeur, parfois plusieurs fois, et recourir à l'écho-endoscopie devant ce défaut d'expansion.",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "linite-gastrique"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-28",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Selon la classification de Lauren, quelle forme histologique du cancer gastrique est associée aux cellules « en bague à chaton » et à un pronostic plus agressif ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La forme diffuse", "image": null },
+                    { "key": "B", "text": "La forme intestinale", "image": null },
+                    { "key": "C", "text": "L'ampullome vatérien", "image": null },
+                    { "key": "D", "text": "Le carcinome fibrolamellaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Les formes diffuses sont plus agressives... associez-les à la linite gastrique, associez-les aux formes infiltratives, associez-les aux cellules en bague à chaton. » Les formes intestinales ont un meilleur pronostic.",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "classification-lauren"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-29",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel examen est décrit comme « le seul examen qui visualise les différentes couches de la paroi gastrique », essentiel pour différencier un cancer superficiel d'un cancer invasif et pour le lymphome gastrique/la linite ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'écho-endoscopie", "image": null },
+                    { "key": "B", "text": "Le scanner thoraco-abdomino-pelvien", "image": null },
+                    { "key": "C", "text": "Le transit œso-gastro-duodénal", "image": null },
+                    { "key": "D", "text": "La scintigraphie osseuse", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Seul examen qui visualise les différentes couches de la paroi gastrique. Différencie les tumeurs superficielles... des tumeurs invasives. » Le scanner, lui, n'est pas bon pour juger l'épaisseur pariétale mais pour l'extension au-delà de la paroi.",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "echo-endoscopie", "bilan-extension"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-30",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Après une gastrectomie totale, quelle carence faut-il systématiquement prévenir par supplémentation ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La vitamine B12", "image": null },
+                    { "key": "B", "text": "La vitamine C", "image": null },
+                    { "key": "C", "text": "Le calcium", "image": null },
+                    { "key": "D", "text": "Le potassium", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Quand on enlève l'estomac, on n'a plus le facteur intrinsèque -> donc il n'y a plus d'absorption de la vitamine B12. Attention à la supplémentation en vitamine B12 chez tous les patients gastrectomisés. »",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "gastrectomie", "vitamine-b12"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-31",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Que signifie « chirurgie en sandwich » dans la prise en charge actuelle du cancer gastrique résécable ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Chimiothérapie néoadjuvante avant la chirurgie, puis chimiothérapie adjuvante après", "image": null },
+                    { "key": "B", "text": "Deux interventions chirurgicales successives sans chimiothérapie", "image": null },
+                    { "key": "C", "text": "Radiothérapie seule avant et après la chirurgie", "image": null },
+                    { "key": "D", "text": "Une seule séance de chimiothérapie juste avant l'opération", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« De nos jours, avant la chirurgie, il faut faire de la chimiothérapie... Donc chimio avant → on opère → chimio après. On l'appelle chirurgie en sandwich. »",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "traitement", "chimiotherapie"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-32",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "D'où proviennent les tumeurs stromales gastro-intestinales (GIST), à la différence de l'adénocarcinome ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "De la musculeuse (4e couche), à partir des cellules de Cajal", "image": null },
+                    { "key": "B", "text": "De la séreuse", "image": null },
+                    { "key": "C", "text": "De l'épithélium de surface, comme l'adénocarcinome", "image": null },
+                    { "key": "D", "text": "Des cellules neuroendocrines ECL", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Il n'y a pas de cancer à partir de la séreuse... Ils s'appellent GIST. Ce sont des tumeurs stromales... qui naissent à partir de la musculeuse, de la 4e couche, des cellules de Kajal (Cajal). Ce ne sont pas des adénocarcinomes. »",
+                  "explanation_media": null,
+                  "tags": ["cm-gastrique", "gist"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "title_fr": "CM - Tumeurs du pancréas et des voies biliaires",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Localiser l'obstacle biliaire et reconnaître le cancer du pancréas",
+              "questions": [
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-33",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une tumeur obstrue le canal hépatique droit ou gauche (en amont de la convergence biliaire). Quelle est la présentation clinique attendue ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Cliniquement rien, avec seulement une cholestase anictérique (bilirubine normale) et une dilatation en amont à l'écho", "image": null },
+                    { "key": "B", "text": "Un ictère franc avec grosse vésicule (signe de Courvoisier-Terrier)", "image": null },
+                    { "key": "C", "text": "Une pancréatite aiguë systématique", "image": null },
+                    { "key": "D", "text": "Une dilatation bi-canalaire (biliaire et pancréatique)", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Une tumeur au niveau du canal hépatique gauche ou droit donne : Cliniquement : rien. En écho : dilatation en amont. Biologie : cholestase anictérique (bilirubine normale). » Une hépatectomie droite reste possible sans ictère.",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "cholangiocarcinome", "anatomie"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-34",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Qu'appelle-t-on le signe de Courvoisier-Terrier ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une grosse vésicule pleine de bile témoignant d'une occlusion néoplasique en aval de l'abouchement du canal cystique", "image": null },
+                    { "key": "B", "text": "Une vésicule plate en cas de tumeur du hile hépatique", "image": null },
+                    { "key": "C", "text": "Une cholestase anictérique isolée", "image": null },
+                    { "key": "D", "text": "Une dilatation exclusive du canal de Wirsung", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Une tumeur depuis l'abouchement du canal cystique jusqu'à l'ampoule de Vater donne... une vésicule qui sera remplie de bile et ça s'appelle cliniquement signe de Courvoisier-Terrier : une grosse vésicule pleine de bile qui témoigne une occlusion néoplasique en aval de l'abouchement du canal cystique. »",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "courvoisier-terrier"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-35",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Parmi les tumeurs des voies biliaires/pancréas, laquelle est la seule qui se présente typiquement comme une masse (« boule ») visible au scanner, avec dilatation bi-canalaire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le cancer du pancréas", "image": null },
+                    { "key": "B", "text": "Le cholangiocarcinome périphérique (extra-hépatique)", "image": null },
+                    { "key": "C", "text": "La tumeur du canal cystique", "image": null },
+                    { "key": "D", "text": "La tumeur du hile (Klatskin)", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Le cancer du pancréas est seul qui donne une boule, une masse tumorale qu'on peut voir sur scan, et une dilatation bi-canalaire. » Les cholangiocarcinomes extra-hépatiques sont des « squeers » (sténoses) difficiles à visualiser directement.",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "cancer-pancreas"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-36",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quel est le seul examen mentionné qui permet de savoir si une baisse du taux de prothrombine (TP) est liée à une carence en vitamine K par cholestase, plutôt qu'à une insuffisance hépatocellulaire (cirrhose) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'administration IV de vitamine K et l'observation d'une correction (cholestase) ou non (cirrhose)", "image": null },
+                    { "key": "B", "text": "Le dosage du CA 19-9", "image": null },
+                    { "key": "C", "text": "L'échographie abdominale seule", "image": null },
+                    { "key": "D", "text": "Le dosage de l'albumine", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Pour savoir si une baisse du taux de prothrombine est liée à une carence de la vitamine K, administration IV de celle-ci : Cholestase → correction du TP ; Cirrhose → pas de correction. » En cholestase, l'absorption entérale de vitamine K est bloquée mais l'IV contourne le problème.",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "biologie", "vitamine-k"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-37",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une pancréatite aiguë survient chez un patient de 55 ans sans cause évidente (pas d'alcool, pas de lithiase). Que faut-il systématiquement rechercher selon le cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une tumeur du pancréas (car le canal de Wirsung peut se boucher)", "image": null },
+                    { "key": "B", "text": "Un ampullome vatérien exclusivement", "image": null },
+                    { "key": "C", "text": "Rien, la pancréatite aiguë après 50 ans est toujours bénigne", "image": null },
+                    { "key": "D", "text": "Une cholangite sclérosante primitive uniquement", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Pancréatite aiguë (toute pancréatite aiguë après 50 ans doit faire évoquer et rechercher une tumeur du pancréas). Parce que le canal de Wirsung qui se bouche dans cette région. »",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "cancer-pancreas", "clinique"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-38",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une thrombose veineuse profonde survient de façon inhabituelle chez un patient jamais opéré ni alité. Que doit-on évoquer ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un syndrome paranéoplasique révélant une néoplasie profonde (pancréas, estomac)", "image": null },
+                    { "key": "B", "text": "Une simple insuffisance veineuse banale", "image": null },
+                    { "key": "C", "text": "Une hépatite virale aiguë", "image": null },
+                    { "key": "D", "text": "Une cholécystite lithiasique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Une apparition soudaine de phlébite chez une personne n'ayant jamais été opérée évoque la recherche d'une néoplasie profonde. Notamment, un cancer du pancréas soit de l'estomac. »",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "syndrome-paraneoplasique"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-39",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle intervention est réalisée pour une tumeur de la tête du pancréas résécable, décrite comme « une des chirurgies les plus lourdes dans le ventre » ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La duodéno-pancréatectomie céphalique (intervention de Whipple)", "image": null },
+                    { "key": "B", "text": "La spléno-pancréatectomie gauche", "image": null },
+                    { "key": "C", "text": "La cholécystectomie simple", "image": null },
+                    { "key": "D", "text": "La sphinctérotomie endoscopique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Tumeur de la tête : Duodéno-Pancréatectomie Céphalique (DPC ou intervention de Whipple). L'intervention de Whipple qui est une des chirurgies les plus lourdes dans le ventre. » La tumeur du corps/queue relève, elle, d'une spléno-pancréatectomie gauche.",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "chirurgie", "whipple"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-40",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Qu'est-ce qui rend une tumeur du pancréas irrésécable même en l'absence de métastase à distance ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'envahissement du pédicule mésentérique supérieur (artère et veine)", "image": null },
+                    { "key": "B", "text": "Une localisation exclusivement céphalique", "image": null },
+                    { "key": "C", "text": "Un taux de CA 19-9 élevé isolément", "image": null },
+                    { "key": "D", "text": "Une taille tumorale inférieure à 2 cm", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Un envahissement du pédicule mésentérique supérieure à ce niveau va rendre cette tumeur irrésécable chirurgicalement même s'il n'y a pas des extensions à distance. »",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "cancer-pancreas", "resecabilite"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-41",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle tumeur biliopancréatique est décrite comme la seule à saigner facilement (méléna, anémie ferriprive) car elle se comporte comme un polype friable pouvant s'ulcérer ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'ampullome vatérien", "image": null },
+                    { "key": "B", "text": "Le cancer du pancréas", "image": null },
+                    { "key": "C", "text": "La tumeur de Klatskin", "image": null },
+                    { "key": "D", "text": "Le cancer des voies biliaires principales", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Donc si je vous dis ictère obstructif avec anémie ou méléna, c'est un ampullome vatérien. Le cancer du pancréas ne va pas saigner, le Klatskin ne va pas saigner... Le seul qui va saigner, c'est l'ampullome vatérien. »",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "ampullome-vaterien"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-42",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Concernant une tumeur kystique mucineuse du pancréas de 5 cm, quelle est l'attitude recommandée, même en l'absence de symptômes ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'exérèse chirurgicale, en raison du risque de dégénérescence en cystadénocarcinome", "image": null },
+                    { "key": "B", "text": "L'abstention thérapeutique systématique", "image": null },
+                    { "key": "C", "text": "Une simple surveillance annuelle sans limite de taille", "image": null },
+                    { "key": "D", "text": "Un traitement uniquement endoscopique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Il faut donc les considérer comme des tumeurs bénignes à potentiel malin. Il faut donc considérer la chirurgie, l'exérèse est la règle même pour les tumeurs non symptomatiques, à cause du risque de cancérisation » (dès qu'elles atteignent 4 cm selon le cours).",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "cystadenome-mucineux"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-43",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Une TIPMP (tumeur intracanalaire papillaire et mucineuse) touche exclusivement le canal de Wirsung (canal principal). Quel est son risque de dégénérescence, et quelle est la conduite à tenir ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Environ 60 % : il faut la réséquer chirurgicalement", "image": null },
+                    { "key": "B", "text": "Environ 15 % : simple surveillance dans tous les cas", "image": null },
+                    { "key": "C", "text": "0 %, jamais de traitement nécessaire", "image": null },
+                    { "key": "D", "text": "100 %, toujours un cancer d'emblée", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« TIPMP touchant uniquement le canal de Wirsung... avec un risque de dégénérescence important (60 %)... il faut toujours les enlever, parce que ça dégénère. » Les canaux secondaires isolés ont un risque plus faible (15 %) et sont souvent surveillés.",
+                  "explanation_media": null,
+                  "tags": ["cm-pancreas-vb", "tipmp"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "title_fr": "CM - Lésions kystiques et solides du foie",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Tumeurs bénignes du foie (hémangiome, HNF, adénome)",
+              "questions": [
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-44",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelle est la tumeur bénigne du foie la plus fréquente, retrouvée fortuitement dans environ 7 % des échographies ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'hémangiome", "image": null },
+                    { "key": "B", "text": "L'hyperplasie nodulaire focale (HNF)", "image": null },
+                    { "key": "C", "text": "L'adénome hépatique", "image": null },
+                    { "key": "D", "text": "Le kyste hydatique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Tumeur bénigne la plus fréquente (7 % des échographies)... souvent la découverte est fortuite devant une échographie » faite pour une autre raison.",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "hemangiome"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-45",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "En imagerie, comment se comporte typiquement un hémangiome hépatique après injection de produit de contraste ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Rehaussement périphérique nodulaire (« en motte ») au temps artériel, puis remplissage progressif et centripète sans wash-out tardif", "image": null },
+                    { "key": "B", "text": "Rehaussement homogène et fugace au temps artériel avec wash-out rapide", "image": null },
+                    { "key": "C", "text": "Aucun rehaussement à aucun temps", "image": null },
+                    { "key": "D", "text": "Rehaussement uniquement au temps tardif sans jamais de remplissage central", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Aspect typique de l'hémangiome : rehaussement périphérique en motte... avec le temps, le rehaussement se fait de façon progressif et centripète... il n'y a pas de lavage de produit de contraste pour les hémangiomes typiques. »",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "hemangiome", "imagerie"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-46",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Qu'est-ce qui caractérise anatomo-pathologiquement l'hyperplasie nodulaire focale (HNF), la faisant décrire comme « du foie dans du foie » ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une lésion lobulée d'hépatocytes séparés par des travées fibreuses, avec une cicatrice centrale vascularisée par une artère", "image": null },
+                    { "key": "B", "text": "Un centre nécrotique et hémorragique vascularisé par des artères périphériques", "image": null },
+                    { "key": "C", "text": "Des cavités bordées de cellules endothéliales remplies de sang", "image": null },
+                    { "key": "D", "text": "Une prolifération de cellules cancéreuses richement vascularisées par la veine porte", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Lésion lobulée formée de nodules d'hépatocytes séparés par des travées fibreuses... cicatrice fibreuse centrale centrée par une artère... l'hyperplasie nodulaire focale est \"du foie dans du foie\". »",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "hnf"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-47",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel facteur de risque majeur est associé à l'adénome hépatique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La prise de contraceptifs oraux (œstrogènes synthétiques)", "image": null },
+                    { "key": "B", "text": "L'alcoolisme chronique", "image": null },
+                    { "key": "C", "text": "L'infection par Helicobacter pylori", "image": null },
+                    { "key": "D", "text": "Le tabagisme uniquement", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Tumeur Hormono-induite (C.O dans 85 %) les fortes doses d'œstrogènes peuvent induire des adénomes qui peuvent saigner ou se cancériser. Les œstrogènes naturelles ne donnent PAS d'adénome, ce sont les œstrogènes synthétiques qui donnent les adénomes. »",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "adenome"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-48",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un homme présente un adénome hépatique asymptomatique. Quelle est la conduite recommandée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Exérèse systématique, car le risque de dégénérescence est multiplié par 10 chez l'homme", "image": null },
+                    { "key": "B", "text": "Simple surveillance, comme chez la femme de moins de 4 cm", "image": null },
+                    { "key": "C", "text": "Abstention thérapeutique définitive", "image": null },
+                    { "key": "D", "text": "Traitement médical par veinotoniques uniquement", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Hommes : Exérèse systématique (risque dégénérescence x10)... chez les hommes il faut toujours l'enlever, même s'ils sont asymptomatiques. » Chez la femme, l'exérèse est réservée aux tumeurs > 4-5 cm ou avec mutation B-caténine.",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "adenome", "traitement"]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Tumeurs malignes du foie et lésions kystiques",
+              "questions": [
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-49",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez un patient cirrhotique, un TP abaissé associé de façon inattendue à un facteur V normal (100 %) doit faire évoquer :",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un hépatocarcinome, qui peut lui-même fabriquer du facteur V", "image": null },
+                    { "key": "B", "text": "Une carence isolée en vitamine K", "image": null },
+                    { "key": "C", "text": "Une hyperplasie nodulaire focale", "image": null },
+                    { "key": "D", "text": "Un simple hémangiome hépatique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Augmentation du facteur 5 : quelqu'un qui a une cirrhose a un TP qui va baisser... mais si associé à un facteur 5 qui est à 100 % doit faire évoquer un hépatocarcinome... L'hépatocarcinome peut lui-même fabriquer du facteur V → signe de poupon. »",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "hepatocarcinome", "biologie"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-50",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Parmi les manifestations suivantes, lesquelles font partie des syndromes paranéoplasiques classiquement décrits avec l'hépatocarcinome ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Érythrocytose (polyglobulie)", "image": null },
+                    { "key": "B", "text": "Hypoglycémie", "image": null },
+                    { "key": "C", "text": "Hypercalcémie", "image": null },
+                    { "key": "D", "text": "Anémie microcytaire isolée", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "« Hépatocarcinome peut s'accompagner d'un syndrome paranéoplasique : Erythrocytose... Hypoglycémie (car il secrète des substances comme l'insuline)... Hypercalcémie (substances PTH-like)... Syndrome de virilisation. » (Le cirrhotique classique a plutôt anémie, leucopénie, thrombopénie.)",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "hepatocarcinome", "syndrome-paraneoplasique"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-51",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la différence de comportement vis-à-vis de la veine porte entre l'hépatocarcinome et le cancer du pancréas envahissant le pédicule mésentérique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'hépatocarcinome pousse à l'intérieur de la veine (thrombus tumoral, dilatation), le cancer du pancréas l'enserre de l'extérieur par fibrose", "image": null },
+                    { "key": "B", "text": "Les deux enserrent la veine de l'extérieur de façon identique", "image": null },
+                    { "key": "C", "text": "Les deux poussent à l'intérieur de la veine de façon identique", "image": null },
+                    { "key": "D", "text": "Aucun des deux n'affecte jamais la veine porte", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Le cancer du pancréas va enserrer la veine porte (ysakkera men barra) alors que l'hépatoK pousse de dedans... ce qui crée des thrombus tumoraux dans les vaisseaux. »",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "hepatocarcinome", "veine-porte"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-52",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quelles sont les caractéristiques distinguant le carcinome fibrolamellaire de l'hépatocarcinome classique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Il se développe sur foie sain, touche les deux sexes avant 50 ans, et l'alpha-fœtoprotéine est normale", "image": null },
+                    { "key": "B", "text": "Il se développe toujours sur cirrhose et touche presque uniquement les hommes de plus de 60 ans", "image": null },
+                    { "key": "C", "text": "L'alpha-fœtoprotéine est toujours très élevée", "image": null },
+                    { "key": "D", "text": "Il n'a jamais de cicatrice centrale visible en imagerie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Fibrolamellaire, retenez, c'est une variété des hépatocarcinomes : le foie est sain, elle touche également les deux sexes [avant 50 ans], AFP normale. » Sa cicatrice centrale (calcifiée, hyposignal T2) peut prêter à confusion avec une HNF.",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "carcinome-fibrolamellaire"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-53",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un kyste biliaire simple contient typiquement quel type de liquide, malgré son nom ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un liquide séreux, sécrété par l'épithélium biliaire qui le borde, sans communication avec l'arbre biliaire ni la bile elle-même", "image": null },
+                    { "key": "B", "text": "De la bile pure venant directement du canal hépatique", "image": null },
+                    { "key": "C", "text": "Du pus en permanence", "image": null },
+                    { "key": "D", "text": "Des vésicules filles parasitaires", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Cavité unique renfermant un liquide séreux bordée par un épithélium biliaire sans communication avec l'arbre biliaire... quel est le contenu du kyste biliaire ? Il est vide [de bile]... contenu séreux car bordé d'un épithélium biliaire. »",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "kyste-biliaire"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-54",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi la ponction simple d'un kyste biliaire symptomatique n'est-elle pas un traitement définitif ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Parce que l'épithélium biliaire continue à sécréter du liquide, entraînant une récidive quasi systématique", "image": null },
+                    { "key": "B", "text": "Parce que la ponction est toujours mortelle", "image": null },
+                    { "key": "C", "text": "Parce que le kyste communique directement avec l'arbre biliaire", "image": null },
+                    { "key": "D", "text": "Parce qu'elle nécessite une anesthésie générale prolongée", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Le problème avec la ponction est qu'après l'avoir réalisée, le kyste se reforme... l'épithélium biliaire continue à sécréter du liquide... si l'on vous propose la ponction, c'est à éviter, car la ponction entraîne une récidive à 100 %. » La fenestration est préférée.",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "kyste-biliaire", "traitement"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-55",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Comment se transmet typiquement le kyste hydatique du foie à l'homme, hôte accidentel (« impasse parasitaire ») ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Par ingestion d'œufs (végétaux souillés par des selles de chien, ou contact avec le pelage d'un chien contaminé)", "image": null },
+                    { "key": "B", "text": "Par piqûre d'insecte", "image": null },
+                    { "key": "C", "text": "Par voie sexuelle uniquement", "image": null },
+                    { "key": "D", "text": "Par simple contact avec de la viande de mouton cuite", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Le chien souille les légumes... en mangeant ces végétaux, vous contractez la maladie hydatique... deuxième mode de contamination : le chien se nettoie en se léchant le pelage. Si vous touchez ce pelage... et mettez votre main dans la bouche, vous risquez de développer un kyste hydatique. »",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "kyste-hydatique"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-56",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quelle est la complication la plus fréquente et redoutée d'un kyste hydatique du foie qui s'érode dans les voies biliaires ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une fistule bilio-kystique avec obstruction et dilatation des voies biliaires", "image": null },
+                    { "key": "B", "text": "Une transformation systématique en cholangiocarcinome", "image": null },
+                    { "key": "C", "text": "Une disparition spontanée du kyste sans séquelle", "image": null },
+                    { "key": "D", "text": "Une hypoglycémie sévère", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« La complication principale d'un kyste hydatique est la fistule dans les voies biliaires. Les vésicules descendent dans la voie biliaire, provoquant une obstruction similaire à celle causée par des calculs... entraînant la dilatation des voies biliaires. »",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "kyste-hydatique", "complications"]
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-real-57",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Vrai ou faux : lorsqu'on opère un cancer secondaire (métastase) du foie, il n'existe pas de résection hépatique à but purement palliatif — l'objectif est toujours de tout retirer (« nettoyer » le patient).",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "« Il n'y a pas de résection hépatique à but palliatif, ça n'existe pas. Mais quand on opère un foie, c'est pour tout enlever » : la chirurgie des métastases hépatiques n'est indiquée que si toutes les lésions (hépatiques et extra-hépatiques) sont réséquables.",
+                  "explanation_media": null,
+                  "tags": ["cm-foie", "metastases-hepatiques", "chirurgie"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

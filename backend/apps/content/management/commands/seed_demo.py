@@ -5,6 +5,12 @@ backend/seed/demo_content.json) : le seed prouve le pipeline et sert
 d'exemple vivant du schéma canonique pour le propriétaire.
 
 Les phases 3/4 étendent ce fichier : seed_gamification() / seed_social().
+
+Contenu "Examens de Spécialité" (2026-07) : le contenu réel (backend/seed/specialite/*.json,
+12 fichiers) a remplacé l'ancien placeholder synthétique (backend/seed/demo_specialite.json,
+conservé comme référence historique — voir apps/content/management/commands/
+replace_specialite_content.py, SPECIALITE_FILES). Un fresh-DB seed_demo importe donc
+directement le contenu réel, comme la base dev déjà migrée.
 """
 import tempfile
 from pathlib import Path
@@ -15,10 +21,11 @@ from django.core.management.base import BaseCommand
 
 from apps.accounts.models import Faculty, Profile, User
 from apps.accounts.services import create_user_with_satellites
+from apps.content.management.commands.replace_specialite_content import SEED_DIR as SPECIALITE_SEED_DIR
+from apps.content.management.commands.replace_specialite_content import SPECIALITE_FILES
 from apps.content.models import ProgramSemester, ProgramYear, Track
 
 SEED_FILE = Path(settings.BASE_DIR) / "seed" / "demo_content.json"
-SEED_FILE_SPECIALITE = Path(settings.BASE_DIR) / "seed" / "demo_specialite.json"
 
 # Autoritaire : les migrations content.0003_seed_tracks_and_backfill créent déjà ces
 # lignes. Répété ici en idempotent (get_or_create) pour couvrir une base sans migration
@@ -128,9 +135,18 @@ class Command(BaseCommand):
                 tmp,
                 stdout=self.stdout,
             )
-        # Contenu "Examens de Spécialité" — même pipeline d'import, aucun média requis
-        # (pas d'image/vidéo dans ce fichier ; --media-dir par défaut = dossier du fichier).
-        call_command("import_exam", str(SEED_FILE_SPECIALITE), stdout=self.stdout)
+        # Contenu "Examens de Spécialité" — contenu réel (12 matières), même pipeline
+        # d'import, aucun média requis (pas d'image/vidéo dans ces fichiers ; --media-dir
+        # par défaut = dossier du fichier). Idempotent : import_exam upsert par
+        # external_id / skip par content_hash, donc un import répété ne double rien.
+        for slug, filename in SPECIALITE_FILES.items():
+            path = SPECIALITE_SEED_DIR / filename
+            if not path.is_file():
+                self.stdout.write(
+                    self.style.WARNING(f"[{slug}] fichier de contenu réel introuvable : {path} — ignoré.")
+                )
+                continue
+            call_command("import_exam", str(path), stdout=self.stdout)
 
     def seed_users(self):
         if settings.DEBUG and not User.objects.filter(username="admin").exists():

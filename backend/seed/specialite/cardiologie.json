@@ -1,0 +1,1012 @@
+{
+  "schema_version": "1.0",
+  "subjects": [
+    {
+      "slug": "specialite-cardiologie",
+      "name_fr": "Cardiologie",
+      "track": "specialite",
+      "program_year": { "name": "M1 - 4e année", "order": 1 },
+      "program_semester": { "name": "S2", "order": 2 },
+      "units": [
+        {
+          "order": 1,
+          "title_fr": "ED1 - Valvulopathies mitrales",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Rétrécissement et insuffisance mitrale",
+              "questions": [
+                {
+                  "external_id": "specialite-cardiologie-real-1",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Que signifie le terme « maladie mitrale » ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'association d'un rétrécissement mitral (RM) et d'une insuffisance mitrale (IM), les deux étant sévères ou moyens", "image": null },
+                    { "key": "B", "text": "Une sténose mitrale isolée, même avec une IM minime associée", "image": null },
+                    { "key": "C", "text": "Une insuffisance mitrale isolée avec une sténose minime associée", "image": null },
+                    { "key": "D", "text": "Toute atteinte simultanée de la valve mitrale et de la valve aortique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la maladie mitrale correspond à un RM + une IM associés, quand les deux sont sévères ou moyens ensemble ; si l'un des deux domine largement, on parle seulement de RM ou seulement d'IM.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-2",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une patiente de 35 ans avec antécédent de RAA dans l'enfance présente une maladie mitrale qui se décompense pendant sa grossesse. Quelle est l'explication physiopathologique de cette décompensation ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La grossesse double presque le débit sanguin cardiaque, ce qui aggrave l'HTAP et la dyspnée en présence de l'obstacle du RM", "image": null },
+                    { "key": "B", "text": "La grossesse provoque une fibrose accélérée des commissures mitrales", "image": null },
+                    { "key": "C", "text": "La grossesse cause une hypercoagulabilité qui bouche directement l'orifice mitral", "image": null },
+                    { "key": "D", "text": "La grossesse diminue le débit cardiaque, ce qui réduit la précharge et aggrave le RM", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que durant la grossesse le débit cardiaque peut presque doubler physiologiquement ; combiné à l'obstacle du RM, tout s'aggrave (HTAP, dyspnée) — la grossesse est une situation classique de décompensation de la maladie mitrale.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-3",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Parmi les situations suivantes, lesquelles peuvent décompenser une sténose mitrale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Grossesse", "image": null },
+                    { "key": "B", "text": "Hyperthyroïdie", "image": null },
+                    { "key": "C", "text": "Fibrillation auriculaire", "image": null },
+                    { "key": "D", "text": "Hypothyroïdie profonde et chronique", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Retiens les situations classiques de décompensation d'une sténose mitrale : grossesse, hyperthyroïdie, anémie, fièvre et fibrillation auriculaire — cette dernière est particulièrement délétère car le remplissage ventriculaire dépend surtout de la systole auriculaire quand il y a une sténose.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-4",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi une fibrillation auriculaire décompense-t-elle beaucoup plus un patient porteur d'une sténose mitrale qu'un sujet normal ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Car chez le patient sténosé, le remplissage ventriculaire ne peut pas se faire dès le début de la diastole à cause de la sténose, et dépend donc davantage de la contraction auriculaire perdue lors de la FA", "image": null },
+                    { "key": "B", "text": "Car la FA provoque systématiquement un rétrécissement supplémentaire de la valve", "image": null },
+                    { "key": "C", "text": "Car la FA augmente la surface de l'orifice mitral", "image": null },
+                    { "key": "D", "text": "Car la FA n'a aucun effet particulier chez ces patients", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que chez un sujet normal, le remplissage se fait surtout en début de diastole, avant la contraction auriculaire ; chez un patient avec sténose, ce remplissage précoce est gêné par l'obstacle, donc la FA (qui supprime la contraction auriculaire) décompense beaucoup plus le sujet sténosé.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-5",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quels bruits caractérisent l'auscultation d'une sténose mitrale, dans l'ordre ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "B1 éclatant, B2 éclatant, claquement d'ouverture mitrale après B2, roulement diastolique avec renforcement pré-systolique", "image": null },
+                    { "key": "B", "text": "Souffle holosystolique irradiant à l'aisselle, puis B2 aboli", "image": null },
+                    { "key": "C", "text": "Souffle mésosystolique losangique irradiant aux carotides", "image": null },
+                    { "key": "D", "text": "B1 diminué, souffle protodiastolique decrescendo au bord gauche du sternum", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens la séquence typique de la sténose mitrale : B1 éclatant (fermeture brutale de la valve rigide), B2 éclatant (HTAP), claquement d'ouverture mitrale, puis roulement diastolique renforcé en présystole sauf en cas de fibrillation auriculaire.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-6",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Le souffle de l'insuffisance mitrale est un souffle holosystolique qui commence dès B1 et se termine à B2, car la valve mitrale insuffisante laisse refluer du sang vers l'oreillette gauche dès le début de la systole.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que le souffle de l'IM dure toute la systole (holosystolique), contrairement au souffle mésosystolique de la sténose aortique qui ne débute qu'après l'ouverture de la valve aortique.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-7",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Un patient présente une IM par prolapsus de la valve mitrale POSTÉRIEURE. Vers où irradie typiquement le souffle, et pourquoi ce piège est important ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vers la base du cœur, car le jet de régurgitation est orienté vers le haut — ce trajet peut être confondu avec celui du souffle de la sténose aortique", "image": null },
+                    { "key": "B", "text": "Vers l'aisselle, comme dans toute IM sans exception", "image": null },
+                    { "key": "C", "text": "Vers le dos, comme une dissection aortique", "image": null },
+                    { "key": "D", "text": "Il n'irradie jamais dans ce cas particulier", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens ce piège classique : en cas de prolapsus de la valve postérieure, le jet remonte vers la base du cœur, empruntant le même trajet apparent que le souffle de la sténose aortique — il faut différencier par la durée du souffle (holosystolique pour l'IM, mésosystolique pour la SA).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-8",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Selon la classification de Carpentier, quel type correspond à une insuffisance mitrale « fonctionnelle » où l'anneau et le ventricule gauche sont dilatés mais les feuillets valvulaires sont normaux ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Type I (mouvement normal des feuillets)", "image": null },
+                    { "key": "B", "text": "Type II (mouvement excessif, prolapsus)", "image": null },
+                    { "key": "C", "text": "Type III (mouvement restrictif)", "image": null },
+                    { "key": "D", "text": "Aucun type ne s'applique aux IM secondaires", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'IM fonctionnelle (secondaire à une dilatation du VG ou de l'anneau) est classée Type I de Carpentier : les feuillets bougent normalement, c'est la dilatation de l'anneau qui empêche la coaptation.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-9",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi l'AVC est-il beaucoup plus fréquent dans le rétrécissement mitral que dans l'insuffisance mitrale ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Dans le RM il y a une double stase (obstacle + fibrillation auriculaire) favorisant les caillots dans l'oreillette gauche dilatée, alors que dans l'IM la régurgitation « lave » constamment l'oreillette", "image": null },
+                    { "key": "B", "text": "L'IM provoque toujours un rétrécissement associé qui protège contre les caillots", "image": null },
+                    { "key": "C", "text": "Le RM ne dilate jamais l'oreillette gauche", "image": null },
+                    { "key": "D", "text": "L'AVC est en réalité aussi fréquent dans les deux pathologies", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans le RM la stase est double (obstacle + FA), ce qui en fait une maladie très emboligène nécessitant des anticoagulants ; alors que dans l'IM, le lavage constant de l'oreillette par la régurgitation prévient la stagnation et rend l'AVC rare.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-10",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Dans le rétrécissement mitral pur, il n'y a pas de véritable insuffisance ventriculaire gauche, car le ventricule gauche lui-même n'est pas malade — le problème se situe dans le remplissage.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux" , "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens cette notion soulignée par le professeur : si on te demande s'il y a une insuffisance cardiaque « ventriculaire gauche » dans le RM, c'est FAUX — le VG n'est pas malade, c'est le volume d'éjection systolique qui est réduit par le trouble du remplissage.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "valvulopathie-mitrale"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "title_fr": "ED2 - Valvulopathies aortiques",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Rétrécissement et insuffisance aortique",
+              "questions": [
+                {
+                  "external_id": "specialite-cardiologie-real-11",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelles sont les 3 causes les plus fréquentes de rétrécissement aortique (RA) de l'adulte ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Dégénérescence valvulaire (maladie de Monckeberg), bicuspidie, RAA", "image": null },
+                    { "key": "B", "text": "Endocardite, dissection aortique, syphilis", "image": null },
+                    { "key": "C", "text": "HTA, coarctation de l'aorte, syndrome de Laubry-Pezzi", "image": null },
+                    { "key": "D", "text": "Spondylarthrite ankylosante, Marfan, Ehlers-Danlos", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens les 3 causes principales du RA de l'adulte : la dégénérescence valvulaire calcifiante (la plus fréquente, >65 ans), la bicuspidie (flux turbulent qui calcifie la valve avec le temps), et le RAA (fusion des commissures).",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-12",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "À partir de quelle surface aortique indexée parle-t-on de rétrécissement aortique « serré » ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Moins de 0,6 cm²/m² de surface corporelle (ou moins de 1 cm² en valeur absolue)", "image": null },
+                    { "key": "B", "text": "Moins de 2 cm²/m²", "image": null },
+                    { "key": "C", "text": "Moins de 3 cm²/m²", "image": null },
+                    { "key": "D", "text": "La sévérité ne dépend jamais de la surface, seulement du gradient", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la surface aortique normale est de 3-4 cm² ; on parle de RA serré en dessous de 1 cm² (ou 0,6 cm²/m² indexé à la surface corporelle) — au-dessus de 2 cm², il n'y a pas de gradient significatif.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-13",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Comment se comporte le souffle du rétrécissement aortique après une extrasystole longue, et comment cela permet-il de le différencier du souffle de l'IM ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le souffle du RA augmente après une extrasystole longue (loi de Starling, gradient augmenté), alors que le souffle de l'IM reste inchangé car son gradient est déjà maximal", "image": null },
+                    { "key": "B", "text": "Le souffle du RA diminue toujours après une extrasystole", "image": null },
+                    { "key": "C", "text": "Les deux souffles augmentent de façon identique", "image": null },
+                    { "key": "D", "text": "Aucun des deux souffles n'est modifié par une extrasystole", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens ce test clinique classique : après une extrasystole longue, le remplissage augmente et le souffle du RA augmente (loi de Starling) tandis que le souffle de l'IM reste identique, son gradient étant déjà maximal — c'est un bon moyen de confirmer un souffle de RA.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-14",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quel est le pronostic (espérance de vie approximative) d'un rétrécissement aortique symptomatique selon le stade d'insuffisance cardiaque atteint, d'après l'ED ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Environ 2 ans au stade d'insuffisance ventriculaire gauche (IVG), et environ 6 mois au stade d'insuffisance ventriculaire droite (IVD)", "image": null },
+                    { "key": "B", "text": "5 ans quel que soit le stade", "image": null },
+                    { "key": "C", "text": "10 ans au stade IVG et 5 ans au stade IVD", "image": null },
+                    { "key": "D", "text": "Le pronostic n'est jamais affecté par le stade d'insuffisance cardiaque", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens ces repères pronostiques discutés en ED : quand le RA arrive au stade d'IVG, l'espérance de vie est d'environ 2 ans ; au stade d'IVD, elle chute à environ 6 mois — mais il faut opérer quel que soit le stade car ça récupère mieux que dans l'IA.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-15",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi le souffle de l'insuffisance aortique (IA) est-il maximal juste après B2 et diminue-t-il progressivement ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Car le gradient de pression aorte-VG est maximal juste après la fermeture de la valve aortique, puis diminue progressivement jusqu'à ce que les pressions s'égalisent avant l'ouverture des sigmoïdes", "image": null },
+                    { "key": "B", "text": "Car le souffle de l'IA est toujours d'intensité constante", "image": null },
+                    { "key": "C", "text": "Car le gradient de pression augmente progressivement tout au long de la diastole", "image": null },
+                    { "key": "D", "text": "Ce souffle n'a aucun rapport avec un gradient de pression", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que le souffle diastolique de l'IA commence à B2 avec un gradient de pression maximal (donc intensité maximale), puis diminue « en decrescendo » à mesure que les pressions aorte-VG s'équilibrent, jusqu'à s'annuler juste avant l'ouverture des sigmoïdes.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-16",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Parmi les signes périphériques suivants, lesquels sont classiquement décrits dans l'insuffisance aortique importante (dus à l'écart de la différentielle systole-diastole) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Signe de Musset (hochement rythmique de la tête)", "image": null },
+                    { "key": "B", "text": "Double souffle de Durozier", "image": null },
+                    { "key": "C", "text": "Signe de Traube (bruits « en pistolet » à l'artère fémorale)", "image": null },
+                    { "key": "D", "text": "Reflux hépato-jugulaire", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Retiens les signes périphériques classiques de l'IA importante liés à l'hyperpulsatilité artérielle : signe de Musset, double souffle de Durozier, signe de Traube, signe de la manchette de Riva-Rocci et pouls unguéal — le reflux hépato-jugulaire est un signe d'insuffisance cardiaque droite, pas un signe périphérique de l'IA.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-17",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Dans l'insuffisance aortique aiguë (par exemple par endocardite ou dissection), le muscle ventriculaire n'a pas eu le temps de développer une compliance : la pression télédiastolique du VG augmente brutalement, ce qui peut conduire à un OAP et un choc cardiogénique, avec un souffle diastolique paradoxalement minime.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans l'IA aiguë, contrairement à l'IA chronique, il n'y a pas eu le temps de dilatation compensatrice : le gradient de pression aorte-VG est faible, donc le souffle est minime, alors même que le tableau clinique (OAP, choc) est grave.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-18",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Un patient a une dissection aortique aiguë sur une valve tricuspide. À partir de quel diamètre aortique parle-t-on d'anévrisme nécessitant d'envisager une opération, selon le seuil (« cut-off ») donné en ED pour une valve tricuspide ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "55 mm (contre 50 mm pour une valve bicuspide, et encore moins pour le syndrome de Marfan)", "image": null },
+                    { "key": "B", "text": "37-38 mm pour toute valve", "image": null },
+                    { "key": "C", "text": "70 mm quelle que soit la valve", "image": null },
+                    { "key": "D", "text": "Il n'existe pas de seuil validé", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens ces seuils opératoires : le diamètre aortique normal va jusqu'à 37-38 mm ; le cut-off pour opérer est de 50 mm sur valve bicuspide et de 55 mm sur valve tricuspide (encore moins pour le Marfan), car le risque principal de l'anévrisme est la dissection.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-19",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la complication spécifique du rétrécissement aortique évoquée en ED (illustrée par une image d'autopsie montrant un embole calcaire dans l'IVA) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'embolie calcaire", "image": null },
+                    { "key": "B", "text": "L'embolie gazeuse", "image": null },
+                    { "key": "C", "text": "L'embolie graisseuse", "image": null },
+                    { "key": "D", "text": "L'embolie septique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'embolie calcaire est une complication spécifique du RA (calcifications de la valve qui se détachent et embolisent), en plus des complications communes (mort subite, insuffisance cardiaque, troubles de conduction/rythme).",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-20",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi une syncope d'effort chez un patient avec RA serré signe-t-elle un tournant pronostique grave imposant une chirurgie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Car à l'effort, le débit ne peut pas augmenter à cause de l'obstacle fixe, ce qui entraîne une hypoperfusion cérébrale pouvant aller jusqu'à la mort subite", "image": null },
+                    { "key": "B", "text": "Car la syncope d'effort dans le RA est toujours bénigne et sans rapport avec la valve", "image": null },
+                    { "key": "C", "text": "Car elle indique systématiquement une hypoglycémie", "image": null },
+                    { "key": "D", "text": "Car elle est due à une sténose carotidienne isolée", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans le RA, l'effort exige plus de débit mais la surface fixe de l'orifice empêche cette adaptation ; le débit cérébral chute alors, provoquant une syncope — la mort subite est la première complication redoutée du RA.",
+                  "explanation_media": null,
+                  "tags": ["ED2", "valvulopathie-aortique"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "title_fr": "ED3 - Insuffisance cardiaque",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Définitions, physiopathologie et diagnostic",
+              "questions": [
+                {
+                  "external_id": "specialite-cardiologie-real-21",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelle est la relation exacte entre « insuffisance cardiaque » et « cardiomyopathie dilatée » (CMD) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La CMD fait partie de l'insuffisance cardiaque : on ne peut pas avoir de CMD sans insuffisance cardiaque, mais on peut avoir une insuffisance cardiaque sans CMD", "image": null },
+                    { "key": "B", "text": "Ce sont des synonymes stricts", "image": null },
+                    { "key": "C", "text": "L'insuffisance cardiaque fait toujours partie de la CMD", "image": null },
+                    { "key": "D", "text": "Aucun lien entre les deux entités", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens cette hiérarchie précisée en ED : l'insuffisance cardiaque est la maladie mère, la CMD (comme la sténose mitrale) en est une des causes possibles — on peut avoir une IC sans CMD (ex. sténose mitrale) mais pas de CMD sans IC.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-22",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une patiente de 64 ans avec dyspnée, orthopnée et OMI a une échocardiographie montrant un VG dilaté avec FE à 20%. Quel type d'insuffisance cardiaque cela évoque-t-il ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "HFrEF (Heart Failure with reduced Ejection Fraction), typiquement une cardiomyopathie dilatée hypokinétique", "image": null },
+                    { "key": "B", "text": "HFpEF (fraction d'éjection préservée)", "image": null },
+                    { "key": "C", "text": "Une insuffisance cardiaque exclusivement diastolique", "image": null },
+                    { "key": "D", "text": "Une pathologie purement valvulaire sans atteinte du muscle", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'une FE effondrée (ici 20%) avec VG dilaté correspond à une IC systolique (HFrEF), aussi appelée cardiomyopathie dilatée hypokinétique — mais attention, avant de parler de CMD comme maladie, il faut éliminer une cause ischémique post-infarctus, qui est la cause la plus fréquente d'un VG dilaté hypokinétique.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-23",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Parmi les caractéristiques suivantes, lesquelles décrivent les œdèmes cardiaques (OMI) typiques de l'insuffisance cardiaque ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Blancs (non inflammatoires)", "image": null },
+                    { "key": "B", "text": "Mous, prenant le godet", "image": null },
+                    { "key": "C", "text": "Déclives et symétriques", "image": null },
+                    { "key": "D", "text": "Rouges, chauds et douloureux", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Retiens que les œdèmes cardiaques sont blancs, mous (prenant le godet), déclives (membres inférieurs ou zone lombaire si alité), indolores et symétriques — des œdèmes rouges/chauds/douloureux orientent plutôt vers une cause inflammatoire ou infectieuse locale.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-24",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Comment différencier la dyspnée de l'insuffisance cardiaque gauche (ICG) de celle de l'insuffisance cardiaque droite (ICD) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Dans l'ICG elle est due à l'augmentation des pressions veineuses pulmonaires (œdème, gêne aux échanges gazeux) ; dans l'ICD elle est due à la diminution du débit cardiaque", "image": null },
+                    { "key": "B", "text": "La dyspnée n'existe que dans l'ICG", "image": null },
+                    { "key": "C", "text": "La dyspnée n'existe que dans l'ICD", "image": null },
+                    { "key": "D", "text": "Les deux mécanismes sont strictement identiques", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la dyspnée dans l'ICG s'explique par l'augmentation des pressions veineuses pulmonaires (l'eau alourdit les poumons, gêne les échanges gazeux), alors que dans l'ICD elle s'explique par la baisse du débit — les crépitants pulmonaires sont spécifiques de l'ICG, la turgescence jugulaire et le reflux hépato-jugulaire spécifiques de l'ICD.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-25",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Sur la courbe de Frank-Starling, à quelle pression télédiastolique du VG (PTDVG) le volume d'éjection systolique (VES) est-il maximal, avant qu'une augmentation supplémentaire ne devienne délétère ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "16-18 mmHg (au-delà, on doit donner des diurétiques pour diminuer la précharge)", "image": null },
+                    { "key": "B", "text": "12 mmHg exactement, jamais plus", "image": null },
+                    { "key": "C", "text": "40 mmHg", "image": null },
+                    { "key": "D", "text": "5 mmHg", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la PTDVG normale est de 12 mmHg, mais le VES maximal est atteint pour une PTDVG de 16-18 mmHg ; au-delà de ce pic, la loi de Starling s'inverse et il faut donner des diurétiques pour réduire la précharge et restaurer une contraction optimale.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-26",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel est l'intérêt diagnostique principal du dosage du BNP ou NT-proBNP devant une dyspnée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Sa sensibilité est très élevée et sa valeur prédictive négative forte : un taux négatif élimine une insuffisance cardiaque", "image": null },
+                    { "key": "B", "text": "Il permet de localiser précisément la coronaire atteinte", "image": null },
+                    { "key": "C", "text": "Il remplace systématiquement l'échocardiographie", "image": null },
+                    { "key": "D", "text": "Il n'a aucune valeur pronostique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que le BNP/NT-proBNP a une sensibilité très élevée avec une forte VPN (négatif = élimine l'IC) ; une valeur très élevée (10x la normale) oriente fortement vers une IC, et le suivi de ses valeurs aide à monitorer la réponse au traitement et le pronostic.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-27",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "La rétention hydrosodée par activation du SRAA est un mécanisme compensateur de l'insuffisance cardiaque qui, à la longue, devient délétère car l'augmentation excessive de la précharge peut entraîner une baisse paradoxale du débit cardiaque.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que les mécanismes compensateurs de l'IC (stimulation sympathique, vasoconstriction périphérique, rétention hydrosodée par le SRAA) aident initialement, mais deviennent délétères à la longue — la rétention hydrosodée en excès dépasse le point optimal de la courbe de Starling et fait chuter le débit.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-28",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelles sont les 3 causes classiques d'hypertrophie du ventricule gauche citées en ED ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Cardiomyopathie hypertrophique (CMH), sténose (aortique), HTA", "image": null },
+                    { "key": "B", "text": "Insuffisance mitrale, endocardite, myocardite virale", "image": null },
+                    { "key": "C", "text": "Cardiomyopathie dilatée, péricardite, embolie pulmonaire", "image": null },
+                    { "key": "D", "text": "Amylose, anémie, hyperthyroïdie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens les 3 causes classiques d'hypertrophie du VG : la cardiomyopathie hypertrophique, la sténose (surcharge de pression comme le RA), et l'HTA — toutes trois imposent au VG de générer plus de force contre un obstacle ou une résistance accrue.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-29",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi entend-on un « bruit de galop » de sommation (B3+B4) chez un patient en décompensation cardiaque aiguë ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La tachycardie raccourcit la diastole, ce qui rapproche B3 (remplissage rapide) et B4 (systole auriculaire) au point qu'ils se superposent", "image": null },
+                    { "key": "B", "text": "B3 et B4 sont toujours entendus séparément quelle que soit la fréquence cardiaque", "image": null },
+                    { "key": "C", "text": "Ce bruit est dû uniquement à une valve mitrale calcifiée", "image": null },
+                    { "key": "D", "text": "Ce bruit n'a aucune valeur diagnostique en IC", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'en insuffisance cardiaque, la tachycardie raccourcit la diastole et fait fusionner B3 et B4 en un galop de sommation — un signe auscultatoire caractéristique de la décompensation.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-30",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est l'utilité principale de la radiographie du thorax dans le bilan étiologique de l'insuffisance cardiaque, selon l'ED ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Elle n'a aucun intérêt étiologique ; elle sert seulement à voir les surcharges pulmonaires ou à orienter vers une cause pulmonaire associée", "image": null },
+                    { "key": "B", "text": "Elle permet à elle seule de poser le diagnostic étiologique de la CMD", "image": null },
+                    { "key": "C", "text": "Elle remplace l'échocardiographie", "image": null },
+                    { "key": "D", "text": "Elle mesure directement la fraction d'éjection", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la radio thorax n'a aucun intérêt étiologique dans l'IC — elle sert à visualiser les surcharges pulmonaires, ou est utile si la clinique oriente plutôt vers une affection pulmonaire associée (toux, crachats).",
+                  "explanation_media": null,
+                  "tags": ["ED3", "insuffisance-cardiaque"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "title_fr": "ED4 - Syncope et bradyarythmies",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Diagnostic différentiel et BAV",
+              "questions": [
+                {
+                  "external_id": "specialite-cardiologie-real-31",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quels sont les 3 critères qui définissent une perte de connaissance brève (TLOC) à l'interrogatoire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Perte de connaissance totale, brève, avec réveil spontané sans intervention externe", "image": null },
+                    { "key": "B", "text": "Perte de connaissance prolongée avec amnésie totale", "image": null },
+                    { "key": "C", "text": "Chute avec traumatisme crânien uniquement", "image": null },
+                    { "key": "D", "text": "Confirmation obligatoire par un examen paraclinique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens ces 3 critères de la TLOC (Transient Loss Of Consciousness) : perte de connaissance totale, brève, avec un réveil spontané sans intervention — un arrêt cardiaque ressuscité par un choc n'est PAS une TLOC, c'est une mort subite ressuscitée.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-32",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quels éléments cliniques orientent vers une syncope plutôt qu'une crise d'épilepsie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Pâleur pendant l'épisode", "image": null },
+                    { "key": "B", "text": "Absence de morsure de la langue", "image": null },
+                    { "key": "C", "text": "Récupération rapide, sans confusion prolongée", "image": null },
+                    { "key": "D", "text": "Présence d'une aura (hallucination visuelle ou auditive) avant l'épisode", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Retiens que la syncope se distingue par : pâleur (vs rouge/bleu en épilepsie), absence de morsure de langue, récupération rapide sans amnésie prolongée, et absence d'aura — l'aura oriente au contraire vers une crise épileptique.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-33",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Qu'est-ce qu'une « syncope à l'emporte-pièce », et quel est son mécanisme typique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une syncope sans aucun prodrome, due à une chute de tension soudaine (ex. BAV complet, passage de tension de 12 à 0 d'un battement à l'autre) ; elle est très traumatisante", "image": null },
+                    { "key": "B", "text": "Une syncope précédée systématiquement de nausées prolongées", "image": null },
+                    { "key": "C", "text": "Une syncope toujours bénigne et sans gravité", "image": null },
+                    { "key": "D", "text": "Une syncope uniquement d'origine psychogène", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la syncope à l'emporte-pièce survient sans aucun symptôme précurseur, par chute de tension soudaine (typiquement un BAV) — elle est doublement grave car traumatisante (le patient n'a pas le temps de se retenir) et car ses causes sont plus sévères.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-34",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une sténose carotidienne isolée, sans accident vasculaire cérébral associé, ne peut pas expliquer à elle seule une syncope, car les 4 axes vasculaires cérébraux sont interconnectés.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens ce point insisté en ED : à cause de l'interconnexion des 4 axes vasculaires cérébraux, il faudrait qu'ils s'occluent tous simultanément pour expliquer une syncope — un scénario presque impossible ; la sténose carotidienne isolée n'est donc pas une cause de syncope.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-35",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient de 77 ans a un souffle systolique 2/6 au foyer aortique. Que faut-il évoquer devant l'association syncope + souffle systolique aortique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un rétrécissement aortique (RAC) ou une cardiomyopathie obstructive (CMO)", "image": null },
+                    { "key": "B", "text": "Une sténose carotidienne isolée", "image": null },
+                    { "key": "C", "text": "Une hypoglycémie", "image": null },
+                    { "key": "D", "text": "Une cataplexie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens la règle mnémotechnique de l'ED : « Syncope + Souffle => RAC/CMO » — mais attention, comme dans le cas discuté, il faut vérifier que le RA est serré ET que la syncope survient à l'effort pour que le RA en soit vraiment responsable.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-36",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Un patient présente un bloc de branche droit complet associé à un hémibloc antéro-supérieur gauche, avec des QRS larges au rythme sinusal. Pourquoi est-il possible que ce patient développe un BAV complet infra-hissien, alors qu'un patient avec des QRS fins à la base ne le pourrait pas ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un bloc infra-hissien nécessite qu'il y ait déjà un trouble de conduction dans au moins une branche ; des QRS fins au rythme sinusal signifient que les 3 branches (droite, hémibranches antérieure et postérieure gauches) sont intactes, rendant un bloc infra-hissien impossible", "image": null },
+                    { "key": "B", "text": "N'importe quel patient peut développer un BAV infra-hissien, indépendamment de la morphologie du QRS de base", "image": null },
+                    { "key": "C", "text": "Le siège du bloc ne dépend jamais de l'état des branches de conduction", "image": null },
+                    { "key": "D", "text": "Les QRS larges excluent systématiquement un problème de conduction infra-hissien", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens ce raisonnement clé de l'ED : si à la base le patient a des QRS fins au rythme sinusal, un bloc infra-hissien est impossible car il faudrait d'abord un bloc de branche initial ; à l'inverse, des QRS larges (comme chez ce patient avec bloc droit + hémibloc) rendent un BAV bas situé (infra-hissien, le plus grave) possible.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-37",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Comment différencier un BAV complet (type 3) d'une dysfonction sinusale sur un tracé Holter montrant une pause avec échappement ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Dans le BAV complet, on voit des ondes P régulières non conduites suivies d'un échappement (souvent bas situé et peu fiable) ; dans la dysfonction sinusale, on observe un tracé plat sans onde P ni QRS avant l'échappement, qui est plus haut situé et plus constant", "image": null },
+                    { "key": "B", "text": "Les deux situations sont électrocardiographiquement identiques", "image": null },
+                    { "key": "C", "text": "Le BAV complet ne montre jamais d'onde P", "image": null },
+                    { "key": "D", "text": "La dysfonction sinusale montre toujours des QRS larges", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens cette distinction discutée sur le tracé Holter du cas : dans le BAV complet les ondes P persistent, non conduites, avant l'échappement (souvent bas situé donc moins fiable) ; dans la dysfonction sinusale, il n'y a ni P ni QRS (silence électrique) puis un échappement plus haut situé et plus constant.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-38",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Parmi les propositions suivantes concernant la classification des blocs auriculo-ventriculaires (BAV), lesquelles sont correctes ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "BAV 1 : PR long (> 0,2 s) mais toutes les ondes P sont conduites", "image": null },
+                    { "key": "B", "text": "Mobitz 1 (BAV 2) : le PR s'allonge progressivement avant le blocage d'une onde P", "image": null },
+                    { "key": "C", "text": "BAV 3 : toutes les ondes P sont bloquées, aucune n'est conduite", "image": null },
+                    { "key": "D", "text": "Un bloc de branche isolé, sans BAV, peut à lui seul provoquer une syncope", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Retiens la classification des BAV : BAV1 (PR long, tout conduit), BAV2 Mobitz 1 (PR qui s'allonge puis blocage) et Mobitz 2 (PR normal avec blocage brutal), BAV2 2:1, et BAV3 (bloc complet). Attention : un bloc de branche isolé ne donne PAS de syncope — c'est le BAV qui en donne.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-39",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi le massage du sinus carotidien ne peut-il, à lui seul, expliquer une syncope récurrente si le test est négatif au cabinet ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Car cette syncope nécessite une stimulation effective du sinus carotidien (rasage, col serré, rotation du cou) pour survenir ; sans ce stimulus, le diagnostic d'hypersensibilité sino-carotidienne ne peut pas être retenu", "image": null },
+                    { "key": "B", "text": "Car le massage du sinus carotidien est toujours positif chez les sujets âgés", "image": null },
+                    { "key": "C", "text": "Car ce test n'a aucune utilité diagnostique", "image": null },
+                    { "key": "D", "text": "Car il ne peut être réalisé que chez les sujets jeunes", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'hypersensibilité du sinus carotidien touche exclusivement les sujets âgés (souvent par athérosclérose) et nécessite un stimulus réel du cou pour provoquer la syncope ; sans preuve de ce lien, le diagnostic ne peut pas être posé.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-40",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Comment choisit-on la durée d'enregistrement Holter à proposer devant des pertes de connaissance récidivantes ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Selon la fréquence des crises : Holter d'1 semaine si crise hebdomadaire, de 24h si palpitations quotidiennes, Holter implantable de 3 ans si syncope grave tous les 2 mois", "image": null },
+                    { "key": "B", "text": "On utilise systématiquement un Holter de 24h quelle que soit la fréquence des symptômes", "image": null },
+                    { "key": "C", "text": "La durée du Holter n'a aucune importance", "image": null },
+                    { "key": "D", "text": "On préfère toujours l'IRM cardiaque à l'enregistrement Holter", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'on adapte la durée du Holter à la fréquence des symptômes (de 24h jusqu'à un Holter implantable de 3 ans) ; le plus important est de corréler le rythme enregistré au malaise ressenti par le patient, car on peut avoir des arythmies sans symptôme associé.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "syncope"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "title_fr": "ED5 - Infarctus du myocarde",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Syndrome coronarien aigu : diagnostic et prise en charge",
+              "questions": [
+                {
+                  "external_id": "specialite-cardiologie-real-41",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Comment distingue-t-on l'angor instable du NSTEMI, une fois le diagnostic de syndrome coronarien aigu sans sus-décalage posé ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Par le dosage de la troponine : négative dans l'angor instable, positive dans le NSTEMI (début de nécrose)", "image": null },
+                    { "key": "B", "text": "Par la présence ou l'absence de douleur thoracique", "image": null },
+                    { "key": "C", "text": "Uniquement par l'ECG, la troponine n'a aucun rôle", "image": null },
+                    { "key": "D", "text": "Il n'y a aucune différence entre ces deux entités", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que dans l'angor instable le cœur souffre mais il n'y a pas encore de nécrose (troponine négative), alors que dans le NSTEMI la nécrose a commencé et la troponine est positive — l'artère est partiellement obstruée dans les deux cas.",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-42",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient a un sus-décalage ST convexe vers le haut de 3mm en V1-V6 avec un sous-décalage en D2, D3, aVF. Comment interpréter ce sous-décalage en D2 D3 aVF ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "C'est une image en miroir : le sus-décalage antérieur (V1-V6) se traduit par un sous-décalage réciproque dans le territoire inférieur opposé", "image": null },
+                    { "key": "B", "text": "C'est le signe d'un second infarctus inférieur totalement indépendant", "image": null },
+                    { "key": "C", "text": "Cela n'a aucune signification diagnostique", "image": null },
+                    { "key": "D", "text": "C'est toujours un artefact technique de l'ECG", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens qu'on doit toujours rechercher l'image en miroir : le sus-décalage d'un territoire (ici antérieur, V1-V6) s'accompagne typiquement d'un sous-décalage réciproque dans le territoire électriquement opposé (ici inférieur, D2-D3-aVF).",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-43",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quel est le délai « door-to-balloon » idéal recommandé entre l'arrivée du patient aux urgences pour un STEMI et l'ouverture de l'artère par angioplastie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "90 minutes", "image": null },
+                    { "key": "B", "text": "6 heures", "image": null },
+                    { "key": "C", "text": "24 heures", "image": null },
+                    { "key": "D", "text": "72 heures", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que « time is muscle » : le délai door-to-balloon (arrivée aux urgences → ouverture de l'artère par le ballon) doit idéalement être de 90 minutes ; si l'angioplastie n'est pas disponible avant 120 minutes, on passe à la thrombolyse puis on transfère vers un centre de cathétérisme.",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-44",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi considère-t-on l'infarctus comme une urgence catastrophique, au-delà de la simple nécrose myocardique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Car toute zone de nécrose du myocarde constitue un terrain propice aux tachycardies et fibrillations ventriculaires, potentiellement mortelles, imposant une surveillance ECG continue", "image": null },
+                    { "key": "B", "text": "Car la nécrose myocardique seule tue immédiatement le patient", "image": null },
+                    { "key": "C", "text": "Car le choc cardiogénique est systématique dans tous les infarctus", "image": null },
+                    { "key": "D", "text": "Car l'infarctus ne provoque jamais de troubles du rythme", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens ce principe central de l'ED : le patient ne meurt pas directement de la nécrose (il peut survivre avec une insuffisance cardiaque à long terme), mais du terrain arythmogène créé par la nécrose (TV/FV) — d'où l'obligation de garder le patient sous scope.",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-45",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Selon la classification de Killip, quel stade correspond à un œdème aigu du poumon avec tension artérielle conservée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Killip 3", "image": null },
+                    { "key": "B", "text": "Killip 1", "image": null },
+                    { "key": "C", "text": "Killip 2", "image": null },
+                    { "key": "D", "text": "Killip 4 (uniquement si choc)", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens la règle de l'ED : OAP + tension conservée = Killip 3 ; OAP + tension basse = Killip 4 (choc cardiogénique). Killip 1 = pas de signe d'IC, Killip 2 = légers crépitants aux bases seulement.",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-46",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Un patient fait une rupture de pilier après un infarctus. Quel pilier est atteint en cas d'infarctus antérieur (territoire IVA), et quelle en est la conséquence clinique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le pilier antérieur ; cela provoque une insuffisance mitrale aiguë avec OAP et dyspnée brutale", "image": null },
+                    { "key": "B", "text": "Le pilier postérieur ; cela ne provoque aucune conséquence valvulaire", "image": null },
+                    { "key": "C", "text": "Aucun pilier n'est jamais touché dans l'infarctus antérieur", "image": null },
+                    { "key": "D", "text": "Cela provoque systématiquement une sténose aortique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens cette question d'examen citée en ED : infarctus antérieur (IVA) → rupture du pilier antérieur ; infarctus postérieur/droit → rupture du pilier postérieur. Dans les deux cas, la rupture donne une IM fonctionnelle aiguë avec le tableau clinique d'une IM aiguë (OAP, dyspnée).",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-47",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quels médicaments sont contre-indiqués en cas de suspicion d'infarctus du ventricule droit, et pourquoi ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Bêta-bloquants (diminuent le débit cardiaque)", "image": null },
+                    { "key": "B", "text": "Diurétiques (baissent la précharge)", "image": null },
+                    { "key": "C", "text": "Dérivés nitrés (baissent la précharge)", "image": null },
+                    { "key": "D", "text": "Aspirine", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Retiens les 3 médicaments contre-indiqués en cas d'infarctus du VD (souvent posés en questions type steps) : bêta-bloquants, diurétiques et dérivés nitrés — tous baissent la précharge ou le débit, alors que l'infarctus du VD nécessite au contraire un remplissage et l'ouverture rapide de l'artère.",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-48",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Le RIVA (rythme idioventriculaire accéléré) observé après une thrombolyse réussie est un bon signe, similaire à une tachycardie ventriculaire mais bénin.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que le RIVA fait partie des signes d'efficacité de la thrombolyse, avec la diminution de la douleur et la diminution de 50% du sus-décalage ST — il ressemble à une TV mais est bénin et ne doit pas être traité comme une arythmie grave.",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-49",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Un patient fait une TV/FV pendant la phase aiguë (dans les premières heures) d'un infarctus, rapidement traitée par choc électrique. Faut-il lui implanter un défibrillateur automatique avant sa sortie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Non, ce n'est pas une indication immédiate si cela survient dans les 6 premières semaines ; il faut réévaluer après ce délai", "image": null },
+                    { "key": "B", "text": "Oui, systématiquement et immédiatement quelle que soit la FE", "image": null },
+                    { "key": "C", "text": "Non, jamais, car la TV en phase aiguë d'infarctus n'est jamais une indication au défibrillateur", "image": null },
+                    { "key": "D", "text": "Cela dépend uniquement de l'âge du patient", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que la TV/FV survenant dans les 6 semaines suivant l'infarctus n'est pas une indication immédiate au défibrillateur automatique implantable ; si les TV persistent après ce délai, l'implantation devient indiquée (prévention secondaire : indiquée d'emblée seulement en cas d'arrêt cardiaque par FV/TV en dehors de la phase aiguë).",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                },
+                {
+                  "external_id": "specialite-cardiologie-real-50",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la différence entre la péricardite précoce et le syndrome de Dressler après un infarctus ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La péricardite précoce est une réaction inflammatoire directe de la phase aiguë, alors que le syndrome de Dressler est une réaction auto-immune tardive avec anticorps dirigés contre les cellules nécrosées du myocarde", "image": null },
+                    { "key": "B", "text": "Ce sont deux noms différents pour la même entité survenant au même moment", "image": null },
+                    { "key": "C", "text": "Le syndrome de Dressler survient toujours avant la péricardite précoce", "image": null },
+                    { "key": "D", "text": "Aucune des deux n'est liée à un mécanisme immunitaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens cette distinction : la péricardite de la phase aiguë/précoce est une réaction inflammatoire directe, tandis que le syndrome de Dressler (péricardite tardive) est une réaction auto-immune, avec des anticorps dirigés contre les cellules myocardiques nécrosées.",
+                  "explanation_media": null,
+                  "tags": ["ED5", "infarctus"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

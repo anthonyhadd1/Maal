@@ -1,0 +1,1159 @@
+{
+  "schema_version": "1.0",
+  "subjects": [
+    {
+      "slug": "specialite-endocrinologie",
+      "name_fr": "Endocrinologie",
+      "track": "specialite",
+      "program_year": { "name": "M1 - 4e année", "order": 1 },
+      "program_semester": { "name": "S1", "order": 1 },
+      "units": [
+        {
+          "slug": "specialite-endocrinologie-u1-thyroide-1",
+          "order": 1,
+          "title_fr": "ED1 - Thyroïde I (hyperthyroïdie et hypothyroïdie)",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Hyperthyroïdie : diagnostic et cas clinique",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-1",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Devant une fibrillation auriculaire avec tachycardie et hypertension systolique chez un patient sans antécédents, quels 2 diagnostics faut-il toujours éliminer en priorité ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Hyperthyroïdie et phéochromocytome", "image": null },
+                    { "key": "B", "text": "Hypothyroïdie et insuffisance surrénalienne", "image": null },
+                    { "key": "C", "text": "Diabète et hypercalcémie", "image": null },
+                    { "key": "D", "text": "Anémie et hypokaliémie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que devant une fibrillation auriculaire avec tachycardie et hypertension systolique, il faut toujours éliminer une hyperthyroïdie ou un phéochromocytome.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "hyperthyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-2",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quel type d'hypertension artérielle est classiquement associé à l'hyperthyroïdie, par opposition à l'hypothyroïdie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Hypertension systolique", "image": null },
+                    { "key": "B", "text": "Hypertension diastolique", "image": null },
+                    { "key": "C", "text": "Hypertension exclusivement nocturne", "image": null },
+                    { "key": "D", "text": "Aucune hypertension n'est associée", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'hyperthyroïdie cause une hypertension systolique, alors qu'une hypothyroïdie donne plutôt une hypertension diastolique.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "hyperthyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-3",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez un patient avec TSH indétectable, quelle est la démarche correcte de l'algorithme diagnostique d'hyperthyroïdie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Doser d'abord la T4 libre ; si élevée, le diagnostic d'hyperthyroïdie franche est posé sans besoin de doser la T3", "image": null },
+                    { "key": "B", "text": "Doser d'emblée la T3 totale avant toute autre chose", "image": null },
+                    { "key": "C", "text": "Faire une scintigraphie avant tout dosage hormonal", "image": null },
+                    { "key": "D", "text": "Doser uniquement les anticorps anti-TPO", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens l'algorithme : TSH basse → on dose la T4 ; si elle est élevée, on a le diagnostic d'hyperthyroïdie franche. Si la T4 est normale, il faut alors doser la T3 pour ne pas manquer une T3-toxicose.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "hyperthyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-4",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi dose-t-on préférentiellement la T3 totale plutôt que la T3 libre en pratique, contrairement à la T4 où l'on préfère la fraction libre ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Parce que la méthode de dosage de la T3 libre est peu sensible et sujette à trop d'erreurs", "image": null },
+                    { "key": "B", "text": "Parce que la T3 libre n'existe pas biologiquement", "image": null },
+                    { "key": "C", "text": "Parce que la T3 totale est moins chère à produire en laboratoire", "image": null },
+                    { "key": "D", "text": "Parce que la TBG ne peut pas influencer la T3", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La méthode de dosage de la T3 libre n'est pas sensible ni efficace, avec trop d'erreurs : on préfère donc doser la T3 totale, même si elle peut être faussée par la TBG. Pour la T4 en revanche, le dosage de la fraction libre est fiable.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "bilan-thyroidien"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-5",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Les œstrogènes (et la pilule contraceptive) augmentent la TBG, ce qui peut faussement augmenter la fraction totale de T4 ou T3.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que les œstrogènes augmentent la TBG (Thyroid Binding Globulin), alors que les androgènes la diminuent : cela peut fausser l'interprétation des hormones totales.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "bilan-thyroidien"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-6",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Le signe du tabouret (difficulté à se relever d'un tabouret bas) traduit une faiblesse des muscles proximaux. Dans quelles 2 pathologies endocriniennes le retrouve-t-on classiquement ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Hyperthyroïdie et syndrome de Cushing", "image": null },
+                    { "key": "B", "text": "Hypothyroïdie et diabète", "image": null },
+                    { "key": "C", "text": "Insuffisance surrénalienne et hypoparathyroïdie", "image": null },
+                    { "key": "D", "text": "Acromégalie et hypogonadisme", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le signe du tabouret est positif dans l'hyperthyroïdie et dans le Cushing, à cause du catabolisme des protéines qui atteint les muscles proximaux.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "examen-clinique"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-7",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quels anticorps sont classiquement associés spécifiquement à la maladie de Basedow, par opposition à ceux de la thyroïdite de Hashimoto ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Anticorps anti-récepteurs de la TSH", "image": null },
+                    { "key": "B", "text": "Anticorps anti-peroxydase (anti-TPO)", "image": null },
+                    { "key": "C", "text": "Anticorps anti-thyroglobuline uniquement", "image": null },
+                    { "key": "D", "text": "Anticorps anti-GAD", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "En général, les anticorps anti-récepteurs à la TSH sont spécifiques du Basedow (Graves), et les anticorps anti-peroxydase (anti-TPO) du Hashimoto — mais dans un contexte auto-immun, les deux peuvent être positifs simultanément.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "basedow"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-8",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Avant de pratiquer une scintigraphie thyroïdienne, il faut s'assurer de 2 éléments essentiels. Lesquels ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Absence de grossesse et absence de prise récente d'iode (amiodarone ou produit de contraste)", "image": null },
+                    { "key": "B", "text": "Absence de diabète et fonction rénale normale", "image": null },
+                    { "key": "C", "text": "Jeûne strict de 12 heures et arrêt des bêtabloquants", "image": null },
+                    { "key": "D", "text": "Absence d'allergie à l'iode et âge inférieur à 60 ans", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Il faut toujours s'assurer, avant une scintigraphie, que la patiente n'est pas enceinte (DDR + test de grossesse) et que le patient n'a pas reçu d'iode récemment (produit de contraste : attendre 6 à 8 semaines ; amiodarone : attendre 9 mois, car elle s'accumule dans la graisse).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "scintigraphie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-9",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel mécanisme explique la fixation basse de l'iode 131 (2% à la 24e heure) observée chez un patient hyperthyroïdien récemment traité par amiodarone ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'effet Wolff-Chaikoff : la surcharge iodée sature les récepteurs de la thyroïde", "image": null },
+                    { "key": "B", "text": "Une hypothyroïdie associée qui bloque la thyroïde", "image": null },
+                    { "key": "C", "text": "Une erreur de calibration de la caméra de scintigraphie", "image": null },
+                    { "key": "D", "text": "Une carence en iode alimentaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "C'est de l'iode : quand on donne une surcharge à la thyroïde, on obtient l'effet Wolff-Chaikoff, les récepteurs deviennent saturés, d'où la fixation basse malgré l'hyperfonctionnement clinique.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "amiodarone"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-10",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Concernant les 2 types d'hyperthyroïdie induite par l'amiodarone, quelles associations sont correctes ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Type 1 : hyperfonctionnement d'un nodule prétoxique ou d'un Basedow infraclinique, traité par antithyroïdiens de synthèse", "image": null },
+                    { "key": "B", "text": "Type 2 : thyroïdite avec relargage hormonal, traitée par corticothérapie", "image": null },
+                    { "key": "C", "text": "Type 1 : évolution fréquente vers l'hypothyroïdie chronique", "image": null },
+                    { "key": "D", "text": "Type 2 : hypervascularisation marquée à l'échographie-Doppler", "image": null }
+                  ],
+                  "correct": ["A", "B"],
+                  "explanation": "Type 1 = hyperfonctionnement glandulaire (nodule/Basedow) traité par antithyroïdiens de synthèse, sans évolution vers l'hypothyroïdie. Type 2 = thyroïdite inflammatoire avec relargage hormonal, traitée par corticoïdes, pouvant évoluer vers une hypothyroïdie chronique.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "amiodarone"]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Hypothyroïdie et Hashimoto",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-11",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Chez une patiente présentant fatigue, prise de poids, constipation, chute de cheveux et aménorrhée, avec un bilan montrant TSH élevée, T4 libre basse et anticorps antiperoxydase très positifs, quel diagnostic est le plus probable ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Thyroïdite de Hashimoto", "image": null },
+                    { "key": "B", "text": "Maladie de Basedow", "image": null },
+                    { "key": "C", "text": "Adénome toxique", "image": null },
+                    { "key": "D", "text": "Thyroïdite de De Quervain", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "TSH élevée, T4 basse et anti-TPO fortement positifs (90-95% de positivité dans le Hashimoto) orientent vers une hypothyroïdie auto-immune de Hashimoto.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "hashimoto"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-12",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi une patiente hypothyroïdienne peut-elle présenter une galactorrhée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'augmentation de la TRH stimule à la fois la TSH et la prolactine", "image": null },
+                    { "key": "B", "text": "La TSH se lie directement aux récepteurs de la prolactine", "image": null },
+                    { "key": "C", "text": "L'hypothyroïdie provoque toujours un prolactinome", "image": null },
+                    { "key": "D", "text": "C'est un effet secondaire de la Lévothyroxine", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La prolactine augmente en raison d'une augmentation de la TRH, qui stimule à la fois la TSH et la sécrétion de prolactine.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "hypothyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-13",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Une patiente hypothyroïdienne traitée par Lévothyroxine à forte dose ne voit pas sa TSH se normaliser malgré une T4 libre normalisée. Quelles sont les 2 causes les plus fréquentes à évoquer ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Problème d'absorption (malabsorption, chirurgie bariatrique) et mauvaise compliance/prise incorrecte du médicament", "image": null },
+                    { "key": "B", "text": "Surdosage chronique et hyperthyroïdie secondaire", "image": null },
+                    { "key": "C", "text": "Allergie à la Lévothyroxine et carence en iode", "image": null },
+                    { "key": "D", "text": "Insuffisance rénale et diabète", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Il faut évoquer un problème d'absorption (malabsorption, chirurgie bariatrique, maladie cœliaque/Crohn) et un problème de compliance : il faut prendre la Lévothyroxine à jeun, 30 min avant le petit-déjeuner, en espaçant de 3h la prise de fer, calcium ou IPP.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "levothyroxine"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-14",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Devant une hypothyroïdie confirmée (TSH élevée, T4 basse), la scintigraphie et l'échographie thyroïdienne sont systématiquement indiquées pour orienter le diagnostic.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["B"],
+                  "explanation": "Ni la scintigraphie ni l'échographie n'ont d'intérêt systématique dans le bilan de l'hypothyroïdie : la scintigraphie serait inutile, et l'échographie n'est utile que si le patient est symptomatique (nodules).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "hypothyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-15",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Chez un patient hospitalisé très malade, on retrouve une TSH normale ou légèrement basse, avec T4 et T3 également basses. Quel diagnostic évoquer, et quelle est la conduite à tenir ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Syndrome de basse T3 (« sick euthyroid syndrome ») : ne pas traiter la thyroïde, traiter la maladie sous-jacente", "image": null },
+                    { "key": "B", "text": "Hypothyroïdie centrale : IRM hypophysaire en urgence et traitement substitutif immédiat", "image": null },
+                    { "key": "C", "text": "Maladie de Basedow atypique : antithyroïdiens de synthèse", "image": null },
+                    { "key": "D", "text": "Hyperthyroïdie infraclinique : surveillance simple", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Ce tableau, avec une rT3 élevée par altération de la conversion T4→T3, ressemble à une hypothyroïdie centrale mais n'en est pas une : c'est le « sick euthyroid syndrome », retrouvé chez les patients très malades (signe de mauvais pronostic). Il faut traiter la cause, pas la thyroïde.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "sick-euthyroid"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-16",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quel est le traitement de référence de l'hypothyroïdie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Lévothyroxine", "image": null },
+                    { "key": "B", "text": "Methimazole", "image": null },
+                    { "key": "C", "text": "Propylthiouracile", "image": null },
+                    { "key": "D", "text": "Iode radioactif", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le traitement de l'hypothyroïdie est la Lévothyroxine, à dose substitutive visant à normaliser la TSH.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "hypothyroidie"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "specialite-endocrinologie-u2-thyroide-2",
+          "order": 2,
+          "title_fr": "ED1 - Thyroïde II (cancer thyroïdien et nodules)",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Nodule thyroïdien : conduite à tenir",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-17",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Devant un nodule thyroïdien découvert à l'examen clinique, quelle est la première étape recommandée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Doser TSH et T4 pour situer le patient dans l'algorithme thyroïdien", "image": null },
+                    { "key": "B", "text": "Faire d'emblée une scintigraphie thyroïdienne", "image": null },
+                    { "key": "C", "text": "Prescrire de la Lévothyroxine pour réduire le volume du nodule", "image": null },
+                    { "key": "D", "text": "Réaliser une cytoponction sans bilan biologique préalable", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Toujours devant un nodule thyroïdien, la première étape est de faire TSH et T4 pour se caser dans l'algorithme : si TSH normale ou élevée (hypo), la next step est l'échographie, pas la scintigraphie.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "nodule"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-18",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Donner de la Lévothyroxine à un patient avec TSH normale, dans le but de réduire le volume d'un nodule thyroïdien, est une pratique aujourd'hui reconnue comme inefficace et à risque d'effets secondaires.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Les études récentes ont démontré que cela ne diminue pas la taille du nodule et cause des effets secondaires (thyrotoxicose exogène, ostéoporose, tachycardie) : c'est une erreur de pratique répétée dans plusieurs cas cliniques du cours.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "nodule"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-19",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Selon la classification TI-RADS, à partir de quel score la cytoponction est-elle indiquée dès que le nodule dépasse 1 cm ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "TI-RADS 5", "image": null },
+                    { "key": "B", "text": "TI-RADS 2", "image": null },
+                    { "key": "C", "text": "TI-RADS 3", "image": null },
+                    { "key": "D", "text": "TI-RADS 1", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "TI-RADS 5, très suspect, impose la cytoponction dès 1 cm ; TI-RADS 4 dès 1,5 cm ; TI-RADS 3 dès 2,5 cm ; TI-RADS 1 et 2 ne nécessitent pas de cytoponction quelle que soit la taille.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "ti-rads"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-20",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Pourquoi ne faut-il jamais réaliser une cytoponction thyroïdienne chez un patient dont la TSH est freinée (basse) ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le nodule chaud donne un aspect d'hypercellularité folliculaire qui peut être confondu à tort avec un néoplasme folliculaire", "image": null },
+                    { "key": "B", "text": "La cytoponction est contre-indiquée en cas de TSH basse pour des raisons de coagulation", "image": null },
+                    { "key": "C", "text": "Cela déclenche systématiquement une crise thyréotoxique", "image": null },
+                    { "key": "D", "text": "Le prélèvement devient techniquement impossible", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Sur un nodule chaud (TSH freinée), on retrouve des cellules qui ressemblent aux folliculaires, faisant craindre à tort un néoplasme folliculaire et une opération inutile : il faut attendre que la TSH soit normale ou élevée avant de ponctionner.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "cytoponction"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-21",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Le dosage de la TSH doit-il toujours précéder celui de la T4 libre devant un nodule thyroïdien, et pourquoi ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Oui, car le patient peut avoir une hyperthyroïdie infraclinique que seule la TSH révèle", "image": null },
+                    { "key": "B", "text": "Non, l'ordre des dosages n'a aucune importance clinique", "image": null },
+                    { "key": "C", "text": "Oui, mais uniquement chez les patients de plus de 65 ans", "image": null },
+                    { "key": "D", "text": "Non, seule la T4 libre doit être dosée en première intention", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le dosage de la TSH doit toujours être fait avant le dosage de la T4 libre parce que le patient peut avoir une hyperthyroïdie infraclinique (TSH basse, T4 encore normale).",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "nodule-toxique"]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Cancer thyroïdien et syndromes MEN",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-22",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Parmi les éléments suivants, lesquels doivent inciter à rechercher un cancer thyroïdien chez un patient présentant un nodule ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Antécédent d'irradiation cervicale dans l'enfance", "image": null },
+                    { "key": "B", "text": "Âge inférieur à 20 ans ou supérieur à 65 ans", "image": null },
+                    { "key": "C", "text": "Nodule fixé aux structures adjacentes, non mobile", "image": null },
+                    { "key": "D", "text": "Nodule mobile de moins de 1 cm chez une femme jeune sans antécédents", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Les facteurs de malignité incluent l'irradiation cervicale antérieure, les âges extrêmes de la vie, l'augmentation de taille (>4 cm), le sexe masculin, les antécédents familiaux (MEN2), la dysphonie et un nodule fixé et non mobile.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "cancer-thyroidien"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-23",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Après une thyroïdectomie totale et traitement à l'iode radioactif pour un cancer thyroïdien, quel taux de thyroglobuline attend-on normalement ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Un taux nul ou très bas", "image": null },
+                    { "key": "B", "text": "Un taux identique à l'avant-opératoire", "image": null },
+                    { "key": "C", "text": "Un taux élevé, reflet de la cicatrisation", "image": null },
+                    { "key": "D", "text": "La thyroglobuline n'est pas interprétable après thyroïdectomie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le taux de thyroglobuline après thyroïdectomie totale doit être très bas (sous traitement frénateur < 0,2 ng/ml, sans traitement frénateur < 1 ng/ml) : une thyroglobuline élevée (170 ng/ml dans le cas du cours) évoque une métastase.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "cancer-thyroidien"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-24",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la différence entre le traitement substitutif de l'hypothyroïdie et le traitement frénateur post-cancer thyroïdien par Lévothyroxine ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le traitement substitutif vise une TSH normale ; le traitement frénateur vise une TSH basse pour éviter la repousse de cellules thyroïdiennes résiduelles", "image": null },
+                    { "key": "B", "text": "Les deux visent exactement la même cible de TSH", "image": null },
+                    { "key": "C", "text": "Le traitement frénateur est utilisé uniquement dans l'hypothyroïdie", "image": null },
+                    { "key": "D", "text": "Le traitement substitutif vise une TSH indétectable à vie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Dans l'hypothyroïdie, on donne une dose de substitution pour rendre la TSH normale ; après un cancer, on donne une dose frénatrice pour maintenir la TSH à la limite basse (mais pas totalement indétectable) et empêcher une récidive.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "cancer-thyroidien"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-25",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Une cytoponction montrant des cellules fusiformes avec stroma amyloïde et immunomarquage positif à la calcitonine évoque quel type de cancer thyroïdien ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Cancer médullaire de la thyroïde", "image": null },
+                    { "key": "B", "text": "Cancer papillaire", "image": null },
+                    { "key": "C", "text": "Cancer folliculaire", "image": null },
+                    { "key": "D", "text": "Lymphome thyroïdien", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Cellules fusiformes, stroma amyloïde et calcitonine positive orientent vers un cancer médullaire de la thyroïde, à doser par la calcitonine sanguine et à rechercher dans le cadre d'un syndrome MEN2.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "cancer-medullaire"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-26",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Concernant les syndromes MEN2, quelles affirmations sont exactes ? (Le professeur insiste : question d'examen)",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "MEN2A associe cancer médullaire de la thyroïde, phéochromocytome et hyperplasie parathyroïdienne", "image": null },
+                    { "key": "B", "text": "MEN2B associe cancer médullaire, phéochromocytome, aspect marfanoïde et neuromes muqueux, sans hyperparathyroïdie", "image": null },
+                    { "key": "C", "text": "Les deux formes sont liées à une mutation du proto-oncogène RET", "image": null },
+                    { "key": "D", "text": "Le gène RET est également muté dans le cancer papillaire de la thyroïde", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "MEN2A = MTC + phéochromocytome + hyperplasie parathyroïdienne. MEN2B = MTC + phéochromocytome, sans hyperparathyroïdie, avec apparition plus jeune, aspect marfanoïde et neuromes muqueux. Les deux impliquent RET, qui est un gène différent de celui impliqué dans le cancer papillaire.",
+                  "explanation_media": null,
+                  "tags": ["ED1", "thyroide", "MEN2"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "specialite-endocrinologie-u3-diabete",
+          "order": 3,
+          "title_fr": "ED3 - Diabète (acidocétose, hypoglycémies, complications)",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Diagnostic et acidocétose diabétique",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-27",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quels sont les critères diagnostiques du diabète sucré ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Glycémie à jeun ≥ 126 mg/dl", "image": null },
+                    { "key": "B", "text": "Glycémie 2h après HGPO à 75g de glucose ≥ 200 mg/dl", "image": null },
+                    { "key": "C", "text": "HbA1c ≥ 6,5%", "image": null },
+                    { "key": "D", "text": "Glycémie aléatoire ≥ 140 mg/dl sans symptômes", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Les 4 critères sont : glycémie à jeun ≥126 mg/dl, HGPO à 2h ≥200 mg/dl, HbA1c ≥6,5%, et glycémie aléatoire ≥200 mg/dl avec symptômes d'hyperglycémie (pas 140, qui est le seuil du prédiabète post-prandial).",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "diagnostic"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-28",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel est le critère le plus important pour distinguer un diabète de type 1 d'un diabète de type 2 devant un tableau de décompensation aiguë ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "La présence d'une acidose (le diabète de type 2 en fait rarement car il garde une sécrétion résiduelle d'insuline)", "image": null },
+                    { "key": "B", "text": "Le niveau de la glycémie capillaire", "image": null },
+                    { "key": "C", "text": "L'âge du patient uniquement", "image": null },
+                    { "key": "D", "text": "La présence de polyurie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'acidose est le critère le plus important : en général, un diabète de type 2 ne fait pas d'acidocétose car il conserve toujours une sécrétion d'insuline qui prévient la formation de corps cétoniques.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "type1"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-29",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quels sont les 3 critères biologiques de l'acidocétose diabétique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Glycémie > 200 mg/dl, acidose (bicarbonate < 18 et pH < 7,3), cétose (cétonémie ou cétonurie)", "image": null },
+                    { "key": "B", "text": "Glycémie > 600 mg/dl, hypernatrémie et hyperosmolarité", "image": null },
+                    { "key": "C", "text": "Hypokaliémie, hypoglycémie et hyponatrémie", "image": null },
+                    { "key": "D", "text": "pH > 7,4, bicarbonate normal et cétonurie négative", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le critère d'une acidocétose : glycémie >200 mg/dl, acidose (bicarbonate <18 et pH <7,3), et cétose (cétonémie ou cétonurie).",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "acidocetose"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-30",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "D'où proviennent les corps cétoniques lors d'une acidocétose diabétique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "De la lipolyse du tissu adipeux, en l'absence d'insuline pour utiliser le glucose comme source d'énergie", "image": null },
+                    { "key": "B", "text": "De la dégradation directe du glucose sanguin", "image": null },
+                    { "key": "C", "text": "De la protéolyse musculaire uniquement", "image": null },
+                    { "key": "D", "text": "De l'excès d'apport alimentaire en graisses", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Quand on n'a pas d'insuline, on ne peut pas utiliser le glucose pour fabriquer de l'énergie : on utilise alors les acides gras du tissu adipeux (lipolyse), ce qui fournit de l'énergie mais génère des corps cétoniques en contrepartie.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "acidocetose"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-31",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quelle est la principale différence biologique entre l'acidocétose diabétique et l'état hyperglycémique hyperosmolaire (HHS) du diabète de type 2 ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Dans le HHS, il n'y a pas vraiment d'acidose car la sécrétion résiduelle d'insuline prévient la lipolyse et la formation de corps cétoniques", "image": null },
+                    { "key": "B", "text": "Le HHS s'accompagne toujours d'une acidose plus sévère que l'acidocétose", "image": null },
+                    { "key": "C", "text": "Le HHS ne s'accompagne jamais de déshydratation", "image": null },
+                    { "key": "D", "text": "La glycémie est toujours plus basse dans le HHS", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Dans l'état hyperosmolaire, on a toujours une sécrétion d'insuline qui prévient la lipolyse : donc pas de formation de corps cétoniques et pas vraiment d'acidose, contrairement à l'acidocétose. La glycémie peut même être plus élevée que dans l'acidocétose.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "HHS"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-32",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "L'hyperkaliémie observée dans l'acidocétose diabétique reflète en réalité un stock corporel de potassium normal ou augmenté.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["B"],
+                  "explanation": "Malgré l'hyperkaliémie mesurée, le stock réel de potassium est bas : sans insuline, le potassium reste en dehors des cellules. Une fois l'insuline administrée, le potassium rentre dans les cellules et une hypokaliémie sévère peut apparaître.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "electrolytes"]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Hypoglycémies et complications chroniques",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-33",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Parmi les antidiabétiques suivants, lequel présente le risque le plus élevé d'hypoglycémie ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Les sulfamides (sulfonylurées)", "image": null },
+                    { "key": "B", "text": "La metformine", "image": null },
+                    { "key": "C", "text": "Les inhibiteurs du SGLT2", "image": null },
+                    { "key": "D", "text": "Les agonistes des récepteurs du GLP-1", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Les sulfamides stimulent le récepteur SUR pour augmenter la sécrétion d'insuline, ce qui explique le risque élevé d'hypoglycémie ; le risque est en général faible avec la metformine, les SGLT2 inhibiteurs, les GLP-1 agonistes ou les gliptines.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "hypoglycemie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-34",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Comment différencier, sur le plan biologique, une hypoglycémie par prise exogène d'insuline d'une hypoglycémie par insulinome ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Dans la prise exogène, le peptide C est bas alors que l'insuline est élevée ; dans l'insulinome, le peptide C est élevé avec l'insuline", "image": null },
+                    { "key": "B", "text": "Le peptide C est toujours élevé dans les deux cas", "image": null },
+                    { "key": "C", "text": "Seule la glycémie permet de distinguer les deux causes", "image": null },
+                    { "key": "D", "text": "L'insuline est toujours basse en cas d'insulinome", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'insuline pharmaceutique ne contient pas de peptide C : une prise exogène donne donc une insuline élevée avec un peptide C bas. Dans l'insulinome (sécrétion endogène), l'insuline et le peptide C sont élevés ensemble, car ils proviennent tous deux du clivage de la proinsuline.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "hypoglycemie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-35",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel examen permet de visualiser les néovaisseaux caractéristiques de la rétinopathie diabétique proliférative, avant même le stade du saignement ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le fond d'œil", "image": null },
+                    { "key": "B", "text": "L'angio-scanner cérébral", "image": null },
+                    { "key": "C", "text": "L'IRM orbitaire", "image": null },
+                    { "key": "D", "text": "L'échographie oculaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'ophtalmologue réalise un fond d'œil pour rechercher les néovaisseaux : leur présence définit la rétinopathie proliférative, avant le stade du saignement qui entraîne la perte de vision.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "retinopathie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-36",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle perte de poids est nécessaire pour espérer réellement prévenir, voire réverser, un diabète de type 2 ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Plus de 15% du poids corporel", "image": null },
+                    { "key": "B", "text": "Environ 2 à 3% du poids corporel", "image": null },
+                    { "key": "C", "text": "Aucune perte de poids n'est nécessaire si le patient est bien traité", "image": null },
+                    { "key": "D", "text": "Exactement 20 kg quel que soit le poids initial", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Une perte de poids entre 5 et 10% diminue le risque de complications, mais pour vraiment reverser ou prévenir un diabète de type 2, il faut perdre plus de 15% du poids.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "prevention"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-37",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Selon les recommandations actuelles, la cible d'HbA1c doit être individualisée pour chaque patient plutôt que fixée uniformément à moins de 7% pour tous.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Il faut individualiser la cible : un patient jeune et actif sans complications peut viser une HbA1c <6,5%, alors qu'un patient âgé avec coronaropathie peut viser <7,5-8% pour surtout éviter l'hypoglycémie, plus délétère chez lui.",
+                  "explanation_media": null,
+                  "tags": ["ED3", "diabete", "objectifs-glycemiques"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "specialite-endocrinologie-u4-calcium",
+          "order": 4,
+          "title_fr": "ED4 - Métabolisme phosphocalcique (hyper et hypocalcémies)",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Hyperparathyroïdie primaire",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-38",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez une patiente hypercalcémique avec un phosphore à la limite basse, une PTH « anormalement normale » (ni basse ni franchement élevée), quel diagnostic évoquer ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Hyperparathyroïdie primaire légère", "image": null },
+                    { "key": "B", "text": "Intoxication à la vitamine D", "image": null },
+                    { "key": "C", "text": "Sarcoïdose", "image": null },
+                    { "key": "D", "text": "Hypercalcémie maligne d'un cancer solide", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Devant une hypercalcémie, la PTH doit normalement être freinée (basse) ; si elle reste à la limite supérieure de la normale, elle est « anormalement normale » et signe une hyperparathyroïdie primaire, même légère.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "hyperparathyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-39",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi dose-t-on systématiquement la calciurie des 24h devant une hypercalcémie avec PTH non freinée ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Pour éliminer une hypercalcémie hypocalciurique familiale, pathologie héréditaire dominante ne nécessitant pas de chirurgie", "image": null },
+                    { "key": "B", "text": "Pour doser directement la vitamine D active", "image": null },
+                    { "key": "C", "text": "Parce que c'est le seul moyen de doser le calcium corrigé", "image": null },
+                    { "key": "D", "text": "Pour diagnostiquer une insuffisance rénale aiguë", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La calciurie de 24h permet de différencier l'hyperparathyroïdie primaire de l'hypercalcémie hypocalciurique familiale (calciurie basse dans cette dernière), une maladie héréditaire dominante qui ne doit pas être opérée.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "hyperparathyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-40",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelles sont des indications chirurgicales reconnues chez un patient asymptomatique porteur d'une hyperparathyroïdie primaire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Âge inférieur à 50 ans", "image": null },
+                    { "key": "B", "text": "Ostéoporose avec T-score < -2,5", "image": null },
+                    { "key": "C", "text": "Calcémie dépassant de plus de 1 mg/dl (10%) la limite supérieure de la normale du laboratoire", "image": null },
+                    { "key": "D", "text": "Toute calcémie légèrement élevée quel que soit le contexte", "image": null }
+                  ],
+                  "correct": ["A", "B", "C"],
+                  "explanation": "Les indications chirurgicales chez le patient asymptomatique incluent : âge <50 ans, ostéoporose (T <-2,5 au rachis ou à la hanche), calcémie >10% au-dessus de la limite supérieure du labo, calciurie >250mg/j (femme) ou >300mg/j (homme) selon les nouvelles guidelines, et clairance <60 ml/min.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "hyperparathyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-41",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Quelle est la cause histologique la plus fréquente d'hyperparathyroïdie primaire ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'adénome parathyroïdien (environ 80%)", "image": null },
+                    { "key": "B", "text": "L'hyperplasie des 4 glandes", "image": null },
+                    { "key": "C", "text": "Le carcinome parathyroïdien", "image": null },
+                    { "key": "D", "text": "L'adénome double", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'adénome représente environ 80-85% des causes d'hyperparathyroïdie primaire, contre 10-18% pour l'hyperplasie, 2-3% pour l'adénome double et moins de 1% pour le carcinome. Retiens que dans l'hyperaldostéronisme, à l'inverse, c'est l'hyperplasie qui prédomine.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "hyperparathyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-42",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Après une parathyroïdectomie, un patient développe une hypocalcémie ET une hypophosphorémie sévères. Quel mécanisme faut-il évoquer, et quel traitement donner ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Le « hungry bone » : dépôt massif de calcium et phosphore dans l'os ; on donne calcium + vitamine D active ET non active", "image": null },
+                    { "key": "B", "text": "Une hypoparathyroïdie fonctionnelle simple ; on donne seulement du calcium", "image": null },
+                    { "key": "C", "text": "Une insuffisance rénale aiguë ; dialyse en urgence", "image": null },
+                    { "key": "D", "text": "Une intoxication à la vitamine D ; arrêt de toute supplémentation", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le hungry bone syndrome se caractérise par un calcium ET un phosphore bas car l'os, avidement, capte massivement le calcium et le phosphore circulants après la levée du frein PTH. Le traitement associe calcium, vitamine D active et non active — à distinguer de l'hypoparathyroïdie fonctionnelle simple où le phosphore est élevé.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "post-operatoire"]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Hypercalcémie maligne et hypocalcémies",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-43",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la différence clinique majeure entre l'hypercalcémie de l'hyperparathyroïdie primaire et l'hypercalcémie maligne (ex. cancer du sein) ? (Le professeur insiste : très important pour l'examen)",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "L'hyperparathyroïdie primaire est indolente avec élévation modérée du calcium chez un patient en bon état général ; l'hypercalcémie maligne est aiguë, sévère, chez un patient en mauvais état général", "image": null },
+                    { "key": "B", "text": "L'hyperparathyroïdie primaire donne toujours un coma", "image": null },
+                    { "key": "C", "text": "L'hypercalcémie maligne est toujours plus modérée que celle de l'hyperparathyroïdie", "image": null },
+                    { "key": "D", "text": "Il n'existe aucune différence clinique entre les deux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'hyperparathyroïdie primaire est indolente, chronique, avec une élévation modérée du calcium chez un patient bien portant. L'hypercalcémie maligne est un tableau aigu avec calcémie très sévère chez un patient en très mauvais état général (risque d'arrêt cardiaque).",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "hypercalcemie-maligne"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-44",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelles sont les 3 bases du traitement d'une hypercalcémie aiguë sévère ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Remplissage vasculaire (sérum salé), calcitonine et bisphosphonates", "image": null },
+                    { "key": "B", "text": "Restriction hydrique stricte et diurétiques thiazidiques", "image": null },
+                    { "key": "C", "text": "Insuline et potassium en perfusion continue", "image": null },
+                    { "key": "D", "text": "Corticothérapie seule à haute dose", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'hydratation par sérum salé favorise l'élimination rénale du calcium (la déshydratation aggrave l'hypercalcémie), et la calcitonine associée aux bisphosphonates inhibent la résorption osseuse.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "hypercalcemie-maligne"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-45",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Le signe de Chvostek, bien qu'évocateur d'une hypocalcémie latente, peut être retrouvé chez 10% des personnes normales et peut être négatif chez un patient réellement hypoparathyroïdien.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Ce signe met en évidence une hypocalcémie latente, mais il est retrouvé chez 10% des gens normaux et peut être négatif dans l'hypoparathyroïdie : sa valeur clinique isolée est donc limitée.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "hypocalcemie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-46",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Chez une fillette avec convulsions, fourmillements et antécédent familial d'aménorrhée primaire chez la sœur, le bilan retrouve Ca bas, phosphore élevé et PTH effondrée. Quelle piste étiologique évoquer ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Hypoparathyroïdie auto-immune dans le cadre d'un syndrome polyglandulaire auto-immun (mutation du gène AIRE)", "image": null },
+                    { "key": "B", "text": "Carence isolée en vitamine D", "image": null },
+                    { "key": "C", "text": "Insuffisance rénale chronique", "image": null },
+                    { "key": "D", "text": "Hyperparathyroïdie secondaire", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'association hypoparathyroïdie et aménorrhée primaire familiale oriente vers une origine auto-immune, due à la mutation du gène AIRE, qui associe plusieurs atteintes auto-immunes (Addison, atteinte ovarienne, diabète de type 1).",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "hypoparathyroidie"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-47",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Pourquoi le déficit en vitamine D est-il exclu comme cause chez une patiente hypocalcémique dont le phosphore est élevé et la PTH basse ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Dans le déficit en vitamine D, on attend une hyperparathyroïdie secondaire avec phosphore bas et PTH élevée, pas basse", "image": null },
+                    { "key": "B", "text": "Le déficit en vitamine D ne provoque jamais d'hypocalcémie", "image": null },
+                    { "key": "C", "text": "Le phosphore est toujours normal en cas de carence en vitamine D", "image": null },
+                    { "key": "D", "text": "La vitamine D n'a aucun rapport avec le phosphore", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Dans un déficit en vitamine D, le phosphore devrait être bas (par hyperparathyroïdie secondaire réactionnelle avec PTH élevée) : ici le phosphore est élevé et la PTH est basse, ce qui est contre cette hypothèse et oriente vers une hypoparathyroïdie primaire.",
+                  "explanation_media": null,
+                  "tags": ["ED4", "calcium", "hypocalcemie"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slug": "specialite-endocrinologie-u5-lipides",
+          "order": 5,
+          "title_fr": "CM - Métabolisme lipidique et hypercholestérolémie familiale",
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Lipoprotéines, récepteur LDL et PCSK9",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-48",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "passage": null,
+                  "text": "Dans la pathologie lipidique, qu'est-ce qui pénètre réellement la paroi vasculaire et cause l'athérosclérose : le cholestérol/les triglycérides, ou les lipoprotéines qui les transportent ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Ce sont les lipoprotéines (le « véhicule ») qui pénètrent la paroi vasculaire, pas directement le cholestérol ou les triglycérides (les « passagers »)", "image": null },
+                    { "key": "B", "text": "Uniquement le cholestérol libre, indépendamment de toute lipoprotéine", "image": null },
+                    { "key": "C", "text": "Uniquement les triglycérides libres", "image": null },
+                    { "key": "D", "text": "Le HDL est la seule lipoprotéine impliquée", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "On dose cholestérol et triglycérides (les passagers), mais ce sont les lipoprotéines qui les transportent (les véhicules) qui pénètrent réellement la paroi des vaisseaux et sont captées par les macrophages à hauteur de 15%, un taux fixe.",
+                  "explanation_media": null,
+                  "tags": ["CM", "lipides", "lipoproteines"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-49",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle enzyme catalyse l'étape limitante de la synthèse endogène du cholestérol, et sert de cible thérapeutique aux statines ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "HMG-CoA réductase", "image": null },
+                    { "key": "B", "text": "Lipoprotéine lipase (LPL)", "image": null },
+                    { "key": "C", "text": "PCSK9", "image": null },
+                    { "key": "D", "text": "NPC1L1", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "L'étape limitante est la transformation de l'acétyl-CoA en acide mévalonique par l'HMG-CoA réductase : les statines bloquent cette enzyme pour diminuer la synthèse hépatique de cholestérol.",
+                  "explanation_media": null,
+                  "tags": ["CM", "lipides", "statines"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-50",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelles sont les 2 causes majeures de dyslipidémie (« embouteillages ») selon la métaphore du cours ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Dysfonction de la LPL (triglycérides élevés) et dysfonction du récepteur aux LDL (cholestérol élevé)", "image": null },
+                    { "key": "B", "text": "Excès d'apport en vitamine D et déficit en calcium", "image": null },
+                    { "key": "C", "text": "Excès de PCSK9 uniquement", "image": null },
+                    { "key": "D", "text": "Déficit isolé en Apo A", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Les 2 grosses causes d'embouteillages sont : la LPL qui ne fonctionne pas bien (donnant des triglycérides élevés dans le sang) et le récepteur aux LDL qui ne fonctionne pas bien (donnant un cholestérol élevé, les triglycérides étant déjà descendus dans le tissu adipeux).",
+                  "explanation_media": null,
+                  "tags": ["CM", "lipides", "LPL"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-51",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel est le rôle du PCSK9 dans la régulation du récepteur aux LDL au niveau hépatique ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Il se lie au récepteur LDL et l'empêche de retourner efficacement à la surface cellulaire pour de nouveaux cycles de captation", "image": null },
+                    { "key": "B", "text": "Il augmente directement la synthèse de cholestérol dans l'intestin", "image": null },
+                    { "key": "C", "text": "Il bloque l'absorption intestinale du cholestérol", "image": null },
+                    { "key": "D", "text": "Il stimule la sécrétion de triglycérides par le foie", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Le PCSK9 reste collé au récepteur LDL lors de son internalisation ; s'il est présent, le récepteur ne peut pas revenir efficacement à la surface pour de nouveaux cycles (« shuttles »), réduisant la clairance du LDL plasmatique. Les anti-PCSK9 lèvent ce blocage.",
+                  "explanation_media": null,
+                  "tags": ["CM", "lipides", "PCSK9"]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Hypercholestérolémie familiale",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-real-52",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quel mode de transmission caractérise l'hypercholestérolémie familiale (FH), fait notable car rare parmi les maladies génétiques ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Autosomique dominante", "image": null },
+                    { "key": "B", "text": "Autosomique récessive", "image": null },
+                    { "key": "C", "text": "Liée à l'X récessive", "image": null },
+                    { "key": "D", "text": "Mitochondriale", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La FH est une maladie autosomale dominante, ce qui est rare car la majorité des maladies génétiques sont récessives : même à l'état hétérozygote, la maladie s'exprime cliniquement.",
+                  "explanation_media": null,
+                  "tags": ["CM", "lipides", "FH"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-53",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle mutation, décrite essentiellement au Liban, est retrouvée chez environ 80% des Libanais porteurs d'une mutation du récepteur aux LDL ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Une mutation non-sens dans l'exon 14 du gène du récepteur aux LDL (« mutation libanaise »)", "image": null },
+                    { "key": "B", "text": "Une mutation du gène de l'Apo B100", "image": null },
+                    { "key": "C", "text": "Une mutation du gène PCSK9 de type « loss of function »", "image": null },
+                    { "key": "D", "text": "Une délétion du chromosome 22q11", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "La mutation libanaise (C660X) est une mutation non-sens dans l'exon 14 du gène LDLR, retrouvée chez 80% des Libanais atteints de FH par mutation du récepteur LDL. On la retrouve aussi dans des populations issues de mariages consanguins comme les Afrikaners ou les Québécois d'origine bretonne.",
+                  "explanation_media": null,
+                  "tags": ["CM", "lipides", "FH"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-54",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "Quelle est la présentation clinique classique des formes hétérozygotes de FH, par opposition aux formes homozygotes ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Xanthomes tendineux avec cholestérol entre 3,4 et 5 g, contre xanthomes cutanés et cholestérol entre 8 et 10 g dans les formes homozygotes", "image": null },
+                    { "key": "B", "text": "Les hétérozygotes ont toujours un cholestérol normal", "image": null },
+                    { "key": "C", "text": "Les homozygotes n'ont jamais de manifestations cliniques", "image": null },
+                    { "key": "D", "text": "Il n'y a aucune différence clinique entre les deux formes", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Les formes hétérozygotes présentent des xanthomes tendineux avec un cholestérol total autour de 3,4-5 g/l ; les formes homozygotes présentent des xanthomes cutanés dès la naissance avec un cholestérol entre 8 et 10 g/l et un risque cardiovasculaire majeur.",
+                  "explanation_media": null,
+                  "tags": ["CM", "lipides", "FH"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-55",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "passage": null,
+                  "text": "Quelle est la démarche thérapeutique pharmacologique standard, par paliers, pour abaisser le LDL-cholestérol ?",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Statines en première intention, puis Ezetimibe en cas d'échec, puis inhibiteur du PCSK9 en dernier recours", "image": null },
+                    { "key": "B", "text": "Inhibiteur du PCSK9 en première intention systématique", "image": null },
+                    { "key": "C", "text": "Ezetimibe seul, sans jamais associer de statine", "image": null },
+                    { "key": "D", "text": "Aphérèse d'emblée chez tout patient hypercholestérolémique", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "On commence toujours par les statines (médicaments les plus étudiés), puis on ajoute l'Ezetimibe en cas d'échec (bloque l'absorption intestinale du cholestérol via NPC1L1), puis un inhibiteur du PCSK9 en dernier recours.",
+                  "explanation_media": null,
+                  "tags": ["CM", "lipides", "traitement"]
+                },
+                {
+                  "external_id": "specialite-endocrinologie-real-56",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "passage": null,
+                  "text": "L'hypothyroïdie doit toujours être évoquée devant toute hypercholestérolémie, car elle diminue le fonctionnement du récepteur aux LDL.",
+                  "image": null,
+                  "choices": [
+                    { "key": "A", "text": "Vrai", "image": null },
+                    { "key": "B", "text": "Faux", "image": null }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Il faut y penser toujours devant toute hypercholestérolémie : dans l'hypothyroïdie, les récepteurs aux LDL fonctionnent moins bien, ce qui élève le LDL-cholestérol circulant.",
+                  "explanation_media": null,
+                  "tags": ["CM", "lipides", "hypothyroidie"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
