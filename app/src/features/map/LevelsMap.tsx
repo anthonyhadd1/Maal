@@ -357,6 +357,7 @@ export function LevelsMap() {
       <MapBackdrop accent={accent} scrollY={scrollY} />
       <MapHeader
         accent={accent}
+        chapterProgress={layout.chapterProgress}
         game={game.data}
         onSwitchSubject={() => router.push('/subject/switcher')}
         onSwitchTrack={() => router.push('/track/switcher')}

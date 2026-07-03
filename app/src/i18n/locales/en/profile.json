@@ -27,6 +27,7 @@
   "statsScreen": {
     "title": "My statistics",
     "bySubject": "Accuracy by subject",
+    "notStarted": "Not started yet",
     "xpByDay": "XP over the last 14 days",
     "maxXp": "max {{xp}} XP",
     "subjectMeta": "{{answered}} answers · {{levels}} levels · {{stars}} stars",

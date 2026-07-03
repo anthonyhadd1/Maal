@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { Flame, Map, Trophy, type LucideIcon } from 'lucide-react-native';
+import { Flame, GraduationCap, Map, Trophy, type LucideIcon } from 'lucide-react-native';
 import { useEffect } from 'react';
 import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 import Animated, {
@@ -47,6 +47,11 @@ export function WelcomeScreen() {
 
       <SafeAreaView edges={['top', 'left', 'right', 'bottom']} style={styles.safe}>
         <View style={styles.hero}>
+          <View style={styles.badge}>
+            <GraduationCap color={colors.neutral[0]} size={14} strokeWidth={2.6} />
+            <Text style={styles.badgeLabel}>{t('welcome.badge')}</Text>
+          </View>
+
           <View style={styles.scene}>
             {/* Far props — occluded by the island on the low half of their orbit. */}
             <OrbitingProp
@@ -68,8 +73,8 @@ export function WelcomeScreen() {
               size={40}
               style={styles.orbitFlask}
             />
-            <FloatingIsland bobAmplitude={8} bobDurationMs={10000} size={296}>
-              <Mascot size={158} state="idle" />
+            <FloatingIsland bobAmplitude={7} bobDurationMs={10000} size={264}>
+              <Mascot size={142} state="idle" />
             </FloatingIsland>
             {/* Near prop — crosses IN FRONT of the island's lower edge. */}
             {/* Flat low sweep: stays below the island so the always-on-top
@@ -90,6 +95,7 @@ export function WelcomeScreen() {
             {t('welcome.title')}
           </Text>
           <Text style={styles.tagline}>{t('welcome.tagline')}</Text>
+          <Text style={styles.pitch}>{t('welcome.pitch')}</Text>
 
           <View style={styles.chips}>
             <FeatureChip Icon={Map} label={t('welcome.featureLevels')} />
@@ -170,7 +176,7 @@ function DriftBlob({
 function FeatureChip({ Icon, label }: { Icon: LucideIcon; label: string }) {
   return (
     <View style={styles.chip}>
-      <Icon color={colors.neutral[0]} size={16} strokeWidth={2.4} />
+      <Icon color={colors.neutral[0]} size={14} strokeWidth={2.4} />
       <Text style={styles.chipLabel}>{label}</Text>
     </View>
   );
@@ -215,11 +221,27 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: spacing.s,
+    gap: spacing.xs,
+  },
+  badge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs + 2,
+    backgroundColor: overlayLight,
+    borderRadius: radii.pill,
+    paddingVertical: spacing.xs + 1,
+    paddingHorizontal: spacing.m,
+    marginBottom: spacing.xs,
+  },
+  badgeLabel: {
+    ...typography.caption,
+    fontSize: 12.5,
+    color: colors.neutral[0],
+    letterSpacing: 0.2,
   },
   scene: {
     alignItems: 'center',
-    marginBottom: spacing.s,
+    marginBottom: spacing.xs,
   },
   // Orbit anchors: % offsets are relative to the scene box (island + mascot).
   orbitBook: {
@@ -236,8 +258,8 @@ const styles = StyleSheet.create({
   },
   wordmark: {
     ...typography.display,
-    fontSize: 60,
-    lineHeight: 68,
+    fontSize: 52,
+    lineHeight: 58,
     color: colors.neutral[0],
     letterSpacing: -1.5,
   },
@@ -247,24 +269,34 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     opacity: 0.95,
   },
+  pitch: {
+    ...typography.small,
+    color: colors.neutral[0],
+    textAlign: 'center',
+    opacity: 0.78,
+    maxWidth: 300,
+    marginTop: spacing.xs,
+  },
   chips: {
     flexDirection: 'row',
-    gap: spacing.s,
-    marginTop: spacing.m,
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: spacing.xs,
+    marginTop: spacing.s,
   },
   chip: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.xs + 2,
+    gap: spacing.xs,
     backgroundColor: overlayLight,
     borderRadius: radii.pill,
-    paddingVertical: spacing.s,
-    paddingHorizontal: spacing.m + 2,
+    paddingVertical: spacing.xs + 3,
+    paddingHorizontal: spacing.s + 2,
   },
   chipLabel: {
     ...typography.smallMedium,
-    fontSize: 13,
-    lineHeight: 18,
+    fontSize: 12,
+    lineHeight: 16,
     color: colors.neutral[0],
   },
   actions: {

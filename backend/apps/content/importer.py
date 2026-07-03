@@ -62,15 +62,23 @@ class ImportReport:
     levels_created: int = 0
     exams_created: int = 0
     passages_created: int = 0
+    warnings: list[str] = None  # type: ignore[assignment]
+
+    def __post_init__(self):
+        if self.warnings is None:
+            self.warnings = []
 
     def summary(self) -> str:
-        return (
+        base = (
             f"questions : {self.created} créée(s), {self.updated} mise(s) à jour, "
             f"{self.skipped} inchangée(s) · "
             f"matières +{self.subjects_created} · unités +{self.units_created} · "
             f"niveaux +{self.levels_created} · examens +{self.exams_created} · "
             f"documents +{self.passages_created}"
         )
+        if self.warnings:
+            base += "\nAvertissements :\n" + "\n".join(f"  - {w}" for w in self.warnings)
+        return base
 
 
 def load_payload(path: Path) -> dict:
@@ -309,6 +317,8 @@ class ExamImporter:
             subject = self._upsert_subject(s_spec)
             for u_spec in s_spec.get("units") or []:
                 unit = self._get_or_create_unit(subject, u_spec)
+                unit_question_total = 0
+                boss_levels = []
                 for l_spec in u_spec.get("levels") or []:
                     level = self._get_or_create_level(unit, l_spec)
                     desired = []
@@ -316,6 +326,29 @@ class ExamImporter:
                         question = self._upsert_question(subject, q_spec)
                         desired.append((question.id, idx))
                     self._sync_level_questions(level, desired)
+                    unit_question_total += len(desired)
+                    if level.kind == Level.Kind.BOSS:
+                        boss_levels.append(level)
+                self._check_boss_pool_size(unit, boss_levels, unit_question_total)
+
+    def _check_boss_pool_size(self, unit: Unit, boss_levels: list[Level], unit_question_total: int):
+        """Avertissement (jamais bloquant) : un niveau boss pioche 10 fixes +
+        complète jusqu'à sa cible dans le RESTE de la banque de l'unité
+        (services/attempts._level_question_set). Si la banque totale de
+        l'unité est plus petite que la cible, le boss servira MOINS de
+        questions que prévu (jamais d'erreur, jamais de doublon — mais une
+        session d'examen blanc plus courte/moins variée que voulu). On le
+        signale ici plutôt que de le découvrir en prod avec du contenu réel."""
+        for level in boss_levels:
+            target = level.question_count_target
+            if unit_question_total < target:
+                self.report.warnings.append(
+                    f"{unit} : niveau boss « {level.title} » cible {target} questions mais "
+                    f"l'unité n'a que {unit_question_total} question(s) au total — le tirage "
+                    f"servira {unit_question_total} question(s) au lieu de {target} (banque "
+                    "trop petite pour ce niveau). Envisage de retirer kind=\"boss\" sur cette "
+                    "unité ou d'ajouter des questions."
+                )
 
     def _resolve_track_and_semester(self, spec: dict) -> tuple[Track, ProgramSemester | None]:
         track_slug = spec.get("track") or "concours"

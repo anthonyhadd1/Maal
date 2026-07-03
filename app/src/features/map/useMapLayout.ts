@@ -142,6 +142,39 @@ export interface MapLayout {
   ) => { length: number; offset: number; index: number };
   /** Node center x for a global node index. */
   xFor: (globalIndex: number) => number;
+  /** "Chapitre N/M" course-progress summary (§4 glue — null when the map is empty). */
+  chapterProgress: ChapterProgress | null;
+}
+
+export interface ChapterProgress {
+  /** 1-based index of the unit containing the current node (or the last unit,
+   * once every unit is fully completed). */
+  current: number;
+  total: number;
+  /** True once every unit in the subject has >=1 completed level in all its levels. */
+  subjectCompleted: boolean;
+}
+
+/**
+ * Course-level "chapter" summary derived from the same rows the map already
+ * renders — no extra request, no new backend field. Current chapter = the
+ * unit holding the current row (first unlocked-not-completed node, or the
+ * last completed one as a fallback); defaults to unit 1 while everything is
+ * still locked (fresh subject, nothing attempted yet).
+ */
+export function computeChapterProgress(rows: MapRow[]): ChapterProgress | null {
+  const unitHeaders = rows.filter((row): row is UnitHeaderRow => row.type === 'unitHeader');
+  if (unitHeaders.length === 0) return null;
+  const total = unitHeaders.length;
+  const currentRowIndex = findCurrentRowIndex(rows);
+  const currentUnitIndex =
+    currentRowIndex >= 0 ? (rows[currentRowIndex] as NodeRow).unitIndex : 0;
+  const subjectCompleted = unitHeaders.every((u) => u.total > 0 && u.done >= u.total);
+  return {
+    current: Math.min(currentUnitIndex + 1, total),
+    total,
+    subjectCompleted,
+  };
 }
 
 export function useMapLayout(units: MapUnit[] | undefined, screenWidth: number): MapLayout {
@@ -157,6 +190,7 @@ export function useMapLayout(units: MapUnit[] | undefined, screenWidth: number):
         index,
       }),
       xFor: (globalIndex: number) => nodeCenterX(globalIndex, screenWidth),
+      chapterProgress: computeChapterProgress(rows),
     };
   }, [units, screenWidth]);
 }

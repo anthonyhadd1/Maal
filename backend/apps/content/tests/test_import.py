@@ -341,3 +341,80 @@ class TestTrackValidation:
         with pytest.raises(ImportValidationError) as exc:
             ExamImporter(payload, media_dir=tmp_path).run()
         assert any("program_semester" in e for e in exc.value.errors)
+
+
+def _question(ref, text="Q ?"):
+    return {
+        "external_id": ref,
+        "type": "single",
+        "text": text,
+        "choices": [{"key": "A", "text": "Oui"}, {"key": "B", "text": "Non"}],
+        "correct": ["A"],
+    }
+
+
+def _boss_unit_payload(n_questions: int, unit_slug="unit-boss"):
+    """One subject / one unit whose single level is kind="boss" with
+    `n_questions` questions — total unit pool == n_questions (no other
+    levels to pad the pool)."""
+    return {
+        "schema_version": "1.0",
+        "subjects": [
+            {
+                "slug": "boss-subject",
+                "name_fr": "Matière Boss",
+                "color": "#111111",
+                "icon": "flask-conical",
+                "order": 1,
+                "units": [
+                    {
+                        "slug": unit_slug,
+                        "title_fr": "Unité Boss",
+                        "order": 1,
+                        "levels": [
+                            {
+                                "order": 1,
+                                "title_fr": "Examen blanc",
+                                "kind": "boss",
+                                "questions": [_question(f"boss-q{i}") for i in range(1, n_questions + 1)],
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
+
+
+class TestBossPoolSizeWarning:
+    """gameplay §1.1 : le boss pioche 10 fixes + complète jusqu'à sa cible (15
+    par défaut) dans le reste de la banque de l'unité (services/attempts.
+    _level_question_set). Une unité trop petite ne fait jamais planter
+    l'import ni le runtime — mais on doit le SIGNALER (rapport d'import),
+    jamais le laisser passer silencieusement sur du contenu réel."""
+
+    def test_warns_when_unit_pool_smaller_than_boss_target(self, tmp_path):
+        report = ExamImporter(_boss_unit_payload(6), media_dir=tmp_path).run()
+        assert report.warnings, "expected a warning for an undersized boss unit"
+        assert any("boss" in w.lower() and "6" in w and "15" in w for w in report.warnings)
+        assert "Avertissements" in report.summary()
+
+    def test_no_warning_when_unit_pool_covers_boss_target(self, tmp_path):
+        report = ExamImporter(_boss_unit_payload(15), media_dir=tmp_path).run()
+        assert report.warnings == []
+        assert "Avertissements" not in report.summary()
+
+    def test_no_warning_for_normal_non_boss_level_regardless_of_size(self, tmp_path):
+        payload = _boss_unit_payload(6)
+        payload["subjects"][0]["units"][0]["levels"][0]["kind"] = "normal"
+        report = ExamImporter(payload, media_dir=tmp_path).run()
+        assert report.warnings == []
+
+    def test_warning_never_blocks_the_import(self, tmp_path):
+        """The undersized-pool warning is advisory only — the level and its
+        questions still get created exactly as authored."""
+        report = ExamImporter(_boss_unit_payload(6), media_dir=tmp_path).run()
+        assert report.created == 6
+        level = Level.objects.get()
+        assert level.kind == Level.Kind.BOSS
+        assert level.level_questions.count() == 6

@@ -3,6 +3,7 @@ import {
   AMPLITUDE_RATIO,
   buildMapRows,
   buildRowOffsets,
+  computeChapterProgress,
   EDGE_PADDING,
   findCurrentRowIndex,
   nodeCenterX,
@@ -155,5 +156,64 @@ describe('findCurrentRowIndex', () => {
     expect(findCurrentRowIndex(buildMapRows([]))).toBe(-1);
     const allLocked: MapUnit[] = [{ id: 1, title: 'U1', order: 1, levels: [level(1), level(2)] }];
     expect(findCurrentRowIndex(buildMapRows(allLocked))).toBe(-1);
+  });
+});
+
+describe('computeChapterProgress', () => {
+  test('returns null for an empty map', () => {
+    expect(computeChapterProgress(buildMapRows([]))).toBeNull();
+  });
+
+  test('current chapter = the unit holding the current (first unlocked) node', () => {
+    // makeUnits(): unit 1 has the current node (level 13, unlocked); 2 units total.
+    const rows = buildMapRows(makeUnits());
+    expect(computeChapterProgress(rows)).toEqual({ current: 1, total: 2, subjectCompleted: false });
+  });
+
+  test('advances to unit 2 once unit 1 is fully passed and unit 2 has the current node', () => {
+    const units: MapUnit[] = [
+      {
+        id: 1,
+        title: 'U1',
+        order: 1,
+        levels: [level(1, { status: 'completed' }), level(2, { status: 'completed' })],
+      },
+      {
+        id: 2,
+        title: 'U2',
+        order: 2,
+        levels: [level(3, { status: 'unlocked' }), level(4)],
+      },
+    ];
+    const rows = buildMapRows(units);
+    expect(computeChapterProgress(rows)).toEqual({ current: 2, total: 2, subjectCompleted: false });
+  });
+
+  test('defaults to chapter 1 when nothing is unlocked yet (fresh subject)', () => {
+    const units: MapUnit[] = [
+      { id: 1, title: 'U1', order: 1, levels: [level(1), level(2)] },
+      { id: 2, title: 'U2', order: 2, levels: [level(3), level(4)] },
+    ];
+    const rows = buildMapRows(units);
+    expect(computeChapterProgress(rows)).toEqual({ current: 1, total: 2, subjectCompleted: false });
+  });
+
+  test('subjectCompleted is true once every unit has all its levels completed', () => {
+    const units: MapUnit[] = [
+      {
+        id: 1,
+        title: 'U1',
+        order: 1,
+        levels: [level(1, { status: 'completed' }), level(2, { status: 'completed' })],
+      },
+      {
+        id: 2,
+        title: 'U2',
+        order: 2,
+        levels: [level(3, { status: 'completed' })],
+      },
+    ];
+    const rows = buildMapRows(units);
+    expect(computeChapterProgress(rows)).toEqual({ current: 2, total: 2, subjectCompleted: true });
   });
 });

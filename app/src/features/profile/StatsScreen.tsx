@@ -1,10 +1,12 @@
 import { useRouter } from 'expo-router';
 import { BookOpenCheck, Flame, Lock, Sparkles, Zap, type LucideIcon } from 'lucide-react-native';
+import { useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useMeStats } from '@/api/queries/stats';
 import type { SubjectStat } from '@/api/types';
+import { splitSubjectStats } from '@/features/profile/statsLogic';
 import { ClayButton } from '@/components/clay/ClayButton';
 import { ClayCard } from '@/components/clay/ClayCard';
 import { ErrorState } from '@/components/feedback/ErrorState';
@@ -26,6 +28,11 @@ export function StatsScreen() {
   const { t } = useTranslation('profile');
   const router = useRouter();
   const stats = useMeStats();
+
+  const { started: startedSubjects, notStarted: notStartedSubjects } = useMemo(
+    () => splitSubjectStats(stats.data?.per_subject),
+    [stats.data?.per_subject],
+  );
 
   return (
     <Screen scroll>
@@ -71,15 +78,33 @@ export function StatsScreen() {
 
           {stats.data.detailed ? (
             <>
-              {/* Per-subject accuracy */}
+              {/* Per-subject accuracy — started subjects get a full accuracy
+                  card; untouched ones (common once a track has 12+ subjects)
+                  collapse into one compact list so the screen doesn't turn
+                  into a wall of identical "0 %" cards. */}
               {stats.data.per_subject && stats.data.per_subject.length > 0 ? (
                 <>
                   <Text style={styles.sectionTitle}>{t('statsScreen.bySubject')}</Text>
                   <View style={styles.subjectList} testID="stats-subjects">
-                    {stats.data.per_subject.map((entry) => (
-                      <SubjectRow entry={entry} key={entry.subject.slug} />
+                    {startedSubjects.map((entry) => (
+                      <SubjectRow entry={entry} key={entry.subject} />
                     ))}
                   </View>
+
+                  {notStartedSubjects.length > 0 ? (
+                    <>
+                      <Text style={styles.notStartedTitle}>{t('statsScreen.notStarted')}</Text>
+                      <ClayCard style={styles.notStartedCard} testID="stats-subjects-not-started">
+                        {notStartedSubjects.map((entry, index) => (
+                          <NotStartedRow
+                            entry={entry}
+                            isLast={index === notStartedSubjects.length - 1}
+                            key={entry.subject}
+                          />
+                        ))}
+                      </ClayCard>
+                    </>
+                  ) : null}
                 </>
               ) : null}
 
@@ -128,8 +153,8 @@ function TotalCard({
 
 function SubjectRow({ entry }: { entry: SubjectStat }) {
   const { t } = useTranslation('profile');
-  const accent = getSubjectAccent(entry.subject.slug, entry.subject.color_hex);
-  const Icon = getLucideIcon(entry.subject.icon);
+  const accent = getSubjectAccent(entry.subject);
+  const Icon = getLucideIcon(undefined);
 
   return (
     <ClayCard style={styles.subjectRow}>
@@ -139,7 +164,7 @@ function SubjectRow({ entry }: { entry: SubjectStat }) {
       <View style={styles.subjectBody}>
         <View style={styles.subjectTop}>
           <Text numberOfLines={1} style={styles.subjectName}>
-            {entry.subject.name}
+            {entry.name}
           </Text>
           <Text style={[styles.subjectPct, { color: accent }]}>
             {formatPercent(entry.accuracy_pct)}
@@ -155,6 +180,20 @@ function SubjectRow({ entry }: { entry: SubjectStat }) {
         </Text>
       </View>
     </ClayCard>
+  );
+}
+
+/** Compact single-line row for a subject the user hasn't played yet. */
+function NotStartedRow({ entry, isLast }: { entry: SubjectStat; isLast: boolean }) {
+  const accent = getSubjectAccent(entry.subject);
+
+  return (
+    <View style={[styles.notStartedRow, isLast && styles.notStartedRowLast]}>
+      <View style={[styles.notStartedDot, { backgroundColor: accent }]} />
+      <Text numberOfLines={1} style={styles.notStartedName}>
+        {entry.name}
+      </Text>
+    </View>
   );
 }
 
@@ -279,6 +318,37 @@ const styles = StyleSheet.create({
   subjectMeta: {
     ...typography.caption,
     color: colors.neutral[500],
+  },
+  notStartedTitle: {
+    ...typography.smallMedium,
+    color: colors.neutral[500],
+    marginTop: spacing.l,
+    marginBottom: spacing.m,
+  },
+  notStartedCard: {
+    marginBottom: spacing.l,
+    paddingVertical: spacing.xs,
+  },
+  notStartedRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.m,
+    paddingVertical: spacing.m,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.neutral[100],
+  },
+  notStartedRowLast: {
+    borderBottomWidth: 0,
+  },
+  notStartedDot: {
+    width: 10,
+    height: 10,
+    borderRadius: radii.pill,
+  },
+  notStartedName: {
+    ...typography.small,
+    color: colors.neutral[700],
+    flexShrink: 1,
   },
   chartCard: {
     marginBottom: spacing.l,

@@ -412,8 +412,14 @@ export interface StatsTotals {
   best_streak: number;
 }
 
+/**
+ * GET /me/stats/ per_subject row — `subject` is the bare slug and `name` is
+ * a sibling field (backend/apps/progress/services/stats.py::_per_subject);
+ * there is no nested SubjectRef here, unlike other subject-bearing payloads.
+ */
 export interface SubjectStat {
-  subject: SubjectRef;
+  subject: string;
+  name: string;
   accuracy_pct: number;
   answered: number;
   levels_completed: number;

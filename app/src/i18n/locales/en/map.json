@@ -18,6 +18,10 @@
     "title": "What are you preparing for?"
   },
   "unitProgress": "{{done}}/{{total}}",
+  "chapterProgress": {
+    "inProgress": "Chapter {{current}}/{{total}}",
+    "done": "{{total}} chapters done"
+  },
   "milestone": {
     "checkpoint": "End-of-unit checkpoint",
     "boss": "Mock exam checkpoint",

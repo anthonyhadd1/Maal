@@ -8,6 +8,7 @@ import { HeartCounter } from '@/components/game/HeartCounter';
 import { StreakFlame } from '@/components/game/StreakFlame';
 import { XPBadge } from '@/components/game/XPBadge';
 import { PressableScale } from '@/components/layout/PressableScale';
+import type { ChapterProgress } from '@/features/map/useMapLayout';
 import { shade } from '@/lib/color';
 import { getLucideIcon } from '@/lib/lucide';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
@@ -21,6 +22,8 @@ interface MapHeaderProps {
   trackIcon?: string;
   trackName?: string;
   onSwitchTrack?: () => void;
+  /** "Chapitre N/M" course-progress summary (§4 glue) — omitted while the map is empty. */
+  chapterProgress?: ChapterProgress | null;
 }
 
 /**
@@ -36,6 +39,7 @@ export function MapHeader({
   trackIcon,
   trackName,
   onSwitchTrack,
+  chapterProgress,
 }: MapHeaderProps) {
   const { t } = useTranslation('map');
   const TrackIcon = getLucideIcon(trackIcon, LayoutGrid);
@@ -61,25 +65,37 @@ export function MapHeader({
       ) : null}
 
       <ClaySurface radius="l" shadow="floating" style={styles.card}>
-        <View
-          style={[
-            styles.subjectPill,
-            { backgroundColor: accent, borderBottomColor: shade(accent, -0.28) },
-          ]}
-        >
-          <PressableScale
-            accessibilityLabel={t('switcher.title')}
-            clay={false}
-            onPress={onSwitchSubject}
-            pressedTranslateY={2}
-            style={styles.subjectTap}
-            testID="map-subject-switcher"
+        <View style={styles.subjectCol}>
+          <View
+            style={[
+              styles.subjectPill,
+              { backgroundColor: accent, borderBottomColor: shade(accent, -0.28) },
+            ]}
           >
-            <Text numberOfLines={1} style={styles.subjectName}>
-              {subjectName}
+            <PressableScale
+              accessibilityLabel={t('switcher.title')}
+              clay={false}
+              onPress={onSwitchSubject}
+              pressedTranslateY={2}
+              style={styles.subjectTap}
+              testID="map-subject-switcher"
+            >
+              <Text numberOfLines={1} style={styles.subjectName}>
+                {subjectName}
+              </Text>
+              <ChevronDown color={colors.neutral[0]} size={16} strokeWidth={3} />
+            </PressableScale>
+          </View>
+          {chapterProgress && chapterProgress.total > 1 ? (
+            <Text numberOfLines={1} style={styles.chapterText} testID="map-chapter-progress">
+              {chapterProgress.subjectCompleted
+                ? t('chapterProgress.done', { total: chapterProgress.total })
+                : t('chapterProgress.inProgress', {
+                    current: chapterProgress.current,
+                    total: chapterProgress.total,
+                  })}
             </Text>
-            <ChevronDown color={colors.neutral[0]} size={16} strokeWidth={3} />
-          </PressableScale>
+          ) : null}
         </View>
 
         <View style={styles.stats}>
@@ -114,6 +130,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.m,
     paddingVertical: spacing.s,
   },
+  subjectCol: {
+    flexShrink: 1,
+    gap: 4,
+  },
   subjectPill: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -123,6 +143,12 @@ const styles = StyleSheet.create({
     minHeight: 44,
     maxWidth: 176,
     borderBottomWidth: 3,
+  },
+  chapterText: {
+    ...typography.caption,
+    fontFamily: typography.smallMedium.fontFamily,
+    color: colors.neutral[500],
+    paddingLeft: spacing.xs,
   },
   trackRow: {
     flexDirection: 'row',

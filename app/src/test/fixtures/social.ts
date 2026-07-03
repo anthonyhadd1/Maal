@@ -124,7 +124,8 @@ export const statsPremium: MeStats = {
   totals: { xp_total: 5210, levels_completed: 64, perfect_levels: 12, best_streak: 31 },
   per_subject: [
     {
-      subject: { name: 'Chimie', slug: 'chimie', color_hex: '#06B6D4', icon: 'flask-conical' },
+      subject: 'chimie',
+      name: 'Chimie',
       accuracy_pct: 82,
       answered: 240,
       levels_completed: 12,

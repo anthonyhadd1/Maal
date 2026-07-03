@@ -18,6 +18,10 @@
     "title": "Que prépares-tu ?"
   },
   "unitProgress": "{{done}}/{{total}}",
+  "chapterProgress": {
+    "inProgress": "Chapitre {{current}}/{{total}}",
+    "done": "{{total}} chapitres terminés"
+  },
   "milestone": {
     "checkpoint": "Étape de fin d'unité",
     "boss": "Étape d'examen blanc",
