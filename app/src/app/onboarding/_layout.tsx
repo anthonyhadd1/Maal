@@ -5,7 +5,11 @@ import { resolveOnboardingGate } from '@/features/onboarding/gate';
 import { useAuthStore } from '@/stores/authStore';
 import { colors } from '@/theme/tokens';
 
-/** Onboarding stack (goal → rhythm → notifications), post-register. */
+/**
+ * Onboarding stack (track → goal → rhythm → notifications), post-register.
+ * `track` SKIPS `goal` for the spécialité track (target_faculty doesn't
+ * apply once already in med school) — see TrackScreen's routing.
+ */
 export default function OnboardingLayout() {
   const status = useAuthStore((s) => s.status);
   const me = useMe();

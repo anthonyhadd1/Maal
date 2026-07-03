@@ -67,6 +67,23 @@ def main():
     assert me["username"] == username
     ok("GET /me/")
 
+    # --- tracks ---
+    tracks = call("GET", "/tracks/")
+    if len(tracks) != 2:
+        fail(f"expected 2 tracks (concours, specialite), got {len(tracks)}")
+    ok(f"{len(tracks)} tracks: {[t['slug'] for t in tracks]}")
+
+    specialite = call("GET", "/subjects/?track=specialite")
+    if "years" not in specialite or specialite.get("track") != "specialite":
+        fail("subjects?track=specialite did not return the tiered shape")
+    years = specialite["years"]
+    if len(years) != 1:
+        fail(f"expected 1 program year for specialite, got {len(years)}")
+    total_specialite_subjects = sum(len(sem["subjects"]) for y in years for sem in y["semesters"])
+    if total_specialite_subjects != 12:
+        fail(f"expected 12 total subjects across specialite semesters, got {total_specialite_subjects}")
+    ok(f"subjects?track=specialite: 1 year, {len(years[0]['semesters'])} semesters, {total_specialite_subjects} subjects")
+
     # --- content ---
     subjects = call("GET", "/subjects/")
     if not subjects:

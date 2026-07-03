@@ -13,6 +13,8 @@ interface SettingsState {
   /** Persisted user choice; null = follow device locale. */
   locale: SupportedLocale | null;
   activeSubjectSlug: string | null;
+  /** Active exam track (« concours » | « specialite »…). Default 'concours'. */
+  activeTrackSlug: string;
   /** True once AsyncStorage rehydration finished (gates the splash screen). */
   hasHydrated: boolean;
 
@@ -22,6 +24,7 @@ interface SettingsState {
   setStreakRemindersEnabled: (value: boolean) => void;
   setLocale: (locale: SupportedLocale | null) => void;
   setActiveSubjectSlug: (slug: string | null) => void;
+  setActiveTrackSlug: (slug: string) => void;
   setHasHydrated: (value: boolean) => void;
 }
 
@@ -34,6 +37,7 @@ export const useSettingsStore = create<SettingsState>()(
       streakRemindersEnabled: true,
       locale: null,
       activeSubjectSlug: null,
+      activeTrackSlug: 'concours',
       hasHydrated: false,
 
       setSoundEnabled: (soundEnabled) => set({ soundEnabled }),
@@ -47,6 +51,7 @@ export const useSettingsStore = create<SettingsState>()(
         }
       },
       setActiveSubjectSlug: (activeSubjectSlug) => set({ activeSubjectSlug }),
+      setActiveTrackSlug: (activeTrackSlug) => set({ activeTrackSlug }),
       setHasHydrated: (hasHydrated) => set({ hasHydrated }),
     }),
     {
@@ -59,6 +64,7 @@ export const useSettingsStore = create<SettingsState>()(
         streakRemindersEnabled: state.streakRemindersEnabled,
         locale: state.locale,
         activeSubjectSlug: state.activeSubjectSlug,
+        activeTrackSlug: state.activeTrackSlug,
       }),
       onRehydrateStorage: () => (state) => {
         // Apply the persisted locale choice once, then unblock the splash gate.

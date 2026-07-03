@@ -11,7 +11,11 @@
   "switcher": {
     "title": "Pick your subject",
     "completed": "{{pct}}% complete",
-    "close": "Close"
+    "close": "Close",
+    "empty": "No subjects yet."
+  },
+  "trackSwitcher": {
+    "title": "What are you preparing for?"
   },
   "unitProgress": "{{done}}/{{total}}",
   "milestone": {

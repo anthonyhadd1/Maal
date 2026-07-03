@@ -22,6 +22,8 @@ export interface Profile {
   locale: string;
   onboarding_completed: boolean;
   leagues_opt_in: boolean;
+  /** Slug of the active Track (read); write accepts a track slug. null = unset. */
+  active_track: string | null;
 }
 
 export interface Me {
@@ -69,6 +71,20 @@ export interface Faculty {
 // Content / map
 // ---------------------------------------------------------------------------
 
+/**
+ * GET /tracks/ row — top-level exam category (« Concours d'entrée »,
+ * « Examens de Spécialité »…). Ordered by `order`, no pagination.
+ */
+export interface Track {
+  slug: string;
+  name: string;
+  description: string;
+  /** Lucide icon name (kebab-case). */
+  icon: string;
+  color_hex: string;
+  order: number;
+}
+
 export interface Subject {
   id: number;
   name: string;
@@ -78,6 +94,53 @@ export interface Subject {
   order: number;
   /** Per-user completion percentage (0–100). */
   completion_pct?: number;
+}
+
+/**
+ * GET /subjects/?track=<slug> — flat shape (today's concours behavior),
+ * with an additive `track` slug field on every item.
+ */
+export interface SubjectFlat extends Subject {
+  track: string;
+}
+
+export interface ProgramSemesterGroup {
+  id: number;
+  name: string;
+  order: number;
+  /**
+   * Bare Subject shape here (per contract) — NOT SubjectFlat. The additive
+   * `track` field only appears on items of the top-level flat array shape;
+   * nested tiered subjects omit it (the track is already the response root).
+   */
+  subjects: Subject[];
+}
+
+export interface ProgramYearGroup {
+  id: number;
+  name: string;
+  order: number;
+  semesters: ProgramSemesterGroup[];
+}
+
+/** GET /subjects/?track=<slug> — tiered shape (tracks with ProgramYear rows). */
+export interface TieredSubjectsResponse {
+  track: string;
+  years: ProgramYearGroup[];
+}
+
+/**
+ * Discriminated union for GET /subjects/?track=<slug>: a flat track
+ * (concours today) returns an array; a tiered track (specialite) returns a
+ * single object keyed by `years`. Use `isTieredSubjects` to narrow — do NOT
+ * rely on `Array.isArray` alone for documentation purposes (it IS the right
+ * check here, but the guard centralizes it so call sites stay consistent).
+ */
+export type SubjectsResponse = SubjectFlat[] | TieredSubjectsResponse;
+
+/** Type guard: narrows a SubjectsResponse to the tiered (years) shape. */
+export function isTieredSubjects(x: SubjectsResponse): x is TieredSubjectsResponse {
+  return !Array.isArray(x) && typeof x === 'object' && x !== null && 'years' in x;
 }
 
 export type LevelStatus = 'locked' | 'unlocked' | 'completed';

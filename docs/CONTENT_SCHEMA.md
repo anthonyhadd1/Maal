@@ -77,6 +77,72 @@ After import, everything is editable in the Django admin (questions, choices, le
 
 Image quality: minimum ~1200 px wide, clean PNG/JPG (re-shot rather than raw scan photos, if possible).
 
+## Tracks (Concours vs Examens de Spécialité)
+
+By default every subject belongs to the **"concours"** track (USJ medicine entrance exam) — nothing changes for existing files, `track` can simply be omitted.
+
+To import content for the **"Examens de Spécialité"** track (per-specialty course exams, organized Year → Semester → Specialty), add 3 optional fields at the **subject** level:
+
+| Field | Rules |
+|---|---|
+| `track` | `"concours"` (default) or `"specialite"`. The slug **must already exist** — tracks are seeded by migration, the importer never creates an unknown track (raises a validation error instead). |
+| `program_year` | Required when `track != "concours"`. `{ "name": "M1 - 4e année", "order": 1 }` — resolved by `(track, order)`, `get_or_create`'d with `name` as the default label. |
+| `program_semester` | Required when `track != "concours"`. `{ "name": "S1", "order": 1 }` — resolved by `(program_year, order)`, same `get_or_create` semantics. |
+
+This is how later years (M2, MSc, Thèses…) get added with **zero code changes**: just send a subject with a new `program_year`/`program_semester` pair.
+
+### Worked example — one specialty subject (Urologie, S1)
+
+```json
+{
+  "schema_version": "1.0",
+  "subjects": [
+    {
+      "slug": "specialite-urologie",
+      "name_fr": "Urologie",
+      "track": "specialite",
+      "program_year": { "name": "M1 - 4e année", "order": 1 },
+      "program_semester": { "name": "S1", "order": 1 },
+      "color": "#0EA5E9",
+      "icon": "droplet",
+      "order": 1,
+      "units": [
+        {
+          "slug": "urologie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-urologie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "text": "Quel est l'examen de première intention devant une colique néphrétique ?",
+                  "choices": [
+                    { "key": "A", "text": "Uroscanner sans injection" },
+                    { "key": "B", "text": "IRM rénale" },
+                    { "key": "C", "text": "Échographie seule" },
+                    { "key": "D", "text": "ASP" }
+                  ],
+                  "correct": ["A"],
+                  "explanation": "Retiens que l'uroscanner sans injection est l'examen de référence en urgence."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+Note `exam_year`/`exam_session` are left `null` for these — they're drill questions written for the course, not tied to a specific concours session.
+
 ## CSV fallback
 
 If the data lives in Excel/Sheets, a flat CSV also works (one row per question):

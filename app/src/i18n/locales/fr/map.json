@@ -11,7 +11,11 @@
   "switcher": {
     "title": "Choisis ta matière",
     "completed": "{{pct}} % terminé",
-    "close": "Fermer"
+    "close": "Fermer",
+    "empty": "Aucune matière pour l'instant."
+  },
+  "trackSwitcher": {
+    "title": "Que prépares-tu ?"
   },
   "unitProgress": "{{done}}/{{total}}",
   "milestone": {

@@ -52,7 +52,7 @@ export function RhythmScreen() {
     <OnboardingStep
       cta={{ label: t('continue'), onPress: submit, loading: patchMe.isPending }}
       mascot="thinking"
-      step={1}
+      step={2}
       subtitle={t('rhythm.subtitle')}
       title={t('rhythm.title')}
     >

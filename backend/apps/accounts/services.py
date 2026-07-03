@@ -10,8 +10,19 @@ from .models import Profile, User
 
 @transaction.atomic
 def create_user_with_satellites(*, username: str, password: str, display_name: str, email: str = "") -> User:
+    from apps.content.models import Track
+
     user = User.objects.create_user(username=username, password=password, email=email)
-    Profile.objects.create(user=user, display_name=display_name or username)
+    concours_track, _ = Track.objects.get_or_create(
+        slug="concours",
+        defaults={
+            "name": "Concours d'entrée",
+            "icon": "graduation-cap",
+            "color_hex": "#7C3AED",
+            "order": 1,
+        },
+    )
+    Profile.objects.create(user=user, display_name=display_name or username, active_track=concours_track)
     _create_game_satellites(user)
     return user
 

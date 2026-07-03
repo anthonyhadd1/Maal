@@ -87,6 +87,10 @@ export default function RootLayout() {
                   name="subject/switcher"
                   options={{ presentation: 'formSheet', sheetAllowedDetents: [0.75, 1] }}
                 />
+                <Stack.Screen
+                  name="track/switcher"
+                  options={{ presentation: 'formSheet', sheetAllowedDetents: [0.75, 1] }}
+                />
                 <Stack.Screen name="paywall" options={{ presentation: 'modal' }} />
                 <Stack.Screen
                   name="streak"

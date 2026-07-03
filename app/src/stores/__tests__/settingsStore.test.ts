@@ -15,6 +15,7 @@ afterEach(async () => {
     s.setHapticsEnabled(true);
     s.setReduceMotion(false);
     s.setLocale(null);
+    s.setActiveTrackSlug('concours');
   });
   if (i18n.language !== 'fr') {
     await i18n.changeLanguage('fr');
@@ -54,5 +55,13 @@ describe('settingsStore (settings screen toggles ↔ store)', () => {
   test('league opt-in lives on the PROFILE (server), not in this store', () => {
     // Regression guard: the settings screen must not grow a local shadow copy.
     expect('leaguesOptIn' in useSettingsStore.getState()).toBe(false);
+  });
+
+  test('activeTrackSlug defaults to "concours" and the track switcher can persist a new choice', () => {
+    expect(useSettingsStore.getState().activeTrackSlug).toBe('concours');
+    act(() => {
+      useSettingsStore.getState().setActiveTrackSlug('specialite');
+    });
+    expect(useSettingsStore.getState().activeTrackSlug).toBe('specialite');
   });
 });

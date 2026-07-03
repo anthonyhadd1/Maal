@@ -63,7 +63,7 @@ export function NotificationsScreen() {
       }}
       onSkip={finish}
       skipLabel={t('notifications.later')}
-      step={2}
+      step={3}
       subtitle={t('notifications.pitch')}
       title={t('notifications.title')}
     >

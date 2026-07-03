@@ -1,6 +1,8 @@
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
+from apps.content.models import Track
+
 from .models import Faculty, Profile, User
 
 
@@ -30,6 +32,10 @@ class RegisterSerializer(serializers.Serializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    active_track = serializers.SlugRelatedField(
+        slug_field="slug", queryset=Track.objects.filter(is_active=True), required=False, allow_null=True
+    )
+
     class Meta:
         model = Profile
         fields = [
@@ -41,6 +47,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "locale",
             "onboarding_completed",
             "leagues_opt_in",
+            "active_track",
         ]
 
 

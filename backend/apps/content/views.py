@@ -3,12 +3,30 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from . import services
-from .models import Subject
+from .models import Subject, Track
+
+
+class TrackListView(APIView):
+    def get(self, request):
+        tracks = Track.objects.filter(is_active=True).order_by("order")
+        payload = [
+            {
+                "slug": t.slug,
+                "name": t.name,
+                "description": t.description,
+                "icon": t.icon,
+                "color_hex": t.color_hex,
+                "order": t.order,
+            }
+            for t in tracks
+        ]
+        return Response(payload)
 
 
 class SubjectListView(APIView):
     def get(self, request):
-        return Response(services.subjects_overview(request.user))
+        track_slug = request.query_params.get("track") or "concours"
+        return Response(services.subjects_overview(request.user, track_slug=track_slug))
 
 
 class SubjectMapView(APIView):

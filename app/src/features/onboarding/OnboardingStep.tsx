@@ -9,7 +9,7 @@ import { PressableScale } from '@/components/layout/PressableScale';
 import { Screen } from '@/components/layout/Screen';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
-export const ONBOARDING_STEPS = 3;
+export const ONBOARDING_STEPS = 4;
 
 interface OnboardingStepProps {
   /** 0-based step index (progress dots). */

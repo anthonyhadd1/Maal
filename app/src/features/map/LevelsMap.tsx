@@ -27,6 +27,7 @@ import { keys } from '@/api/queries/keys';
 import { useSubjectMap } from '@/api/queries/map';
 import { useAbandonAttempt, useStartAttempt } from '@/api/queries/session';
 import { useSubjects } from '@/api/queries/subjects';
+import { useTracks } from '@/api/queries/tracks';
 import { queryClient } from '@/api/queryClient';
 import type { MapLevel } from '@/api/types';
 import { ClayDialog } from '@/components/feedback/ClayDialog';
@@ -72,9 +73,19 @@ export function LevelsMap() {
 
   const storedSlug = useSettingsStore((s) => s.activeSubjectSlug);
   const setActiveSubjectSlug = useSettingsStore((s) => s.setActiveSubjectSlug);
+  const activeTrackSlug = useSettingsStore((s) => s.activeTrackSlug);
 
-  const subjects = useSubjects();
-  const activeSlug = storedSlug ?? subjects.data?.[0]?.slug ?? null;
+  const subjects = useSubjects(activeTrackSlug);
+  const tracks = useTracks();
+  const activeTrack = tracks.data?.find((track) => track.slug === activeTrackSlug);
+
+  // Flat track: subjects.data is an array. Tiered: the map itself always
+  // resolves to ONE active subject (the subject switcher renders the
+  // grouped view) — fall back to the first flat subject when nothing is
+  // stored yet; tiered tracks always have a stored/defaulted slug by the
+  // time the track switcher hands off (see track/switcher.tsx).
+  const firstFlatSubject = Array.isArray(subjects.data) ? subjects.data[0] : undefined;
+  const activeSlug = storedSlug ?? firstFlatSubject?.slug ?? null;
 
   // Persist the defaulted subject so the switcher highlights it consistently.
   useEffect(() => {
@@ -88,7 +99,7 @@ export function LevelsMap() {
   const abandonAttempt = useAbandonAttempt();
 
   const accent = getSubjectAccent(activeSlug ?? '', map.data?.subject.color_hex);
-  const subjectName = map.data?.subject.name ?? subjects.data?.[0]?.name ?? t('title');
+  const subjectName = map.data?.subject.name ?? firstFlatSubject?.name ?? t('title');
 
   const [heartsModalVisible, setHeartsModalVisible] = useState(false);
   const [resumeVisible, setResumeVisible] = useState(false);
@@ -348,7 +359,9 @@ export function LevelsMap() {
         accent={accent}
         game={game.data}
         onSwitchSubject={() => router.push('/subject/switcher')}
+        onSwitchTrack={() => router.push('/track/switcher')}
         subjectName={subjectName}
+        trackIcon={activeTrack?.icon}
       />
 
       {isLoading ? (

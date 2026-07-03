@@ -1,6 +1,10 @@
 {
   "skip": "Plus tard",
   "continue": "Continuer",
+  "track": {
+    "title": "Que prépares-tu ?",
+    "subtitle": "On adapte tout ton parcours à ton examen — tu pourras changer plus tard."
+  },
   "goal": {
     "title": "Tu vises quoi ?",
     "subtitle": "On personnalise ton parcours — tu pourras changer plus tard.",

@@ -40,6 +40,9 @@ class Profile(TimeStampedModel):
     display_name = models.CharField(max_length=40)
     avatar_id = models.CharField(max_length=32, default="avatar-01")
     target_faculty = models.ForeignKey(Faculty, null=True, blank=True, on_delete=models.SET_NULL)
+    active_track = models.ForeignKey(
+        "content.Track", null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
+    )
     exam_year = models.PositiveSmallIntegerField(null=True, blank=True)
     daily_goal_xp = models.PositiveSmallIntegerField(choices=DailyGoal.choices, default=DailyGoal.SERIOUS)
     locale = models.CharField(max_length=8, default="fr")

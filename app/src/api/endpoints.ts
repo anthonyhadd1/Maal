@@ -15,6 +15,7 @@ export const ENDPOINTS = {
   faculties: '/faculties/',
 
   // content + map
+  tracks: '/tracks/',
   subjects: '/subjects/',
   subjectMap: (slug: string) => `/subjects/${slug}/map/` as const,
 

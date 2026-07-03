@@ -57,7 +57,11 @@ class TestSubjectsList:
         assert resp.status_code == 200
         slugs = [s["slug"] for s in resp.data]
         assert slugs == ["biologie", "chimie"]  # ordered, inactive excluded
-        assert set(resp.data[0]) == {"id", "name", "slug", "color_hex", "icon", "order", "completion_pct"}
+        # "track" is an additive field on the historical flat shape (backward-compatible).
+        assert set(resp.data[0]) == {
+            "id", "name", "slug", "color_hex", "icon", "order", "completion_pct", "track",
+        }
+        assert resp.data[0]["track"] == "concours"
         assert resp.data[0]["completion_pct"] == 0
 
     def test_no_pagination(self, auth_client):

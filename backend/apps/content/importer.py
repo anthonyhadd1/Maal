@@ -15,7 +15,19 @@ from django.conf import settings
 from django.db import transaction
 from django.utils.text import slugify
 
-from .models import Choice, Exam, Level, LevelQuestion, Passage, Question, Subject, Unit
+from .models import (
+    Choice,
+    Exam,
+    Level,
+    LevelQuestion,
+    Passage,
+    ProgramSemester,
+    ProgramYear,
+    Question,
+    Subject,
+    Track,
+    Unit,
+)
 
 SUPPORTED_SCHEMA_VERSION = "1.0"
 VALID_TYPES = {Question.QType.SINGLE, Question.QType.MULTI, Question.QType.TRUE_FALSE}
@@ -195,12 +207,33 @@ class ExamImporter:
             if not s_spec.get("slug"):
                 self.errors.append("Matière sans slug.")
                 continue
+            self._validate_track(s_spec)
             for u_spec in s_spec.get("units") or []:
                 for l_spec in u_spec.get("levels") or []:
                     if l_spec.get("order") is None:
                         self.errors.append(f"{s_spec['slug']} : niveau sans order.")
                     for q_spec in l_spec.get("questions") or []:
                         self._validate_question(q_spec, seen_refs)
+
+    def _validate_track(self, s_spec: dict):
+        track_slug = s_spec.get("track") or "concours"
+        if not Track.objects.filter(slug=track_slug).exists():
+            self.errors.append(
+                f'{s_spec["slug"]} : track "{track_slug}" inconnu — '
+                f"les tracks doivent déjà exister (migration de seed), aucune création implicite."
+            )
+            return
+        if track_slug != "concours":
+            if not s_spec.get("program_year"):
+                self.errors.append(f'{s_spec["slug"]} : "program_year" requis pour le track "{track_slug}".')
+            elif s_spec["program_year"].get("order") is None:
+                self.errors.append(f'{s_spec["slug"]} : "program_year.order" requis.')
+            if not s_spec.get("program_semester"):
+                self.errors.append(
+                    f'{s_spec["slug"]} : "program_semester" requis pour le track "{track_slug}".'
+                )
+            elif s_spec["program_semester"].get("order") is None:
+                self.errors.append(f'{s_spec["slug"]} : "program_semester.order" requis.')
 
     def _validate_question(self, spec: dict, seen_refs: set):
         ref = spec.get("external_id")
@@ -284,7 +317,28 @@ class ExamImporter:
                         desired.append((question.id, idx))
                     self._sync_level_questions(level, desired)
 
+    def _resolve_track_and_semester(self, spec: dict) -> tuple[Track, ProgramSemester | None]:
+        track_slug = spec.get("track") or "concours"
+        # Slug déjà validé dans _validate_track() — get() sûr ici (aucune création implicite).
+        track = Track.objects.get(slug=track_slug)
+        if track_slug == "concours":
+            return track, None
+        year_spec = spec["program_year"]
+        semester_spec = spec["program_semester"]
+        year, _ = ProgramYear.objects.get_or_create(
+            track=track,
+            order=year_spec["order"],
+            defaults={"name": year_spec.get("name") or f"Année {year_spec['order']}"},
+        )
+        semester, _ = ProgramSemester.objects.get_or_create(
+            year=year,
+            order=semester_spec["order"],
+            defaults={"name": semester_spec.get("name") or f"Semestre {semester_spec['order']}"},
+        )
+        return track, semester
+
     def _upsert_subject(self, spec: dict) -> Subject:
+        track, program_semester = self._resolve_track_and_semester(spec)
         subject = Subject.objects.filter(slug=spec["slug"]).first()
         if subject is None:
             max_order = Subject.objects.order_by("-order").values_list("order", flat=True).first() or 0
@@ -294,6 +348,8 @@ class ExamImporter:
                 color_hex=spec.get("color") or "#64748B",
                 icon=spec.get("icon") or "book-open",
                 order=spec.get("order") or max_order + 1,
+                track=track,
+                program_semester=program_semester,
             )
             self.report.subjects_created += 1
             return subject
@@ -308,6 +364,12 @@ class ExamImporter:
             if value is not None and getattr(subject, field) != value:
                 setattr(subject, field, value)
                 dirty = True
+        if subject.track_id != track.id:
+            subject.track = track
+            dirty = True
+        if subject.program_semester_id != (program_semester.id if program_semester else None):
+            subject.program_semester = program_semester
+            dirty = True
         if dirty:
             subject.save()
         return subject

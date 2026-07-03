@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { Check, X } from 'lucide-react-native';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { useTranslation } from 'react-i18next';
 
@@ -10,17 +10,24 @@ import { ClaySurface } from '@/components/clay/ClaySurface';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import { Skeleton } from '@/components/feedback/Skeleton';
 import { PressableScale } from '@/components/layout/PressableScale';
-import type { Subject } from '@/api/types';
+import { isTieredSubjects, type ProgramYearGroup, type Subject } from '@/api/types';
 import { shade, withAlpha } from '@/lib/color';
 import { getLucideIcon } from '@/lib/lucide';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { colors, getSubjectAccent, radii, spacing, typography } from '@/theme/tokens';
 
-/** formSheet modal: grid of accent-tinted subject clay tiles (§4a). */
+/**
+ * formSheet modal: grid of accent-tinted subject clay tiles (§4a). Flat
+ * tracks (concours) keep the exact original flat-grid behavior. Tiered
+ * tracks (spécialité) render Year -> Semester -> the SAME subject tile
+ * grouped instead — same sheet, same SubjectCard, no visual regression on
+ * the flat path.
+ */
 export default function SubjectSwitcherRoute() {
   const { t } = useTranslation('map');
   const router = useRouter();
-  const subjects = useSubjects();
+  const activeTrackSlug = useSettingsStore((s) => s.activeTrackSlug);
+  const subjects = useSubjects(activeTrackSlug);
   const activeSlug = useSettingsStore((s) => s.activeSubjectSlug);
   const setActiveSubjectSlug = useSettingsStore((s) => s.setActiveSubjectSlug);
 
@@ -28,6 +35,9 @@ export default function SubjectSwitcherRoute() {
     setActiveSubjectSlug(subject.slug);
     router.back();
   };
+
+  const tiered = subjects.data && isTieredSubjects(subjects.data) ? subjects.data : null;
+  const flat = subjects.data && !isTieredSubjects(subjects.data) ? subjects.data : null;
 
   return (
     <View style={styles.root}>
@@ -45,18 +55,29 @@ export default function SubjectSwitcherRoute() {
       </View>
 
       {subjects.isPending ? (
-        <View style={styles.grid}>
+        <View style={styles.skeletonGrid}>
           {Array.from({ length: 4 }, (_, i) => (
             <Skeleton height={158} key={i} radius={radii.l} style={styles.gridItem} width="47%" />
           ))}
         </View>
       ) : subjects.isError ? (
         <ErrorState onRetry={() => void subjects.refetch()} retrying={subjects.isRefetching} />
+      ) : tiered ? (
+        <ScrollView contentContainerStyle={styles.listContent} testID="subject-switcher-tiered">
+          {tiered.years.map((year) => (
+            <YearGroupSection
+              activeSlug={activeSlug}
+              key={year.id}
+              onSelect={select}
+              year={year}
+            />
+          ))}
+        </ScrollView>
       ) : (
         <FlatList
           columnWrapperStyle={styles.column}
           contentContainerStyle={styles.listContent}
-          data={subjects.data}
+          data={flat ?? []}
           keyExtractor={(item) => item.slug}
           numColumns={2}
           renderItem={({ item }) => (
@@ -66,8 +87,48 @@ export default function SubjectSwitcherRoute() {
               subject={item}
             />
           )}
+          testID="subject-switcher-flat"
         />
       )}
+    </View>
+  );
+}
+
+/** Year header (bold, track-tinted) -> semester pill -> subject grid. */
+function YearGroupSection({
+  year,
+  activeSlug,
+  onSelect,
+}: {
+  year: ProgramYearGroup;
+  activeSlug: string | null;
+  onSelect: (subject: Subject) => void;
+}) {
+  const { t } = useTranslation('map');
+  return (
+    <View style={styles.yearSection} testID={`year-group-${year.id}`}>
+      <Text style={styles.yearTitle}>{year.name}</Text>
+      {year.semesters.map((semester) => (
+        <View key={semester.id} style={styles.semesterSection} testID={`semester-group-${semester.id}`}>
+          <View style={styles.semesterPill}>
+            <Text style={styles.semesterPillText}>{semester.name}</Text>
+          </View>
+          {semester.subjects.length === 0 ? (
+            <Text style={styles.semesterEmpty}>{t('switcher.empty')}</Text>
+          ) : (
+            <View style={styles.grid}>
+              {semester.subjects.map((subject) => (
+                <SubjectCard
+                  active={subject.slug === activeSlug}
+                  key={subject.slug}
+                  onPress={() => onSelect(subject)}
+                  subject={subject}
+                />
+              ))}
+            </View>
+          )}
+        </View>
+      ))}
     </View>
   );
 }
@@ -198,14 +259,23 @@ const styles = StyleSheet.create({
   column: {
     gap: spacing.m,
   },
-  grid: {
+  skeletonGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: spacing.m,
     paddingHorizontal: spacing.l,
   },
+  /** Subject tile grid — used both under the flat FlatList columns and inside
+   * each tiered semester group. No horizontal padding: the parent scroll
+   * container (`listContent`) already supplies it. */
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.m,
+  },
   gridItem: {
-    flex: 1,
+    flexBasis: '47%',
+    flexGrow: 1,
     marginBottom: spacing.m,
   },
   card: {
@@ -254,5 +324,34 @@ const styles = StyleSheet.create({
   cardPct: {
     ...typography.caption,
     fontFamily: typography.h2.fontFamily,
+  },
+  yearSection: {
+    marginBottom: spacing.xl,
+  },
+  yearTitle: {
+    ...typography.h2,
+    fontFamily: typography.h1.fontFamily,
+    color: colors.primary[700],
+    marginBottom: spacing.m,
+  },
+  semesterSection: {
+    marginBottom: spacing.l,
+  },
+  semesterPill: {
+    alignSelf: 'flex-start',
+    backgroundColor: colors.primary[100],
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    paddingVertical: spacing.xs,
+    marginBottom: spacing.m,
+  },
+  semesterPillText: {
+    ...typography.smallMedium,
+    fontFamily: typography.bodyBold.fontFamily,
+    color: colors.primary[700],
+  },
+  semesterEmpty: {
+    ...typography.small,
+    color: colors.neutral[500],
   },
 });

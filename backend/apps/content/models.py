@@ -4,7 +4,71 @@ from django.db import models
 from apps.common.models import TimeStampedModel
 
 
+class Track(TimeStampedModel):
+    """Un parcours de contenu de haut niveau (ex. concours vs spécialités).
+
+    Un Track « plat » (sans ProgramYear) rend /subjects/ tel quel aujourd'hui ;
+    un Track « à paliers » (avec ProgramYear) rend l'arborescence Année → Semestre.
+    """
+
+    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=80)
+    description = models.TextField(blank=True)
+    icon = models.CharField(max_length=40, help_text="Nom d'icône Lucide (ex. graduation-cap)")
+    color_hex = models.CharField(max_length=7)
+    order = models.PositiveSmallIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order"]
+        verbose_name = "Parcours"
+        verbose_name_plural = "Parcours"
+
+    def __str__(self):
+        return self.name
+
+
+class ProgramYear(TimeStampedModel):
+    track = models.ForeignKey(Track, on_delete=models.CASCADE, related_name="years")
+    name = models.CharField(max_length=80)
+    order = models.PositiveSmallIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order"]
+        constraints = [
+            models.UniqueConstraint(fields=["track", "order"], name="programyear_track_order_unique"),
+        ]
+        verbose_name = "Année de programme"
+        verbose_name_plural = "Années de programme"
+
+    def __str__(self):
+        return f"{self.track.name} · {self.name}"
+
+
+class ProgramSemester(TimeStampedModel):
+    year = models.ForeignKey(ProgramYear, on_delete=models.CASCADE, related_name="semesters")
+    name = models.CharField(max_length=40)
+    order = models.PositiveSmallIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order"]
+        constraints = [
+            models.UniqueConstraint(fields=["year", "order"], name="programsemester_year_order_unique"),
+        ]
+        verbose_name = "Semestre de programme"
+        verbose_name_plural = "Semestres de programme"
+
+    def __str__(self):
+        return f"{self.year} · {self.name}"
+
+
 class Subject(TimeStampedModel):
+    track = models.ForeignKey(Track, on_delete=models.PROTECT, related_name="subjects")
+    program_semester = models.ForeignKey(
+        ProgramSemester, null=True, blank=True, on_delete=models.SET_NULL, related_name="subjects"
+    )
     name = models.CharField(max_length=80)
     slug = models.SlugField(unique=True)
     color_hex = models.CharField(max_length=7)

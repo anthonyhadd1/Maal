@@ -5,7 +5,19 @@ from django.core.management import call_command
 from django.core.management.base import CommandError
 
 from apps.content.importer import ExamImporter, ImportValidationError
-from apps.content.models import Choice, Exam, Level, LevelQuestion, Passage, Question, Subject, Unit
+from apps.content.models import (
+    Choice,
+    Exam,
+    Level,
+    LevelQuestion,
+    Passage,
+    ProgramSemester,
+    ProgramYear,
+    Question,
+    Subject,
+    Track,
+    Unit,
+)
 
 pytestmark = pytest.mark.django_db
 
@@ -247,3 +259,85 @@ class TestCsvImport:
         multi = Question.objects.get(external_ref="bio-q2")
         assert multi.qtype == "multi"
         assert [c.is_correct for c in multi.choices.order_by("order")] == [True, True, False]
+
+
+def _specialite_payload():
+    payload = _base_payload()
+    subject = payload["subjects"][0]
+    subject["slug"] = "specialite-uro-test"
+    subject["track"] = "specialite"
+    subject["program_year"] = {"name": "M1 - 4e année", "order": 1}
+    subject["program_semester"] = {"name": "S1", "order": 1}
+    return payload
+
+
+class TestTrackRegressionNoFieldsOmitted:
+    """Concours files (no track/program_year/program_semester) must behave with
+    ZERO change — explicit regression test for the schema addition."""
+
+    def test_import_without_track_fields_defaults_to_concours_flat(self, tmp_path):
+        report = ExamImporter(_base_payload(), media_dir=tmp_path).run()
+        assert report.created == 2
+        subject = Subject.objects.get(slug="chimie")
+        assert subject.track.slug == "concours"
+        assert subject.program_semester is None
+        # No ProgramYear/ProgramSemester rows are created for the concours track.
+        assert ProgramYear.objects.filter(track__slug="concours").count() == 0
+
+
+class TestTrackFieldsCreateHierarchy:
+    def test_specialite_creates_year_and_semester(self, tmp_path):
+        report = ExamImporter(_specialite_payload(), media_dir=tmp_path).run()
+        assert report.created == 2
+        subject = Subject.objects.get(slug="specialite-uro-test")
+        assert subject.track.slug == "specialite"
+        assert subject.program_semester is not None
+        assert subject.program_semester.name == "S1"
+        assert subject.program_semester.order == 1
+        assert subject.program_semester.year.name == "M1 - 4e année"
+        assert subject.program_semester.year.order == 1
+        assert subject.program_semester.year.track.slug == "specialite"
+
+    def test_reimport_is_idempotent_no_duplicate_year_or_semester(self, tmp_path):
+        payload = _specialite_payload()
+        ExamImporter(payload, media_dir=tmp_path).run()
+        ExamImporter(payload, media_dir=tmp_path).run()
+        assert ProgramYear.objects.filter(track__slug="specialite", order=1).count() == 1
+        assert ProgramSemester.objects.filter(order=1, year__track__slug="specialite").count() == 1
+
+    def test_two_subjects_same_year_semester_share_rows(self, tmp_path):
+        payload = _specialite_payload()
+        second = _specialite_payload()
+        second["subjects"][0]["slug"] = "specialite-gyneco-test"
+        second["subjects"][0]["units"][0]["levels"][0]["questions"][0]["external_id"] = "gyneco-q1"
+        second["subjects"][0]["units"][0]["levels"][0]["questions"][1]["external_id"] = "gyneco-q2"
+        payload["subjects"].append(second["subjects"][0])
+        ExamImporter(payload, media_dir=tmp_path).run()
+        assert ProgramYear.objects.filter(track__slug="specialite").count() == 1
+        assert ProgramSemester.objects.filter(year__track__slug="specialite").count() == 1
+        assert Subject.objects.filter(program_semester__name="S1").count() == 2
+
+
+class TestTrackValidation:
+    def test_unknown_track_slug_raises_clear_error(self, tmp_path):
+        payload = _specialite_payload()
+        payload["subjects"][0]["track"] = "does-not-exist"
+        with pytest.raises(ImportValidationError) as exc:
+            ExamImporter(payload, media_dir=tmp_path).run()
+        assert any("does-not-exist" in e and "inconnu" in e for e in exc.value.errors)
+        assert not Track.objects.filter(slug="does-not-exist").exists()  # never silently created
+        assert Subject.objects.count() == 0
+
+    def test_missing_program_year_on_non_concours_track_fails(self, tmp_path):
+        payload = _specialite_payload()
+        del payload["subjects"][0]["program_year"]
+        with pytest.raises(ImportValidationError) as exc:
+            ExamImporter(payload, media_dir=tmp_path).run()
+        assert any("program_year" in e for e in exc.value.errors)
+
+    def test_missing_program_semester_on_non_concours_track_fails(self, tmp_path):
+        payload = _specialite_payload()
+        del payload["subjects"][0]["program_semester"]
+        with pytest.raises(ImportValidationError) as exc:
+            ExamImporter(payload, media_dir=tmp_path).run()
+        assert any("program_semester" in e for e in exc.value.errors)

@@ -4,7 +4,9 @@
  */
 export const keys = {
   me: ['me'] as const,
-  subjects: ['subjects'] as const,
+  tracks: ['tracks'] as const,
+  /** Per-track subjects list (flat or tiered — see SubjectsResponse). */
+  subjects: (trackSlug: string = 'concours') => ['subjects', trackSlug] as const,
   map: (subjectSlug: string) => ['map', subjectSlug] as const,
   /** Root key — invalidates every subject map at once (post-completion). */
   mapRoot: ['map'] as const,

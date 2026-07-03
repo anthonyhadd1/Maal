@@ -1,0 +1,3977 @@
+{
+  "schema_version": "1.0",
+  "subjects": [
+    {
+      "slug": "specialite-urologie",
+      "name_fr": "Urologie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S1",
+        "order": 1
+      },
+      "color": "#0EA5E9",
+      "icon": "droplet",
+      "order": 1,
+      "units": [
+        {
+          "slug": "specialite-urologie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-urologie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est l'examen de première intention devant une colique néphrétique aiguë ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Uroscanner sans injection",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "IRM rénale",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Échographie rénale seule",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "ASP (abdomen sans préparation)",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que l'uroscanner sans injection est l'examen de référence en urgence : il détecte le calcul et retentissement en quelques minutes.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-urologie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Le PSA (antigène prostatique spécifique) est principalement utilisé pour le dépistage de quelle pathologie ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Cancer de la prostate",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Cancer de la vessie",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Cancer du rein",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Lithiase urinaire",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le PSA n'est pas spécifique du cancer (peut monter avec HBP, prostatite) mais reste l'outil de dépistage de référence.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-urologie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "L'hypertrophie bénigne de la prostate (HBP) est un facteur de risque direct de cancer de la prostate.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "B"
+                  ],
+                  "explanation": "Retiens que HBP et cancer de prostate sont deux entités indépendantes qui peuvent coexister, mais l'une n'entraîne pas l'autre.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-urologie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels signes évoquent une pyélonéphrite aiguë compliquée nécessitant une hospitalisation ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Fièvre > 38.5°C avec frissons",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Obstacle urinaire associé",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Simple brûlure mictionnelle isolée",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Sepsis / signes de gravité",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "D"
+                  ],
+                  "explanation": "Retiens la triade : fièvre élevée, obstacle (dérivation en urgence), et signes de sepsis imposent l'hospitalisation.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-urologie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est la localisation la plus fréquente des calculs urinaires calciques ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Oxalate de calcium",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Acide urique",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Struvite",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Cystine",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que 70-80% des lithiases urinaires sont à base d'oxalate de calcium.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-urologie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Une clairance de la créatinine estimée à $30\\ mL/min$ correspond à quel stade d'insuffisance rénale chronique ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Stade 2 (légère)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Stade 3 (modérée)",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Stade 4 (sévère)",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Stade 5 (terminale)",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "C"
+                  ],
+                  "explanation": "Retiens la classification KDIGO : stade 4 = DFG entre 15 et 29 mL/min/1,73m².",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-urologie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le traitement de première intention d'une rétention aiguë d'urine ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Sondage vésical évacuateur",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Alpha-bloquant per os",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Antibiothérapie probabiliste",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Surveillance simple",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens qu'il faut lever l'obstacle en urgence par sondage (ou cathéter sus-pubien si contre-indication).",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-urologie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "L'hématurie macroscopique isolée chez un patient de plus de 50 ans doit toujours faire éliminer une tumeur de vessie.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens : toute hématurie macroscopique après 50 ans impose une cystoscopie jusqu'à preuve du contraire.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-gynecologie",
+      "name_fr": "Gynécologie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S1",
+        "order": 1
+      },
+      "color": "#EC4899",
+      "icon": "heart",
+      "order": 2,
+      "units": [
+        {
+          "slug": "specialite-gynecologie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-gynecologie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est la durée moyenne d'un cycle menstruel normal ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "28 jours (± 7)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "14 jours",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "35 à 40 jours",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "21 jours fixes",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que 21 à 35 jours reste considéré comme normal, avec 28 jours comme moyenne théorique.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gynecologie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Le frottis cervico-utérin dépiste principalement quelle pathologie ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Cancer du col utérin",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Cancer de l'endomètre",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Cancer de l'ovaire",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Fibromes utérins",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le frottis dépiste les lésions précancéreuses/cancéreuses du col, liées à HPV.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gynecologie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La grossesse extra-utérine est une urgence chirurgicale potentielle.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la rupture tubaire engage le pronostic vital par hémorragie interne.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gynecologie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels sont des facteurs de risque classiques du cancer de l'endomètre ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Obésité",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Nulliparité",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Multiparité",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Traitement hormonal substitutif non compensé",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "D"
+                  ],
+                  "explanation": "Retiens le lien avec l'hyperoestrogénie relative : obésité, nulliparité, oestrogènes seuls sans progestatif.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-gynecologie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le signe échographique typique du syndrome des ovaires polykystiques (SOPK) ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Plus de 12 follicules de 2-9mm par ovaire",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Kyste unique de 8cm",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Ovaires atrophiques",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Endomètre fin homogène",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le critère morphologique de Rotterdam : ≥12 follicules ou volume ovarien >10mL.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gynecologie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Dans le score de Bishop utilisé avant déclenchement, quel élément n'est PAS évalué ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "La dilatation cervicale",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "La consistance du col",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Le taux de béta-hCG",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "La position du col",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "C"
+                  ],
+                  "explanation": "Retiens que le Bishop évalue le col (dilatation, effacement, consistance, position) et la hauteur de présentation — pas la biologie.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gynecologie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel examen confirme le diagnostic de grossesse extra-utérine en cas de doute ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Échographie pelvienne + béta-hCG quantitatif",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "IRM pelvienne systématique",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Frottis cervico-vaginal",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Dosage de la progestérone seul",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le couple échographie + cinétique des béta-hCG comme pilier diagnostique.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gynecologie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La ménopause est définie par une aménorrhée de plus de 12 mois consécutifs.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la définition clinique stricte : 12 mois sans règles, en l'absence d'autre cause.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-chirurgie-viscerale",
+      "name_fr": "Chirurgie Viscérale",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S1",
+        "order": 1
+      },
+      "color": "#F97316",
+      "icon": "scissors",
+      "order": 3,
+      "units": [
+        {
+          "slug": "specialite-chirurgie-viscerale-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-chirurgie-viscerale-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le signe clinique le plus évocateur d'une appendicite aiguë ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Douleur en fosse iliaque droite avec défense",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Douleur épigastrique irradiant dans le dos",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Douleur en hypochondre droit avec Murphy",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Douleur diffuse sans point fixe",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le point de Mac Burney et la défense en FID comme signes cardinaux.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Le signe de Murphy est recherché pour quelle pathologie ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Cholécystite aiguë",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Appendicite",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Pancréatite",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Occlusion intestinale",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens : arrêt de l'inspiration à la palpation de l'hypochondre droit = signe de Murphy, évocateur de cholécystite.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Une occlusion intestinale aiguë avec arrêt des matières et des gaz est une urgence chirurgicale potentielle.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le risque de souffrance ischémique impose une prise en charge rapide.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels sont des signes de gravité d'une pancréatite aiguë ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Défaillance hémodynamique",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "CRP > 150 mg/L à 48h",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Lipasémie normale",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Insuffisance rénale aiguë",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "D"
+                  ],
+                  "explanation": "Retiens les critères de gravité (score de Ranson, CRP à 48h, défaillances d'organe).",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-chirurgie-viscerale-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est la cause la plus fréquente de pancréatite aiguë en France ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Lithiase biliaire",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Alcool",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Hypertriglycéridémie",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Origine médicamenteuse",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la lithiase biliaire est la 1ère cause, l'alcool la 2ème.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le volume de résection hépatique jugé sûr chez un foie sain, en pourcentage du parenchyme total ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Jusqu'à environ $70\\%$",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Jusqu'à $10\\%$",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Jusqu'à $25\\%$",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Aucune limite définie",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le foie sain régénère bien : jusqu'à 70% peut être réséqué en cas de fonction hépatique normale.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est la complication la plus redoutée d'une hernie inguinale non traitée ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Étranglement herniaire",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Récidive spontanée",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Infection cutanée locale",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Aucune, elle reste bénigne",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que l'étranglement engage le pronostic vital par nécrose intestinale — urgence chirurgicale.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-chirurgie-viscerale-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La cholécystectomie coelioscopique est le traitement de référence de la lithiase vésiculaire symptomatique.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la voie coelioscopique est devenue le standard, sauf contre-indication.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-gastro-enterologie",
+      "name_fr": "Gastro-entérologie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S1",
+        "order": 1
+      },
+      "color": "#84CC16",
+      "icon": "activity",
+      "order": 4,
+      "units": [
+        {
+          "slug": "specialite-gastro-enterologie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-gastro-enterologie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel micro-organisme est principalement responsable de l'ulcère gastroduodénal ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Helicobacter pylori",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Escherichia coli",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Clostridium difficile",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Candida albicans",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que H. pylori est impliqué dans la majorité des ulcères gastroduodénaux non liés aux AINS.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gastro-enterologie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel examen est indispensable au diagnostic positif d'un reflux gastro-oesophagien compliqué ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Fibroscopie oeso-gastro-duodénale",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Échographie abdominale",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Scanner thoracique",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "pH-métrie systématique en 1ère intention",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la FOGD recherche l'oesophagite et élimine une complication (sténose, Barrett).",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gastro-enterologie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La maladie de Crohn peut toucher n'importe quel segment du tube digestif, de la bouche à l'anus.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le caractère segmentaire et pan-digestif de la maladie de Crohn, contrairement à la RCH limitée au côlon-rectum.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gastro-enterologie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels signes orientent vers une cirrhose décompensée ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Ascite",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Ictère",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Encéphalopathie hépatique",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Appétit conservé et poids stable",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "C"
+                  ],
+                  "explanation": "Retiens la triade classique de décompensation : ascite, ictère, encéphalopathie (± hémorragie digestive).",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-gastro-enterologie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est la cause la plus fréquente de cirrhose dans le monde ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Consommation chronique d'alcool",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Hépatite auto-immune",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Maladie de Wilson",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Hémochromatose",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que l'alcool reste la première cause devant les hépatites virales selon les régions.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gastro-enterologie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Un score de Child-Pugh à $10$ points correspond à quelle classe pronostique ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Classe B",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Classe A",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Classe C",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Non classable",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens : Child A = 5-6 pts, Child B = 7-9 pts, Child C = 10-15 pts. Donc 10 points = classe C en réalité — vérifie toujours les bornes exactes.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gastro-enterologie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel traitement est indiqué en première intention dans une poussée de rectocolite hémorragique légère à modérée ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Aminosalicylés (5-ASA)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Chirurgie de colectomie totale",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Immunosuppresseurs d'emblée",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Antibiothérapie large spectre",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens les 5-ASA comme traitement de fond de première ligne dans les formes légères à modérées.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-gastro-enterologie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Une hémorragie digestive haute extériorisée par hématémèse nécessite une fibroscopie en urgence après stabilisation hémodynamique.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la séquence : stabilisation d'abord (voies veineuses, remplissage), puis endoscopie diagnostique et thérapeutique.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-endocrinologie",
+      "name_fr": "Endocrinologie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S1",
+        "order": 1
+      },
+      "color": "#A855F7",
+      "icon": "dna",
+      "order": 5,
+      "units": [
+        {
+          "slug": "specialite-endocrinologie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le seuil diagnostique du diabète sur une glycémie à jeun (deux mesures) ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "$\\geq 1.26\\ g/L$",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "$\\geq 1.00\\ g/L$",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "$\\geq 2.00\\ g/L$",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "$\\geq 0.90\\ g/L$",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens : glycémie à jeun $\\geq 1.26\\ g/L$ confirmée à deux reprises = diabète.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-endocrinologie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle hormone est déficitaire dans le diabète insipide central ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "ADH (vasopressine)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Insuline",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Aldostérone",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Cortisol",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le déficit en ADH entraîne une polyurie avec urines très diluées.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-endocrinologie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "L'hyperthyroïdie de Basedow s'accompagne classiquement d'une TSH effondrée et de T4 libre élevée.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le profil biologique typique de l'hyperthyroïdie périphérique : TSH basse, T4L haute.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-endocrinologie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels sont des signes cliniques évocateurs d'une hypothyroïdie ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Prise de poids",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Frilosité",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Tachycardie et amaigrissement",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Constipation",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "D"
+                  ],
+                  "explanation": "Retiens le ralentissement métabolique global : prise de poids, frilosité, constipation, bradycardie.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-endocrinologie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le traitement de référence de l'acidocétose diabétique ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Insulinothérapie IV + réhydratation",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Metformine per os",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Sulfamides hypoglycémiants",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Corticothérapie",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la prise en charge en urgence : insuline IV à la seringue électrique, réhydratation, correction de la kaliémie.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-endocrinologie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Une HbA1c à $8.5\\%$ correspond approximativement à quelle glycémie moyenne des 3 derniers mois ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Environ $2.00\\ g/L$",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Environ $1.00\\ g/L$",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Environ $1.26\\ g/L$",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Environ $3.00\\ g/L$",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la formule approximative : glycémie moyenne (mg/dL) ≈ 28.7 × HbA1c − 46.7, soit environ 2 g/L pour 8.5%.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-endocrinologie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est la cause la plus fréquente d'hypercalcémie en ambulatoire ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Hyperparathyroïdie primaire",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Intoxication à la vitamine D",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Sarcoïdose",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Myélome multiple",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que l'hyperparathyroïdie primaire domine en ambulatoire, alors que les néoplasies dominent en hospitalier.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-endocrinologie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Le syndrome de Cushing est lié à un excès chronique de cortisol.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la définition : hypercorticisme chronique, quelle que soit son origine (ACTH-dépendante ou non).",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-dermatologie",
+      "name_fr": "Dermatologie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S1",
+        "order": 1
+      },
+      "color": "#F59E0B",
+      "icon": "hand",
+      "order": 6,
+      "units": [
+        {
+          "slug": "specialite-dermatologie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-dermatologie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel critère ABCDE n'est PAS utilisé dans le dépistage du mélanome ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Asymétrie",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Bords irréguliers",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Douleur au toucher",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Évolution/changement récent",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "C"
+                  ],
+                  "explanation": "Retiens ABCDE : Asymétrie, Bords, Couleur, Diamètre, Évolution — la douleur n'en fait pas partie.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-dermatologie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est l'agent causal du zona ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Réactivation du virus varicelle-zona (VZV)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Herpès simplex de type 2",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Papillomavirus humain",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Poxvirus",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le zona est la réactivation du VZV latent dans un ganglion sensitif.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-dermatologie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Le psoriasis est une maladie inflammatoire chronique non contagieuse.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le psoriasis est une dermatose inflammatoire auto-immune, jamais contagieuse.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-dermatologie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels sont des facteurs de risque du mélanome ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Phototype clair",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Exposition solaire intense intermittente",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Nombreux naevi atypiques",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Phototype foncé sans autre facteur",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "C"
+                  ],
+                  "explanation": "Retiens la triade de risque : phototype clair, coups de soleil (surtout dans l'enfance), naevus atypiques/nombreux.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-dermatologie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le traitement de première intention d'un impétigo peu étendu ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Antibiothérapie locale ou courte per os",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Corticothérapie locale",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Antiviraux systémiques",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Chirurgie d'exérèse",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que l'impétigo (staphylocoque/streptocoque) se traite par antibiotiques locaux ou courte cure orale selon l'étendue.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-dermatologie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Un indice de Breslow de $2.5\\ mm$ sur un mélanome classe la lésion dans quelle catégorie de risque ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Épaisseur intermédiaire, pronostic réservé",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Mélanome in situ, excellent pronostic",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Breslow < 1mm, faible risque",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Non mesurable par définition",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le Breslow est le facteur pronostique majeur : plus il est élevé, plus le risque de récidive/métastase augmente.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-dermatologie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est la lésion élémentaire typique de l'acné inflammatoire ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Papulo-pustule",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Vésicule",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Bulle",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Purpura",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la papulo-pustule comme lésion inflammatoire type de l'acné, à distinguer du comédon (lésion rétentionnelle).",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-dermatologie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "L'eczéma de contact allergique nécessite une sensibilisation préalable à l'allergène en cause.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le mécanisme d'hypersensibilité retardée (type IV) : il faut un premier contact sensibilisant.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-nephrologie",
+      "name_fr": "Néphrologie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S2",
+        "order": 2
+      },
+      "color": "#14B8A6",
+      "icon": "droplet",
+      "order": 1,
+      "units": [
+        {
+          "slug": "specialite-nephrologie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-nephrologie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle formule est classiquement utilisée pour estimer le débit de filtration glomérulaire (DFG) ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "CKD-EPI",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Score de Ranson",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Score de Child-Pugh",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Index de Karnofsky",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens CKD-EPI comme formule de référence actuelle, remplaçant progressivement MDRD.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-nephrologie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le signe biologique cardinal du syndrome néphrotique ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Protéinurie $> 3\\ g/24h$ avec hypoalbuminémie",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Hématurie microscopique isolée",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Hyperkaliémie isolée",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Glycosurie sans hyperglycémie",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la définition biologique stricte : protéinurie massive + hypoalbuminémie < 30 g/L.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-nephrologie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "L'insuffisance rénale aiguë peut être d'origine pré-rénale, rénale ou post-rénale.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la classification topographique classique en 3 mécanismes à rechercher systématiquement.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-nephrologie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelles sont des indications classiques de l'épuration extra-rénale en urgence ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Hyperkaliémie menaçante résistante au traitement médical",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Acidose métabolique sévère réfractaire",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Surcharge hydrosodée résistante aux diurétiques",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Hypokaliémie légère isolée",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "C"
+                  ],
+                  "explanation": "Retiens le moyen mnémotechnique AEIOU : Acidose, Électrolytes (hyperK+), Intoxication, Overload, Urémie symptomatique.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-nephrologie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est la cause la plus fréquente d'insuffisance rénale chronique terminale dans les pays développés ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Néphropathie diabétique",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Polykystose rénale",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Glomérulonéphrite aiguë",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Néphroangiosclérose isolée",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le diabète est devenu la 1ère cause d'IRC terminale dans la majorité des pays développés.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-nephrologie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Chez un patient avec une kaliémie à $6.8\\ mmol/L$ et des troubles ECG, quel traitement est administré en priorité ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Gluconate de calcium IV (stabilisation membranaire)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Diurétique de l'anse seul",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Recharge potassique orale",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Attente de la dialyse sans traitement immédiat",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la priorité absolue : le calcium protège le myocarde avant même de faire baisser la kaliémie.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-nephrologie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel examen confirme le diagnostic de glomérulonéphrite lorsqu'il est indiqué ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Ponction-biopsie rénale",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Échographie rénale seule",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Uroscanner",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "ECBU simple",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la biopsie rénale reste l'examen de référence pour le diagnostic histologique précis.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-nephrologie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La restriction protidique sévère est recommandée en routine dès le stade 2 de l'insuffisance rénale chronique.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "B"
+                  ],
+                  "explanation": "Retiens que la restriction protidique stricte n'est envisagée qu'aux stades avancés et sous suivi diététique spécialisé, pas en routine précoce.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-anesthesie",
+      "name_fr": "Anesthésie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S2",
+        "order": 2
+      },
+      "color": "#6366F1",
+      "icon": "syringe",
+      "order": 2,
+      "units": [
+        {
+          "slug": "specialite-anesthesie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Que signifie le score ASA en anesthésie ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Une classification du risque anesthésique préopératoire",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Un score de douleur postopératoire",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Un indice de profondeur d'anesthésie",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Un score de réveil post-anesthésique",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que l'ASA (1 à 5/6) classe l'état général du patient avant l'anesthésie, pas la douleur ni le réveil.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-anesthesie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est la durée de jeûne préopératoire classiquement recommandée pour les liquides clairs ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "2 heures",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "12 heures",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "30 minutes",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "24 heures",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la règle 2-6 : 2h pour liquides clairs, 6h pour un repas léger, afin de réduire le risque d'inhalation.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-anesthesie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La rachianesthésie est une technique d'anesthésie loco-régionale.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la rachianesthésie (injection intrathécale) fait partie des anesthésies loco-régionales, comme la péridurale.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-anesthesie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels signes font évoquer une hyperthermie maligne peranesthésique ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Élévation rapide et importante de la température",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Rigidité musculaire généralisée",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Hypercapnie brutale et inexpliquée",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Hypothermie progressive isolée",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "C"
+                  ],
+                  "explanation": "Retiens la triade d'alerte : hyperthermie rapide, rigidité, hypercapnie — urgence vitale imposant l'arrêt des agents déclenchants et le dantrolène.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-anesthesie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel agent est un curare dépolarisant utilisé pour l'intubation en séquence rapide ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Succinylcholine",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Rocuronium",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Atracurium",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Vécuronium",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la succinylcholine est le seul curare dépolarisant d'usage courant, à délai d'action très rapide.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-anesthesie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Une saturation en oxygène (SpO2) à $88\\%$ sous air chez un patient en salle de réveil impose en premier lieu :",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "L'administration immédiate d'oxygène et la recherche de la cause",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "La simple surveillance sans intervention",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "L'arrêt de toute analgésie",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "La sortie du patient vers le service",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la priorité absolue : oxygéner d'abord, chercher la cause ensuite (dépression respiratoire, obstruction, atélectasie…).",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-anesthesie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le principal risque de l'anesthésie générale chez un patient non à jeun ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Inhalation bronchique (syndrome de Mendelson)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Hypertension artérielle isolée",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Allergie médicamenteuse systématique",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Hyperthermie systématique",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le risque majeur d'inhalation du contenu gastrique lors de l'induction chez un patient non à jeun.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-anesthesie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La consultation d'anesthésie doit être réalisée plusieurs jours avant une chirurgie programmée non urgente.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens l'obligation réglementaire d'une consultation pré-anesthésique à distance (sauf urgence) pour évaluer le risque.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-pneumologie",
+      "name_fr": "Pneumologie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S2",
+        "order": 2
+      },
+      "color": "#38BDF8",
+      "icon": "wind",
+      "order": 3,
+      "units": [
+        {
+          "slug": "specialite-pneumologie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-pneumologie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel examen confirme le diagnostic d'asthme par un trouble ventilatoire obstructif réversible ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Épreuves fonctionnelles respiratoires (EFR) avec test de réversibilité",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Radiographie thoracique seule",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Gazométrie artérielle isolée",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Scanner thoracique systématique",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que les EFR avec réversibilité sous bronchodilatateur confirment le diagnostic fonctionnel de l'asthme.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-pneumologie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le principal facteur de risque de la bronchopneumopathie chronique obstructive (BPCO) ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Le tabagisme",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "L'exposition aux pollens",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "L'obésité isolée",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Le reflux gastro-oesophagien isolé",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le tabac est responsable de la grande majorité des BPCO dans le monde.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-pneumologie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Une embolie pulmonaire peut se révéler par une simple dyspnée aiguë isolée sans douleur thoracique.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la présentation de l'EP est polymorphe : la dyspnée isolée est une forme fréquente et parfois trompeuse.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-pneumologie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels éléments composent le score de Wells simplifié pour l'embolie pulmonaire ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Signes cliniques de thrombose veineuse profonde",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Fréquence cardiaque élevée",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Antécédent de chirurgie ou immobilisation récente",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Groupe sanguin du patient",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "C"
+                  ],
+                  "explanation": "Retiens que le score de Wells combine des éléments cliniques et anamnestiques — jamais le groupe sanguin.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-pneumologie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel germe est le plus fréquemment en cause dans les pneumonies aiguës communautaires typiques ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Streptococcus pneumoniae",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Mycoplasma pneumoniae",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Legionella pneumophila",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Pseudomonas aeruginosa",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le pneumocoque comme premier agent responsable des pneumonies communautaires typiques.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-pneumologie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Un score de CURB-65 à $3$ points chez un patient avec pneumonie impose :",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Une hospitalisation, envisager la réanimation",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Un traitement ambulatoire simple",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Aucune antibiothérapie nécessaire",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Une simple surveillance à domicile",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que CURB-65 ≥ 3 signe une pneumonie sévère justifiant hospitalisation, voire soins intensifs.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-pneumologie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le traitement de référence du pneumothorax spontané complet et mal toléré ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Drainage thoracique",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Simple surveillance ambulatoire",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Antibiothérapie seule",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Kinésithérapie respiratoire isolée",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le drainage est indiqué en cas de pneumothorax complet, mal toléré ou récidivant.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-pneumologie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Le syndrome d'apnées obstructives du sommeil (SAOS) est confirmé par une polysomnographie.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la polysomnographie (ou polygraphie ventilatoire) reste l'examen de référence pour quantifier les événements respiratoires nocturnes.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-cardiologie",
+      "name_fr": "Cardiologie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S2",
+        "order": 2
+      },
+      "color": "#EF4444",
+      "icon": "heart-pulse",
+      "order": 4,
+      "units": [
+        {
+          "slug": "specialite-cardiologie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-cardiologie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel examen est indispensable en première intention devant une douleur thoracique évocatrice de syndrome coronarien aigu ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Électrocardiogramme (ECG)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "IRM cardiaque",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Épreuve d'effort immédiate",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Échographie transoesophagienne",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que l'ECG doit être réalisé et interprété en moins de 10 minutes devant toute douleur thoracique suspecte.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardiologie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel marqueur biologique est le plus spécifique de la nécrose myocardique ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Troponine",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "CRP",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "D-dimères",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "BNP",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la troponine (Tc/Ti) comme marqueur de référence de la souffrance myocardique.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardiologie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La fibrillation atriale augmente le risque d'accident vasculaire cérébral ischémique.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le lien fort FA-AVC par stase sanguine dans l'oreillette gauche et formation de thrombus.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardiologie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels éléments composent le score CHA2DS2-VASc utilisé dans la fibrillation atriale ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Âge du patient",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Antécédent d'AVC/AIT",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Insuffisance cardiaque",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Taux de cholestérol total",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "C"
+                  ],
+                  "explanation": "Retiens que CHA2DS2-VASc combine âge, comorbidités cardiovasculaires et antécédents thromboemboliques — jamais un dosage lipidique.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-cardiologie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le traitement en urgence d'un STEMI (infarctus avec sus-décalage ST) ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Reperfusion en urgence (angioplastie primaire ou thrombolyse)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Simple surveillance monitorée sans reperfusion",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Bêtabloquant seul suffisant",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Attente de 24h avant coronarographie",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la règle d'or : « time is muscle » — reperfusion la plus rapide possible dans le STEMI.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardiologie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Une fraction d'éjection ventriculaire gauche (FEVG) mesurée à $32\\%$ correspond à quel type d'insuffisance cardiaque ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Insuffisance cardiaque à FEVG réduite (< 40%)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "FEVG normale (> 55%)",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "FEVG modérément altérée seulement (41-49%)",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Valeur non interprétable en cardiologie",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens les seuils : FEVG < 40% = réduite, 41-49% = modérément altérée, ≥ 50% = préservée.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardiologie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel signe ECG caractérise un bloc auriculo-ventriculaire du 3e degré (complet) ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Dissociation complète entre ondes P et QRS",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Allongement progressif du PR jusqu'à une onde P bloquée",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "PR constant et normal",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "QRS fins réguliers sans onde P visible",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la dissociation auriculo-ventriculaire totale comme signature du BAV complet.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardiologie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "L'hypertension artérielle est définie par une pression artérielle systolique ≥ 140 mmHg et/ou diastolique ≥ 90 mmHg en consultation.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens les seuils de définition classiques de l'HTA en mesure clinique au cabinet.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-cardio-chirurgie",
+      "name_fr": "Cardio Chirurgie",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S2",
+        "order": 2
+      },
+      "color": "#DC2626",
+      "icon": "heart-pulse",
+      "order": 5,
+      "units": [
+        {
+          "slug": "specialite-cardio-chirurgie-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-cardio-chirurgie-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle est l'intervention de référence dans la maladie coronarienne pluritronculaire sévère ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Pontage aorto-coronarien (PAC)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Valvuloplastie mitrale",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Fermeture de communication interauriculaire",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Ablation par radiofréquence",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le pontage reste l'option chirurgicale de référence pour les atteintes pluritronculaires complexes.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardio-chirurgie-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel greffon est le plus utilisé pour un pontage coronarien en raison de sa longévité ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "L'artère mammaire interne",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "La veine saphène uniquement",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Un greffon synthétique",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "L'artère rénale",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que l'artère mammaire interne offre la meilleure perméabilité à long terme comparée à la veine saphène.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardio-chirurgie-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La circulation extra-corporelle (CEC) permet de suppléer temporairement la fonction cardiaque et pulmonaire pendant la chirurgie.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que la CEC assure l'oxygénation et la circulation du sang pendant que le cœur est arrêté chirurgicalement.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardio-chirurgie-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelles sont des indications classiques de remplacement valvulaire aortique chirurgical ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Rétrécissement aortique serré symptomatique",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Insuffisance aortique sévère symptomatique",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Endocardite avec destruction valvulaire",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Souffle systolique isolé asymptomatique modéré",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "C"
+                  ],
+                  "explanation": "Retiens que la sévérité + les symptômes (ou complications comme l'endocardite destructrice) guident l'indication opératoire.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-cardio-chirurgie-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quelle complication précoce redoutée surveille-t-on systématiquement après chirurgie cardiaque ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "La tamponnade péricardique",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "L'otite moyenne aiguë",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "La lithiase rénale",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "L'hyperthyroïdie",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la tamponnade comme complication précoce grave à dépister (drains, échographie au moindre doute hémodynamique).",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardio-chirurgie-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Un gradient moyen transaortique mesuré à $55\\ mmHg$ à l'échographie oriente vers :",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Un rétrécissement aortique serré",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Une valve aortique normale",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Un rétrécissement aortique minime",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Une insuffisance mitrale isolée",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le seuil usuel : gradient moyen ≥ 40 mmHg oriente vers un RA serré (à confirmer avec la surface valvulaire).",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardio-chirurgie-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel traitement anticoagulant est nécessaire à vie après pose d'une valve mécanique ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Antivitamine K (AVK)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Aspirine seule à faible dose",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Aucun traitement nécessaire",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Anticoagulant oral direct (AOD)",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que les AOD sont contre-indiqués sur valve mécanique — seuls les AVK sont validés à vie.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-cardio-chirurgie-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La chirurgie de la dissection aortique de type A est une urgence chirurgicale absolue.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que le type A (atteinte de l'aorte ascendante) menace le pronostic vital immédiat et impose une chirurgie en urgence.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "specialite-medecine-du-travail",
+      "name_fr": "Médecine du Travail",
+      "track": "specialite",
+      "program_year": {
+        "name": "M1 - 4e année",
+        "order": 1
+      },
+      "program_semester": {
+        "name": "S2",
+        "order": 2
+      },
+      "color": "#78716C",
+      "icon": "briefcase",
+      "order": 6,
+      "units": [
+        {
+          "slug": "specialite-medecine-du-travail-u1-bases",
+          "title_fr": "Bases",
+          "order": 1,
+          "levels": [
+            {
+              "order": 1,
+              "title_fr": "Fondamentaux",
+              "questions": [
+                {
+                  "external_id": "specialite-medecine-du-travail-q001",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est le rôle principal du médecin du travail ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Prévenir toute altération de la santé liée au travail",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Prescrire des arrêts de travail au long cours systématiquement",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Remplacer le médecin traitant",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Gérer exclusivement les accidents du travail déjà survenus",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens la mission exclusivement préventive du médecin du travail — il ne soigne pas, il prévient et surveille l'aptitude.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-medecine-du-travail-q002",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Qu'est-ce qu'une maladie professionnelle, par définition ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Une maladie causée de façon essentielle et directe par le travail habituel",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Toute maladie survenant pendant les heures de travail",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Un accident survenu sur le trajet domicile-travail",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Une pathologie sans lien identifiable avec l'activité professionnelle",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le critère de causalité directe et essentielle avec l'exposition professionnelle, souvent listée dans des tableaux dédiés.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-medecine-du-travail-q003",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "La visite médicale d'embauche a pour but principal de vérifier l'aptitude du salarié au poste de travail proposé.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que l'objectif central est l'évaluation de l'aptitude au poste, pas un bilan de santé général exhaustif.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-medecine-du-travail-q004",
+                  "type": "multi",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quels facteurs de risques professionnels physiques classiques doivent être recherchés à l'interrogatoire ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Exposition au bruit",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Port de charges lourdes répété",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Exposition aux vibrations",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Préférences alimentaires personnelles",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A",
+                    "B",
+                    "C"
+                  ],
+                  "explanation": "Retiens les principaux risques physiques du poste : bruit, charges, vibrations, postures — pas les habitudes alimentaires personnelles.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "title_fr": "Approfondissement",
+              "questions": [
+                {
+                  "external_id": "specialite-medecine-du-travail-q005",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel est l'objectif principal d'une étude de poste réalisée par le médecin du travail ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Identifier les contraintes du poste pour adapter le travail à l'homme",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Sanctionner l'employeur",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Remplacer l'enquête de l'inspection du travail",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Établir uniquement un diagnostic médical individuel",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le principe fondamental de l'ergonomie préventive : adapter le poste à l'homme, pas l'inverse.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-medecine-du-travail-q006",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 3,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Un salarié exposé à l'amiante pendant $15$ ans nécessite quel type de suivi après la fin de l'exposition ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Un suivi post-professionnel prolongé et régulier",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Aucun suivi une fois l'exposition terminée",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Un seul bilan unique à la retraite",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "Un suivi uniquement en cas de symptômes",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que les pathologies liées à l'amiante ont une latence longue — le suivi post-professionnel se poursuit après la fin de l'exposition.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-medecine-du-travail-q007",
+                  "type": "single",
+                  "language": "fr",
+                  "difficulty": 2,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Quel document formalise les risques professionnels identifiés dans une entreprise ?",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Le document unique d'évaluation des risques (DUER)",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Le carnet de santé du salarié",
+                      "image": null
+                    },
+                    {
+                      "key": "C",
+                      "text": "Le contrat de travail",
+                      "image": null
+                    },
+                    {
+                      "key": "D",
+                      "text": "La fiche de paie",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens le DUER comme outil réglementaire central de la prévention en entreprise.",
+                  "explanation_media": null,
+                  "tags": []
+                },
+                {
+                  "external_id": "specialite-medecine-du-travail-q008",
+                  "type": "true_false",
+                  "language": "fr",
+                  "difficulty": 1,
+                  "exam_year": null,
+                  "exam_session": "",
+                  "passage": null,
+                  "text": "Le secret médical s'applique aussi au médecin du travail vis-à-vis de l'employeur.",
+                  "image": null,
+                  "choices": [
+                    {
+                      "key": "A",
+                      "text": "Vrai",
+                      "image": null
+                    },
+                    {
+                      "key": "B",
+                      "text": "Faux",
+                      "image": null
+                    }
+                  ],
+                  "correct": [
+                    "A"
+                  ],
+                  "explanation": "Retiens que seul l'avis d'aptitude (apte/inapte/aménagements) est transmis à l'employeur — jamais le contenu médical.",
+                  "explanation_media": null,
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

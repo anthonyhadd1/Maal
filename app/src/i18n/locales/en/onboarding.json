@@ -1,6 +1,10 @@
 {
   "skip": "Later",
   "continue": "Continue",
+  "track": {
+    "title": "What are you preparing for?",
+    "subtitle": "We'll tailor your whole journey to your exam — you can change this later."
+  },
   "goal": {
     "title": "What are you aiming for?",
     "subtitle": "We'll personalize your journey — you can change this later.",

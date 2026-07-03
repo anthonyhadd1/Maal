@@ -49,7 +49,7 @@ export function GoalScreen() {
       }}
       mascot="idle"
       onSkip={next}
-      step={0}
+      step={1}
       subtitle={t('goal.subtitle')}
       title={t('goal.title')}
     >

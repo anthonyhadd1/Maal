@@ -11,7 +11,7 @@ export default function TabsLayout() {
   const status = useAuthStore((s) => s.status);
   const me = useMe();
 
-  // anon → welcome; authed + onboarding incomplete → /onboarding/goal.
+  // anon → welcome; authed + onboarding incomplete → /onboarding/track.
   const target = resolveTabsGate({
     status,
     onboardingCompleted: me.data ? me.data.profile.onboarding_completed : null,

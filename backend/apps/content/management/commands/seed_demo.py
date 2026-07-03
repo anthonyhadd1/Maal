@@ -15,8 +15,19 @@ from django.core.management.base import BaseCommand
 
 from apps.accounts.models import Faculty, Profile, User
 from apps.accounts.services import create_user_with_satellites
+from apps.content.models import ProgramSemester, ProgramYear, Track
 
 SEED_FILE = Path(settings.BASE_DIR) / "seed" / "demo_content.json"
+SEED_FILE_SPECIALITE = Path(settings.BASE_DIR) / "seed" / "demo_specialite.json"
+
+# Autoritaire : les migrations content.0003_seed_tracks_and_backfill créent déjà ces
+# lignes. Répété ici en idempotent (get_or_create) pour couvrir une base sans migration
+# de données (ex. tests unitaires qui appellent seed_demo directement).
+TRACKS = [
+    # (slug, name, icon, color_hex, order)
+    ("concours", "Concours d'entrée", "graduation-cap", "#7C3AED", 1),
+    ("specialite", "Examens de Spécialité", "stethoscope", "#0EA5E9", 2),
+]
 
 FACULTIES = [("Médecine", "medecine"), ("Médecine dentaire", "medecine-dentaire")]
 
@@ -73,6 +84,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.seed_faculties()
+        self.seed_tracks()
         self.seed_content()
         self.seed_users()
         try:
@@ -90,6 +102,18 @@ class Command(BaseCommand):
             Faculty.objects.get_or_create(slug=slug, defaults={"name": name, "order": order})
         self.stdout.write(f"Facultés : {Faculty.objects.count()} en base.")
 
+    def seed_tracks(self):
+        # Autoritaire = migration content.0003_seed_tracks_and_backfill. Idempotent ici
+        # aussi (get_or_create) au cas où la commande tourne sur une base sans historique
+        # de migration de données (ex. tests qui appellent seed_demo directement).
+        created = 0
+        for slug, name, icon, color_hex, order in TRACKS:
+            _, was_created = Track.objects.get_or_create(
+                slug=slug, defaults={"name": name, "icon": icon, "color_hex": color_hex, "order": order}
+            )
+            created += was_created
+        self.stdout.write(f"Parcours (tracks) : {created} créé(s), {len(TRACKS) - created} déjà présent(s).")
+
     def seed_content(self):
         # Pas de binaire dans le repo : l'image démo est générée ici (Pillow)
         # puis copiée dans MEDIA_ROOT par le pipeline d'import.
@@ -104,6 +128,9 @@ class Command(BaseCommand):
                 tmp,
                 stdout=self.stdout,
             )
+        # Contenu "Examens de Spécialité" — même pipeline d'import, aucun média requis
+        # (pas d'image/vidéo dans ce fichier ; --media-dir par défaut = dossier du fichier).
+        call_command("import_exam", str(SEED_FILE_SPECIALITE), stdout=self.stdout)
 
     def seed_users(self):
         if settings.DEBUG and not User.objects.filter(username="admin").exists():

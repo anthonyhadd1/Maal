@@ -6,16 +6,54 @@ from apps.content.models import (
     Level,
     LevelQuestion,
     Passage,
+    ProgramSemester,
+    ProgramYear,
     Question,
     Subject,
+    Track,
     Unit,
 )
+
+
+class TrackFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Track
+        django_get_or_create = ["slug"]
+
+    slug = "concours"
+    name = "Concours d'entrée"
+    icon = "graduation-cap"
+    color_hex = "#7C3AED"
+    order = 1
+    is_active = True
+
+
+class ProgramYearFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ProgramYear
+
+    track = factory.SubFactory(TrackFactory, slug="specialite", name="Examens de Spécialité", order=2)
+    name = "M1 - 4e année"
+    order = 1
+    is_active = True
+
+
+class ProgramSemesterFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ProgramSemester
+
+    year = factory.SubFactory(ProgramYearFactory)
+    name = "S1"
+    order = 1
+    is_active = True
 
 
 class SubjectFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Subject
 
+    track = factory.SubFactory(TrackFactory)
+    program_semester = None
     name = factory.Sequence(lambda n: f"Matière {n}")
     slug = factory.Sequence(lambda n: f"matiere-{n}")
     color_hex = "#22C55E"

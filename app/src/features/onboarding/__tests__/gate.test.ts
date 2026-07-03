@@ -5,9 +5,9 @@ describe('resolveTabsGate (root gate: authed + !onboarding_completed → onboard
     expect(resolveTabsGate({ status: 'anon', onboardingCompleted: null })).toBe('/welcome');
   });
 
-  test('authed + onboarding NOT completed → /onboarding/goal', () => {
+  test('authed + onboarding NOT completed → /onboarding/track', () => {
     expect(resolveTabsGate({ status: 'authed', onboardingCompleted: false })).toBe(
-      '/onboarding/goal',
+      '/onboarding/track',
     );
   });
 

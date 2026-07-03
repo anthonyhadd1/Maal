@@ -2,14 +2,59 @@ from django.contrib import admin
 from django.db.models import Count
 from django.utils.html import format_html
 
-from .models import Choice, Exam, Level, LevelQuestion, Passage, Question, Subject, Unit
+from .models import (
+    Choice,
+    Exam,
+    Level,
+    LevelQuestion,
+    Passage,
+    ProgramSemester,
+    ProgramYear,
+    Question,
+    Subject,
+    Track,
+    Unit,
+)
+
+
+@admin.register(Track)
+class TrackAdmin(admin.ModelAdmin):
+    list_display = ["order", "name", "slug", "color_swatch", "icon", "is_active"]
+    list_display_links = ["name"]
+    list_editable = ["is_active"]
+    ordering = ["order"]
+    prepopulated_fields = {"slug": ["name"]}
+
+    @admin.display(description="Couleur")
+    def color_swatch(self, obj):
+        return format_html(
+            '<span style="display:inline-block;width:16px;height:16px;border-radius:4px;'
+            'background:{};vertical-align:middle;margin-right:6px;border:1px solid #cbd5e1"></span>{}',
+            obj.color_hex,
+            obj.color_hex,
+        )
+
+
+@admin.register(ProgramYear)
+class ProgramYearAdmin(admin.ModelAdmin):
+    list_display = ["__str__", "track", "order", "is_active"]
+    list_filter = ["track", "is_active"]
+    ordering = ["track__order", "order"]
+
+
+@admin.register(ProgramSemester)
+class ProgramSemesterAdmin(admin.ModelAdmin):
+    list_display = ["__str__", "year", "order", "is_active"]
+    list_filter = ["year__track", "year", "is_active"]
+    ordering = ["year__track__order", "year__order", "order"]
 
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
-    list_display = ["order", "name", "slug", "color_swatch", "icon", "is_active"]
+    list_display = ["order", "name", "slug", "track", "program_semester", "color_swatch", "icon", "is_active"]
     list_display_links = ["name"]
     list_editable = ["is_active"]
+    list_filter = ["track", "program_semester", "is_active"]
     ordering = ["order"]
     prepopulated_fields = {"slug": ["name"]}
 
