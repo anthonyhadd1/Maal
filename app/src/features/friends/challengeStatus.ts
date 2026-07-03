@@ -137,3 +137,16 @@ export function challengeOutcome(
         : 'lost';
   return { result, myScore, otherScore, otherName: other.display_name || other.username };
 }
+
+/**
+ * i18n key for the outcome message. A tied score can still resolve to a
+ * winner server-side (total-response-time tiebreak, see
+ * social/services/challenges.py on_attempt_completed) — rendering the plain
+ * "won"/"lost" copy in that case reads as contradictory ("Tu as battu X
+ * 7–7 !" next to two identical scores), so a same-score win/loss gets its
+ * own copy calling out the time tiebreak instead.
+ */
+export function challengeResultKey(outcome: ChallengeOutcome): string {
+  if (outcome.result === 'tie') return 'tie';
+  return outcome.myScore === outcome.otherScore ? `${outcome.result}OnTime` : outcome.result;
+}

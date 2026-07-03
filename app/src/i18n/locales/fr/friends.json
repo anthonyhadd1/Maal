@@ -77,7 +77,9 @@
     },
     "result": {
       "won": "Tu as battu {{name}} {{a}}–{{b}} !",
+      "wonOnTime": "Score à égalité ({{a}}–{{b}}) mais tu as été plus rapide que {{name}} !",
       "lost": "{{name}} t'a battu·e {{b}}–{{a}}. Revanche ?",
+      "lostOnTime": "Score à égalité ({{b}}–{{a}}) mais {{name}} a été plus rapide. Revanche ?",
       "tie": "Égalité {{a}}–{{b}} contre {{name}} !"
     },
     "detail": {

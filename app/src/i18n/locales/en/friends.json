@@ -77,7 +77,9 @@
     },
     "result": {
       "won": "You beat {{name}} {{a}}–{{b}}!",
+      "wonOnTime": "Tied score ({{a}}–{{b}}) but you were faster than {{name}}!",
       "lost": "{{name}} beat you {{b}}–{{a}}. Rematch?",
+      "lostOnTime": "Tied score ({{b}}–{{a}}) but {{name}} was faster. Rematch?",
       "tie": "Tie {{a}}–{{b}} against {{name}}!"
     },
     "detail": {

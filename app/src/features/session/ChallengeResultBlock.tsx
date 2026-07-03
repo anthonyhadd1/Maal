@@ -9,7 +9,7 @@ import { keys } from '@/api/queries/keys';
 import { queryClient } from '@/api/queryClient';
 import { ClayCard } from '@/components/clay/ClayCard';
 import { Skeleton } from '@/components/feedback/Skeleton';
-import { challengeOutcome } from '@/features/friends/challengeStatus';
+import { challengeOutcome, challengeResultKey } from '@/features/friends/challengeStatus';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
 interface ChallengeResultBlockProps {
@@ -60,7 +60,7 @@ export function ChallengeResultBlock({ challengeId }: ChallengeResultBlockProps)
         <Text style={styles.headerLabel}>{t('challenges.title')}</Text>
       </View>
       <Text style={[styles.outcome, { color: tone }]}>
-        {t(`challenges.result.${outcome.result}`, {
+        {t(`challenges.result.${challengeResultKey(outcome)}`, {
           name: outcome.otherName,
           a: outcome.myScore,
           b: outcome.otherScore,

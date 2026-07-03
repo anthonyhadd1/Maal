@@ -26,6 +26,7 @@ import {
   challengeAction,
   challengeChip,
   challengeOutcome,
+  challengeResultKey,
   orientChallenge,
   type ChallengeChip,
   type ChallengeDirection,
@@ -343,7 +344,7 @@ function ChallengeDetailDialog({
               ]}
               testID="detail-outcome"
             >
-              {t(`challenges.result.${outcome.result}`, {
+              {t(`challenges.result.${challengeResultKey(outcome)}`, {
                 name: outcome.otherName,
                 a: outcome.myScore,
                 b: outcome.otherScore,
