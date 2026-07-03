@@ -28,12 +28,32 @@ from apps.content.models import ProgramSemester, ProgramYear, Track
 SEED_FILE = Path(settings.BASE_DIR) / "seed" / "demo_content.json"
 
 # Autoritaire : les migrations content.0003_seed_tracks_and_backfill créent déjà ces
-# lignes. Répété ici en idempotent (get_or_create) pour couvrir une base sans migration
-# de données (ex. tests unitaires qui appellent seed_demo directement).
+# lignes. Répété ici en idempotent (update_or_create) pour couvrir une base sans migration
+# de données (ex. tests unitaires qui appellent seed_demo directement), et pour que la
+# description reste à jour même si le Track existe déjà (ex. rows créées par la migration
+# 0003, qui ne posait pas encore de description).
+#
+# Descriptions : honnêtes par track. "concours" = contenu 100% synthétique/démo (aucune
+# annale réelle) -> pas de promesse d'authenticité. "specialite" = contenu réel fourni par
+# le propriétaire (backend/seed/specialite/*.json) -> peut mentionner les vraies annales.
 TRACKS = [
-    # (slug, name, icon, color_hex, order)
-    ("concours", "Concours d'entrée", "graduation-cap", "#7C3AED", 1),
-    ("specialite", "Examens de Spécialité", "stethoscope", "#0EA5E9", 2),
+    # (slug, name, icon, color_hex, order, description)
+    (
+        "concours",
+        "Concours d'entrée",
+        "graduation-cap",
+        "#7C3AED",
+        1,
+        "Des questions d'entraînement pour couvrir tout le programme du concours.",
+    ),
+    (
+        "specialite",
+        "Examens de Spécialité",
+        "stethoscope",
+        "#0EA5E9",
+        2,
+        "De vraies questions d'examens de spécialité, matière par matière.",
+    ),
 ]
 
 FACULTIES = [("Médecine", "medecine"), ("Médecine dentaire", "medecine-dentaire")]
@@ -111,12 +131,21 @@ class Command(BaseCommand):
 
     def seed_tracks(self):
         # Autoritaire = migration content.0003_seed_tracks_and_backfill. Idempotent ici
-        # aussi (get_or_create) au cas où la commande tourne sur une base sans historique
-        # de migration de données (ex. tests qui appellent seed_demo directement).
+        # aussi (update_or_create) au cas où la commande tourne sur une base sans historique
+        # de migration de données (ex. tests qui appellent seed_demo directement). On force
+        # la description à chaque run pour que ce fichier reste la source de vérité, même
+        # sur des Track déjà créés (ex. par la migration 0003, sans description).
         created = 0
-        for slug, name, icon, color_hex, order in TRACKS:
-            _, was_created = Track.objects.get_or_create(
-                slug=slug, defaults={"name": name, "icon": icon, "color_hex": color_hex, "order": order}
+        for slug, name, icon, color_hex, order, description in TRACKS:
+            _, was_created = Track.objects.update_or_create(
+                slug=slug,
+                defaults={
+                    "name": name,
+                    "icon": icon,
+                    "color_hex": color_hex,
+                    "order": order,
+                    "description": description,
+                },
             )
             created += was_created
         self.stdout.write(f"Parcours (tracks) : {created} créé(s), {len(TRACKS) - created} déjà présent(s).")
