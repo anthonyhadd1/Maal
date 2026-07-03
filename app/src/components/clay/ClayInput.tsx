@@ -15,6 +15,26 @@ import { useTranslation } from 'react-i18next';
 
 import { colors, focusRing, radii, spacing, typography } from '@/theme/tokens';
 
+// Edge (Chromium) renders its own native reveal-password icon inside
+// type="password" inputs via the legacy ::-ms-reveal pseudo-element it kept
+// for IE compat — left alone it doubles up with our own Eye/EyeOff toggle.
+// Web only; native iOS/Android render a real SecureTextEntry field, not a
+// DOM <input>, so there's nothing to suppress there.
+if (Platform.OS === 'web' && typeof document !== 'undefined') {
+  const STYLE_ID = 'clay-input-suppress-ms-reveal';
+  if (!document.getElementById(STYLE_ID)) {
+    const style = document.createElement('style');
+    style.id = STYLE_ID;
+    style.textContent = `
+      input[type="password"]::-ms-reveal,
+      input[type="password"]::-ms-clear {
+        display: none;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
 export interface ClayInputProps extends TextInputProps {
   /** Visible label above the field (never placeholder-only). */
   label: string;
