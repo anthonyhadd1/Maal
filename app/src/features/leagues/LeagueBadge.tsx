@@ -9,6 +9,7 @@ import { msToParts } from '@/lib/format';
 import { getLucideIcon } from '@/lib/lucide';
 import { colors, fonts, radii, shadows, spacing, typography } from '@/theme/tokens';
 import { darken, lighten, tint } from '@/features/leagues/tierColor';
+import { tierNameKey } from '@/features/leagues/tierName';
 
 const MEDALLION_SIZE = 104;
 const MEDALLION_EDGE = 6;
@@ -30,6 +31,8 @@ export function LeagueBadge({ tier, promoteCount, demoteCount, weekEndsAt }: Lea
   const { t } = useTranslation('leagues');
   const Icon = getLucideIcon(tier.icon);
   const countdown = useWeekCountdown(weekEndsAt);
+  const nameKey = tierNameKey(tier.order);
+  const name = nameKey ? t(`tierNames.${nameKey}`) : tier.name;
 
   return (
     <View style={styles.root}>
@@ -58,7 +61,7 @@ export function LeagueBadge({ tier, promoteCount, demoteCount, weekEndsAt }: Lea
         </View>
 
         <Text accessibilityRole="header" style={styles.name}>
-          {tier.name}
+          {name}
         </Text>
 
         <View style={styles.zoneCaptions}>

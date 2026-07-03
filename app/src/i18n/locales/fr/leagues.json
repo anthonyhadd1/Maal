@@ -47,6 +47,13 @@
     "diamant": "Ligue Diamant",
     "cedre": "Ligue Cèdre"
   },
+  "tierNames": {
+    "bronze": "Bronze",
+    "argent": "Argent",
+    "or": "Or",
+    "diamant": "Diamant",
+    "cedre": "Cèdre"
+  },
   "hero": {
     "promote": "Top {{count}} montent",
     "demote": "{{count}} derniers descendent"

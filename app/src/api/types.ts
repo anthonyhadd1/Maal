@@ -343,10 +343,13 @@ export interface MeGame {
 // ---------------------------------------------------------------------------
 
 export interface LeagueTierInfo {
+  /** Pre-formatted French name — fallback only; localize via `order` instead. */
   name: string;
   /** Lucide icon name (kebab-case). */
   icon: string;
   color_hex: string;
+  /** Stable 1 (Bronze) .. 5 (Cèdre) rank — the localization key, not `name`. */
+  order: number;
 }
 
 export interface LeaderboardRow {

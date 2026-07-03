@@ -24,6 +24,7 @@ import { StreakFlame } from '@/components/game/StreakFlame';
 import { XPBadge } from '@/components/game/XPBadge';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { Screen } from '@/components/layout/Screen';
+import { tierNameKey } from '@/features/leagues/tierName';
 import { formatDate, formatNumber } from '@/lib/format';
 import { colors, fonts, radii, spacing, typography } from '@/theme/tokens';
 import { tints } from '@/theme/tints';
@@ -31,6 +32,7 @@ import { tints } from '@/theme/tints';
 /** TAB 4 « Profil » — hero + summary + premium status + drill-down rows. */
 export function ProfileScreen() {
   const { t } = useTranslation('profile');
+  const { t: tLeagues } = useTranslation('leagues');
   const router = useRouter();
   const me = useMe();
   const game = useMeGame();
@@ -87,9 +89,12 @@ export function ProfileScreen() {
                 <View style={styles.chip} testID="league-chip">
                   <Trophy color={colors.xpGold} size={16} />
                   <Text style={styles.chipLabel}>
-                    {typeof game.data.league.tier === 'string'
-                      ? game.data.league.tier
-                      : game.data.league.tier.name}
+                    {(() => {
+                      const tier = game.data.league.tier;
+                      if (typeof tier === 'string') return tier;
+                      const nameKey = tierNameKey(tier.order);
+                      return nameKey ? tLeagues(`tierNames.${nameKey}`) : tier.name;
+                    })()}
                   </Text>
                 </View>
               ) : null}

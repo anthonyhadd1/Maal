@@ -47,6 +47,13 @@
     "diamant": "Diamond League",
     "cedre": "Cedar League"
   },
+  "tierNames": {
+    "bronze": "Bronze",
+    "argent": "Silver",
+    "or": "Gold",
+    "diamant": "Diamond",
+    "cedre": "Cedar"
+  },
   "hero": {
     "promote": "Top {{count}} move up",
     "demote": "Bottom {{count}} move down"

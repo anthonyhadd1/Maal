@@ -51,7 +51,7 @@ export function boardRows(n: number, meRank = 4): LeaderboardRow[] {
 }
 
 export const leagueResponse: LeagueResponse = {
-  tier: { name: 'Ligue Argent', icon: 'medal', color_hex: '#94A3B8' },
+  tier: { name: 'Ligue Argent', icon: 'medal', color_hex: '#94A3B8', order: 2 },
   rank: 4,
   xp_week: 900,
   week_ends_at: '2026-07-05T20:59:59Z',
