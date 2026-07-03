@@ -32,7 +32,7 @@
     "label": "Nom d'utilisateur",
     "placeholder": "ex. rita.k",
     "hint": "Tape au moins 2 caractères.",
-    "empty": "Personne trouvée pour « {{q}} »",
+    "empty": "Aucun résultat pour « {{q}} »",
     "emptyMessage": "Vérifie l'orthographe ou essaie un autre nom.",
     "add": "Ajouter",
     "friends": "Amis",

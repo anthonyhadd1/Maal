@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 import type { PropsWithChildren } from 'react';
 
 import type { CompleteResponse } from '@/api/types';
@@ -25,8 +25,16 @@ import {
  * Rendered under reduced motion so every stage is on screen immediately.
  */
 
+const mockPush = jest.fn();
+const mockDismissTo = jest.fn();
+
 jest.mock('expo-router', () => ({
-  useRouter: () => ({ push: jest.fn(), back: jest.fn(), dismissAll: jest.fn() }),
+  useRouter: () => ({
+    push: mockPush,
+    back: jest.fn(),
+    dismissAll: jest.fn(),
+    dismissTo: mockDismissTo,
+  }),
   Redirect: jest.fn(() => null),
 }));
 
@@ -128,5 +136,40 @@ describe('ResultsScreen — legendary block', () => {
 
     expect(scheduleMock).toHaveBeenCalledTimes(1);
     expect(scheduleMock).toHaveBeenCalledWith(legendaryEarnedComplete.streak.current);
+  });
+
+  // Regression: `session` is a fullScreenModal in the root Stack that hosts
+  // its OWN nested Stack ([levelId] -> results). `router.dismissAll()` (and
+  // `dismiss(n)`) dispatch stack actions that resolve against the nearest
+  // navigator in context — the nested one — so they bottomed out at
+  // [levelId] instead of closing the whole modal: the map never regained
+  // focus and [levelId] re-rendered with an emptied session store, hanging
+  // forever on its loading skeleton. `dismissTo(href)` resolves the target
+  // against the real route tree (like a Link) and correctly crosses the
+  // navigator boundary back to the tabs root.
+  describe('« Continuer » navigation (dead-end regression)', () => {
+    test('dismisses to the tabs root via dismissTo, not dismissAll/dismiss', async () => {
+      await renderResults(legendaryMissComplete); // extended_today: false
+      fireEvent.press(screen.getByTestId('results-continue'));
+
+      expect(mockDismissTo).toHaveBeenCalledWith('/');
+      expect(mockPush).not.toHaveBeenCalled();
+    });
+
+    test('when a streak day was earned, pushes /streak AFTER dismissing to the root', async () => {
+      await renderResults(completeResponse); // extended_today: true, current: 3
+      const order: string[] = [];
+      mockDismissTo.mockImplementation(() => order.push('dismissTo'));
+      mockPush.mockImplementation(() => order.push('push'));
+
+      fireEvent.press(screen.getByTestId('results-continue'));
+
+      expect(mockDismissTo).toHaveBeenCalledWith('/');
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: '/streak',
+        params: { days: String(completeResponse.streak.current) },
+      });
+      expect(order).toEqual(['dismissTo', 'push']);
+    });
   });
 });

@@ -134,7 +134,20 @@ export function ResultsScreen() {
   const onContinue = () => {
     const { streak } = results;
     useSessionStore.getState().reset();
-    router.dismissAll();
+    // `session` is ONE fullScreenModal group in the root Stack, but it hosts
+    // its OWN nested Stack (`session/_layout.tsx`) with two screens pushed
+    // inside it: [levelId] then this results screen. `dismissAll()`
+    // (POP_TO_TOP) and `dismiss(n)` (POP) both dispatch against the nearest
+    // stack navigator in context — the nested one — so they only pop within
+    // it (bottoming out at [levelId], since a stack can't pop below its
+    // first screen) and never close the fullScreenModal itself. The result:
+    // the map underneath never gets focus back, and [levelId] re-renders
+    // with an emptied (just-reset) session store, hanging forever on its
+    // loading skeleton (no attempt to resume, no start call fired).
+    // `dismissTo` resolves the target href against the real route tree
+    // (like a Link), so it correctly crosses out of the nested stack and
+    // back to the tabs root underneath the whole modal group.
+    router.dismissTo('/');
     if (streak.extended_today) {
       router.push({ pathname: '/streak', params: { days: String(streak.current) } });
     }
