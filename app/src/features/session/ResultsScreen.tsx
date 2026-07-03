@@ -26,6 +26,11 @@ import { ClayCard } from '@/components/clay/ClayCard';
 import { useToast } from '@/components/feedback/Toast';
 import { Screen } from '@/components/layout/Screen';
 import { Mascot } from '@/components/mascot/Mascot';
+import {
+  achievementTextKeys,
+  expertSubjectName,
+  isExpertAchievement,
+} from '@/features/profile/achievementLogic';
 import { ChallengeResultBlock } from '@/features/session/ChallengeResultBlock';
 import { formatElapsedMs, formatNumber, formatPercent } from '@/lib/format';
 import { impactMedium, notifySuccess } from '@/lib/haptics';
@@ -50,6 +55,7 @@ export function ResultsScreen() {
   const { t } = useTranslation('session');
   const { t: tCommon } = useTranslation('common');
   const { t: tErrors } = useTranslation('errors');
+  const { t: tProfile } = useTranslation('profile');
   const router = useRouter();
   const toast = useToast();
   const reduceMotion = useReducedMotionPref();
@@ -79,6 +85,20 @@ export function ResultsScreen() {
     return () => timers.forEach(clearTimeout);
   }, [reduceMotion]);
 
+  // Server sends a pre-formatted French title for the unlock toast (same
+  // gap as everywhere else the catalog leaks raw FR text) — localize known
+  // codes, same fallback rules as AchievementsScreen's helpers.
+  const localizedTrophyName = (achievement: { code: string; title: string }): string => {
+    const keys = achievementTextKeys(achievement.code);
+    if (keys) return tProfile(keys.titleKey);
+    if (isExpertAchievement(achievement.code)) {
+      return tProfile('achievementsScreen.expertTitle', {
+        subject: expertSubjectName(achievement.title),
+      });
+    }
+    return achievement.title;
+  };
+
   // Mount-time game feel + follow-ups (results snapshot is stable):
   // level-complete SFX, trophy toasts (+success haptic), streak reminders.
   useEffect(() => {
@@ -95,7 +115,7 @@ export function ResultsScreen() {
           () =>
             toast.show({
               type: 'success',
-              message: tCommon('trophy.unlocked', { name: achievement.title }),
+              message: tCommon('trophy.unlocked', { name: localizedTrophyName(achievement) }),
             }),
           index * 2000, // single-slot toast — stagger multiples
         ),

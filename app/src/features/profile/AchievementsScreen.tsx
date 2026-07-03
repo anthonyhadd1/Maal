@@ -13,6 +13,11 @@ import { ProgressBar } from '@/components/game/ProgressBar';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { Screen } from '@/components/layout/Screen';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
+import {
+  achievementTextKeys,
+  expertSubjectName,
+  isExpertAchievement,
+} from '@/features/profile/achievementLogic';
 import { questFraction } from '@/features/quests/questLogic';
 import { formatDate, formatNumber } from '@/lib/format';
 import { getLucideIcon } from '@/lib/lucide';
@@ -91,10 +96,11 @@ function TrophyCard({
   const { t } = useTranslation('profile');
   const unlocked = achievement.unlocked_at != null;
   const Icon = getLucideIcon(achievement.icon);
+  const title = localizedAchievementTitle(t, achievement);
 
   return (
     <PressableScale
-      accessibilityLabel={achievement.title}
+      accessibilityLabel={title}
       onPress={onPress}
       style={styles.cell}
       testID={`trophy-${achievement.code}`}
@@ -113,7 +119,7 @@ function TrophyCard({
           )}
         </View>
         <Text numberOfLines={2} style={[styles.cellTitle, !unlocked && styles.cellTitleLocked]}>
-          {achievement.title}
+          {title}
         </Text>
         {unlocked ? (
           <Text style={[styles.cellDate, styles.cellDateUnlocked]}>
@@ -145,9 +151,9 @@ function AchievementDialog({
   return (
     <ClayDialog
       actions={[{ label: tCommon('cta.close'), onPress: onClose, variant: 'primary' }]}
-      message={achievement.description}
+      message={localizedAchievementDescription(t, achievement)}
       onRequestClose={onClose}
-      title={achievement.title}
+      title={localizedAchievementTitle(t, achievement)}
       visible
     >
       {unlocked ? (
@@ -179,6 +185,41 @@ function AchievementDialog({
       ) : null}
     </ClayDialog>
   );
+}
+
+/**
+ * Server-generated title/description are pre-formatted French (see
+ * gamification/services/achievements.py's DEFAULT_ACHIEVEMENTS +
+ * seed_catalog) — localize the 20 static trophies and the per-subject
+ * "Expert·e {matière}" family by code, falling back to the raw payload
+ * for anything this build doesn't recognize yet.
+ */
+function localizedAchievementTitle(
+  t: (key: string, options?: Record<string, unknown>) => string,
+  achievement: AchievementItem,
+): string {
+  const keys = achievementTextKeys(achievement.code);
+  if (keys) return t(keys.titleKey);
+  if (isExpertAchievement(achievement.code)) {
+    return t('achievementsScreen.expertTitle', {
+      subject: expertSubjectName(achievement.title),
+    });
+  }
+  return achievement.title;
+}
+
+function localizedAchievementDescription(
+  t: (key: string, options?: Record<string, unknown>) => string,
+  achievement: AchievementItem,
+): string {
+  const keys = achievementTextKeys(achievement.code);
+  if (keys) return t(keys.descriptionKey);
+  if (isExpertAchievement(achievement.code)) {
+    return t('achievementsScreen.expertDescription', {
+      subject: expertSubjectName(achievement.title),
+    });
+  }
+  return achievement.description;
 }
 
 const styles = StyleSheet.create({
