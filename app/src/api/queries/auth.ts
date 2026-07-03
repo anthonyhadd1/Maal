@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
 
 import { api, authApi, REFRESH_TOKEN_KEY, setTokens } from '@/api/client';
 import * as SecureStore from '@/lib/secureStorage';
@@ -49,6 +50,7 @@ export function useLogin() {
 }
 
 export function useLogout() {
+  const router = useRouter();
   return useMutation({
     mutationFn: async () => {
       const refresh = await SecureStore.getItemAsync(REFRESH_TOKEN_KEY);
@@ -62,6 +64,14 @@ export function useLogout() {
     },
     onSettled: async () => {
       await useAuthStore.getState().logout();
+      // The (tabs) auth gate reacts to status changes, but ONLY for the
+      // screen currently on top of the stack. Logout is commonly triggered
+      // from a PUSHED route (e.g. /profile/settings, sitting above the tabs
+      // navigator) — the gate redirects the tabs layout underneath, but the
+      // pushed screen stays visible with its now-disabled queries, frozen on
+      // its loading skeleton forever. Explicitly unwind back to the root so
+      // the gate's redirect is actually seen, from any screen that logs out.
+      router.dismissTo('/');
     },
   });
 }
