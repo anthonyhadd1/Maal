@@ -22,7 +22,8 @@
     "title": "Ta série",
     "current": "Série actuelle",
     "longest": "Record",
-    "freezes": "Gels de série"
+    "freezes": "Gels de série",
+    "freezesA11y": "Gels de série : {{held}} sur {{total}}"
   },
   "achievements": {
     "row": "Trophées",

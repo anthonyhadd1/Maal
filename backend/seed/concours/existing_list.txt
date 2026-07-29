@@ -1,0 +1,17 @@
+0 | chimie-2023-juillet-q26-Epreuv | chimie-chimie-organique-nomenclature-fonctions | La molécule suivante s’appelle :
+1 | chimie-2023-juillet-q27-Epreuv | chimie-chimie-organique-nomenclature-fonctions | La molécule suivante s’appelle :
+2 | chimie-2023-juillet-q28-Epreuv | chimie-chimie-organique-nomenclature-fonctions | Le 3,3-diméthylpentan-1-ol :
+3 | chimie-2023-juillet-q29-Epreuv | chimie-chimie-organique-nomenclature-fonctions | Combien existe-t-il, en tenant compte d’éventuels énantiomères R et S, d’alcools
+4 | chimie-2023-juillet-q30-Epreuv | chimie-chimie-organique-nomenclature-fonctions | On dispose au laboratoire d’un réactif inconnu. On envisage alors différents tes
+5 | chimie-2023-juillet-q38-Epreuv | chimie-chimie-organique-nomenclature-fonctions | La combustion complète de 7,4 g d’un alcool secondaire donne 17,6 g de dioxyde d
+6 | chimie-2023-juillet-q8-Epreuv | chimie-solutions-concentrations-dilutions | On prépare 100 mL d’une solution d’acide phosphorique H3PO4 de concentration    
+7 | chimie-2023-juillet-q10-Epreuv | chimie-solutions-concentrations-dilutions | On souhaite préparer 100 mL d’une solution de permanganate de potassium KMnO4 de
+8 | chimie-2023-juillet-q31-Epreuv | chimie-solutions-concentrations-dilutions | On dispose d’un monoalcool saturé et non cyclique. L’analyse quantitative de cet
+9 | chimie-2023-juillet-q1-Epreuv | chimie-equilibres-acido-basiques | Sachant que le pKa du couple HCOOH/HCOO- est égal à 3,75, dans une solution acid
+10 | chimie-2023-juillet-q2-Epreuv | chimie-equilibres-acido-basiques | Lorsque pH = pKa :
+11 | chimie-2023-juillet-q3-Epreuv | chimie-equilibres-acido-basiques | L’introduction dans l’eau de l’espèce NH3 conduit à un équilibre entre les forme
+12 | chimie-2023-juillet-q4-Epreuv | chimie-equilibres-acido-basiques | Une solution tampon :
+13 | chimie-2023-juillet-q13-Epreuv | chimie-equilibres-acido-basiques | La réaction d’autoprotolyse de l’eau a pour constante d’équilibre :
+14 | chimie-2023-juillet-q16-Epreuv | chimie-equilibres-acido-basiques | Une solution tampon est préparée en mélangeant 100 mL d’une solution d’ammoniac 
+15 | chimie-2023-juillet-q32-Epreuv | chimie-equilibres-acido-basiques | Dans un bécher de 250 mL, on mélange 100 mL d’une solution de HCl de concentrati
+16 | chimie-2023-juillet-q11-Epreuv | chimie-oxydoreduction-piles | 

@@ -1,0 +1,1322 @@
+[
+  {
+    "unit_slug": "chimie-chimie-organique-nomenclature-fonctions",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q26-Epreuv",
+    "text": "La molécule suivante s’appelle :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "4-méthyl-5-propylheptanal",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "5-éthyl-4-méthyloctanal",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "4-méthyl-3-propylheptanal",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "4-méthyl-5-propylheptanone",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "5-éthyl-4-méthyloctanone",
+        "image": null
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-chimie-organique-nomenclature-fonctions",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q27-Epreuv",
+    "text": "La molécule suivante s’appelle :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "3-éthyl-2,4-diméthylhexan-1-amine",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "2,4-diéthyl-3-propylhexanamide",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "3-éthyl-2,4-diméthylpentamide",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "2,4-diéthyl-3-propylpentanamide",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "3-éthyl-2,4-diméthylhexanamide",
+        "image": null
+      }
+    ],
+    "correct": [
+      "E"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-chimie-organique-nomenclature-fonctions",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q28-Epreuv",
+    "text": "Le 3,3-diméthylpentan-1-ol :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Est un alcool linéaire",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Est un alcool secondaire",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Peut être oxydé en 3,3-diméthylpentanone",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Peut être oxydé en acide 3,3-diméthylpentanoïque",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Possède des énantiomères R et S",
+        "image": null
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-chimie-organique-nomenclature-fonctions",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q29-Epreuv",
+    "text": "Combien existe-t-il, en tenant compte d’éventuels énantiomères R et S, d’alcools de  formule brute C4H10O ?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "4",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "5",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "6",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "7",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "8 9",
+        "image": null
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-chimie-organique-nomenclature-fonctions",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q30-Epreuv",
+    "text": "On dispose au laboratoire d’un réactif inconnu. On envisage alors différents tests pour le  caractériser. Un test à la 2,4-dinitrophénylhydrazine (ou 2,4-DNPH) a conduit à la formation d’un précipité jaune orangé. Un second test en présence de liqueur de Fehling n’a pas conduit à l’obtention d’un précipité rouge brique. Ce réactif inconnu appartient à la famille :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Des aldéhydes",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Des alcools primaires",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Des acides carboxyliques",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Des cétones",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Des alcools secondaires",
+        "image": null
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-chimie-organique-nomenclature-fonctions",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q38-Epreuv",
+    "text": "La combustion complète de 7,4 g d’un alcool secondaire donne 17,6 g de dioxyde de  carbone. L’alcool utilisé est le :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Propan-2-ol",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Butan-1-ol",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "2-méthylpropan-1-ol",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Pentan-2-ol",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Butan-2-ol 12",
+        "image": null
+      }
+    ],
+    "correct": [
+      "E"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-solutions-concentrations-dilutions",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q8-Epreuv",
+    "text": "On prépare 100 mL d’une solution d’acide phosphorique H3PO4 de concentration                            5,0.10-3 mol.L-1 à partir d’une solution d’acide phosphorique de concentration 2,5.10-2 mol.L-1. Au cours de la préparation, on utilise :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Une pipette graduée de 20 mL",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Une balance de précision",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Une fiole jaugée de 50 mL",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Une pipette jaugée de 100 mL",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Une éprouvette graduée de 50 mL",
+        "image": null
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-solutions-concentrations-dilutions",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q10-Epreuv",
+    "text": "On souhaite préparer 100 mL d’une solution de permanganate de potassium KMnO4 de  concentration égale à 0,10 mol.L-1. Connaissant les masses molaires de K (39 g.mol-1), Mn (55 g.mol-1) et O (16 g.mol-1), la masse de KMnO4, solide pur à 98 %, à prélever est de :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "1,548 g",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "1,580 g",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "1,612 g",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "1,260 g",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "1,286 g",
+        "image": null
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-solutions-concentrations-dilutions",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q31-Epreuv",
+    "text": "On dispose d’un monoalcool saturé et non cyclique. L’analyse quantitative de cet alcool  a révélé un pourcentage massique en oxygène de 21,62 %. Connaissant les masses molaires de H (1 g.mol-1), C (12 g.mol-1) et O (16 g.mol-1), la formule brute de cet alcool est :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "C4H8O",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "C4H10O",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "C3H8O",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "C5H12O",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "C3H10O",
+        "image": null
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibres-acido-basiques",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q1-Epreuv",
+    "text": "Sachant que le pKa du couple HCOOH/HCOO- est égal à 3,75, dans une solution acide de  ce couple de pH égal à 5,9 :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "On ne trouve que HCOOH qui est prédominant",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "On ne trouve que HCOO- qui est prédominant",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Les concentrations en HCOOH et HCOO- sont identiques",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Il y a codominance avec une concentration en HCOOH plus élevée",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Il y a codominance avec une concentration en HCOO- plus élevée",
+        "image": null
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibres-acido-basiques",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q2-Epreuv",
+    "text": "Lorsque pH = pKa :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "La base prédomine en solution",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "La base est majoritaire en solution",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "L’acide prédomine en solution",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Les concentrations en acide et en base conjuguée sont identiques en solution",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "L’acide est majoritaire en solution",
+        "image": null
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibres-acido-basiques",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q3-Epreuv",
+    "text": "L’introduction dans l’eau de l’espèce NH3 conduit à un équilibre entre les formes NH4+,  NH3, H2O et HO-. NH3 est :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Une base forte",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Une base faible",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Un ampholyte",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Un acide faible",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Une base indifférente",
+        "image": null
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibres-acido-basiques",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q4-Epreuv",
+    "text": "Une solution tampon :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Voit son pH varier en présence d’une base forte",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Peut être obtenue en mélangeant une solution de base du couple avec une solution d’acide fort de concentration appropriée",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Change de pH lors d’une dilution",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Est préparée en mélangeant l’acide faible d’un couple et la base faible d’un autre couple",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Peut être préparée en mélangeant une solution d’acide du couple avec une solution d’acide fort de concentration appropriée 1",
+        "image": null
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibres-acido-basiques",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q13-Epreuv",
+    "text": "La réaction d’autoprotolyse de l’eau a pour constante d’équilibre :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Ke = [H3O+] [HO-] = 14 B. C. D.",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Ke = [H3O+] [HO-] = 10-14",
+        "image": null
+      }
+    ],
+    "correct": [
+      "E"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibres-acido-basiques",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q16-Epreuv",
+    "text": "Une solution tampon est préparée en mélangeant 100 mL d’une solution d’ammoniac NH3  de concentration 0,1 mol.L-1 et 20 mL d’une solution de H3O+ de concentration 0,05 mol.L-1. Sachant que le pKa du couple NH4+/NH3 est égal à 9,20, le pH de cette solution tampon est égal à :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "1,30",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "2,00",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "9,30",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "9,20",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "10,15 4",
+        "image": null
+      }
+    ],
+    "correct": [
+      "E"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibres-acido-basiques",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q32-Epreuv",
+    "text": "Dans un bécher de 250 mL, on mélange 100 mL d’une solution de HCl de concentration  0,002 mol.L-1 et 100 mL d’une solution de NaOH de concentration 0,001 mol.L-1. L’électrode du pH- mètre indique une valeur de pH de ce mélange égale à :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "7,00",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "4,00",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "3,00",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "2,70",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "3,30",
+        "image": null
+      }
+    ],
+    "correct": [
+      "E"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-oxydoreduction-piles",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q11-Epreuv",
+    "text": "Soit la réaction suivante :  Cr2O72- + 6 Fe2+ + 14 H+ → 2 Cr3+ + 6 Fe3+ + 7 H2O Les couples redox mis en jeu sont :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Cr2O72-/Cr3+ et Fe2+/Fe3+",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Cr3+/Cr2O72- et Fe3+/Fe2+",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Cr2O72-/Cr3+ et Fe3+/Fe2+",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Cr2O72-/Cr3+ et H+/H2O",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Fe2+/Fe3+ et H+/H2O",
+        "image": null
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-oxydoreduction-piles",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q12-Epreuv",
+    "text": "Intéressons-nous à cette pile Daniell.   Connaissant les couples redox mis en jeu, Zn2+/Zn (E° = - 0,76 V) et Cu2+/Cu (E° = 0,34 V) :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Les électrons se déplacent de l’électrode de cuivre vers l’électrode de zinc",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "L’électrode de zinc est le pôle + de la pile",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Cette pile peut fonctionner sans pont salin",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "L’électrode de cuivre subit l’oxydation",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "L’électrode de zinc est l’anode",
+        "image": null
+      }
+    ],
+    "correct": [
+      "E"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-oxydoreduction-piles",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q21-Epreuv",
+    "text": "La réaction redox entre Fe2+ et MnO4-, sachant que les couples mis en jeu sont Fe3+/Fe2+  et MnO4-/Mn2+, est :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "5 Fe2+ + 2 MnO4- + 8 H+ → 5 Fe3+ + 2 Mn2+ + 4 H2O",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "5 Fe2+ + MnO4- → 5 Fe3+ + Mn2+",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Fe2+ + MnO4- + 8 H+ → Fe3+ + Mn2+ + 4 H2O",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "5 Fe2+ + MnO4- + 8 H+ → 5 Fe3+ + Mn2+ + 4 H2O",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Fe2+ + MnO4- → Fe3+ + Mn2+",
+        "image": null
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-oxydoreduction-piles",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q22-Epreuv",
+    "text": "Connaissant les couples O2/H2O2 (E° = 0,70 V), H2O2/H2O (E° = 1,78 V) et                            I2/I- (E° = 0,54 V), la réaction favorable entre H2O2 et I- est :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "H2O2 + 2 I- + 2 H+ → I2 + O2",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "O2 + 2 I- + 2 H+ → I2 + H2O2",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "H2O2 + 2 I- + 2 H+ → I2 + 2 H2O",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "H2O2 + 4 I- + 4 H+ → 2 I2 + 2 H2O",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "H2O2 + 2 I- → H2O + I2",
+        "image": null
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-titrages",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q7-Epreuv",
+    "text": "On titre 10,0 mL d’une solution d’acide chlorhydrique HCl par une solution de soude  NaOH de concentration égale à 0,100 mol.L-1. Sachant que l’équivalence est observée pour un volume de soude versé égal à 6,8 mL, la concentration de la solution d’acide chlorhydrique est égale à :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "6,8.10-3 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "3,4.10-3 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "6,8.10-2 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "1,5.10-1 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "4,0.10-2 mol.L-1",
+        "image": null
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-titrages",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q17-Epreuv",
+    "text": "On réalise le titrage de 10 mL d’une solution diluée 5 fois d’acide acétique CH3COOH  de concentration inconnue par une solution de soude NaOH de concentration 0,01 mol.L-1 via un suivi pH-métrique. La courbe d’évolution du pH en fonction du volume de soude versé est la suivante : La solution mère d’acide acétique a pour concentration :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "0,015 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "0,010 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "0,075 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "0,006 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "0,030 mol.L-1",
+        "image": null
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "tags": [],
+    "image": "media/chimie-2023-juillet-q17-Epreuv.png"
+  },
+  {
+    "unit_slug": "chimie-titrages",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q18-Epreuv",
+    "text": "On souhaite effectuer le titrage pH-métrique d’un monoacide faible par une solution de  soude NaOH. La courbe pH-métrique habituellement obtenue pour ce titrage est la suivante. 5 Malheureusement, le pH-mètre est en panne, mais on dispose d’un certain nombre d’indicateurs colorés au laboratoire. Indicateur coloré Zone de virage Bleu de thymol 1,2 – 2,8 Vert de bromocrésol 3,8 – 5,4 Rouge de chlorophénol 6,6 – 8,4 Jaune d’Alizarine R 10 – 12 Carmin d’indigo 11,6 – 14 Quel indicateur coloré faut-il utiliser pour ce titrage ?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Bleu de thymol",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Vert de bromocrésol",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Rouge de chlorophénol",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Jaune d’Alizarine R",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Carmin d’indigo",
+        "image": null
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "tags": [],
+    "image": "media/chimie-2023-juillet-q18-Epreuv.png"
+  },
+  {
+    "unit_slug": "chimie-titrages",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q33-Epreuv",
+    "text": "On réalise le titrage de 10 mL d’une solution d’eau oxygénée H2O2 par une solution de  permanganate de potassium KMnO4 de concentration égale à 0,01 mol.L-1. Le volume de permanganate de potassium versé à l’équivalence est égal à 9,2 mL. Sachant que les couples mis en jeu sont MnO4-/Mn2+ et O2/H2O2, la concentration de la solution d’eau oxygénée est égale à :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "9,20.10-3 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "4,60.10-2 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "1,84.10-3 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "2,30.10-2 mol.L-1",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "2,72.10-2 mol.L-1 10",
+        "image": null
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-cinetique-chimique",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q5-Epreuv",
+    "text": "L’unité de la vitesse volumique d’une réaction est :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "L.mol-1.min-1",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "L.min-1",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "L.mol.min-1",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "mol.L -1.min-1",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "L.mol-1.min",
+        "image": null
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-cinetique-chimique",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q6-Epreuv",
+    "text": "Un catalyseur :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Augmente le rendement de la réaction chimique",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Apparait dans l’équation-bilan de la réaction chimique",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "Est régénéré au cours de la réaction chimique",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Ralentit la réaction chimique",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Est une espèce introduite en grande quantité",
+        "image": null
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-cinetique-chimique",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q9-Epreuv",
+    "text": "Le zinc est un métal qui réagit avec une solution aqueuse d'acide chlorhydrique selon  l'équation suivante : Zn (s) + 2 H3O+ (aq) → Zn2+ (aq) + H2 (g) + 2 H2O (l) La vitesse de cette réaction peut être augmentée :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "En utilisant une solution d’acide chlorhydrique moins concentrée",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Par une trempe",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "En ajoutant de l’eau dans le milieu réactionnel",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "En utilisant une solution d’acide chlorhydrique de pH plus faible",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "En introduisant initialement une solution de Zn2+ 2",
+        "image": null
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-cinetique-chimique",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q19-Epreuv",
+    "text": "On étudie, à température constante, la cinétique de dismutation de l’eau oxygénée selon  la réaction suivante : 2 H2O2 → 2 H2O + O2 La courbe d’évolution de la concentration en H2O2 en fonction de temps est la suivante : La vitesse volumique de la disparition de H2O2 à t = 10 min est égale à :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "1,7 mmol.L-1.min-1",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "5,6.10-3 mol.L-1.min-1",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "1,7 mol.L-1.min-1",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "1,7.10-3 mol.L-1.s-1",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "400 mol.L-1.min-1 6",
+        "image": null
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "tags": [],
+    "image": "media/chimie-2023-juillet-q19-Epreuv.png"
+  },
+  {
+    "unit_slug": "chimie-cinetique-chimique",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q20-Epreuv",
+    "text": "On étudie la réaction de saponification de l’éthanoate d’éthyle, selon la réaction suivante :  CH3COOC2H5 + HO- → CH3COO- + C2H5OH On ajoute un volume V = 8 mL d’une solution d’hydroxyde de sodium NaOH de concentration 0,20 mol.L-1 dans un bécher de 500 mL. A l’instant t=0, on ajoute dans le bécher un volume d’éthanoate d’éthyle pur équivalent à 0,01 mol. Le volume de la solution ainsi obtenue est égal à 400 mL. Une étude de la variation du pH au cours du temps a permis de calculer la concentration en HO- à différents temps. Voici les résultats obtenus. t (min) 1 2 4 6 8 10 12 16 20 24 28 34 40 [HO-] (10-3 3,2 2,5 2,0 1,6 1,3 1,0 0,83 0,60 0,45 0,36 0,30 0,24 0,21 mol.L-1) Le temps de demi-réaction est égal à :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "20 min",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "10 min",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "16 min",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "28 min",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "4 min",
+        "image": null
+      }
+    ],
+    "correct": [
+      "E"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibre-chimique",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q14-Epreuv",
+    "text": "Soit l’équilibre chimique suivant :  H2 (g) + I2 (g) ⇄ 2 HI (g) Si on augmente la quantité de matière de H2 :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "La réaction est stoppée",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Le système évolue dans le sens indirect",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "La quantité de matière de HI formée augmente",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Le système tend à augmenter la quantité de matière de H2",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Le système tend à augmenter la quantité de matière de I2",
+        "image": null
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibre-chimique",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q15-Epreuv",
+    "text": "A l’état d’équilibre d’une réaction limitée :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "On ne trouve que des produits",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "Aucun produit n’est formé",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "On trouve les produits et le réactif en excès",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "Tous les réactifs ont disparu",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "On trouve les produits et une partie de chacun des réactifs introduits initialement",
+        "image": null
+      }
+    ],
+    "correct": [
+      "E"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibre-chimique",
+    "level_title": "Niveau 1",
+    "external_id": "chimie-2023-juillet-q23-Epreuv",
+    "text": "Soit la réaction de formation de l’ammoniac :   N2 (g) + 3 H2 (g) ⇄ 2 NH3 (g) Cet équilibre peut être déplacé dans le sens de la formation de NH3 :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "En utilisant un catalyseur",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "En diminuant la quantité de matière de N2",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "En diminuant la pression",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "En augmentant la quantité de matière de H2",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Impossible, un équilibre ne peut pas être déplacé",
+        "image": null
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibre-chimique",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q24-Epreuv",
+    "text": "Soit l’équilibre chimique de formation de SO3 selon l’équation-bilan :  2 SO2 (g) + O2 (g) ⇄ 2 SO3 (g) Sachant que ΔH = -196 kJ.mol-1, la réaction est déplacée dans le sens direct :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "En diminuant la pression du système",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "En diminuant la quantité de matière de O2",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "En refroissant le système",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "En chauffant le système",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "Impossible de déplacer cet équilibre dans le sens direct",
+        "image": null
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibre-chimique",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q34-Epreuv",
+    "text": "Soit la réaction de formation de l’ammoniac :   N2 (g) + 3 H2 (g) ⇄ 2 NH3 (g) A l’état initial, 0,20 mol de N2 et 0,60 mol de H2 sont utilisés. Lorsque le système cesse d’évoluer, la quantité de matière de NH3 obtenue est égale à 0,08 mol. Sachant que le volume du système à l’équilibre est de 200 mL, la constante d’équilibre Kc de cette réaction est égale à :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "1,45.10-2",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "6,66.10-1",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "1,48.10-1",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "8,93.10-1",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "3,62.10-1",
+        "image": null
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibre-chimique",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q35-Epreuv",
+    "text": "La molécule suivante est synthétisée à partir :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "D’acide 3-éthylpentanoïque et de méthanol",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "De 3-éthylpentanone et d’éthanol",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "D’acide éthanoïque et de 3-éthylpentanol",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "D’acide 3-éthylpentanoïque et d’éthanol",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "De 3-éthylpentanal et d’éthanol",
+        "image": null
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "tags": []
+  },
+  {
+    "unit_slug": "chimie-equilibre-chimique",
+    "level_title": "Niveau 2",
+    "external_id": "chimie-2023-juillet-q37-Epreuv",
+    "text": "Soit la réaction de synthèse du formiate d’éthyle, dont la formule topologique est la  suivante : Pour réaliser cette synthèse, on utilise 69 mL d’alcool de densité égale à 0,80 ; 55,2 g d’acide et quelques gouttes d’acide sulfurique concentré. On obtient une masse expérimentale d’ester de 59,2 g. Connaissant les masses molaires de H (1 g.mol-1), C (12 g.mol-1) et O (16 g.mol-1), le rendement de cette synthèse est de :",
+    "choices": [
+      {
+        "key": "A",
+        "text": "67 %",
+        "image": null
+      },
+      {
+        "key": "B",
+        "text": "62 %",
+        "image": null
+      },
+      {
+        "key": "C",
+        "text": "70 %",
+        "image": null
+      },
+      {
+        "key": "D",
+        "text": "65 %",
+        "image": null
+      },
+      {
+        "key": "E",
+        "text": "100 %",
+        "image": null
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "tags": []
+  }
+]

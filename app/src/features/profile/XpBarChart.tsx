@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import type { XpByDayEntry } from '@/api/types';
 import { formatNumber } from '@/lib/format';
 import { colors, fonts, spacing, typography } from '@/theme/tokens';
+import { tints } from '@/theme/tints';
 
 const CHART_HEIGHT = 120;
 const DAYS_SHOWN = 14;
@@ -32,6 +33,21 @@ export function XpBarChart({ data }: XpBarChartProps) {
   const barWidth = days.length > 0 ? (width - gap * (days.length - 1)) / days.length : 0;
   const radius = Math.min(6, Math.max(3, barWidth / 3));
 
+  // The SVG bars carry no text of their own — without this, screen readers
+  // either skip the chart entirely or announce a bare, dataless "image".
+  // Collapsed into one label (below) rather than one accessibility element
+  // per bar, since the bars aren't individually interactive.
+  const chartLabel = t('statsScreen.chartA11yLabel', {
+    list: days
+      .map((day) =>
+        t('statsScreen.chartA11yEntry', {
+          day: day.date === todayIso ? t('statsScreen.today') : shortDay(day.date),
+          xp: formatNumber(day.xp),
+        }),
+      )
+      .join(', '),
+  });
+
   return (
     <View testID="xp-bar-chart">
       <View style={styles.maxRow}>
@@ -39,9 +55,15 @@ export function XpBarChart({ data }: XpBarChartProps) {
           {t('statsScreen.maxXp', { xp: formatNumber(max) })}
         </Text>
       </View>
-      <View onLayout={onLayout} style={styles.chartArea}>
+      <View
+        accessibilityLabel={chartLabel}
+        accessibilityRole="image"
+        accessible
+        onLayout={onLayout}
+        style={styles.chartArea}
+      >
         {width > 0 ? (
-          <Svg height={CHART_HEIGHT} width={width}>
+          <Svg aria-hidden height={CHART_HEIGHT} width={width}>
             <Defs>
               <SvgLinearGradient id="xpBar" x1="0" x2="0" y1="0" y2="1">
                 <Stop offset="0" stopColor={colors.primary[400]} />
@@ -125,6 +147,8 @@ const styles = StyleSheet.create({
   },
   axisToday: {
     fontFamily: fonts.bodyBold,
-    color: colors.streakOrange,
+    // Deep flame, not #F97316 — a 10pt axis label at 2.80:1 fails even the
+    // large-text threshold. The bar gradient keeps the bright hue.
+    color: tints.flameText,
   },
 });

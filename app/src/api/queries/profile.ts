@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
 
 import { api } from '@/api/client';
 import { ENDPOINTS } from '@/api/endpoints';
@@ -33,10 +34,17 @@ export function usePatchMe() {
 
 /** DELETE /me/ — App Store requirement. Caller logs out on success. */
 export function useDeleteAccount() {
+  const router = useRouter();
   return useMutation({
     mutationFn: async () => (await api.delete(ENDPOINTS.me)).data,
     onSuccess: async () => {
       await useAuthStore.getState().logout();
+      // Same fix as useLogout() (see api/queries/auth.ts) — this is always
+      // triggered from the pushed /profile/settings route, so the (tabs)
+      // auth gate's redirect is never seen without explicitly unwinding
+      // back to the root first. Without this, the screen was observed to
+      // stay frozen on its now-unauthenticated "Réglages" shell indefinitely.
+      router.dismissTo('/');
     },
   });
 }

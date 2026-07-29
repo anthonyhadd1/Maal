@@ -52,8 +52,7 @@ export function Avatar({ avatarId, name, size = 44, style }: AvatarProps) {
 
   return (
     <View
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants"
+      aria-hidden
       style={[
         styles.circle,
         {

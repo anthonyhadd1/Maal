@@ -98,9 +98,20 @@ function TrophyCard({
   const Icon = getLucideIcon(achievement.icon);
   const title = localizedAchievementTitle(t, achievement);
 
+  // An explicit accessibilityLabel replaces the subtree's natural
+  // text-content name, not adds to it — without folding the status in here,
+  // a screen reader hears only the trophy's name, never whether it's been
+  // earned (the border color / date / "locked" caption sighted users see).
+  const status = unlocked
+    ? t('achievementsScreen.unlockedAt', { date: formatDate(achievement.unlocked_at!) })
+    : t('achievementsScreen.locked');
+  const a11yLabel = achievement.is_premium_only
+    ? `${title}, ${status}, ${t('achievementsScreen.premiumOnly')}`
+    : `${title}, ${status}`;
+
   return (
     <PressableScale
-      accessibilityLabel={title}
+      accessibilityLabel={a11yLabel}
       onPress={onPress}
       style={styles.cell}
       testID={`trophy-${achievement.code}`}
@@ -115,7 +126,7 @@ function TrophyCard({
           {unlocked ? (
             <Icon color={colors.neutral[0]} size={26} strokeWidth={2.2} />
           ) : (
-            <Lock color={colors.neutral[500]} size={22} />
+            <Lock color={colors.neutral[500]} size={26} strokeWidth={2.2} />
           )}
         </View>
         <Text numberOfLines={2} style={[styles.cellTitle, !unlocked && styles.cellTitleLocked]}>

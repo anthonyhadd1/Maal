@@ -52,6 +52,7 @@
   },
   "challenges": {
     "title": "Défis",
+    "resultUnavailable": "Résultat indisponible pour le moment.",
     "received": "Reçus",
     "sent": "Envoyés",
     "you": "Toi",
@@ -86,7 +87,9 @@
       "title": "Défi sur « {{level}} »",
       "perQuestion": "Question par question",
       "questionN": "Question {{n}}",
-      "error": "Impossible de charger ce défi. Réessaie."
+      "error": "Impossible de charger ce défi. Réessaie.",
+      "markCorrect": "Bonne réponse",
+      "markWrong": "Mauvaise réponse"
     }
   }
 }

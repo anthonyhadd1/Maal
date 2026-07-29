@@ -6,9 +6,10 @@ import { useAuthStore } from '@/stores/authStore';
 import { colors } from '@/theme/tokens';
 
 /**
- * Onboarding stack (track → goal → rhythm → notifications), post-register.
- * `track` SKIPS `goal` for the spécialité track (target_faculty doesn't
- * apply once already in med school) — see TrackScreen's routing.
+ * Onboarding stack (goal → rhythm → notifications), post-register.
+ *
+ * There is no track-selection step: the app covers the USJ concours d'entrée
+ * only, and a choice between one option is not a choice.
  */
 export default function OnboardingLayout() {
   const status = useAuthStore((s) => s.status);
@@ -27,7 +28,7 @@ export default function OnboardingLayout() {
       screenOptions={{
         headerShown: false,
         gestureEnabled: false,
-        contentStyle: { backgroundColor: colors.neutral[50] },
+        contentStyle: { backgroundColor: colors.inkBottom },
       }}
     />
   );

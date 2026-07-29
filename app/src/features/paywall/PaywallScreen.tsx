@@ -28,6 +28,7 @@ import { Screen } from '@/components/layout/Screen';
 import {
   DEFAULT_PLAN,
   PLANS,
+  paywallCta,
   purchase,
   resolvePaywallMode,
   restore,
@@ -35,6 +36,7 @@ import {
 } from '@/features/paywall/entitlements';
 import { FloatingIsland, type IslandPalette } from '@/features/scenes';
 import { shade } from '@/lib/color';
+import { PRIVACY_URL, TERMS_URL, hasLegalLinks, openLegal } from '@/lib/legal';
 import { formatDate } from '@/lib/format';
 import { colors, fonts, gradients, radii, shadows, spacing, typography } from '@/theme/tokens';
 import { tints } from '@/theme/tints';
@@ -64,12 +66,14 @@ const BENEFITS: { key: string; Icon: LucideIcon }[] = [
 export function PaywallScreen() {
   const { t } = useTranslation('paywall');
   const { t: tCommon } = useTranslation('common');
+  const { t: tProfile } = useTranslation('profile');
   const router = useRouter();
   const entitlement = useEntitlement();
 
   const [plan, setPlan] = useState<PlanId>(DEFAULT_PLAN);
   const [comingSoon, setComingSoon] = useState(false);
   const [busy, setBusy] = useState(false);
+  const ctaCopy = paywallCta(PLANS[plan]);
 
   const runPurchaseFlow = async (action: () => Promise<{ status: string }>) => {
     if (busy) return;
@@ -87,10 +91,9 @@ export function PaywallScreen() {
       <ClayIconButton
         accessibilityLabel={tCommon('cta.close')}
         onPress={() => router.back()}
-        size={40}
         testID="paywall-close"
       >
-        <X color={colors.neutral[700]} size={20} />
+        <X color={colors.neutral[700]} size={22} />
       </ClayIconButton>
     </View>
   );
@@ -112,43 +115,52 @@ export function PaywallScreen() {
   // Already premium → status view instead of the pitch.
   if (resolvePaywallMode(entitlement.data) === 'premium' && entitlement.data) {
     return (
-      <Screen edges={['top', 'left', 'right', 'bottom']} scroll>
+      <Screen contentStyle={styles.premiumContent} edges={['top', 'left', 'right', 'bottom']} scroll>
         {close}
-        <View style={styles.hero} testID="paywall-premium">
-          <Mascot size={140} state="celebrate" />
-          <View style={styles.crownRow}>
-            <Crown color={colors.xpGold} fill={colors.xpGold} size={26} />
-            <Text accessibilityRole="header" style={styles.titleDark}>
-              {t('premium.title')}
-            </Text>
+        {/* Centered as one block (not pinned top with the CTA pushed to the
+            bottom edge via marginTop:'auto') — three short elements on a
+            tall screen otherwise leave a bare gap that reads as unfinished,
+            the same issue fixed on the welcome/login screens. */}
+        <View style={styles.premiumGroup}>
+          <View style={styles.hero} testID="paywall-premium">
+            <Mascot size={140} state="celebrate" />
+            <View style={styles.crownRow}>
+              <Crown color={colors.xpGold} fill={colors.xpGold} size={26} />
+              <Text accessibilityRole="header" style={styles.titleDark}>
+                {t('premium.title')}
+              </Text>
+            </View>
+            <Text style={styles.pitchDark}>{t('premium.body')}</Text>
           </View>
-          <Text style={styles.pitchDark}>{t('premium.body')}</Text>
-        </View>
-        <ClayCard style={styles.statusCard}>
-          <Text style={styles.statusLine}>
-            {entitlement.data.premium_until
-              ? t('premium.until', { date: formatDate(entitlement.data.premium_until) })
-              : t('premium.lifetime')}
-          </Text>
-          <Text style={styles.statusSource}>
-            {t('premium.source', { source: entitlement.data.source })}
-          </Text>
-        </ClayCard>
-        <View style={styles.actions}>
-          <ClayButton
-            fullWidth
-            onPress={() => router.back()}
-            size="l"
-            title={tCommon('cta.continue')}
-            variant="primary"
-          />
+          <ClayCard style={styles.statusCard}>
+            <Text style={styles.statusLine}>
+              {entitlement.data.premium_until
+                ? t('premium.until', { date: formatDate(entitlement.data.premium_until) })
+                : t('premium.lifetime')}
+            </Text>
+            <Text style={styles.statusSource}>
+              {t('premium.source', { source: entitlement.data.source })}
+            </Text>
+          </ClayCard>
+          <View style={styles.premiumActions}>
+            <ClayButton
+              fullWidth
+              onPress={() => router.back()}
+              size="l"
+              title={tCommon('cta.continue')}
+              variant="primary"
+            />
+          </View>
         </View>
       </Screen>
     );
   }
 
   return (
-    <Screen edges={['left', 'right', 'bottom']} padded={false} scroll>
+    // 'top' included like the loading and premium states — without it the
+    // pitch's close button slid under the notch, and the button jumped
+    // position the moment the entitlement query resolved.
+    <Screen edges={['top', 'left', 'right', 'bottom']} padded={false} scroll>
       {/* Hero — brand gradient band that sells */}
       <LinearGradient
         colors={gradients.brandDeep}
@@ -160,10 +172,9 @@ export function PaywallScreen() {
           <ClayIconButton
             accessibilityLabel={tCommon('cta.close')}
             onPress={() => router.back()}
-            size={40}
             testID="paywall-close"
           >
-            <X color={colors.neutral[700]} size={20} />
+            <X color={colors.neutral[700]} size={22} />
           </ClayIconButton>
         </View>
         <View style={styles.hero}>
@@ -218,26 +229,65 @@ export function PaywallScreen() {
 
         {/* CTA + restore + legal */}
         <View style={styles.actions}>
+        {/* The label and the note both follow the SELECTED plan. The button
+            used to read « Essayer 7 jours gratuits » even with the monthly
+            plan active — which has no trial — so the paywall promised
+            something the purchase would not deliver. */}
         <ClayButton
           fullWidth
           loading={busy}
           onPress={() => void runPurchaseFlow(() => purchase(plan))}
           size="l"
           testID="paywall-cta"
-          title={t('cta')}
+          title={t(ctaCopy.titleKey, ctaCopy.params)}
           variant="gold"
         />
+        <Text style={styles.ctaNote} testID="paywall-cta-note">
+          {t(ctaCopy.noteKey, ctaCopy.params)}
+        </Text>
         <PressableScale
           accessibilityRole="button"
+          accessibilityState={{ disabled: busy }}
           clay={false}
+          disabled={busy}
           onPress={() => void runPurchaseFlow(restore)}
           pressedTranslateY={2}
-          style={styles.restore}
+          style={[styles.restore, busy && styles.restoreDisabled]}
           testID="paywall-restore"
         >
           <Text style={styles.restoreText}>{t('restore')}</Text>
         </PressableScale>
           <Text style={styles.legal}>{t('legal')}</Text>
+          {/* Guideline 3.1.2: an auto-renewable subscription must carry
+              FUNCTIONAL links to the terms of use and the privacy policy at
+              the point of purchase — inert legal prose is one of the most
+              reliably enforced auto-rejections. Hidden when the URLs are not
+              configured for this build rather than shipped dead. */}
+          {hasLegalLinks() ? (
+            <View style={styles.legalLinks}>
+              <PressableScale
+                accessibilityLabel={tProfile('settings.terms')}
+                accessibilityRole="link"
+                clay={false}
+                onPress={() => void openLegal(TERMS_URL)}
+                style={styles.legalLink}
+                testID="paywall-terms"
+              >
+                <Text style={styles.legalLinkText}>{tProfile('settings.terms')}</Text>
+              </PressableScale>
+              <Text style={styles.legalDot}>·</Text>
+              <PressableScale
+                accessibilityLabel={tProfile('settings.privacy')}
+                accessibilityRole="link"
+                clay={false}
+                onPress={() => void openLegal(PRIVACY_URL)}
+                style={styles.legalLink}
+                testID="paywall-privacy"
+              >
+                <Text style={styles.legalLinkText}>{tProfile('settings.privacy')}</Text>
+              </PressableScale>
+            </View>
+          ) : null}
         </View>
       </View>
 
@@ -277,6 +327,10 @@ function PlanCard({
     <PressableScale
       accessibilityRole="button"
       accessibilityState={{ selected }}
+      // clay={false}: the wrapper is a plain rectangle, so its clay shadow
+      // drew a square halo behind the rounded card. The inner planCard already
+      // carries the raised/pressed elevation (same as GoalScreen/TrackCard).
+      clay={false}
       onPress={onPress}
       style={styles.planCell}
       testID={`plan-${plan.id}`}
@@ -310,12 +364,12 @@ const styles = StyleSheet.create({
   heroBand: {
     borderBottomLeftRadius: radii.xl,
     borderBottomRightRadius: radii.xl,
-    paddingTop: spacing.l,
+    // The safe-area inset now supplies the top breathing room (see edges).
+    paddingTop: spacing.s,
     paddingHorizontal: spacing.l,
     paddingBottom: spacing.xl,
   },
   body: {
-    flex: 1,
     paddingHorizontal: spacing.l,
   },
   hero: {
@@ -393,7 +447,7 @@ const styles = StyleSheet.create({
   },
   planCard: {
     alignItems: 'center',
-    gap: 2,
+    gap: spacing.xs,
     backgroundColor: colors.neutral[0],
     borderRadius: radii.l,
     borderWidth: 2.5,
@@ -428,10 +482,12 @@ const styles = StyleSheet.create({
   ribbon: {
     position: 'absolute',
     top: -12,
-    backgroundColor: colors.successDeep,
+    // successEdge, not successDeep: white on #16A34A is 3.3:1, and the ribbon
+    // carries the single number that justifies the annual plan.
+    backgroundColor: colors.successEdge,
     borderRadius: radii.pill,
     paddingHorizontal: spacing.m,
-    paddingVertical: 3,
+    paddingVertical: spacing.xs,
     ...shadows.clayPressed,
   },
   ribbonText: {
@@ -461,7 +517,7 @@ const styles = StyleSheet.create({
     borderColor: colors.goldDeep,
     borderRadius: radii.pill,
     paddingHorizontal: spacing.m,
-    paddingVertical: 2,
+    paddingVertical: spacing.xs,
     marginTop: spacing.xs,
   },
   trialText: {
@@ -469,10 +525,18 @@ const styles = StyleSheet.create({
     fontFamily: fonts.bodyBold,
     color: tints.goldText,
   },
+  premiumContent: {
+    justifyContent: 'center',
+  },
+  premiumGroup: {
+    gap: spacing.xl,
+  },
+  premiumActions: {
+    marginTop: spacing.m,
+  },
   statusCard: {
     alignItems: 'center',
     gap: spacing.xs,
-    marginTop: spacing.xl,
   },
   statusLine: {
     ...typography.bodyBold,
@@ -483,24 +547,55 @@ const styles = StyleSheet.create({
     color: colors.neutral[500],
   },
   actions: {
-    marginTop: 'auto',
     gap: spacing.m,
-    paddingTop: spacing.xl,
+    marginTop: spacing.xl,
     paddingBottom: spacing.l,
   },
   restore: {
     alignSelf: 'center',
-    paddingVertical: spacing.xs,
+    // 12 + 12 + 20pt line box = 44pt, matching LoginScreen's linkRow. It was
+    // spacing.xs, giving a 28pt target.
+    paddingVertical: spacing.m,
     paddingHorizontal: spacing.m,
+  },
+  restoreDisabled: {
+    opacity: 0.5,
   },
   restoreText: {
     ...typography.smallMedium,
     color: colors.primary[600],
+    textDecorationLine: 'underline',
+  },
+  ctaNote: {
+    ...typography.caption,
+    color: colors.neutral[700],
+    textAlign: 'center',
+    marginTop: -spacing.xs,
   },
   legal: {
     ...typography.caption,
     color: colors.neutral[500],
     textAlign: 'center',
+  },
+  legalLinks: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.xs,
+  },
+  legalLink: {
+    minHeight: 44,
+    justifyContent: 'center',
+    paddingHorizontal: spacing.xs,
+  },
+  legalLinkText: {
+    ...typography.caption,
+    color: colors.primary[600],
+    textDecorationLine: 'underline',
+  },
+  legalDot: {
+    ...typography.caption,
+    color: colors.neutral[300],
   },
   skeleton: {
     flex: 1,

@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.neutral[0],
     borderRadius: radii.pill,
-    padding: spacing.xs + 2,
+    padding: spacing.s,
     borderWidth: 1,
     borderColor: 'rgba(36, 31, 62, 0.05)',
     borderBottomWidth: 2,
@@ -169,11 +169,11 @@ const styles = StyleSheet.create({
   pill: {
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 1,
+    gap: spacing.xs,
     borderRadius: radii.pill,
     paddingVertical: spacing.s,
     minHeight: 54,
-    marginHorizontal: 2,
+    marginHorizontal: spacing.xs,
   },
   pillActive: {
     backgroundColor: colors.primary[600],

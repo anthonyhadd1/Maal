@@ -101,11 +101,23 @@ export function QuestCard({ quest }: QuestCardProps) {
     </ClayCard>
   );
 
+  // Two issues in one: `quest.title` is the raw (unlocalized) server field —
+  // the visible text uses the computed, localized `title` above instead. And
+  // an explicit accessibilityLabel on this wrapper absorbs the whole card
+  // (including the progress line below) into one accessible node, so without
+  // folding progress in too, a screen reader never hears "2/5" or "Done".
+  const progressText = quest.done
+    ? t('quests.done')
+    : t('quests.progress', {
+        current: formatNumber(quest.current),
+        target: formatNumber(quest.target),
+      });
+
   return (
     <Animated.View style={animatedStyle}>
       {actionable ? (
         <PressableScale
-          accessibilityLabel={quest.title}
+          accessibilityLabel={`${title}, ${progressText}`}
           clay={false}
           onPress={() => router.push('/practice')}
         >
@@ -152,7 +164,9 @@ const styles = StyleSheet.create({
     color: colors.neutral[500],
   },
   progressLabelDone: {
-    color: colors.successDeep,
+    // successEdge (5.0:1 on white), not successDeep (3.3:1 — fails AA at this
+    // caption size).
+    color: colors.successEdge,
     fontFamily: typography.bodyBold.fontFamily,
   },
 });

@@ -209,6 +209,9 @@ const styles = StyleSheet.create({
   },
   toggleRow: {
     flexDirection: 'row',
+    // A visible seam between the two pills — they abutted exactly, so the
+    // boundary between two 40pt targets was invisible.
+    gap: spacing.xs,
     backgroundColor: colors.neutral[200],
     borderRadius: radii.pill,
     padding: spacing.xs,
@@ -219,7 +222,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: radii.pill,
-    minHeight: 40,
+    minHeight: 44,
     paddingVertical: spacing.s,
   },
   pillActive: {

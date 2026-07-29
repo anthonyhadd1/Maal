@@ -22,8 +22,8 @@
     "xpPerDay": "{{xp}} XP"
   },
   "notifications": {
-    "title": "Keep your streak alive?",
-    "pitch": "I'll remind you to keep your streak. One small nudge a day, never spam.",
+    "title": "Study a little every day?",
+    "pitch": "I'll remind you to revise each day. One small nudge a day, never spam.",
     "yes": "Yes, motivate me!",
     "later": "Later"
   }

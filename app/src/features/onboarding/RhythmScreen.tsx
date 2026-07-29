@@ -9,7 +9,12 @@ import { ClaySurface } from '@/components/clay/ClaySurface';
 import { useToast } from '@/components/feedback/Toast';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
+import {
+  onboardingPrevious,
+  onboardingProgress,
+} from '@/features/onboarding/onboardingProgress';
 import { shade } from '@/lib/color';
+import { useSettingsStore } from '@/stores/settingsStore';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
 interface RhythmOption {
@@ -36,6 +41,9 @@ export function RhythmScreen() {
   const router = useRouter();
   const toast = useToast();
   const patchMe = usePatchMe();
+  const activeTrackSlug = useSettingsStore((s) => s.activeTrackSlug);
+  const { step, totalSteps } = onboardingProgress('rhythm');
+  const previous = onboardingPrevious('rhythm');
 
   const [goalXp, setGoalXp] = useState(DEFAULT_DAILY_GOAL_XP);
 
@@ -54,10 +62,12 @@ export function RhythmScreen() {
   return (
     <OnboardingStep
       cta={{ label: t('continue'), onPress: submit, loading: patchMe.isPending }}
+      onBack={previous ? () => router.replace(`/onboarding/${previous}`) : undefined}
       mascot="thinking"
-      step={2}
+      step={step}
       subtitle={t('rhythm.subtitle')}
       title={t('rhythm.title')}
+      totalSteps={totalSteps}
     >
       <View style={styles.list}>
         {OPTIONS.map(({ key, xp, Icon }) => {
@@ -134,7 +144,7 @@ const styles = StyleSheet.create({
   },
   cardBody: {
     flex: 1,
-    gap: 1,
+    gap: spacing.xs,
   },
   cardLabel: {
     ...typography.bodyMedium,

@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   },
   rowBody: {
     flex: 1,
-    gap: 1,
+    gap: spacing.xs,
   },
   rowName: {
     ...typography.bodyMedium,
@@ -241,7 +241,8 @@ const styles = StyleSheet.create({
     color: colors.neutral[500],
   },
   chipTextFriends: {
-    color: colors.successDeep,
+    // successEdge (5.0:1 on white) — successDeep only reaches 3.3:1, failing AA.
+    color: colors.successEdge,
   },
   skeleton: {
     gap: spacing.s,

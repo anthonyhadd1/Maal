@@ -84,8 +84,7 @@ export function ParticleBurst({
 
   return (
     <View
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants"
+      aria-hidden
       pointerEvents="none"
       style={[styles.base, { width, height }, style]}
     >

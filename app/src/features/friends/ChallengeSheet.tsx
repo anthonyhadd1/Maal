@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useCreateChallenge } from '@/api/queries/challenges';
 import { useSubjectMap } from '@/api/queries/map';
 import type { Friend, MapLevel } from '@/api/types';
+import { ClayButton } from '@/components/clay/ClayButton';
 import { ClayDialog } from '@/components/feedback/ClayDialog';
 import { useToast } from '@/components/feedback/Toast';
 import { Skeleton } from '@/components/feedback/Skeleton';
@@ -72,6 +73,21 @@ export function ChallengeSheet({ friend, onClose }: ChallengeSheetProps) {
             <Skeleton height={52} key={i} radius={radii.m} width="100%" />
           ))}
         </View>
+      ) : map.isError ? (
+        // A failed load must NOT masquerade as "no completed levels" (which
+        // would tell a user with real progress they have nothing to challenge
+        // with) — surface the error and offer a retry.
+        <View style={styles.errorBox}>
+          <Text style={styles.empty}>{tErrors('network')}</Text>
+          <ClayButton
+            loading={map.isRefetching}
+            onPress={() => void map.refetch()}
+            size="m"
+            testID="challenge-level-retry"
+            title={tErrors('retry')}
+            variant="secondary"
+          />
+        </View>
       ) : completedLevels.length === 0 ? (
         <Text style={styles.empty}>{t('challengeSheet.empty')}</Text>
       ) : (
@@ -82,7 +98,12 @@ export function ChallengeSheet({ friend, onClose }: ChallengeSheetProps) {
         >
           {completedLevels.map((level) => (
             <PressableScale
-              accessibilityLabel={level.title}
+              // StarRating below carries its own accessibilityLabel, but a
+              // wrapper with an explicit label of its own absorbs the whole
+              // subtree into one accessible node — the child's label never
+              // gets announced. Fold the star count in here instead of
+              // silently dropping how well this level was played.
+              accessibilityLabel={`${level.title}, ${tCommon('a11y.stars', { count: level.stars })}`}
               clay={false}
               disabled={createChallenge.isPending}
               key={level.id}
@@ -129,7 +150,7 @@ const styles = StyleSheet.create({
   },
   levelBody: {
     flex: 1,
-    gap: 2,
+    gap: spacing.xs,
   },
   levelTitle: {
     ...typography.smallMedium,
@@ -139,6 +160,12 @@ const styles = StyleSheet.create({
     ...typography.small,
     color: colors.neutral[500],
     textAlign: 'center',
+  },
+  errorBox: {
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    gap: spacing.m,
+    paddingVertical: spacing.s,
   },
   skeleton: {
     alignSelf: 'stretch',

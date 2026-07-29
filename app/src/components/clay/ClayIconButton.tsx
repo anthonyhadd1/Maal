@@ -17,6 +17,7 @@ export function ClayIconButton({
   size = 44,
   backgroundColor = colors.neutral[0],
   accessibilityLabel,
+  disabled,
   style,
   ...rest
 }: PropsWithChildren<ClayIconButtonProps>) {
@@ -24,9 +25,12 @@ export function ClayIconButton({
     <PressableScale
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
+      accessibilityState={{ disabled: !!disabled }}
+      disabled={disabled}
       style={[
         styles.base,
         { width: size, height: size, borderRadius: Math.min(radii.m, size / 2.5), backgroundColor },
+        disabled && styles.disabled,
         style,
       ]}
       {...rest}
@@ -40,5 +44,8 @@ const styles = StyleSheet.create({
   base: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  disabled: {
+    opacity: 0.5,
   },
 });

@@ -22,7 +22,8 @@
     "title": "Your streak",
     "current": "Current streak",
     "longest": "Record",
-    "freezes": "Streak freezes"
+    "freezes": "Streak freezes",
+    "freezesA11y": "Streak freezes: {{held}} of {{total}}"
   },
   "achievements": {
     "row": "Trophies",

@@ -24,7 +24,6 @@ export function ScreenHeader({ title, right, onBack }: ScreenHeaderProps) {
       <ClayIconButton
         accessibilityLabel={t('cta.back')}
         onPress={onBack ?? (() => router.back())}
-        size={40}
         testID="screen-header-back"
       >
         <ChevronLeft color={colors.neutral[700]} size={22} />

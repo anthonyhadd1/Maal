@@ -22,8 +22,8 @@
     "xpPerDay": "{{xp}} XP"
   },
   "notifications": {
-    "title": "On garde ta série ?",
-    "pitch": "Je te rappellerai de garder ta série. Un petit rappel par jour, jamais de spam.",
+    "title": "On garde le rythme ?",
+    "pitch": "Je te rappellerai de réviser chaque jour. Un petit rappel quotidien, jamais de spam.",
     "yes": "Oui, motive-moi !",
     "later": "Plus tard"
   }

@@ -37,8 +37,12 @@ export function DailyGoalRing({ current, target }: DailyGoalRingProps) {
   return (
     <View style={styles.root}>
       <View
+        // `accessible` is what actually collapses the SVG + inner Texts into
+        // one node; without it the progressbar role and label were inert.
+        accessible
         accessibilityLabel={t('dailyGoal.progressA11y', { current, target })}
         accessibilityRole="progressbar"
+        accessibilityValue={{ min: 0, max: target, now: current }}
         style={styles.ringWrap}
         testID="daily-goal-ring"
       >

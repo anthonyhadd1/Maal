@@ -1,21 +1,20 @@
-import { useRouter } from 'expo-router';
+import { useNavigation, useRouter } from 'expo-router';
 import { Brain, Crown } from 'lucide-react-native';
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useMeGame } from '@/api/queries/game';
-import { ClayButton } from '@/components/clay/ClayButton';
 import { ClayDialog } from '@/components/feedback/ClayDialog';
 import { ErrorState } from '@/components/feedback/ErrorState';
 import { Skeleton } from '@/components/feedback/Skeleton';
 import { useToast } from '@/components/feedback/Toast';
+import { ClayButton } from '@/components/clay/ClayButton';
 import { Screen } from '@/components/layout/Screen';
 import { FeedbackSheet } from '@/features/session/FeedbackSheet';
-import { QuestionRenderer } from '@/features/session/QuestionRenderer';
 import { SessionHeader } from '@/features/session/SessionHeader';
+import { SessionPager } from '@/features/session/SessionPager';
 import { useSessionEngine } from '@/features/session/useSessionEngine';
-import { shade, withAlpha } from '@/lib/color';
 import { useSessionStore } from '@/stores/sessionStore';
 import { colors, getSubjectAccent, radii, spacing, typography } from '@/theme/tokens';
 import { useSettingsStore } from '@/stores/settingsStore';
@@ -29,12 +28,18 @@ interface SessionScreenProps {
   practice?: boolean;
 }
 
-/** MODAL /session/:levelId (or /session/practice) — the question loop (hero screen §4b). */
+/**
+ * MODAL /session/:levelId (or /session/practice) — the question loop, a
+ * TikTok/Reels-style swipe-card pager: each question is a full-screen card,
+ * free navigation (swipe up/down at any time, not gated by answering the
+ * card in view — see useSessionEngine's header comment for why that's safe).
+ */
 export function SessionScreen({ levelId, challengeId, practice }: SessionScreenProps) {
   const { t } = useTranslation('session');
   const { t: tCommon } = useTranslation('common');
   const { t: tErrors } = useTranslation('errors');
   const router = useRouter();
+  const navigation = useNavigation();
   const toast = useToast();
   const game = useMeGame();
   const activeSlug = useSettingsStore((s) => s.activeSubjectSlug);
@@ -45,28 +50,59 @@ export function SessionScreen({ levelId, challengeId, practice }: SessionScreenP
     {
       onHeartsDepleted: () =>
         toast.show({ type: 'error', message: t('hearts.emptyMidSession') }),
-      onRequestError: (info) =>
-        toast.show({ type: 'error', message: info.detail ?? tErrors('server') }),
+      onRequestError: () => toast.show({ type: 'error', message: tErrors('server') }),
     },
     { challengeId: challengeId ?? null, practice: practice ?? false },
   );
 
-  const attemptId = useSessionStore((s) => s.attemptId);
   const legendary = useSessionStore((s) => s.legendary);
-  const [selected, setSelected] = useState<number[]>([]);
   const [quitVisible, setQuitVisible] = useState(false);
+  // Hardware back button (Android) and the browser back button both bypass
+  // the header's X entirely by default — neither is a `router.back()` call
+  // WE make, so without this, "quitting goes through the confirm dialog"
+  // (see session/_layout.tsx) only ever held for the one path a player is
+  // least likely to reach for. `gestureEnabled: false` on the stack only
+  // covers the iOS edge-swipe; this covers the rest.
+  const [leaveNow, setLeaveNow] = useState(false);
+  const pendingLeaveAction = useRef<unknown>(null);
+  const canLeaveFreely = leaveNow || engine.phase === 'error' || engine.phase === 'done';
 
-  // Fresh selection per question (and per replayed attempt).
-  useEffect(() => {
-    setSelected([]);
-  }, [engine.currentIndex, attemptId]);
+  useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        if (canLeaveFreely) return;
+        e.preventDefault();
+        pendingLeaveAction.current = e.data.action;
+        setQuitVisible(true);
+      }),
+    [navigation, canLeaveFreely],
+  );
 
-  // Completion → results (navigation stays out of the engine).
+  // Deferred a render behind `leaveNow` (rather than dispatched inline from
+  // confirmQuit) so the listener above has already re-subscribed with
+  // `canLeaveFreely: true` by the time this actually navigates — dispatching
+  // the preserved action synchronously would just re-trigger the same
+  // `beforeRemove` block with last render's (still-blocking) closure.
   useEffect(() => {
-    if (engine.phase === 'done') {
+    if (!leaveNow) return;
+    engine.abandon();
+    if (pendingLeaveAction.current) {
+      navigation.dispatch(pendingLeaveAction.current as never);
+    } else {
+      router.back();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [leaveNow]);
+
+  // Completion → results. Waits for the last card's feedback overlay to be
+  // dismissed first — the level is objectively "done" the instant every
+  // question is answered, but the player should still get to read that
+  // final verdict before being whisked to the results screen.
+  useEffect(() => {
+    if (engine.phase === 'done' && engine.justAnsweredId == null) {
       router.push('/session/results');
     }
-  }, [engine.phase, router]);
+  }, [engine.phase, engine.justAnsweredId, router]);
 
   // 402 premium on a deep-linked/resumed start → paywall.
   useEffect(() => {
@@ -89,28 +125,26 @@ export function SessionScreen({ levelId, challengeId, practice }: SessionScreenP
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [engine.phase, engine.startError, router]);
 
-  const question = engine.question;
-  const isMulti = question?.qtype === 'multi';
-
-  const onToggle = (choiceId: number) => {
-    if (engine.phase !== 'question' || !question) return;
-    if (isMulti) {
-      setSelected((prev) =>
-        prev.includes(choiceId) ? prev.filter((id) => id !== choiceId) : [...prev, choiceId],
-      );
-    } else {
-      setSelected([choiceId]);
-    }
-  };
-
   const confirmQuit = () => {
     setQuitVisible(false);
-    engine.abandon();
-    router.back();
+    setLeaveNow(true);
+  };
+
+  const stayInSession = () => {
+    setQuitVisible(false);
+    // Don't replay a stale blocked action next time the dialog reopens.
+    pendingLeaveAction.current = null;
   };
 
   const hearts = engine.heartsRemaining ?? game.data?.hearts ?? null;
   const heartsUnlimited = engine.heartsUnlimited || (game.data?.hearts_unlimited ?? false);
+
+  const justAnsweredQuestion =
+    engine.justAnsweredId != null
+      ? engine.questions.find((q) => q.id === engine.justAnsweredId)
+      : null;
+  const justAnsweredRecord =
+    engine.justAnsweredId != null ? engine.answers[engine.justAnsweredId] : null;
 
   if (engine.phase === 'error') {
     return (
@@ -138,7 +172,7 @@ export function SessionScreen({ levelId, challengeId, practice }: SessionScreenP
           accent={accent}
           answeredCount={engine.answeredCount}
           combo={engine.combo}
-          currentIndex={engine.currentIndex}
+          currentIndex={engine.viewedIndex}
           hearts={hearts}
           heartsUnlimited={heartsUnlimited}
           onQuit={() => setQuitVisible(true)}
@@ -157,42 +191,19 @@ export function SessionScreen({ levelId, challengeId, practice }: SessionScreenP
         ) : null}
       </View>
 
-      {engine.phase === 'loading' || !question ? (
+      {engine.phase === 'loading' || engine.questions.length === 0 ? (
         <SessionSkeleton />
       ) : (
-        <>
-          <ScrollView
-            contentContainerStyle={styles.questionContent}
-            showsVerticalScrollIndicator={false}
-          >
-            <View style={[styles.counterChip, { backgroundColor: withAlpha(accent, 0.12) }]}>
-              <Text style={[styles.counter, { color: shade(accent, -0.35) }]}>
-                {t('questionCounter', { n: engine.currentIndex + 1, total: engine.total })}
-              </Text>
-            </View>
-            <QuestionRenderer
-              accent={accent}
-              disabled={engine.phase !== 'question'}
-              onToggle={onToggle}
-              question={question}
-              revealed={engine.lastAnswer}
-              selected={selected}
-            />
-          </ScrollView>
-
-          <View style={styles.footer}>
-            <ClayButton
-              disabled={selected.length === 0 || engine.phase !== 'question'}
-              fullWidth
-              loading={engine.isSubmitting}
-              onPress={() => engine.submit(selected)}
-              size="l"
-              testID="session-check"
-              title={isMulti ? t('cta.validate') : tCommon('cta.check')}
-              variant="primary"
-            />
-          </View>
-        </>
+        <SessionPager
+          accent={accent}
+          answers={engine.answers}
+          initialIndex={engine.viewedIndex}
+          onShown={engine.markShown}
+          onSubmit={engine.submit}
+          onViewedIndexChange={engine.setViewedIndex}
+          questions={engine.questions}
+          submittingId={engine.submittingId}
+        />
       )}
 
       {engine.phase === 'completing' ? (
@@ -201,17 +212,17 @@ export function SessionScreen({ levelId, challengeId, practice }: SessionScreenP
         </View>
       ) : null}
 
-      {engine.phase === 'feedback' && engine.lastAnswer && question ? (
+      {justAnsweredQuestion && justAnsweredRecord ? (
         <FeedbackSheet
-          answer={engine.lastAnswer}
-          onContinue={engine.continueNext}
-          question={question}
+          answer={justAnsweredRecord}
+          onContinue={engine.dismissFeedback}
+          question={justAnsweredQuestion}
         />
       ) : null}
 
       <ClayDialog
         actions={[
-          { label: t('quit.stay'), onPress: () => setQuitVisible(false), variant: 'primary' },
+          { label: t('quit.stay'), onPress: stayInSession, variant: 'primary' },
           {
             label: t('quit.confirm'),
             onPress: confirmQuit,
@@ -220,7 +231,7 @@ export function SessionScreen({ levelId, challengeId, practice }: SessionScreenP
           },
         ]}
         message={t('quit.body')}
-        onRequestClose={() => setQuitVisible(false)}
+        onRequestClose={stayInSession}
         title={t('quit.title')}
         visible={quitVisible}
       />
@@ -256,7 +267,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.xpGold,
     borderRadius: radii.pill,
     paddingHorizontal: spacing.m,
-    paddingVertical: 3,
+    paddingVertical: spacing.xs,
     marginTop: spacing.xs,
   },
   legendaryBannerText: {
@@ -273,36 +284,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary[500],
     borderRadius: radii.pill,
     paddingHorizontal: spacing.m,
-    paddingVertical: 3,
+    paddingVertical: spacing.xs,
     marginTop: spacing.xs,
   },
   practiceBannerText: {
     ...typography.caption,
     color: colors.neutral[0],
     letterSpacing: 0.4,
-  },
-  counterChip: {
-    alignSelf: 'flex-start',
-    borderRadius: radii.pill,
-    paddingHorizontal: spacing.m,
-    paddingVertical: spacing.xs,
-    marginBottom: spacing.m,
-  },
-  counter: {
-    ...typography.caption,
-    fontFamily: typography.h2.fontFamily,
-    letterSpacing: 0.4,
-  },
-  questionContent: {
-    flexGrow: 1,
-    paddingHorizontal: spacing.l,
-    paddingTop: spacing.s,
-    paddingBottom: spacing.xxl,
-  },
-  footer: {
-    paddingHorizontal: spacing.l,
-    paddingBottom: spacing.l,
-    paddingTop: spacing.s,
   },
   errorFooter: {
     paddingBottom: spacing.l,

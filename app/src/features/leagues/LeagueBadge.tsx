@@ -66,8 +66,10 @@ export function LeagueBadge({ tier, promoteCount, demoteCount, weekEndsAt }: Lea
 
         <View style={styles.zoneCaptions}>
           <View style={styles.zoneCaption}>
-            <ChevronsUp color={colors.successDeep} size={14} strokeWidth={2.8} />
-            <Text style={[styles.zoneCaptionText, { color: colors.successDeep }]}>
+            {/* successEdge, not successDeep — successDeep only holds 3.3:1
+                against the pill's white backing, below the 4.5:1 minimum. */}
+            <ChevronsUp color={colors.successEdge} size={14} strokeWidth={2.8} />
+            <Text style={[styles.zoneCaptionText, { color: colors.successEdge }]}>
               {t('hero.promote', { count: promoteCount })}
             </Text>
           </View>
@@ -153,10 +155,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.s,
   },
+  // Own opaque backing (not just the translucent band behind it, matching
+  // countdownChip below) — successDeep/dangerDeep text measured as low as
+  // 2.22:1 directly on the band's alpha-tinted gradient, below the 4.5:1
+  // minimum.
   zoneCaption: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 3,
+    gap: spacing.xs,
+    backgroundColor: colors.neutral[0],
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.s,
+    paddingVertical: spacing.xs,
   },
   zoneCaptionText: {
     ...typography.caption,
@@ -175,7 +185,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral[0],
     borderRadius: radii.pill,
     paddingHorizontal: spacing.m,
-    paddingVertical: 6,
+    paddingVertical: spacing.xs,
     marginTop: spacing.xs,
     ...shadows.clayPressed,
   },

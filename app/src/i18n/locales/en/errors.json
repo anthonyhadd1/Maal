@@ -1,7 +1,7 @@
 {
   "generic": "Oops, something went wrong.",
   "network": "Check your connection and try again.",
-  "server": "Oops, our servers are coughing. Try again.",
+  "server": "Something went wrong on our end. Please try again in a moment.",
   "unauthorized": "Your session expired. Log back in.",
   "validation": "Some fields are invalid.",
   "retry": "Try again"

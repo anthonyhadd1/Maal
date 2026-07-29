@@ -147,6 +147,14 @@ export function MathText({
   return (
     <View style={[{ height: webViewHeight }, style]} testID="math-text-webview">
       <WebView
+        // WebView content lives outside the native accessibility tree — a
+        // screen reader hits this and gets nothing (KaTeX renders to canvas/
+        // custom DOM the platform a11y bridge can't read). Every math
+        // question would go silent for VoiceOver/TalkBack users otherwise;
+        // the raw source (still readable even with the `$...$` delimiters
+        // spoken literally) beats announcing nothing at all.
+        accessibilityLabel={text}
+        accessible
         androidLayerType="software"
         containerStyle={styles.transparent}
         javaScriptEnabled

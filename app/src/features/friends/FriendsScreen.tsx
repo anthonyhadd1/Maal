@@ -74,7 +74,6 @@ export function FriendsScreen() {
             <ClayIconButton
               accessibilityLabel={t('search.title')}
               onPress={() => router.push('/friends/search')}
-              size={40}
               testID="friends-search-btn"
             >
               <Search color={colors.neutral[700]} size={20} />
@@ -83,7 +82,6 @@ export function FriendsScreen() {
               <ClayIconButton
                 accessibilityLabel={t('challenges.title')}
                 onPress={() => router.push('/friends/challenges')}
-                size={40}
                 testID="friends-challenges-btn"
               >
                 <Swords color={colors.neutral[700]} size={20} />
@@ -123,16 +121,16 @@ export function FriendsScreen() {
                 <ClayIconButton
                   accessibilityLabel={t('requests.accept')}
                   backgroundColor={colors.success}
+                  disabled={acceptRequest.isPending || declineRequest.isPending}
                   onPress={() => acceptRequest.mutate(request.id, { onError })}
-                  size={38}
                   testID={`accept-${request.id}`}
                 >
                   <Check color={colors.neutral[0]} size={18} strokeWidth={3} />
                 </ClayIconButton>
                 <ClayIconButton
                   accessibilityLabel={t('requests.decline')}
+                  disabled={acceptRequest.isPending || declineRequest.isPending}
                   onPress={() => declineRequest.mutate(request.id, { onError })}
-                  size={38}
                   testID={`decline-${request.id}`}
                 >
                   <X color={colors.danger} size={18} strokeWidth={3} />
@@ -202,7 +200,6 @@ export function FriendsScreen() {
                   name: friend.display_name || friend.username,
                 })}
                 onPress={() => setActionsFor(friend)}
-                size={38}
                 testID={`friend-actions-${friend.user_id}`}
               >
                 <EllipsisVertical color={colors.neutral[500]} size={18} />
@@ -329,7 +326,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.danger,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 4,
+    paddingHorizontal: spacing.xs,
   },
   badgeText: {
     ...typography.caption,

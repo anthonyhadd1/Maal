@@ -27,7 +27,7 @@ export function Screen({
     <SafeAreaView edges={edges} style={[styles.root, style]}>
       {scroll ? (
         <ScrollView
-          contentContainerStyle={[padded && styles.padded, styles.grow, contentStyle]}
+          contentContainerStyle={[padded && styles.paddedScroll, styles.grow, contentStyle]}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
@@ -58,5 +58,16 @@ const styles = StyleSheet.create({
   padded: {
     paddingHorizontal: spacing.l,
     paddingTop: spacing.l,
+  },
+  // Scrollable content only: without this, a screen's last item lands flush
+  // against the physical bottom edge (default `edges` excludes 'bottom', so
+  // no safe-area inset applies either) — cramped everywhere, and on a pushed
+  // (non-tab) screen with a notched/gesture-bar device, the last row can sit
+  // right under the home indicator. Some screens patched this themselves
+  // (e.g. SettingsScreen's version caption); most didn't.
+  paddedScroll: {
+    paddingHorizontal: spacing.l,
+    paddingTop: spacing.l,
+    paddingBottom: spacing.xl,
   },
 });

@@ -3,6 +3,11 @@
     "validate": "Submit"
   },
   "questionCounter": "Question {{n}}/{{total}}",
+  "swipeHint": "Swipe up for the next question",
+  "reviewed": {
+    "correct": "Answered — correct",
+    "wrong": "Answered — incorrect"
+  },
   "feedback": {
     "correct": {
       "1": "Well done!",
@@ -32,7 +37,12 @@
   },
   "media": {
     "unmute": "Unmute",
-    "mute": "Mute"
+    "mute": "Mute",
+    "answerImage": "Answer choice image",
+    "passageImage": "Document image",
+    "explanationImage": "Explanation image",
+    "questionImage": "Question image",
+    "answerImageLettered": "Answer choice {{letter}} image"
   },
   "legendary": {
     "banner": "Legendary run — 9/10 minimum",
@@ -46,7 +56,7 @@
     "failed": "Not this time… run it back?",
     "xpEarned": "+{{xp}} XP",
     "accuracy": "Accuracy",
-    "maxCombo": "Best run",
+    "maxCombo": "Best combo",
     "time": "Time",
     "replay": "Replay",
     "xp": {
@@ -56,13 +66,20 @@
       "firstClear": "First clear",
       "streak": "Streak bonus",
       "legendary": "Legendary crown"
-    }
+    },
+    "skip": "Skip animation",
+    "skipHint": "Reveals the full result right away"
   },
   "hearts": {
     "lost": "You lost a heart",
     "earned": "+1 heart! Nice.",
     "emptyMidSession": "Out of hearts! Finish this level in peace.",
     "refillIn": "Next heart in {{time}}",
+    "countdown": {
+      "hoursMinutes": "{{hours}}h {{minutes}}min",
+      "minutes": "{{minutes}} min",
+      "seconds": "{{seconds}}s"
+    },
     "empty": {
       "title": "Out of hearts!",
       "body": "Get a heart back in {{time}}, earn one in Review, or go unlimited with Premium.",
@@ -96,5 +113,10 @@
   "a11y": {
     "quit": "Quit the level",
     "combo": "{{count}} correct answers in a row"
+  },
+  "nav": {
+    "previous": "Previous question",
+    "next": "Next question",
+    "lastAnswered": "Finish"
   }
 }

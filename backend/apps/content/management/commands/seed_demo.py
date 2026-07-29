@@ -6,11 +6,17 @@ d'exemple vivant du schéma canonique pour le propriétaire.
 
 Les phases 3/4 étendent ce fichier : seed_gamification() / seed_social().
 
-Contenu "Examens de Spécialité" (2026-07) : le contenu réel (backend/seed/specialite/*.json,
-12 fichiers) a remplacé l'ancien placeholder synthétique (backend/seed/demo_specialite.json,
-conservé comme référence historique — voir apps/content/management/commands/
-replace_specialite_content.py, SPECIALITE_FILES). Un fresh-DB seed_demo importe donc
-directement le contenu réel, comme la base dev déjà migrée.
+Le track "Examens de Spécialité" a été RETIRÉ (2026-07-28, décision produit) : l'app
+ne couvre plus que le concours d'entrée. Ses 12 matières, ses 810 questions synthétiques,
+ses seeds (backend/seed/specialite/) et sa commande d'import ont été supprimés.
+
+Contenu "Concours d'admission" (2026-07-04) : le contenu réel (backend/seed/concours/*.json,
+5 matières — 3267 vraies questions minées des annales USJ 2016-2026) remplace les
+192 questions synthétiques (générées par IA, encore présentes dans demo_content.json
+lui-même — fichier conservé tel quel comme référence historique du pipeline) pour ces
+5 matières — voir apps/content/management/commands/replace_concours_content.py,
+CONCOURS_FILES. Un fresh-DB seed_demo importe donc demo_content.json PUIS remplace
+immédiatement son contenu concours par le contenu réel.
 """
 import tempfile
 from pathlib import Path
@@ -21,8 +27,6 @@ from django.core.management.base import BaseCommand
 
 from apps.accounts.models import Faculty, Profile, User
 from apps.accounts.services import create_user_with_satellites
-from apps.content.management.commands.replace_specialite_content import SEED_DIR as SPECIALITE_SEED_DIR
-from apps.content.management.commands.replace_specialite_content import SPECIALITE_FILES
 from apps.content.models import ProgramSemester, ProgramYear, Track
 
 SEED_FILE = Path(settings.BASE_DIR) / "seed" / "demo_content.json"
@@ -33,9 +37,7 @@ SEED_FILE = Path(settings.BASE_DIR) / "seed" / "demo_content.json"
 # description reste à jour même si le Track existe déjà (ex. rows créées par la migration
 # 0003, qui ne posait pas encore de description).
 #
-# Descriptions : honnêtes par track. "concours" = contenu 100% synthétique/démo (aucune
-# annale réelle) -> pas de promesse d'authenticité. "specialite" = contenu réel fourni par
-# le propriétaire (backend/seed/specialite/*.json) -> peut mentionner les vraies annales.
+# Un seul track : l'app est dédiée au concours d'entrée.
 TRACKS = [
     # (slug, name, icon, color_hex, order, description)
     (
@@ -45,14 +47,6 @@ TRACKS = [
         "#7C3AED",
         1,
         "Des questions d'entraînement pour couvrir tout le programme du concours.",
-    ),
-    (
-        "specialite",
-        "Examens de Spécialité",
-        "stethoscope",
-        "#0EA5E9",
-        2,
-        "De vraies questions d'examens de spécialité, matière par matière.",
     ),
 ]
 
@@ -164,18 +158,10 @@ class Command(BaseCommand):
                 tmp,
                 stdout=self.stdout,
             )
-        # Contenu "Examens de Spécialité" — contenu réel (12 matières), même pipeline
-        # d'import, aucun média requis (pas d'image/vidéo dans ces fichiers ; --media-dir
-        # par défaut = dossier du fichier). Idempotent : import_exam upsert par
-        # external_id / skip par content_hash, donc un import répété ne double rien.
-        for slug, filename in SPECIALITE_FILES.items():
-            path = SPECIALITE_SEED_DIR / filename
-            if not path.is_file():
-                self.stdout.write(
-                    self.style.WARNING(f"[{slug}] fichier de contenu réel introuvable : {path} — ignoré.")
-                )
-                continue
-            call_command("import_exam", str(path), stdout=self.stdout)
+        # Concours d'admission — remplace immédiatement les 192 questions synthétiques
+        # tout juste importées ci-dessus par les 3267 vraies questions (annales USJ
+        # 2016-2026, 5 matières). Idempotent (delete + reimport par matière).
+        call_command("replace_concours_content", stdout=self.stdout)
 
     def seed_users(self):
         if settings.DEBUG and not User.objects.filter(username="admin").exists():

@@ -2,7 +2,6 @@
   "title": "Passe en Premium",
   "pitch": "Tous les niveaux. Cœurs illimités. Révision intelligente. Tout pour décrocher ta place.",
   "priceNote": "Moins cher qu'une heure de soutien scolaire.",
-  "cta": "Essayer 7 jours gratuits",
   "restore": "Restaurer mes achats",
   "perMonth": "{{price}} / mois",
   "perYear": "{{price}} / an",
@@ -22,7 +21,7 @@
     "save": "Économise {{pct}}%",
     "trial": "{{days}} jours gratuits"
   },
-  "legal": "Abonnement renouvelé automatiquement. Annule quand tu veux dans les réglages de ton store.",
+  "legal": "Abonnement renouvelé automatiquement. Annule quand tu veux dans les réglages de l'App Store ou de Google Play.",
   "comingSoon": {
     "title": "Bientôt disponible !",
     "body": "Les achats arrivent très vite."
@@ -33,5 +32,11 @@
     "until": "Actif jusqu'au {{date}}",
     "lifetime": "Actif sans limite",
     "source": "Abonnement : {{source}}"
+  },
+  "ctaTrial": "Essayer {{days}} jours gratuits",
+  "ctaNoTrial": "S'abonner — {{price}} / mois",
+  "ctaNote": {
+    "trial": "Puis {{price}} par an. Annule avant la fin des {{days}} jours et tu ne paies rien.",
+    "direct": "Facturé {{price}} chaque mois."
   }
 }

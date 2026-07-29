@@ -13,7 +13,11 @@ from .models import Level, ProgramSemester, ProgramYear, Subject, Track
 
 def level_is_free(level: Level) -> bool:
     """Un niveau est gratuit ssi son unité fait partie des N premières unités
-    de la matière (1-indexé) — règle réconciliée : gating par unité, jamais stocké."""
+    de la matière (1-indexé) — règle réconciliée : gating par unité, jamais stocké.
+    L'interrupteur de test UNLOCK_ALL_LEVELS ouvre aussi le portail premium :
+    un seul drapeau = tout jouable (voir base.py)."""
+    if settings.UNLOCK_ALL_LEVELS:
+        return True
     return level.unit.order <= settings.GAME["FREE_UNITS_PER_SUBJECT"]
 
 
@@ -157,7 +161,12 @@ def subject_map(user, subject: Subject) -> dict:
         for level in unit.levels.all():
             level.unit = unit  # populate FK cache — keeps level_is_free() query-free
             row = progress.get(level.id)
-            status = row["status"] if row else ("unlocked" if level.id == first_level_id else "locked")
+            if row:
+                status = row["status"]
+            elif settings.UNLOCK_ALL_LEVELS or level.id == first_level_id:
+                status = "unlocked"
+            else:
+                status = "locked"
             levels_payload.append(
                 {
                     "id": level.id,

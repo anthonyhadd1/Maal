@@ -52,5 +52,23 @@
     "abandon": "Abandon",
     "abandonRestart": "Abandon and restart",
     "cancel": "Cancel"
+  },
+  "chapters": {
+    "title": "Syllabus",
+    "close": "Close",
+    "overall": "{{done}} of {{total}} chapters completed",
+    "overallA11y": "Overall progress: {{done}} of {{total}} chapters completed",
+    "progress": "{{done}}/{{total}} levels",
+    "cardA11y": "Chapter {{index}}, {{title}}, {{done}} of {{total}} levels, {{status}}",
+    "state": {
+      "completed": "Completed",
+      "current": "In progress",
+      "locked": "Locked"
+    },
+    "hint": "Open the syllabus and jump to any chapter"
+  },
+  "chapterBar": {
+    "ordinal": "Chapter {{index}}",
+    "a11y": "Chapter {{index}} of {{total}}: {{title}}, {{done}} of {{levels}} levels completed"
   }
 }

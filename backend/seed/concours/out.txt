@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "<string>", line 15, in <module>
+    print(qs[0])
+    ~~~~~^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 182-185: character maps to <undefined>
+7
+['order', 'title_fr', 'questions']
+10
+['external_id', 'type', 'language', 'difficulty', 'exam_year', 'exam_session', 'passage', 'text', 'image', 'choices', 'correct', 'explanation', 'explanation_media', 'tags']

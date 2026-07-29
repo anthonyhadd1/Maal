@@ -12,7 +12,13 @@ import type { MapLevel, MapUnit } from '@/api/types';
  */
 
 export const ROW_HEIGHT = 120;
-export const UNIT_HEADER_HEIGHT = 116;
+/**
+ * Chapter banner height. Was 116 — with the map header and the pinned chapter
+ * bar above it, a small phone had room for barely two level nodes. The banner
+ * only has to carry "CHAPITRE N", a title and an n/m pill; 78 does that and
+ * gives ~38pt of the climb back on every chapter boundary.
+ */
+export const UNIT_HEADER_HEIGHT = 78;
 /** Node x-offset wave: centerX + amplitude * sin(globalIndex * WAVE_STEP). */
 export const WAVE_STEP = 0.9;
 /** Amplitude as a fraction of the usable width. */
@@ -177,20 +183,67 @@ export function computeChapterProgress(rows: MapRow[]): ChapterProgress | null {
   };
 }
 
+export interface ChapterInView {
+  /** 0-based position of the chapter in the subject. */
+  index: number;
+  title: string;
+  done: number;
+  levels: number;
+  unitId: number;
+}
+
+/**
+ * Which chapter the rows currently on screen belong to.
+ *
+ * Takes the SMALLEST unitIndex among the visible rows — in the reversed
+ * (bottom-to-top) render order a lower unitIndex sits further down the screen,
+ * so when a chapter boundary is straddled this reports the chapter you are
+ * climbing out of rather than flickering to the next one the instant a single
+ * pixel of its banner appears. Returns null when nothing is visible.
+ */
+export function chapterInView(rows: MapRow[], visibleIndices: number[]): ChapterInView | null {
+  let best: MapRow | null = null;
+  for (const i of visibleIndices) {
+    const row = rows[i];
+    if (!row) continue;
+    if (best === null || row.unitIndex < best.unitIndex) best = row;
+  }
+  if (!best) return null;
+
+  const unit = best.unit;
+  const levels = unit.levels.length;
+  const done = unit.levels.filter((l) => l.status === 'completed').length;
+  return { index: best.unitIndex, title: unit.title, done, levels, unitId: unit.id };
+}
+
 export function useMapLayout(units: MapUnit[] | undefined, screenWidth: number): MapLayout {
   return useMemo(() => {
+    // `rows` stays in natural PROGRESSION order (level 1 first) — globalIndex,
+    // prevGlobalIndex, chapterProgress etc. are all derived from it and stay
+    // orientation-independent. Only the RENDER order is flipped: the level-1
+    // row is reversed to the end of the array so it lands at the BOTTOM of
+    // the (top-to-bottom) FlatList, and later levels climb upward above it —
+    // a "climb the mountain" map instead of a top-down list. MapConnector
+    // mirrors its geometry to match (see MapConnector.tsx).
     const rows = buildMapRows(units ?? []);
-    const offsets = buildRowOffsets(rows);
+    const chapterProgress = computeChapterProgress(rows);
+    const naturalCurrentIndex = findCurrentRowIndex(rows);
+
+    const displayRows = [...rows].reverse();
+    const displayOffsets = buildRowOffsets(displayRows);
+    const displayCurrentIndex =
+      naturalCurrentIndex < 0 ? -1 : displayRows.length - 1 - naturalCurrentIndex;
+
     return {
-      rows,
-      currentRowIndex: findCurrentRowIndex(rows),
+      rows: displayRows,
+      currentRowIndex: displayCurrentIndex,
       getItemLayout: (_data, index) => ({
-        length: rows[index] ? rowHeight(rows[index]) : ROW_HEIGHT,
-        offset: offsets[index] ?? 0,
+        length: displayRows[index] ? rowHeight(displayRows[index]) : ROW_HEIGHT,
+        offset: displayOffsets[index] ?? 0,
         index,
       }),
       xFor: (globalIndex: number) => nodeCenterX(globalIndex, screenWidth),
-      chapterProgress: computeChapterProgress(rows),
+      chapterProgress,
     };
   }, [units, screenWidth]);
 }

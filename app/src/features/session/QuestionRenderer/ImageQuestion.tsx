@@ -1,4 +1,4 @@
-import { X } from 'lucide-react-native';
+import { Maximize2, X } from 'lucide-react-native';
 import { useState } from 'react';
 import { Image, Modal, Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -9,6 +9,7 @@ import { ClayIconButton } from '@/components/clay/ClayIconButton';
 import { useEffectiveScreenWidth } from '@/components/layout/WebFrame';
 import type { RendererProps } from '@/features/session/QuestionRenderer/types';
 import { OptionsByType } from '@/features/session/QuestionRenderer/optionsByType';
+import { withAlpha } from '@/lib/color';
 import { backdropDark, colors, radii, spacing } from '@/theme/tokens';
 
 /**
@@ -29,7 +30,18 @@ export function ImageQuestion(props: RendererProps) {
           onPress={() => setZoomOpen(true)}
           testID="question-image"
         >
-          <Image resizeMode="cover" source={{ uri: imageUrl }} style={styles.image} />
+          <Image
+            accessibilityLabel={t('media.questionImage')}
+            resizeMode="contain"
+            source={{ uri: imageUrl }}
+            style={styles.image}
+            testID="question-figure"
+          />
+          {/* Zoom affordance — the figure is shown whole, but circuit labels
+              and axis values still reward a closer look. */}
+          <View pointerEvents="none" style={styles.zoomHint}>
+            <Maximize2 color={colors.neutral[0]} size={14} strokeWidth={2.4} />
+          </View>
         </Pressable>
       ) : null}
 
@@ -42,7 +54,8 @@ export function ImageQuestion(props: RendererProps) {
   );
 }
 
-function ImageZoomModal({
+/** Fullscreen pinch-zoom viewer — shared with PassageQuestion's embedded image. */
+export function ImageZoomModal({
   uri,
   visible,
   onClose,
@@ -82,6 +95,7 @@ function ImageZoomModal({
         <GestureDetector gesture={Gesture.Simultaneous(pinch, doubleTap)}>
           <Animated.View style={[styles.zoomStage, animatedStyle]}>
             <Image
+              accessibilityLabel={t('media.questionImage')}
               resizeMode="contain"
               source={{ uri }}
               style={{ width: width - spacing.l * 2, height: height * 0.7 }}
@@ -102,11 +116,28 @@ const styles = StyleSheet.create({
   root: {
     gap: spacing.l,
   },
+  /**
+   * `contain` on a white plate, not a 16/10 `cover` crop: these are real exam
+   * figures (circuit schematics, oscilloscope traces, labelled biology
+   * diagrams) where a cropped edge can hide the very terminal or label the
+   * question asks about. 4/3 fits typical exam figures with little letterbox.
+   */
   image: {
     width: '100%',
-    aspectRatio: 16 / 10,
+    aspectRatio: 4 / 3,
     borderRadius: radii.m,
-    backgroundColor: colors.neutral[100],
+    backgroundColor: colors.neutral[0],
+  },
+  zoomHint: {
+    position: 'absolute',
+    bottom: spacing.s,
+    right: spacing.s,
+    width: 26,
+    height: 26,
+    borderRadius: radii.pill,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: withAlpha(colors.neutral[900], 0.55),
   },
   zoomBackdrop: {
     flex: 1,

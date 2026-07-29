@@ -3,7 +3,6 @@ import { StyleSheet, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { ClayDialog } from '@/components/feedback/ClayDialog';
-import { formatDurationMs } from '@/lib/format';
 import { colors, typography } from '@/theme/tokens';
 
 interface HeartsModalProps {
@@ -52,8 +51,15 @@ export function HeartsModal({
   );
 }
 
-/** Ticks once per second while visible; null when no target. */
+/**
+ * Ticks once per second while visible; null when no target. Builds the
+ * string through i18n (matching LeagueBadge's useWeekCountdown) rather than
+ * the old `formatDurationMs` util, which hardcoded French "h"/"min"/"s"
+ * regardless of the active locale — an English-locale player would have
+ * seen "3 h 24 min" in this exact countdown.
+ */
 function useCountdown(targetIso: string | null, active: boolean): string | null {
+  const { t } = useTranslation('session');
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
@@ -66,7 +72,15 @@ function useCountdown(targetIso: string | null, active: boolean): string | null 
   if (!targetIso) return null;
   const remaining = new Date(targetIso).getTime() - now;
   if (!Number.isFinite(remaining)) return null;
-  return formatDurationMs(remaining);
+
+  const totalSeconds = Math.max(0, Math.ceil(remaining / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  if (hours > 0) {
+    return t('hearts.countdown.hoursMinutes', { hours, minutes: String(minutes).padStart(2, '0') });
+  }
+  if (minutes > 0) return t('hearts.countdown.minutes', { minutes });
+  return t('hearts.countdown.seconds', { seconds: totalSeconds });
 }
 
 const styles = StyleSheet.create({

@@ -1,4 +1,4 @@
-import { ChevronDown, LayoutGrid } from 'lucide-react-native';
+import { ChevronDown } from 'lucide-react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -8,9 +8,7 @@ import { HeartCounter } from '@/components/game/HeartCounter';
 import { StreakFlame } from '@/components/game/StreakFlame';
 import { XPBadge } from '@/components/game/XPBadge';
 import { PressableScale } from '@/components/layout/PressableScale';
-import type { ChapterProgress } from '@/features/map/useMapLayout';
-import { shade } from '@/lib/color';
-import { getLucideIcon } from '@/lib/lucide';
+import { accentFill, shade } from '@/lib/color';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
 interface MapHeaderProps {
@@ -18,95 +16,54 @@ interface MapHeaderProps {
   accent: string;
   game: MeGame | undefined;
   onSwitchSubject: () => void;
-  /** Track name/icon + tap target — opens the track switcher (§4a bis). */
-  trackIcon?: string;
-  trackName?: string;
-  onSwitchTrack?: () => void;
-  /** "Chapitre N/M" course-progress summary (§4 glue) — omitted while the map is empty. */
-  chapterProgress?: ChapterProgress | null;
 }
 
 /**
- * Floating clay card above the map list: a labeled track chip ("Concours
- * d'entrée ⌄") on its own row so the second-category feature is impossible
- * to miss, then the existing subject pill + hearts/streak/XP row below.
+ * Single-row chrome above the map: subject pill + hearts / streak / XP.
+ *
+ * Deliberately ONE row. It used to stack a "Chapitre 1/10" chip under the
+ * subject pill, which cost a whole row and — once the pinned chapter bar
+ * landed below it — meant the screen carried TWO different "Chapitre …"
+ * readouts saying different numbers (the chip counts the chapter you have
+ * REACHED, the bar names the one you are LOOKING at). Confusing, and on a
+ * small phone the two of them plus the chapter banner left barely two level
+ * nodes visible. The bar won: it answers the more useful question and doubles
+ * as the entry point to the full programme.
  */
-export function MapHeader({
-  subjectName,
-  accent,
-  game,
-  onSwitchSubject,
-  trackIcon,
-  trackName,
-  onSwitchTrack,
-  chapterProgress,
-}: MapHeaderProps) {
+export function MapHeader({ subjectName, accent, game, onSwitchSubject }: MapHeaderProps) {
   const { t } = useTranslation('map');
-  const TrackIcon = getLucideIcon(trackIcon, LayoutGrid);
 
   return (
     <View style={styles.wrap}>
-      {onSwitchTrack && trackName ? (
-        <PressableScale
-          accessibilityLabel={t('trackSwitcher.title')}
-          onPress={onSwitchTrack}
-          pressedTranslateY={1}
-          style={styles.trackRow}
-          testID="map-track-switcher"
-        >
-          <View style={styles.trackIconWrap}>
-            <TrackIcon color={colors.primary[600]} size={13} strokeWidth={2.6} />
-          </View>
-          <Text numberOfLines={1} style={styles.trackName}>
-            {trackName}
-          </Text>
-          <ChevronDown color={colors.neutral[500]} size={14} strokeWidth={3} />
-        </PressableScale>
-      ) : null}
-
       <ClaySurface radius="l" shadow="floating" style={styles.card}>
-        <View style={styles.subjectCol}>
-          <View
-            style={[
-              styles.subjectPill,
-              { backgroundColor: accent, borderBottomColor: shade(accent, -0.28) },
-            ]}
-          >
-            <PressableScale
-              accessibilityLabel={t('switcher.title')}
-              clay={false}
-              onPress={onSwitchSubject}
-              pressedTranslateY={2}
-              style={styles.subjectTap}
-              testID="map-subject-switcher"
-            >
-              <Text numberOfLines={1} style={styles.subjectName}>
-                {subjectName}
-              </Text>
-              <ChevronDown color={colors.neutral[0]} size={16} strokeWidth={3} />
-            </PressableScale>
-          </View>
-          {chapterProgress && chapterProgress.total > 1 ? (
-            <Text numberOfLines={1} style={styles.chapterText} testID="map-chapter-progress">
-              {chapterProgress.subjectCompleted
-                ? t('chapterProgress.done', { total: chapterProgress.total })
-                : t('chapterProgress.inProgress', {
-                    current: chapterProgress.current,
-                    total: chapterProgress.total,
-                  })}
-            </Text>
-          ) : null}
-        </View>
+        {/* The pill IS the button — a decorative wrapper with a smaller
+            Pressable inside left its padded edges dead. */}
+        <PressableScale
+          accessibilityLabel={t('switcher.title')}
+          clay={false}
+          onPress={onSwitchSubject}
+          pressedTranslateY={2}
+          style={[
+            styles.subjectPill,
+            { backgroundColor: accentFill(accent), borderBottomColor: shade(accent, -0.6) },
+          ]}
+          testID="map-subject-switcher"
+        >
+          <Text numberOfLines={1} style={styles.subjectName}>
+            {subjectName}
+          </Text>
+          <ChevronDown color={colors.neutral[0]} size={15} strokeWidth={3} />
+        </PressableScale>
 
         <View style={styles.stats}>
           <HeartCounter
             compact
             count={game?.hearts ?? 0}
-            size={20}
+            size={19}
             unlimited={game?.hearts_unlimited ?? false}
           />
           <View style={styles.divider} />
-          <StreakFlame days={game?.streak_current ?? 0} size={20} />
+          <StreakFlame days={game?.streak_current ?? 0} size={19} />
           <View style={styles.divider} />
           <XPBadge xp={game?.xp_total ?? 0} />
         </View>
@@ -119,70 +76,33 @@ const styles = StyleSheet.create({
   wrap: {
     paddingHorizontal: spacing.m,
     paddingTop: spacing.xs,
-    paddingBottom: spacing.s,
+    paddingBottom: spacing.xs,
     zIndex: 10,
   },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: spacing.m,
+    gap: spacing.s,
     paddingHorizontal: spacing.m,
-    paddingVertical: spacing.s,
-  },
-  subjectCol: {
-    flexShrink: 1,
-    gap: 4,
+    paddingVertical: spacing.xs,
   },
   subjectPill: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: radii.pill,
-    paddingLeft: spacing.m,
-    paddingRight: spacing.l,
-    minHeight: 44,
-    maxWidth: 176,
-    borderBottomWidth: 3,
-  },
-  chapterText: {
-    ...typography.caption,
-    fontFamily: typography.smallMedium.fontFamily,
-    color: colors.neutral[500],
-    paddingLeft: spacing.xs,
-  },
-  trackRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    gap: 6,
-    paddingHorizontal: spacing.s,
-    paddingVertical: 6,
-    marginBottom: spacing.xs,
-    minHeight: 32,
-    borderRadius: radii.pill,
-    backgroundColor: colors.neutral[0],
-    borderWidth: 1,
-    borderColor: colors.primary[200],
-  },
-  trackIconWrap: {
-    width: 20,
-    height: 20,
-    borderRadius: radii.pill,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.primary[50],
-  },
-  trackName: {
-    ...typography.caption,
-    fontFamily: typography.smallMedium.fontFamily,
-    color: colors.primary[700],
-  },
-  subjectTap: {
-    flexDirection: 'row',
-    alignItems: 'center',
     gap: spacing.xs,
+    borderRadius: radii.pill,
+    paddingHorizontal: spacing.m,
+    // 40 rather than 44: the pill sits inside a card with its own padding, so
+    // the effective touch target is comfortably past the 44pt minimum while
+    // the chrome gives ~30pt of map back on a small screen.
+    minHeight: 40,
+    maxWidth: 168,
+    borderBottomWidth: 3,
+    // Never let the subject name — the most identifying label here — collapse
+    // before the fixed-width XP badge does.
     flexShrink: 1,
-    paddingVertical: spacing.s,
+    minWidth: 108,
   },
   subjectName: {
     ...typography.smallMedium,
@@ -193,12 +113,13 @@ const styles = StyleSheet.create({
   stats: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.s,
-    flexShrink: 0,
+    gap: spacing.xs,
+    flexShrink: 1,
+    minWidth: 0,
   },
   divider: {
     width: 1,
-    height: 18,
+    height: 16,
     backgroundColor: colors.neutral[200],
   },
 });

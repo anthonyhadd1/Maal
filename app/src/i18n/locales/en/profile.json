@@ -22,7 +22,9 @@
     "stats": "My statistics",
     "achievements": "Trophies",
     "friends": "Friends",
-    "settings": "Settings"
+    "settings": "Settings",
+    "friendsPending_one": "{{count}} pending request",
+    "friendsPending_other": "{{count}} pending requests"
   },
   "statsScreen": {
     "title": "My statistics",
@@ -36,7 +38,9 @@
       "body": "Accuracy per subject, day-by-day progress, trends — it's all in Premium.",
       "cta": "Discover Premium"
     },
-    "today": "Today"
+    "today": "Today",
+    "chartA11yLabel": "Chart: XP per day over the last 14 days. {{list}}",
+    "chartA11yEntry": "{{day}}: {{xp}} XP"
   },
   "achievementsScreen": {
     "title": "Trophies",
@@ -49,26 +53,86 @@
     "expertTitle": "Expert in {{subject}}",
     "expertDescription": "Earn 3 stars on every level of a {{subject}} unit.",
     "catalog": {
-      "premiere-victoire": { "title": "First win", "description": "Finish your first level with at least one star." },
-      "sans-faute": { "title": "Flawless", "description": "Ace a level 10/10." },
-      "sur-ta-lancee": { "title": "On a roll", "description": "Reach a 7-day streak. A free Streak Freeze!" },
-      "inarretable": { "title": "Unstoppable", "description": "Reach a 30-day streak." },
-      "centurion": { "title": "Centurion", "description": "Reach a 100-day streak." },
-      "une-annee-de-feu": { "title": "A year on fire", "description": "Reach a 365-day streak." },
-      "semaine-parfaite": { "title": "Perfect week", "description": "Hit your daily goal every day, Monday through Sunday." },
-      "noctambule": { "title": "Night owl", "description": "Finish a level between midnight and 5 AM." },
-      "leve-tot": { "title": "Early bird", "description": "Finish a level between 5 and 8 AM." },
-      "marathonien": { "title": "Marathoner", "description": "Finish 10 levels in the same day." },
-      "touche-a-tout": { "title": "Jack of all trades", "description": "Finish at least one level in every subject." },
-      "grimpeur": { "title": "Climber", "description": "Get your first league promotion." },
-      "podium": { "title": "Podium", "description": "Finish a league week in the top 3." },
-      "cedre-eternel": { "title": "Eternal Cedar", "description": "Finish first in the Cedar League." },
-      "defi-releve": { "title": "Challenge accepted", "description": "Win your first challenge against a friend." },
-      "rival-redoutable": { "title": "Formidable rival", "description": "Win 10 challenges." },
-      "papillon-social": { "title": "Social butterfly", "description": "Add 5 friends." },
-      "perfectionniste": { "title": "Perfectionist", "description": "Earn 10 legendary crowns." },
-      "memoire-d-elephant": { "title": "Elephant memory", "description": "Graduate 100 questions in Review." },
-      "collectionneur-d-or": { "title": "Gold collector", "description": "Earn 3 stars across an entire subject." }
+      "premiere-victoire": {
+        "title": "First win",
+        "description": "Finish your first level with at least one star."
+      },
+      "sans-faute": {
+        "title": "Flawless",
+        "description": "Ace a level 10/10."
+      },
+      "sur-ta-lancee": {
+        "title": "On a roll",
+        "description": "Reach a 7-day streak. A free Streak Freeze!"
+      },
+      "inarretable": {
+        "title": "Unstoppable",
+        "description": "Reach a 30-day streak."
+      },
+      "centurion": {
+        "title": "Centurion",
+        "description": "Reach a 100-day streak."
+      },
+      "une-annee-de-feu": {
+        "title": "A year on fire",
+        "description": "Reach a 365-day streak."
+      },
+      "semaine-parfaite": {
+        "title": "Perfect week",
+        "description": "Hit your daily goal every day, Monday through Sunday."
+      },
+      "noctambule": {
+        "title": "Night owl",
+        "description": "Finish a level between midnight and 5 AM."
+      },
+      "leve-tot": {
+        "title": "Early bird",
+        "description": "Finish a level between 5 and 8 AM."
+      },
+      "marathonien": {
+        "title": "Marathoner",
+        "description": "Finish 10 levels in the same day."
+      },
+      "touche-a-tout": {
+        "title": "Jack of all trades",
+        "description": "Finish at least one level in every subject."
+      },
+      "grimpeur": {
+        "title": "Climber",
+        "description": "Get your first league promotion."
+      },
+      "podium": {
+        "title": "Podium",
+        "description": "Finish a league week in the top 3."
+      },
+      "cedre-eternel": {
+        "title": "Eternal Cedar",
+        "description": "Finish first in the Cedar League."
+      },
+      "defi-releve": {
+        "title": "Challenge accepted",
+        "description": "Win your first challenge against a friend."
+      },
+      "rival-redoutable": {
+        "title": "Formidable rival",
+        "description": "Win 10 challenges."
+      },
+      "papillon-social": {
+        "title": "Social butterfly",
+        "description": "Add 5 friends."
+      },
+      "perfectionniste": {
+        "title": "Perfectionist",
+        "description": "Earn 10 legendary crowns."
+      },
+      "memoire-d-elephant": {
+        "title": "Elephant memory",
+        "description": "Graduate 100 questions in Review."
+      },
+      "collectionneur-d-or": {
+        "title": "Gold collector",
+        "description": "Earn 3 stars across an entire subject."
+      }
     }
   },
   "email": "Email",
@@ -83,7 +147,8 @@
       "account": "Account",
       "preferences": "Preferences",
       "league": "League",
-      "danger": "Danger zone"
+      "danger": "Danger zone",
+      "legal": "Legal"
     },
     "displayName": "Display name",
     "avatar": "Avatar",
@@ -114,6 +179,9 @@
       "final": "Delete permanently"
     },
     "cancel": "Cancel",
-    "version": "Version {{version}}"
+    "version": "Version {{version}}",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "disclaimer": "ACE is an independent revision tool, not affiliated with Université Saint-Joseph."
   }
 }

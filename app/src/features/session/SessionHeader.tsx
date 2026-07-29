@@ -43,7 +43,6 @@ export function SessionHeader({
           accessibilityLabel={t('a11y.quit')}
           backgroundColor={colors.neutral[100]}
           onPress={onQuit}
-          size={40}
           testID="session-quit"
         >
           <X color={colors.neutral[500]} size={22} strokeWidth={2.6} />

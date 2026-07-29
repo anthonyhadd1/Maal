@@ -75,8 +75,7 @@ export function RadialRays({
 
   return (
     <Animated.View
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants"
+      aria-hidden
       pointerEvents="none"
       style={[styles.base, { width: size, height: size }, style, spinStyle]}
     >

@@ -194,6 +194,23 @@ function ChallengeCard({
   };
   const expiry = chip === 'pending' ? expiresIn() : null;
 
+  // The tappable card below folds subject, opponent, status chip and score
+  // into one visual — an explicit accessibilityLabel on the wrapper replaces
+  // all of that with just whatever string it's given, so build the full
+  // summary here rather than leaving screen-reader users with only the
+  // level title (which was the previous, incomplete label).
+  const scorePart = completed
+    ? `${t('challenges.you')} ${oriented.myScore ?? 0}, ${otherName} ${oriented.otherScore ?? 0}`
+    : null;
+  const detailA11yLabel = [
+    challenge.level.title,
+    challenge.level.subject.name,
+    t(`challenges.status.${chip}`),
+    scorePart,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
   const card = (
     <View style={styles.card} testID={`challenge-${challenge.id}`}>
       <View style={[styles.accentBar, { backgroundColor: accent }]} />
@@ -282,7 +299,7 @@ function ChallengeCard({
   if (action === 'detail') {
     return (
       <PressableScale
-        accessibilityLabel={challenge.level.title}
+        accessibilityLabel={detailA11yLabel}
         clay={false}
         onPress={onOpenDetail}
         pressedTranslateY={2}
@@ -393,11 +410,25 @@ function ChallengeDetailDialog({
   );
 }
 
+/** The mark IS the data point (per-question correct/wrong) — a screen
+ * reader hitting an unlabeled icon here would get nothing, in a row whose
+ * entire purpose is reporting that result. */
 function CompareMark({ correct }: { correct: boolean }) {
+  const { t } = useTranslation('friends');
   return correct ? (
-    <Check color={colors.success} size={18} strokeWidth={3} />
+    <Check
+      accessibilityLabel={t('challenges.detail.markCorrect')}
+      color={colors.success}
+      size={18}
+      strokeWidth={3}
+    />
   ) : (
-    <X color={colors.danger} size={18} strokeWidth={3} />
+    <X
+      accessibilityLabel={t('challenges.detail.markWrong')}
+      color={colors.danger}
+      size={18}
+      strokeWidth={3}
+    />
   );
 }
 
@@ -436,7 +467,7 @@ const styles = StyleSheet.create({
   },
   cardTitleWrap: {
     flex: 1,
-    gap: 1,
+    gap: spacing.xs,
   },
   levelTitle: {
     ...typography.bodyMedium,
@@ -482,7 +513,7 @@ const styles = StyleSheet.create({
     borderRadius: radii.pill,
     borderWidth: 2,
     borderColor: colors.primary[400],
-    padding: 2,
+    padding: spacing.xs,
     backgroundColor: colors.neutral[0],
   },
   vsScore: {
@@ -495,7 +526,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral[100],
     borderRadius: radii.pill,
     paddingHorizontal: spacing.m,
-    paddingVertical: 3,
+    paddingVertical: spacing.xs,
   },
   vsLabel: {
     ...typography.caption,

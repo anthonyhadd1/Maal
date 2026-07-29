@@ -1,6 +1,6 @@
-import { Check, Square, SquareCheckBig, X } from 'lucide-react-native';
+import { Check, Maximize2, Square, SquareCheckBig, X } from 'lucide-react-native';
 import { useEffect, useRef } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -8,6 +8,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import { useTranslation } from 'react-i18next';
 
 import { MathText } from '@/components/content/MathText';
 import { PressableScale } from '@/components/layout/PressableScale';
@@ -28,6 +29,15 @@ export interface AnswerOptionProps {
   multi?: boolean;
   /** Big centered variant (Vrai/Faux side-by-side buttons). */
   center?: boolean;
+  /**
+   * The image IS the answer (real exam graph/diagram choices), not a thumbnail
+   * beside a label: render it large, uncropped, on white. A 48px cover-cropped
+   * thumbnail makes four candidate curves indistinguishable — the student
+   * literally cannot answer the question.
+   */
+  imagePrimary?: boolean;
+  /** Open the fullscreen zoom viewer for this choice's figure. */
+  onZoom?: () => void;
   disabled?: boolean;
   onPress: () => void;
   testID?: string;
@@ -59,9 +69,11 @@ function appearance(state: RevealState, accent: string): Appearance {
       };
     case 'correct':
       return {
-        backgroundColor: colors.success,
-        borderColor: colors.successDeep,
-        edgeColor: colors.successEdge,
+        // White on colors.success measured 2.28:1. successEdge carries the
+        // same "this is right" green at 5.02:1.
+        backgroundColor: colors.successEdge,
+        borderColor: colors.successEdge,
+        edgeColor: shade(colors.successEdge, -0.25),
         textColor: colors.neutral[0],
         opacity: 1,
         badgeBg: 'rgba(255, 255, 255, 0.28)',
@@ -69,7 +81,9 @@ function appearance(state: RevealState, accent: string): Appearance {
       };
     case 'wrong':
       return {
-        backgroundColor: colors.heartsRed,
+        // heartsRed is the hearts-economy token and measured 3.76:1 under
+        // white; dangerDeep is the semantic one and clears AA at 4.83:1.
+        backgroundColor: colors.dangerDeep,
         borderColor: colors.dangerDeep,
         edgeColor: colors.dangerEdge,
         textColor: colors.neutral[0],
@@ -82,7 +96,7 @@ function appearance(state: RevealState, accent: string): Appearance {
         backgroundColor: colors.neutral[0],
         borderColor: colors.success,
         edgeColor: colors.successDeep,
-        textColor: colors.successDeep,
+        textColor: colors.successEdge,
         opacity: 1,
         badgeBg: withAlpha(colors.success, 0.16),
         badgeText: colors.successEdge,
@@ -93,7 +107,11 @@ function appearance(state: RevealState, accent: string): Appearance {
         borderColor: colors.neutral[200],
         edgeColor: colors.neutral[300],
         textColor: colors.neutral[500],
-        opacity: 0.55,
+        // Was 0.55, which multiplied down onto the text and left the label at
+        // 2.36:1 — a de-emphasised option must still be readable (the student
+        // is comparing it against the right answer). neutral[500] alone
+        // already reads as secondary at 6.05:1.
+        opacity: 1,
         badgeBg: colors.neutral[100],
         badgeText: colors.neutral[500],
       };
@@ -126,10 +144,13 @@ export function AnswerOption({
   index,
   multi = false,
   center = false,
+  imagePrimary = false,
+  onZoom,
   disabled = false,
   onPress,
   testID,
 }: AnswerOptionProps) {
+  const { t } = useTranslation('session');
   const reduceMotion = useReducedMotionPref();
   const shakeX = useSharedValue(0);
   const popScale = useSharedValue(1);
@@ -172,6 +193,91 @@ export function AnswerOption({
   const showCross = state === 'wrong';
   const iconOnDark = state === 'correct' || state === 'wrong';
   const letter = !multi && !center && index != null ? LETTERS[index] : null;
+
+  // --- image-as-answer variant (real exam graph/diagram choices) -----------
+  // The figure is the content: it sits on its own white surface at full width,
+  // uncropped (`contain`), with the letter badge and verdict icon kept OUTSIDE
+  // the image area so they never cover part of the curve being judged.
+  if (imagePrimary && imageUrl) {
+    return (
+      <Animated.View style={animatedStyle}>
+        {/* The zoom control is a SIBLING of the card, not a child: nesting one
+            pressable inside another produces invalid nested <button>s on web
+            and swallows the inner tap on some platforms. */}
+        <View>
+        <PressableScale
+          accessibilityLabel={
+            letter != null ? t('media.answerImageLettered', { letter }) : t('media.answerImage')
+          }
+          accessibilityState={{ disabled: disabled || revealed, selected: state === 'selected' }}
+          disabled={disabled || revealed}
+          haptic={false}
+          onPress={() => {
+            selection();
+            onPress();
+          }}
+          pressedTranslateY={2}
+          style={[
+            styles.imageCard,
+            {
+              backgroundColor: a.backgroundColor,
+              borderColor: a.borderColor,
+              borderBottomColor: a.edgeColor,
+              opacity: a.opacity,
+            },
+          ]}
+          testID={testID}
+        >
+          <View style={styles.imageCardHeader}>
+            {letter != null ? (
+              <View style={[styles.letterBadge, { backgroundColor: a.badgeBg }]}>
+                <Text style={[styles.letterText, { color: a.badgeText }]}>{letter}</Text>
+              </View>
+            ) : null}
+            <View style={styles.imageCardHeaderSpacer} />
+            {showCheck ? (
+              <View testID="answer-icon-check">
+                <Check
+                  color={iconOnDark ? colors.neutral[0] : colors.success}
+                  size={22}
+                  strokeWidth={3}
+                />
+              </View>
+            ) : null}
+            {showCross ? (
+              <View testID="answer-icon-cross">
+                <X color={colors.neutral[0]} size={22} strokeWidth={3} />
+              </View>
+            ) : null}
+          </View>
+
+          <Image
+            accessibilityLabel={
+              letter != null ? t('media.answerImageLettered', { letter }) : t('media.answerImage')
+            }
+            resizeMode="contain"
+            source={{ uri: imageUrl }}
+            style={styles.choiceImageLarge}
+            testID={`${testID ?? 'option'}-figure`}
+          />
+        </PressableScale>
+
+          {onZoom ? (
+            <Pressable
+              accessibilityLabel={t('imageZoom.open')}
+              accessibilityRole="button"
+              hitSlop={10}
+              onPress={onZoom}
+              style={styles.zoomButton}
+              testID={`${testID ?? 'option'}-zoom`}
+            >
+              <Maximize2 color={colors.neutral[700]} size={15} strokeWidth={2.4} />
+            </Pressable>
+          ) : null}
+        </View>
+      </Animated.View>
+    );
+  }
 
   return (
     <Animated.View style={animatedStyle}>
@@ -221,7 +327,12 @@ export function AnswerOption({
         ) : null}
 
         {imageUrl ? (
-          <Image resizeMode="cover" source={{ uri: imageUrl }} style={styles.choiceImage} />
+          <Image
+            accessibilityLabel={t('media.answerImage')}
+            resizeMode="cover"
+            source={{ uri: imageUrl }}
+            style={styles.choiceImage}
+          />
         ) : null}
 
         <View style={[styles.textWrap, center && styles.textCenter]}>
@@ -278,7 +389,6 @@ const styles = StyleSheet.create({
   letterText: {
     ...typography.smallMedium,
     fontFamily: typography.h2.fontFamily,
-    fontSize: 15,
   },
   textWrap: {
     flex: 1,
@@ -293,5 +403,43 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: radii.s,
+  },
+  // --- image-as-answer variant -------------------------------------------
+  imageCard: {
+    borderWidth: 2,
+    borderBottomWidth: 4,
+    borderRadius: radii.m,
+    padding: spacing.s,
+    gap: spacing.xs,
+  },
+  imageCardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.s,
+  },
+  imageCardHeaderSpacer: {
+    flex: 1,
+  },
+  zoomButton: {
+    position: 'absolute',
+    top: spacing.s,
+    right: spacing.s,
+    width: 32,
+    height: 32,
+    borderRadius: radii.pill,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.neutral[100],
+  },
+  /**
+   * Exam figures are black line-art on white: they need a real white plate
+   * (never the tinted card fill) and `contain` so no part of the curve is
+   * cropped away. 4/3 suits the source crops without letterboxing much.
+   */
+  choiceImageLarge: {
+    width: '100%',
+    aspectRatio: 4 / 3,
+    borderRadius: radii.s,
+    backgroundColor: colors.neutral[0],
   },
 });

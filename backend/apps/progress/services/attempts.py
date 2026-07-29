@@ -45,9 +45,20 @@ def _absolute_media(request, filefield) -> str | None:
 def _questions_payload(questions, request) -> list[dict]:
     """Sérialisation SÛRE (jamais is_correct / explication) + choix mélangés
     par tentative. La correction se fait par id de choix — le mélange n'a
-    aucun impact serveur."""
+    aucun impact serveur.
+
+    EXCEPTION — les choix illustrés (vraies annales : « laquelle de ces courbes
+    représente f ? »). La lettre A/B/C/D y est IMPRIMÉE dans la figure elle-même,
+    telle qu'elle apparaît sur le sujet d'examen : mélanger ces choix afficherait
+    la pastille « A » au-dessus d'une figure légendée « B ». On garde donc leur
+    ordre d'origine ; ces questions résistent de toute façon à la mémorisation
+    par position, puisque c'est la figure — et non sa place — qui porte la
+    réponse.
+    """
     data = QuestionPublicSerializer(questions, many=True, context={"request": request}).data
     for question in data:
+        if any(choice.get("image_url") for choice in question["choices"]):
+            continue
         random.shuffle(question["choices"])
     return data
 
@@ -72,6 +83,8 @@ def _level_unlocked(user, level: Level) -> bool:
     exige TOUS les niveaux de l'unité précédente ≥ 1★ ; le tout premier niveau
     actif de la matière est toujours déverrouillé. Une ligne LevelProgress
     existante (déverrouillage matérialisé ou complétion) suffit aussi."""
+    if settings.UNLOCK_ALL_LEVELS:  # interrupteur de test — voir base.py
+        return True
     sequence = _subject_sequence(level.unit.subject)
     flat = [lvl for _, levels in sequence for lvl in levels]
     if flat and flat[0].id == level.id:

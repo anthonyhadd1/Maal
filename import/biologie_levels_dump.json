@@ -1,0 +1,2004 @@
+[
+ {
+  "level_id": 3190,
+  "level_title": "Niveau 1",
+  "old_unit": "Biologie cellulaire",
+  "old_unit_order": 1,
+  "level_order": 1,
+  "question_count": 9,
+  "sample_stems": [
+   "Dans le noyau d’une cellule somatique humaine, il y a :",
+   "Concernant l'organisation du neurone, éliminer la mauvaise réponse :",
+   "Concernant le chromosome"
+  ]
+ },
+ {
+  "level_id": 3191,
+  "level_title": "Niveau 1",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 1,
+  "question_count": 10,
+  "sample_stems": [
+   "Dans une molécule d'ARN, choisir la bonne réponse :",
+   "Les deux brins d'ADN sont dits « antiparallèles » car :",
+   "Les deux chaînes de l'ADN sont complémentaires :"
+  ]
+ },
+ {
+  "level_id": 3192,
+  "level_title": "Niveau 2",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 2,
+  "question_count": 10,
+  "sample_stems": [
+   "Lequel des facteurs ou mécanismes suivants, ne peut pas être considéré comme agent  mutagène ?",
+   "Quel groupement chimique détermine l’identité d’un nucléotide ?",
+   "La correspondance entre les triplets d’acide ribonucléique et les acides aminés affiche  une redondance pour l’une des raisons suivantes, laquelle ?"
+  ]
+ },
+ {
+  "level_id": 3193,
+  "level_title": "Niveau 3",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 3,
+  "question_count": 10,
+  "sample_stems": [
+   "Les propositions suivantes concernent les mutations ; laquelle est incorrecte ?",
+   "Concernant la relation entre les mutations et l'environnement, éliminer la réponse  incorrecte :",
+   "Concernant les agents mutagènes, éliminer la mauvaise réponse:"
+  ]
+ },
+ {
+  "level_id": 3194,
+  "level_title": "Niveau 4",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 4,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant la réplication de l'ADN, choisir la bonne réponse :",
+   "Concernant l'ARN messager, choisir la bonne réponse :",
+   "Le code génétique"
+  ]
+ },
+ {
+  "level_id": 3195,
+  "level_title": "Niveau 5",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 5,
+  "question_count": 10,
+  "sample_stems": [
+   "D'après la figure suivante, précisez dans quel sens se déplace l'ARN polymérase ?",
+   "Un gène est une séquence",
+   "Concernant les mutations, éliminez la mauvaise réponse :"
+  ]
+ },
+ {
+  "level_id": 3196,
+  "level_title": "Niveau 6",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 6,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les protéines (éliminer la mauvaise réponse) :",
+   "Concernant la synthèse des protéines (éliminer la mauvaise réponse) :",
+   "Watson et Crick, sont connus pour avoir proposé"
+  ]
+ },
+ {
+  "level_id": 3197,
+  "level_title": "Niveau 7",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 7,
+  "question_count": 10,
+  "sample_stems": [
+   "Les expériences de transgénèse prouvent que",
+   "La transgénèse consiste à",
+   "Les ARN, choisir la bonne réponse :"
+  ]
+ },
+ {
+  "level_id": 3198,
+  "level_title": "Niveau 8",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 8,
+  "question_count": 10,
+  "sample_stems": [
+   "Ecrire dans le sens 5'/3', la séquence d'ADN complémentaire de la séquence suivante :  GCGCTATAAT",
+   "Ecrire dans le sens 5'/3' la séquence d'ARN copiée par l'ARN polymérase à partir d'une  matrice d'ADN suivante : AGCCCGCTTCGATGCGGGCT",
+   "Parmi les propositions suivantes relatives au génome humain, laquelle est exacte ?"
+  ]
+ },
+ {
+  "level_id": 3199,
+  "level_title": "Niveau 9",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 9,
+  "question_count": 10,
+  "sample_stems": [
+   "Ecrire dans le sens 5’/3’, la séquence d’ADN complémentaire de la séquence suivante :  GCTATATAAT",
+   "Ecrire dans le sens standard 5’/3’ la séquence d’ARN copiée par l’ARN polymérase II des  eucaryotes à partir de la matrice d’ADN suivante : AATGTTCAGGGAA",
+   "Choisir ce qui convient ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3200,
+  "level_title": "Niveau 10",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 10,
+  "question_count": 10,
+  "sample_stems": [
+   "Les agents mutagènes",
+   "Concernant les protéines, choisir ce qui ne convient pas :",
+   "La transcription correspond"
+  ]
+ },
+ {
+  "level_id": 3201,
+  "level_title": "Niveau 11",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 11,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminez l'intrus :",
+   "Concernant l'ARN messager, choisir ce qui convient :",
+   "Une séquence de 22 acides aminés est codée par une séquence de"
+  ]
+ },
+ {
+  "level_id": 3202,
+  "level_title": "Niveau 12",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 12,
+  "question_count": 10,
+  "sample_stems": [
+   "Dans ce qui suit, éliminez l'option incorrecte :",
+   "La transcription correspond",
+   "Une séquence de 22 acides aminés est codée par une séquence de"
+  ]
+ },
+ {
+  "level_id": 3203,
+  "level_title": "Niveau 13",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 13,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminer l’intrus :",
+   "Dans ce qui suit, éliminer ce qui ne convient pas :",
+   "Au cours de la mitose, la transmission des gènes de la cellule mère aux cellules filles, est qualifiée  de"
+  ]
+ },
+ {
+  "level_id": 3204,
+  "level_title": "Niveau 14",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 14,
+  "question_count": 10,
+  "sample_stems": [
+   "La réplication débute à plusieurs endroits de la molécule d'ADN et progresse dans les deux directions opposées, formant des",
+   "Une séquence nucléotidique est traduite quand elle est sous forme",
+   "Si une cellule de la peau est mutée, cette mutation pourra être transmise"
+  ]
+ },
+ {
+  "level_id": 3205,
+  "level_title": "Niveau 15",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 15,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les agents mutagènes, éliminer ce qui ne convient pas parmi les options suivantes :",
+   "Compléter la phrase par ce qui convient parmi les options suivantes : On appelle mutation, une  modification de la molécule d’ADN",
+   "Concernant la molécule d’ADN, éliminer ce qui ne convient pas parmi les options suivantes :"
+  ]
+ },
+ {
+  "level_id": 3206,
+  "level_title": "Niveau 16",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 16,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant le code génétique, quelle option parmi les suivantes ne convient pas ?",
+   "Concernant la relation gène-protéine, éliminer l'option qui ne convient pas :",
+   "Concernant l'expression génétique et rôle des facteurs de transcription, éliminer l'option qui  ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3207,
+  "level_title": "Niveau 17",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 17,
+  "question_count": 10,
+  "sample_stems": [
+   "Quel titre parmi les suivants convient le mieux à la figure ci-dessous ?",
+   "Ecrire dans le sens 5'/3', la séquence d'ADN complémentaire de la séquence  suivante, GCTATATAGC. Identifier la proposition qui convient parmi les suivantes :",
+   "Concernant les agents mutagènes et leurs effets sur l'ADN et nos cellules, identifier la  proposition erronée parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3208,
+  "level_title": "Niveau 18",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 18,
+  "question_count": 10,
+  "sample_stems": [
+   "Les enzymes dotées des propriétés de réparation des anomalies de réplication de l’ADN sont  appelées des, identifier la proposition qui convient parmi les suivantes :",
+   "L’acronyme SNP de l’anglais, identifier la proposition qui convient parmi les suivantes :",
+   "Compléter la phrase suivante par ce qui convient parmi les propositions suivantes :   La réplication de l’ADN se termine quand les « yeux de réplication »"
+  ]
+ },
+ {
+  "level_id": 3209,
+  "level_title": "Niveau 19",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 19,
+  "question_count": 10,
+  "sample_stems": [
+   "Un même ARN pré-messager peut subir des maturations différentes et donner des ARNm  différents selon le type de cellule. Ce phénomène est appelé épissage (identifier la proposition qui convient parmi les suivantes) :",
+   "La régulation de l’expression des gènes se fait par des facteurs externes ou internes mettant  en jeu des molécules dites, identifier la proposition qui convient parmi les suivantes :",
+   "Ecrire dans le sens standard 5’/3’ la séquence d’ARN copiée par l’ARN polymérase II des  eucaryotes à partir de la matrice d’ADN suivante : AATGTTCAGGGTT"
+  ]
+ },
+ {
+  "level_id": 3210,
+  "level_title": "Niveau 20",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 20,
+  "question_count": 10,
+  "sample_stems": [
+   "Ecrire dans le sens 5'/3' la séquence d'ADN complémentaire de la séquence suivante  CGATCATATAAAGA. Choisir la proposition qui convient parmi les suivantes :",
+   "Ecrire dans le sens 5’/3’ la séquence d’ARN copiée par l’ARN polymérase à partir d’une  matrice d’ADN suivante AGCCCGCTTCGATGCGGGCT. Choisir la proposition qui convient parmi les suivantes :",
+   "La multiplication par mitose d’une cellule initiale produit, théoriquement, un clone de cellules  génétiquement identiques. Des mutations peuvent se produire, mais elles restent peu fréquentes. A chaque division, quelle est la probabilité qu’un nucléotide soit modifié chez l’Homme ?"
+  ]
+ },
+ {
+  "level_id": 3211,
+  "level_title": "Niveau 21",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 21,
+  "question_count": 9,
+  "sample_stems": [
+   "Attribuer à la lettre indicative E dans le schéma de la Q42, la proposition qui lui convient  parmi les suivantes :",
+   "A chaque codon de l’ARNm correspond un acide aminé, toujours le même. Trois codons n’ont  pas d’acide aminé dédié, sont qualifiés de, choisir la proposition qui convient parmi les suivantes :",
+   "Ils (elles) se trouvent dans l’ARN pré-messager et pas dans l’ARN messager. Il s’agit :"
+  ]
+ },
+ {
+  "level_id": 3212,
+  "level_title": "Niveau 22",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 22,
+  "question_count": 10,
+  "sample_stems": [
+   "Un polypeptide",
+   "Le phénotype moléculaire est",
+   "La transcription du gène"
+  ]
+ },
+ {
+  "level_id": 3213,
+  "level_title": "Niveau 23",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 23,
+  "question_count": 10,
+  "sample_stems": [
+   "L'ADN",
+   "Le phénotype",
+   "Les molécules spécifiques de l'ARN le différenciant de l'ADN sont"
+  ]
+ },
+ {
+  "level_id": 3214,
+  "level_title": "Niveau 24",
+  "old_unit": "Génétique moléculaire (ADN, ARN, réplication, transcription, traduction)",
+  "old_unit_order": 2,
+  "level_order": 24,
+  "question_count": 10,
+  "sample_stems": [
+   "La liaison qui associe la guanine et la cytosine est",
+   "La molécule spécifique d'ARNm est",
+   "Choisir le brin d'ARNm complémentaire du brin d'ADN GGACTGATT"
+  ]
+ },
+ {
+  "level_id": 3215,
+  "level_title": "Niveau 1",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 1,
+  "question_count": 10,
+  "sample_stems": [
+   "L'analyse de l'ADN de trois sujets A, B et C a été réalisée, dans le but de mieux comprendre les mécanismes qui interviennent dans la différentiation de l'appareil génital masculin. Les informations extraites sont alors présentées dans le tableau ci-dessous. Quelle proposition, parmi les suivantes, n'est pas révélée par les résultats de l'analyse ?",
+   "Parmi les propositions suivantes, laquelle est incorrecte ?",
+   "Dans un élevage de poissons zèbres (Danio rerio) dont les flancs présentent des  rayures sombres (phénotype sauvage), nous avons vu apparaitre un poisson (le mutant golden) aux rayures beaucoup plus claires. Le croisement entre le mutant golden clair et la forme sauvage sombre donne une première génération F1 ou tous les poissons ont des rayures sombres. A noter que la différence phénotypique entre la forme sauvage et la forme golden mutante est due à une mutation ne touchant qu'un seul gène. 11 Croisés entre eux, ces poissons F1 donneraient une génération F2. F2 serait formée de :"
+  ]
+ },
+ {
+  "level_id": 3216,
+  "level_title": "Niveau 2",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 2,
+  "question_count": 10,
+  "sample_stems": [
+   "La distance génique est mesurée en",
+   "Une population, dite, en équilibre génétique, est une population où",
+   "Laquelle des maladies géniques suivantes, présente une atteinte du gène de l'hémoglobine ?"
+  ]
+ },
+ {
+  "level_id": 3217,
+  "level_title": "Niveau 3",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 3,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les empreintes génétiques, éliminer la mauvaise réponse :",
+   "La mucoviscidose est l'une des maladies héréditaires récessives autosomiques les  plus fréquentes en Europe, avec une incidence moyenne de l'ordre de un nouveau-né pour 3100 naissances. Le schéma ci-dessous montre la mutation qui serait à la base de cette maladie chez deux individus, l'un sain et l'autre malade. Choisir la bonne réponse :",
+   "Dans un élevage de poissons zèbres dont les flancs présentent des rayures sombres (phénotype sauvage), nous avons vu apparaitre un poisson aux rayures beaucoup plus claires (le mutant golden). Le croisement entre le mutant et la forme sauvage donne une première génération F1 où tous les poissons ont des rayures sombres. A noter que la différence phénotypique entre la forme sauvage et la forme mutante est due à une mutation ne touchant qu'un seul gène. Croisés entre eux, ces poissons F1 donneraient une génération F2. F2 serait formée de"
+  ]
+ },
+ {
+  "level_id": 3218,
+  "level_title": "Niveau 4",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 4,
+  "question_count": 10,
+  "sample_stems": [
+   "Les gamètes possèdent",
+   "Un croisement-test est effectué lorsque l'on veut connaître",
+   "Un phénotype peut se définir (éliminez la mauvaise réponse):"
+  ]
+ },
+ {
+  "level_id": 3219,
+  "level_title": "Niveau 5",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 5,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant le flux de gènes entre deux populations, choisir la bonne réponse:",
+   "Lors d'un croisement test, si les résultats obtenus sont équiprobables (25% de probabilité pour  chaque phénotype), alors les gènes sont transmis :",
+   "Parmi les anomalies chromosomiques suivantes, indiquer celle qui corresponde à un gain  d'ADN dans le génome :"
+  ]
+ },
+ {
+  "level_id": 3220,
+  "level_title": "Niveau 6",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 6,
+  "question_count": 10,
+  "sample_stems": [
+   "Dans les résultats d’un test-cross avec intervention de deux gènes, nous avons 85% de  phénotypes parentaux et 15% de phénotypes recombinés, choisir la réponse exacte :",
+   "Un test-cross consiste à croiser",
+   "Qu’est ce qui caractérise les allèles A et B du groupe sanguin AB ?"
+  ]
+ },
+ {
+  "level_id": 3221,
+  "level_title": "Niveau 7",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 7,
+  "question_count": 10,
+  "sample_stems": [
+   "La structure commune au système ABO du groupe sanguin est :",
+   "Parmi les propositions suivantes, laquelle est exacte ?",
+   "Laquelle des maladies suivantes n’est pas une maladie autosomale?"
+  ]
+ },
+ {
+  "level_id": 3222,
+  "level_title": "Niveau 8",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 8,
+  "question_count": 10,
+  "sample_stems": [
+   "Un allèle de type sauvage désigne",
+   "Eliminez l’intrus :",
+   "La fréquence allélique désigne"
+  ]
+ },
+ {
+  "level_id": 3223,
+  "level_title": "Niveau 9",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 9,
+  "question_count": 10,
+  "sample_stems": [
+   "Choisir ce qui convient:",
+   "La probabilité pour que deux individus, excepté les vrais jumeaux, aient le même génotype est",
+   "Les gènes du HLA et de la bêta-globine, se caractérisent par"
+  ]
+ },
+ {
+  "level_id": 3224,
+  "level_title": "Niveau 10",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 10,
+  "question_count": 10,
+  "sample_stems": [
+   "Voici l'arbre généalogique d'une famille atteint d'une maladie héréditaire. Choisir ce qui convient :",
+   "Une aneuploïdie, signifie qu'une cellule",
+   "Eliminer l'intrus :"
+  ]
+ },
+ {
+  "level_id": 3225,
+  "level_title": "Niveau 11",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 11,
+  "question_count": 10,
+  "sample_stems": [
+   "Lorsque deux individus possèdent de nombreux allèles en commun, on peut déduire",
+   "Une aneuploïdie, signifie qu'une cellule",
+   "L’étude d’un arbre généalogique d’une famille permet"
+  ]
+ },
+ {
+  "level_id": 3226,
+  "level_title": "Niveau 12",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 12,
+  "question_count": 10,
+  "sample_stems": [
+   "Quelle maladie parmi les suivantes est une maladie génétique liée à X ?",
+   "Les différentes variétés d'un gène sont appelées:",
+   "Dans ce qui suit, éliminez l'option incorrecte:"
+  ]
+ },
+ {
+  "level_id": 3227,
+  "level_title": "Niveau 13",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 13,
+  "question_count": 10,
+  "sample_stems": [
+   "Les différentes variétés d’un gène sont appelées :",
+   "Le caryotype d’un individu atteint du syndrome 47",
+   "Dans ce qui suit, éliminer ce qui ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3228,
+  "level_title": "Niveau 14",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 14,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant la maladie de la mucoviscidose, éliminer la proposition qui ne convient pas :",
+   "La drépanocytose est une maladie qui affecte",
+   "D'après les données représentées sur cette figure, choisir l'option qui ne convient pas :  D'après SVT LLP"
+  ]
+ },
+ {
+  "level_id": 3229,
+  "level_title": "Niveau 15",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 15,
+  "question_count": 10,
+  "sample_stems": [
+   "Pour estimer la position relative des gènes le long d’un chromosome, on réalise, choisir  l’option qui convient :",
+   "Concernant l’équilibre génétique des populations, éliminer l’option qui ne convient pas :",
+   "Pour pouvoir caractériser objectivement un groupe d’individus, il faut analyser leurs  « marqueurs biologiques », tels que : tout ce qui suit est correcte à l’exception d’une seule option laquelle ?"
+  ]
+ },
+ {
+  "level_id": 3230,
+  "level_title": "Niveau 16",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 16,
+  "question_count": 10,
+  "sample_stems": [
+   "Un arbre généalogique permet au généticien, éliminer l’option qui ne convient pas :",
+   "Concernant les maladies génétiques autosomales, éliminer l’option qui ne convient pas :",
+   "Pour savoir si deux couples d’allèles sont liés ou indépendants, choisir la proposition qui convient:"
+  ]
+ },
+ {
+  "level_id": 3231,
+  "level_title": "Niveau 17",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 17,
+  "question_count": 10,
+  "sample_stems": [
+   "Une maladie congénitale est une maladie, identifier la proposition erronée parmi les suivantes:",
+   "Concernant le brassage génétique, pour savoir si deux couples d’allèles sont liés ou  indépendants, identifier la proposition qui convient parmi les suivantes :",
+   "Concernant les anomalies affectant le nombre des chromosomes, une monosomie s’écrit,  identifier la proposition qui convient parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3232,
+  "level_title": "Niveau 18",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 18,
+  "question_count": 9,
+  "sample_stems": [
+   "Concernant l'APCR pour Ancêtre Commun le Plus Récent : Pour une population de 1000 individus, il faudrait (identifier la proposition qui convient parmi les suivantes) :",
+   "Chaque homme possède un chromosome Y hérité de son père et, au-delà, de sa lignée paternelle. L'étude des mutations portées par le chromosome Y a permis de définir des groupes de parenté entre hommes du monde entier, appelés, identifier la proposition qui convient parmi les suivantes :",
+   "Concernant les mitochondries dans l'étude des liens de parenté, identifier la proposition erronée parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3233,
+  "level_title": "Niveau 19",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 19,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant la fécondation, choisir la proposition qui convient parmi les suivantes :",
+   "Concernant le génotype des individus, toutes les propositions suivantes sont correctes à l'exception d'une seule, laquelle ?",
+   "Concernant les anomalies chromosomiques, choisir la proposition qui convient parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3234,
+  "level_title": "Niveau 20",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 20,
+  "question_count": 3,
+  "sample_stems": [
+   "Supposons, pour simplifier, qu’un individu possède seulement 500 gènes (plutôt que 20000 ou  25000) avec 2 allèles pour chaque gène (plutôt que plusieurs). Il peut avoir alors,",
+   "Dans une hématie drépanocytaire, l’hémoglobine (Hb) est sous forme de,",
+   "Un exemple d'une mutation, touchant une enzyme avec un effet bénéfique, et est retrouvée chez 30 % des humains, il s'agit du phénotype de,"
+  ]
+ },
+ {
+  "level_id": 3235,
+  "level_title": "Niveau 21",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 21,
+  "question_count": 10,
+  "sample_stems": [
+   "Le phénotype peut être",
+   "Les phénotypes alternatifs",
+   "Dans une espèce donnée, tous les individus"
+  ]
+ },
+ {
+  "level_id": 3236,
+  "level_title": "Niveau 22",
+  "old_unit": "Génétique formelle et hérédité (maladies génétiques, arbres généalogiques)",
+  "old_unit_order": 3,
+  "level_order": 22,
+  "question_count": 2,
+  "sample_stems": [
+   "Un génotype donné conduit toujours au même phénotype car la mise en place du phénotype dépend exclusivement du génotype.",
+   "Deux vrais jumeaux (jumeaux monozygotes) possèdent toujours le même phénotype car les jumeaux monozygotes ont le même génotype."
+  ]
+ },
+ {
+  "level_id": 3237,
+  "level_title": "Niveau 1",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 1,
+  "question_count": 10,
+  "sample_stems": [
+   "La mitose n’a lieu que dans les cellules :",
+   "Le cliché suivant représente des cellules en mitose ou en interphase. 10 Que représentent les cellules marquées 1, 2 et 3 ?",
+   "Le cliché suivant représente des cellules en mitose ou en interphase. Citer dans l'ordre une interphase, une télophase et une cytodiérèse :"
+  ]
+ },
+ {
+  "level_id": 3238,
+  "level_title": "Niveau 2",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 2,
+  "question_count": 10,
+  "sample_stems": [
+   "La division cellulaire mitotique est une reproduction conforme car :",
+   "Le caryotype ci-dessus est celui d'un enfant atteint d'une anomalie chromosomique. Il peut avoir pour origine",
+   "Qu’est ce qui se passe, entre l'étape 2 et l'étape 3 dans la figure suivante ?"
+  ]
+ },
+ {
+  "level_id": 3239,
+  "level_title": "Niveau 3",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 3,
+  "question_count": 10,
+  "sample_stems": [
+   "Lors de la mitose, une cellule passe de 46 à 23 chromosomes",
+   "Dans certains cas particuliers, si une cellule diploïde subit trois cycles cellulaires, mais que chaque cycle est privé de mitose",
+   "La division cellulaire mitotique est une reproduction conforme car"
+  ]
+ },
+ {
+  "level_id": 3240,
+  "level_title": "Niveau 4",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 4,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminer l'intrus",
+   "Le brassage inter-chromosomique offre plus de",
+   "Lorsqu'une cellule de peau comportant 46 chromosomes se divise,"
+  ]
+ },
+ {
+  "level_id": 3241,
+  "level_title": "Niveau 5",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 5,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant le processus de brassage intrachromosomique, choisir la bonne réponse :",
+   "La réplication de l'ADN a lieu",
+   "Au cours de la méiose, le brassage interchromosomique"
+  ]
+ },
+ {
+  "level_id": 3242,
+  "level_title": "Niveau 6",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 6,
+  "question_count": 10,
+  "sample_stems": [
+   "Lors d’un crossing-over, tout ce qui suit est exact sauf :",
+   "Eliminer l'intrus :",
+   "A propos de la méiose, les centromères se dédoublent lors de, choisir la bonne réponse :"
+  ]
+ },
+ {
+  "level_id": 3243,
+  "level_title": "Niveau 7",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 7,
+  "question_count": 10,
+  "sample_stems": [
+   "Au cours de la méiose, la quantité d’ADN par cellule",
+   "Le caryotype des gamètes",
+   "La quantité d'ADN présente dans une cellule diploïde à la phase G1 du cycle cellulaire est de 2X. Quelle serait la quantité d'ADN présente dans la même cellule pendant la métaphase de la méiose I ?"
+  ]
+ },
+ {
+  "level_id": 3244,
+  "level_title": "Niveau 8",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 8,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant la méiose, choisir ce qui convient :",
+   "La mitose est dite une division conforme, car",
+   "La phase S du cycle cellulaire"
+  ]
+ },
+ {
+  "level_id": 3245,
+  "level_title": "Niveau 9",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 9,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminez l’intrus :",
+   "Les cellules appartenant à une population clonale",
+   "Les crossing-over inégaux sont"
+  ]
+ },
+ {
+  "level_id": 3246,
+  "level_title": "Niveau 10",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 10,
+  "question_count": 10,
+  "sample_stems": [
+   "Dans ce qui suit, éliminer l'option incorrecte:",
+   "Concernant les différentes phases du cycle cellulaire d'une cellule somatique, éliminez l'option incorrecte :",
+   "Au cours de la méiose, la quantité d'ADN par cellule"
+  ]
+ },
+ {
+  "level_id": 3247,
+  "level_title": "Niveau 11",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 11,
+  "question_count": 10,
+  "sample_stems": [
+   "Dans ce qui suit, éliminer ce qui ne convient pas :",
+   "Dans ce qui suit, choisir ce qui ne convient pas:",
+   "Dans les définitions suivantes, qu'est ce qui ne convient pas?"
+  ]
+ },
+ {
+  "level_id": 3248,
+  "level_title": "Niveau 12",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 12,
+  "question_count": 10,
+  "sample_stems": [
+   "Les cellules appartenant à une population clonale",
+   "Concernant le génome humain, éliminer ce qui ne convient pas parmi les options suivantes :",
+   "Concernant la stabilité du caryotype d'une génération à la suivante, éliminer ce qui ne convient pas parmi les options suivantes :"
+  ]
+ },
+ {
+  "level_id": 3249,
+  "level_title": "Niveau 13",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 13,
+  "question_count": 10,
+  "sample_stems": [
+   "Ce caryotype, à éliminer l'option qui ne convient pas :",
+   "Observer la situation ci-dessous dans cette cellule et éliminer l'option qui ne convient pas :",
+   "On considère chez un individu une cellule en méiose, dans laquelle la disposition des gènes est  la suivante. Eliminer l'option qui ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3250,
+  "level_title": "Niveau 14",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 14,
+  "question_count": 10,
+  "sample_stems": [
+   "Quel évènement se produit uniquement pendant la méiose et non dans la mitose ?",
+   "Concernant la méiose, identifier la proposition erronée parmi les suivantes :",
+   "On appelle cycle cellulaire, identifier la proposition qui convient parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3251,
+  "level_title": "Niveau 15",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 15,
+  "question_count": 10,
+  "sample_stems": [
+   "Attribuer à la lettre A dans la figure ci-contre la proposition qui convient parmi les suivantes : TEMPS D'après SVT 1re enseignement de spécialité. Collection D. Baude & Y. Jusserand. Bordas Editeur.",
+   "Concernant les étapes de la spermatogenèse et comportement chromosomique correspondant,  identifier la proposition erronée parmi les suivantes :",
+   "Concernant l’ovogenèse et comportement chromosomique correspondant, identifier la  proposition erronée parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3252,
+  "level_title": "Niveau 16",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 16,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les mécanismes d’apparition d’anomalies chromosomiques, éliminer la  proposition qui ne convient pas parmi les suivantes :",
+   "Un individu est constitué de cellules qui résultent de mitoses à partir d'une cellule-œuf initiale. Le nombre de divisions qui ont lieu au cours d'une vie humaine est estimé à :",
+   "Quelle association parmi les suivantes n'est pas cohérente ?"
+  ]
+ },
+ {
+  "level_id": 3253,
+  "level_title": "Niveau 17",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 17,
+  "question_count": 1,
+  "sample_stems": [
+   "Concernant la méiose, choisir la proposition qui ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3254,
+  "level_title": "Niveau 18",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 18,
+  "question_count": 10,
+  "sample_stems": [
+   "Durant la mitose et avant la division de la cellule, les chromosomes subissent",
+   "Quel est le rôle fondamental de la méiose ? (les autres propositions sont coupées au bas de la page ; seules les propositions a et b sont lisibles)",
+   "L'information génétique dans les cellules eucaryotes peut être transmise par"
+  ]
+ },
+ {
+  "level_id": 3255,
+  "level_title": "Niveau 19",
+  "old_unit": "Division cellulaire (mitose, méiose, cycle cellulaire)",
+  "old_unit_order": 4,
+  "level_order": 19,
+  "question_count": 1,
+  "sample_stems": [
+   "Lors de l'anaphase I de méiose"
+  ]
+ },
+ {
+  "level_id": 3256,
+  "level_title": "Niveau 1",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 1,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant la structure des gonades, éliminer la mauvaise réponse ?",
+   "La spermatogenèse est (choisir la réponse correcte)",
+   "Trouvez l’intrus :"
+  ]
+ },
+ {
+  "level_id": 3257,
+  "level_title": "Niveau 2",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 2,
+  "question_count": 10,
+  "sample_stems": [
+   "La caryogamie désigne",
+   "Eliminer l'intrus :",
+   "Les cellules de Leydig se trouvent dans l'espace interstitiel des"
+  ]
+ },
+ {
+  "level_id": 3258,
+  "level_title": "Niveau 3",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 3,
+  "question_count": 10,
+  "sample_stems": [
+   "Lequel des follicules ovariens suivants ne renferment pas un ovocyte II ?",
+   "La fécondation correspond à la fusion des noyaux des gamètes",
+   "La cellule œuf contient"
+  ]
+ },
+ {
+  "level_id": 3259,
+  "level_title": "Niveau 4",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 4,
+  "question_count": 10,
+  "sample_stems": [
+   "L’ovulation entraîne la libération d’un",
+   "Un individu humain peut produire potentiellement",
+   "Un ovule « pondu » par une femme âgée de 20 ans, il sera lui-même, âgé de"
+  ]
+ },
+ {
+  "level_id": 3260,
+  "level_title": "Niveau 5",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 5,
+  "question_count": 10,
+  "sample_stems": [
+   "Un spermatocyte du deuxième ordre, choisir la bonne réponse :",
+   "Quel élément n'appartient pas au spermatozoïde ?",
+   "A propos du follicule de De Graaf, par ordre, nous avons :"
+  ]
+ },
+ {
+  "level_id": 3261,
+  "level_title": "Niveau 6",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 6,
+  "question_count": 10,
+  "sample_stems": [
+   "Les glandes endométriales sécrètent durant la phase lutéale un liquide nutritif riche en :",
+   "L’endomètre est constitué:",
+   "La glaire cervicale est secrétée par :"
+  ]
+ },
+ {
+  "level_id": 3262,
+  "level_title": "Niveau 7",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 7,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminer l’intrus :",
+   "La nidation de l’œuf fécondé a lieu dans",
+   "Le sperme contient tout ce qui suit sauf :"
+  ]
+ },
+ {
+  "level_id": 3263,
+  "level_title": "Niveau 8",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 8,
+  "question_count": 10,
+  "sample_stems": [
+   "La taille du follicule de De Graaf peut atteindre",
+   "Un ovotide, choisir ce qui convient :",
+   "Choisir ce qui convient :"
+  ]
+ },
+ {
+  "level_id": 3264,
+  "level_title": "Niveau 9",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 9,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminer l'intrus :",
+   "L'ovogenèse se déroule, choisir la réponse exacte :",
+   "La division réductionnelle de l'ovogenèse s'achève"
+  ]
+ },
+ {
+  "level_id": 3265,
+  "level_title": "Niveau 10",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 10,
+  "question_count": 10,
+  "sample_stems": [
+   "L'ovocyte II ovulé est bloqué en",
+   "Un spermatide, choisir ce qui convient :",
+   "L’ovocyte II ovulé est bloqué en"
+  ]
+ },
+ {
+  "level_id": 3266,
+  "level_title": "Niveau 11",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 11,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant la spermatogénèse, choisir ce qui convient :",
+   "Qu'est ce qui ne convient pas ?",
+   "Concernant la division méiotique chez l’homme, choisir ce qui convient :"
+  ]
+ },
+ {
+  "level_id": 3267,
+  "level_title": "Niveau 12",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 12,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminer l'intrus :",
+   "La folliculogenèse est le cycle de développement des cellules folliculaires qui",
+   "Une jeune femme a eu des règles successives le 5 Juillet et le 27 Juillet. La durée de son cycle  sexuel est de :"
+  ]
+ },
+ {
+  "level_id": 3268,
+  "level_title": "Niveau 13",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 13,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant l'ultrastructure du spermatozoïde, éliminer l'option qui ne convient pas :",
+   "Concernant l'ultrastructure du follicule de De Graaf, éliminer l'option qui ne convient pas :",
+   "Concernant l'ovogenèse, choisir l'option qui ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3269,
+  "level_title": "Niveau 14",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 14,
+  "question_count": 10,
+  "sample_stems": [
+   "Le nombre d'ovules libérés par une femme en une année est",
+   "Concernant le préservatif masculin, éliminer la proposition qui ne convient pas:",
+   "Normalement, les règles mensuels chez la femme ne se produisent plus, éliminer ce qui ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3270,
+  "level_title": "Niveau 15",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 15,
+  "question_count": 10,
+  "sample_stems": [
+   "La glaire cervicale est secrétée par, identifier la proposition qui convient parmi les suivantes :",
+   "Concernant le synchronisme des cycles ovarien et utérin, choisir l’ordre exacte des événements  proposés :",
+   "En utilisant les données de la figure ci-dessus, à quoi peut-elle correspondre la lettre A ?"
+  ]
+ },
+ {
+  "level_id": 3271,
+  "level_title": "Niveau 16",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 16,
+  "question_count": 9,
+  "sample_stems": [
+   "Attribuer à la lettre indicative B dans le schéma de la Q65, la proposition qui lui convient  parmi les suivantes :",
+   "Attribuer à la lettre indicative C dans le schéma de la Q65, la proposition qui lui convient  parmi les suivantes :",
+   "Dessin montrant une coupe longitudinale d’un testicule et de l’épididyme. Attribuer à la lettre  indicative A dans le schéma, la proposition qui lui convient parmi les suivantes : D’après : https://cancer.ca/fr/cancer-information/cancer-types/testicular/what-is-testicular-cancer/the-testicles."
+  ]
+ },
+ {
+  "level_id": 3272,
+  "level_title": "Niveau 17",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 17,
+  "question_count": 1,
+  "sample_stems": [
+   "Concernant l’ovogenèse, choisir la proposition qui ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3273,
+  "level_title": "Niveau 18",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 18,
+  "question_count": 10,
+  "sample_stems": [
+   "Tous les gamètes produits par un individu sont typiquement identiques",
+   "Les gamètes possèdent deux fois moins de chromosomes que toutes les autres cellules de l'organisme",
+   "C'est au cours de la fécondation qu'apparaissent les anomalies responsables des trisomies"
+  ]
+ },
+ {
+  "level_id": 3274,
+  "level_title": "Niveau 19",
+  "old_unit": "Reproduction (spermatogenèse, ovogenèse, cycle sexuel)",
+  "old_unit_order": 5,
+  "level_order": 19,
+  "question_count": 1,
+  "sample_stems": [
+   "La fécondation"
+  ]
+ },
+ {
+  "level_id": 3275,
+  "level_title": "Niveau 1",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 1,
+  "question_count": 10,
+  "sample_stems": [
+   "Nous comprenons par tonus musculaire :",
+   "En 1895, Claude Bernard écrivait: «Voici une grenouille, dont la moelle épinière a été mise à nu et chez laquelle j'ai coupé, à droite, les racines antérieures qui se rendent aux membres postérieurs, et à gauche, les racines postérieures. La patte gauche, qui se meut encore bien, est insensible, comme le montrent les excitations portées en vain sur elle. La patte droite est immobile mais elle est restée sensible car, si l'on vient à la pincer, on détermine des mouvements du reste du corps.» Toutes les options sont correctes sauf une, laquelle?",
+   "Une stimulation électrique d'un neurone in vitro, nécessite tout ce qui suit, sauf :"
+  ]
+ },
+ {
+  "level_id": 3276,
+  "level_title": "Niveau 2",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 2,
+  "question_count": 10,
+  "sample_stems": [
+   "Dans la genèse d'un potentiel d'action et le retour au potentiel de repos, le long d'une  fibre nerveuse, choisir la bonne réponse :",
+   "Dans la genèse d'un potentiel d'action et le retour au potentiel de repos, le long d'une  fibre nerveuse, choisir la bonne réponse :",
+   "Toutes les conditions suivantes sont nécessaires pour le maintien du potentiel  membranaire de repos sauf une seule, laquelle :"
+  ]
+ },
+ {
+  "level_id": 3277,
+  "level_title": "Niveau 3",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 3,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les neurones, éliminer la mauvaise option :",
+   "La sommation temporelle des influx nerveux au niveau d’une fibre nerveuse désigne",
+   "Dans la genèse d'un potentiel d'action et le retour au potentiel de repos, le long d'une  fibre nerveuse, choisir la bonne réponse :"
+  ]
+ },
+ {
+  "level_id": 3278,
+  "level_title": "Niveau 4",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 4,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les canaux et pompes ioniques du neurone, choisir la bonne réponse :",
+   "Le neurotransmetteur est de nature",
+   "Le caractère excitateur ou inhibiteur d'une synapse, dépend surtout"
+  ]
+ },
+ {
+  "level_id": 3279,
+  "level_title": "Niveau 5",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 5,
+  "question_count": 10,
+  "sample_stems": [
+   "Une des propositions suivantes est fausse. Laquelle ?",
+   "Les expérimentations sur les fibres nerveuses de calamar faisaient la joie des  scientifiques, par ce que",
+   "Dans la genèse d'un potentiel d'action et le retour au potentiel de repos, le long d'une  fibre nerveuse, choisir la bonne réponse:"
+  ]
+ },
+ {
+  "level_id": 3280,
+  "level_title": "Niveau 6",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 6,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminer l’intrus :",
+   "Eliminer l’intrus :",
+   "Un neurone est, éliminer la mauvaise option :"
+  ]
+ },
+ {
+  "level_id": 3281,
+  "level_title": "Niveau 7",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 7,
+  "question_count": 10,
+  "sample_stems": [
+   "A propos du potentiel d'action, choisir la réponse exacte :",
+   "Parmi les propositions suivantes, laquelle est exacte ?",
+   "Chaque neurone dispose d'un seul axone, ce dernier peut être, éliminer la mauvaise réponse :"
+  ]
+ },
+ {
+  "level_id": 3282,
+  "level_title": "Niveau 8",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 8,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant la période réfractaire d’une fibre nerveuse, choisir ce qui convient :",
+   "Les mécanorécepteurs sont localisés au niveau",
+   "Les chémorécepteurs sont localisés au niveau"
+  ]
+ },
+ {
+  "level_id": 3283,
+  "level_title": "Niveau 9",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 9,
+  "question_count": 10,
+  "sample_stems": [
+   "Choisir ce qui convient :",
+   "Eliminez l’intrus :",
+   "Un influx nerveux est"
+  ]
+ },
+ {
+  "level_id": 3284,
+  "level_title": "Niveau 10",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 10,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les fonctions du cervelet dans la motricité, éliminez l’option incorrecte :",
+   "Concernant les synapses chimiques, choisir la bonne option :",
+   "Concernant les réflexes, éliminez l’option incorrecte :"
+  ]
+ },
+ {
+  "level_id": 3285,
+  "level_title": "Niveau 11",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 11,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant le neurone, qu'est ce qui ne convient pas ?",
+   "Eliminez l'intrus :",
+   "Concernant les propriétés électriques de la membrane plasmique du neurone, choisir ce qui convient :"
+  ]
+ },
+ {
+  "level_id": 3286,
+  "level_title": "Niveau 12",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 12,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminez l’intrus :",
+   "Concernant la période réfractaire du neurone, qu’est ce qui ne convient pas ?",
+   "Un potentiel d’action se mesure en"
+  ]
+ },
+ {
+  "level_id": 3287,
+  "level_title": "Niveau 13",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 13,
+  "question_count": 10,
+  "sample_stems": [
+   "Le tonus musculaire revient à un",
+   "Concernant le neurone, il s'agit d'une cellule",
+   "Eliminer l'intrus :"
+  ]
+ },
+ {
+  "level_id": 3288,
+  "level_title": "Niveau 14",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 14,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminer l’intrus :",
+   "Une fibre nerveuse dans un « état réfractaire », signifie qu'elle est dans un état",
+   "Le réflexe myotatique est un réflexe"
+  ]
+ },
+ {
+  "level_id": 3289,
+  "level_title": "Niveau 15",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 15,
+  "question_count": 10,
+  "sample_stems": [
+   "Laquelle des structures suivantes n'est pas associée au fuseau neuromusculaire ?",
+   "Concernant le message nerveux, choisir l’option qui convient :",
+   "Concernant les mécanismes du réflexe myotatique, éliminer la proposition qui ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3290,
+  "level_title": "Niveau 16",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 16,
+  "question_count": 10,
+  "sample_stems": [
+   "Laquelle des molécules suivantes est mise en cause dans le développement de la maladie de  Parkinson ?",
+   "Le curare, alcaloïde d'origine végétal, interfère par son action avec",
+   "La cocaïne, alcaloïde extrait de la feuille de coca, interfère par son action avec"
+  ]
+ },
+ {
+  "level_id": 3291,
+  "level_title": "Niveau 17",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 17,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les caractéristiques du message nerveux au niveau d’un nerf. Choisir l’option qui  convient :",
+   "Concernant le potentiel d'action d'une cellule animale, identifier la proposition erronée parmi  les suivantes :",
+   "Concernant le neurone, identifier la proposition erronée parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3292,
+  "level_title": "Niveau 18",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 18,
+  "question_count": 10,
+  "sample_stems": [
+   "Une dendrite est un prolongement cytoplasmique",
+   "Un message nerveux afférent est",
+   "La substance grise de la moelle épinière"
+  ]
+ },
+ {
+  "level_id": 3293,
+  "level_title": "Niveau 19",
+  "old_unit": "Système nerveux (neurone, potentiel d'action, réflexes)",
+  "old_unit_order": 6,
+  "level_order": 19,
+  "question_count": 10,
+  "sample_stems": [
+   "Quelle est l'affirmation exacte ?",
+   "A propos du réflexe myotatique",
+   "Quelle est l'affirmation exacte ?"
+  ]
+ },
+ {
+  "level_id": 3294,
+  "level_title": "Niveau 1",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 1,
+  "question_count": 10,
+  "sample_stems": [
+   "Le complexe majeur d'histocompatibilité chez l'homme se trouve sur le chromosome",
+   "Les gènes codant pour les protéines du CMH sont au nombre de :",
+   "Concernant l'immunité innée, éliminez l'option incorrecte :"
+  ]
+ },
+ {
+  "level_id": 3295,
+  "level_title": "Niveau 2",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 2,
+  "question_count": 10,
+  "sample_stems": [
+   "Pour apprécier l'efficacité d'un médicament anti-inflammatoire sur l'organisme, nous dosons",
+   "Les globules blancs qui n'interviennent pas dans l'immunité innée sont :",
+   "La reconnaissance des agents pathogènes par les cellules de l'immunité innée"
+  ]
+ },
+ {
+  "level_id": 3296,
+  "level_title": "Niveau 3",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 3,
+  "question_count": 10,
+  "sample_stems": [
+   "COVID-19 signifie",
+   "Concernant les immunoglobulines, éliminez l'option incorrecte :",
+   "Concernant le CMH, éliminez l'option incorrecte :"
+  ]
+ },
+ {
+  "level_id": 3297,
+  "level_title": "Niveau 4",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 4,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminez l'intrus :",
+   "Le VIH cible",
+   "La moelle rouge des os est le lieu de"
+  ]
+ },
+ {
+  "level_id": 3298,
+  "level_title": "Niveau 5",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 5,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les cellules dendritiques, éliminer l'option incorrecte :",
+   "Concernant la douleur liée à l'inflammation, choisir l'option correcte :",
+   "Chez des patients atteints d'une inflammation chronique des voies respiratoires, on teste l'efficacité de deux médicaments anti-inflammatoires stéroïdiens : le fluticasone et la prednisone en dosant, chez ces patients, la CRP (C-reactive protein), une protéine plasmatique. Un groupe de sujets témoins suit un traitement avec une substance inactive (placebo). Les résultats sont indiqués dans le tableau ci-dessous. (D'après documents SVT 1e ES Bordas Edition 2019. Collection Baude et Jusserand). D'après ces résultats, nous pouvons conclure tout ce qui suit sauf :"
+  ]
+ },
+ {
+  "level_id": 3299,
+  "level_title": "Niveau 6",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 6,
+  "question_count": 10,
+  "sample_stems": [
+   "L'immunité innée constitue une première ligne de défense contre (éliminer l'option incorrecte) :",
+   "La mémoire immunitaire entraîne",
+   "Dans ce qui suit, choisir l'option correcte :"
+  ]
+ },
+ {
+  "level_id": 3300,
+  "level_title": "Niveau 7",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 7,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant le CMH, éliminez l’option incorrecte :",
+   "Eliminez l’intrus :",
+   "L’agent infectieux du COVID19 est"
+  ]
+ },
+ {
+  "level_id": 3301,
+  "level_title": "Niveau 8",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 8,
+  "question_count": 10,
+  "sample_stems": [
+   "La courbe portant la lettre B représente le profil des",
+   "La courbe portant la lettre C représente le profil des",
+   "La courbe portant la lettre D représente le profil des"
+  ]
+ },
+ {
+  "level_id": 3302,
+  "level_title": "Niveau 9",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 9,
+  "question_count": 10,
+  "sample_stems": [
+   "Quel est le taux de survie estimé pour le groupe 6 ?",
+   "Eliminer l'intrus :",
+   "Que représente la figure ci-contre ?  SVT 1er collection Baude et Jusserand. Ed. Bordas 2019"
+  ]
+ },
+ {
+  "level_id": 3303,
+  "level_title": "Niveau 10",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 10,
+  "question_count": 10,
+  "sample_stems": [
+   "Toutes les options suivantes sont correctes sauf une seule, laquelle ?",
+   "Après une infection grippale, l'évolution avec le temps (de j0 à la guérison) du processus immunitaire  se dessine comme suit :",
+   "COVID-19 signifie"
+  ]
+ },
+ {
+  "level_id": 3304,
+  "level_title": "Niveau 11",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 11,
+  "question_count": 10,
+  "sample_stems": [
+   "Eliminez l'intrus :",
+   "Concernant la liaison antigène-anticorps, éliminez la mauvaise réponse :",
+   "Concernant le TCR des lymphocytes T, choisir ce qui convient:"
+  ]
+ },
+ {
+  "level_id": 3305,
+  "level_title": "Niveau 12",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 12,
+  "question_count": 10,
+  "sample_stems": [
+   "Les mastocytes sont des cellules",
+   "Le cytoplasme des mastocytes contient de nombreux granules riches en",
+   "Les souris du groupe 1 ont survécus et éliminés le virus de la grippe, à votre avis, ce schéma a  nécessité l'action des"
+  ]
+ },
+ {
+  "level_id": 3306,
+  "level_title": "Niveau 13",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 13,
+  "question_count": 10,
+  "sample_stems": [
+   "La vaccination reproduit la réponse immunitaire primaire et les réponses secondaires. Dans le cas  de la vaccination antitétanique (graphe ci-contre), il faut réaliser plusieurs injections pour obtenir une protection efficace. Des rappels sont également nécessaires au bout de quelques années pour maintenir une protection permanente. Que représente la lettre X sur l'axe des ordonnées dans le graphique ci- contre ? Modifié d'après SVT 1er collection Baude et Jusserand. Ed. Bordas 2019",
+   "Laquelle des phrases suivantes définies une interleukine ?",
+   "Choisissez l’ordre correcte caractérisant certaines étapes de la réponse immunitaire innée :"
+  ]
+ },
+ {
+  "level_id": 3307,
+  "level_title": "Niveau 14",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 14,
+  "question_count": 10,
+  "sample_stems": [
+   "Après une infection grippale, l'évolution avec le temps (de j0 à la guérison) du processus immunitaire se dessine comme suit :",
+   "L'agent infectieux responsable des oreillons est",
+   "L'agent infectieux responsable du choléra est"
+  ]
+ },
+ {
+  "level_id": 3308,
+  "level_title": "Niveau 15",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 15,
+  "question_count": 10,
+  "sample_stems": [
+   "La courbe portant la lettre A, représente le profil des",
+   "La courbe portant la lettre B, représente le profil des",
+   "La courbe portant la lettre C, représente le profil des"
+  ]
+ },
+ {
+  "level_id": 3309,
+  "level_title": "Niveau 16",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 16,
+  "question_count": 10,
+  "sample_stems": [
+   "L’agent infectieux de la pneumonie et/ou de la méningite est (Choisir la proposition qui convient) :",
+   "Concernant la réaction inflammatoire associée à la réponse immunitaire innée et les événements qui s’y manifestent, choisir l’ordre chronologique qui convient :",
+   "Le médiateur chimique libéré des cellules lésées suite à une agression, et provoquant une douleur est/sont :"
+  ]
+ },
+ {
+  "level_id": 3310,
+  "level_title": "Niveau 17",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 17,
+  "question_count": 10,
+  "sample_stems": [
+   "Expérience de Claman, 1966 : Des lymphocytes sont prélevés chez des souris normales et placés en culture dans un milieu permettant leur survie. Des souris de même souche sont soumises à des traitements (ablation du thymus et irradiation) qui détruisent tous leurs lymphocytes et les rendent immunodéficientes. Ces souris ont été réparties en trois lots et reçoivent des injections de lymphocytes issus de la mise en culture. Un quatrième lot de souris non traités sert de témoins. Les souris de tous les lots reçoivent ensuite une injection de globules rouges de mouton (GRM) qui jouent le rôle d’antigène. Une semaine plus tard, du sérum est prélevé chez chacune des souris et mis en présence de GRM afin de rechercher la présence d’anticorps anti-GRM. La démarche expérimentale est dressée dans le tableau ci-contre. TABLEAU DE LA SOURIS DEMARCHE EXPERIMENTALE Lot 1 Lot 2 Lot 3 Lot4 Traitement initial Ablation du thymus + irradiation Aucun Injection 1 Lymphocytes B Lymphocytes T Lymphocytes B et T Aucune Injection 2 GRM GRM GRM GRM Modifié d’après SVT 1er collection Baude et Jusserand. Ed. Bordas 2019 Les souris qui ont fabriqué des anticorps-anti-GRM sont (choisir la proposition qui convient) :",
+   "Concernant les organes lymphoïdes et la production de cellules immunocompétentes, éliminer la proposition qui ne convient pas :",
+   "Des macrophages de souris ont été mis en culture en présence de particules de silice. Au bout de 12 heures, on mesure la concentration de l’interleukine-1 (IL-1) dans le surnageant des boites de culture. Choisir la proposition qui convient : La production de l’IL-1, telle que montrée dans la figure"
+  ]
+ },
+ {
+  "level_id": 3311,
+  "level_title": "Niveau 18",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 18,
+  "question_count": 10,
+  "sample_stems": [
+   "Laquelle des maladies suivantes dont le vaccin est une anatoxine ?",
+   "Concernant les adjuvants associés aux vaccins, choisir la proposition qui convient :",
+   "La couverture vaccinale dans une population doit être forte pour que certaines catégories de personnes qui ne peuvent être vaccinées soient protégées. Ce sont principalement : tout ce qui suit est correcte à l'exception d'une seule proposition, laquelle ?"
+  ]
+ },
+ {
+  "level_id": 3312,
+  "level_title": "Niveau 19",
+  "old_unit": "Immunologie (réponse immunitaire, vaccins, immunothérapie)",
+  "old_unit_order": 7,
+  "level_order": 19,
+  "question_count": 2,
+  "sample_stems": [
+   "Concernant la liaison antigène-anticorps, éliminez la proposition qui ne convient pas :",
+   "Concernant le répertoire immunitaire, choisir la proposition qui convient :"
+  ]
+ },
+ {
+  "level_id": 3313,
+  "level_title": "Niveau 1",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 1,
+  "question_count": 10,
+  "sample_stems": [
+   "Une hormone (choisir la réponse correcte) :",
+   "Parmi les propositions suivantes, quelle relation fonctionnelle entre l'hypothalamus et l'hypophyse est incorrecte ?",
+   "Concernant le fonctionnement des gonades, quelle proposition est incorrecte ?"
+  ]
+ },
+ {
+  "level_id": 3314,
+  "level_title": "Niveau 2",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 2,
+  "question_count": 10,
+  "sample_stems": [
+   "Dans ce tableau sont présentées, la fréquence et l’amplitude des pulses (sécrétions  de courtes durées et discontinues) de GnRH par l’hypothalamus dans le sang chez un bélier dans trois situations. D’après les données de ce tableau, quelle option parmi les suivantes serait la bonne ?",
+   "Les courbes suivantes montrent le contrôle de l’hypothalamus sur les secrétions de  gonadostimulines de l’hypophyse. L’expérience a été réalisée sur l’animal en âge de sa puberté. D'après les résultats des courbes affichées devant vous, on peut dire que",
+   "Le rétrocontrôle exercé par les ovaires de début de phase lutéale sur le complexe  hypothalamo-hypophysaire est"
+  ]
+ },
+ {
+  "level_id": 3315,
+  "level_title": "Niveau 3",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 3,
+  "question_count": 10,
+  "sample_stems": [
+   "Parmi les propositions suivantes, choisir la réponse exacte :",
+   "Quel organe parmi les suivants, stock le plus, le glucose ?",
+   "Quel organe parmi les suivants, consomme le plus, le glucose au repos ?"
+  ]
+ },
+ {
+  "level_id": 3316,
+  "level_title": "Niveau 4",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 4,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant le glucagon, choisir la bonne option :",
+   "Lequel des éléments suivants n'est pas impliqué dans la sécrétion de l'insuline ?",
+   "Concernant les cellules bêta pancréatiques, choisir l'option correcte :"
+  ]
+ },
+ {
+  "level_id": 3317,
+  "level_title": "Niveau 5",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 5,
+  "question_count": 10,
+  "sample_stems": [
+   "L'expérience de la « piqûre diabétique » de Claude Bernard a permis",
+   "Certains sportifs se dopent à l'insuline afin",
+   "Eliminez l'intrus :"
+  ]
+ },
+ {
+  "level_id": 3318,
+  "level_title": "Niveau 6",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 6,
+  "question_count": 10,
+  "sample_stems": [
+   "L'hormone qui fait un pic 24 heures avant l'ovulation est",
+   "La principale hormone qui exerce un rétrocontrôle positif sur le complexe hypothalamo- hypophysaire est",
+   "La glycémie désigne la mesure de la concentration du glucose dans"
+  ]
+ },
+ {
+  "level_id": 3319,
+  "level_title": "Niveau 7",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 7,
+  "question_count": 10,
+  "sample_stems": [
+   "Le contrôle homéostatique de la glycémie implique tous ces effecteurs sauf un seul, lequel ?",
+   "L'utilisation de l'insuline par certains athlètes de haut niveau a pour but",
+   "Concernant le diabète de type 2, choisir l'option correcte :"
+  ]
+ },
+ {
+  "level_id": 3320,
+  "level_title": "Niveau 8",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 8,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les cellules bêta pancréatiques,",
+   "Concernant les effets des hormones pancréatiques, choisir ce qui convient:",
+   "Parmi les signes du diabète de type 1, tout ce qui suit est correct sauf :"
+  ]
+ },
+ {
+  "level_id": 3321,
+  "level_title": "Niveau 9",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 9,
+  "question_count": 10,
+  "sample_stems": [
+   "Une pancréatectomie totale est",
+   "L’hormone progestérone présente toutes les caractéristiques suivantes sauf une seule, laquelle ?",
+   "Vous mélangez dans un bécher, une quantité déterminée d’insuline avec une quantité déterminée de  glucose diluée dans du sérum physiologique, et vous attendez 45 minutes. Choisir ce qui convient :"
+  ]
+ },
+ {
+  "level_id": 3322,
+  "level_title": "Niveau 10",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 10,
+  "question_count": 10,
+  "sample_stems": [
+   "Quelle hormone des suivantes entraine le développement des glandes du col utérin ?",
+   "Concernant les courbes représentées dans le graphe, choisir ce qui convient :",
+   "Concernant le glucose, choisir ce qui convient :"
+  ]
+ },
+ {
+  "level_id": 3323,
+  "level_title": "Niveau 11",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 11,
+  "question_count": 10,
+  "sample_stems": [
+   "Quel est le r�le principal de l�insuline dans la r�gulation de la glyc�mie ?",
+   "Vous m�langez dans une erlenmeyer contenant 50 ml de s�rum physiologique, 50 microgrammes  d�insuline et 2 grammes de glucose. Apr�s 30 minutes � une temp�rature de 37�C, choisir la proposition qui convient :",
+   "La glyc�mie chez une personne saine, choisir la proposition qui ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3324,
+  "level_title": "Niveau 12",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 12,
+  "question_count": 10,
+  "sample_stems": [
+   "Une baisse du taux de glucose sanguin favorise, �liminer la proposition qui ne convient pas:",
+   "Le foie, choisir la proposition qui convient :",
+   "Le dépistage du diabète de type 1 se fait par"
+  ]
+ },
+ {
+  "level_id": 3325,
+  "level_title": "Niveau 13",
+  "old_unit": "Régulation hormonale et homéostasie (glycémie, hormones)",
+  "old_unit_order": 8,
+  "level_order": 13,
+  "question_count": 8,
+  "sample_stems": [
+   "Concernant le cycle ovarien, identifier la proposition erronée parmi les suivantes :",
+   "Un acide aminé peut être utilisé par plusieurs types de cellules dans différentes voies  métaboliques pour des fonctions spécifiques. Ainsi, par exemple les cellules de la glande thyroïde, les neurones et les mélanocytes utilisent toutes les trois un acide aminé pour la synthèse d’hormones, de neurotransmetteurs et de la mélanine respectivement. Il s’agit de l’acide aminé :",
+   "Concernant les hormones hypothalamo-hypophysaires qui interviennent dans la régulation  des hormones sexuelles, identifier la proposition qui convient parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3326,
+  "level_title": "Niveau 1",
+  "old_unit": "Enzymologie et biochimie (enzymes, protéines, métabolisme)",
+  "old_unit_order": 9,
+  "level_order": 1,
+  "question_count": 10,
+  "sample_stems": [
+   "Les protéines occupent les fonctions suivantes sauf une, laquelle?",
+   "Un acide aminé renferme obligatoirement l'un des groupements chimiques suivants, lequel ?",
+   "Les enzymes sont des biocatalyseurs car elles:"
+  ]
+ },
+ {
+  "level_id": 3327,
+  "level_title": "Niveau 2",
+  "old_unit": "Enzymologie et biochimie (enzymes, protéines, métabolisme)",
+  "old_unit_order": 9,
+  "level_order": 2,
+  "question_count": 10,
+  "sample_stems": [
+   "En étudiant le tube 7, particulièrement, qu'en déduisez-vous ?",
+   "En analysant les tubes de la deuxième série d'expériences, quelle conclusion en tirez-vous ?",
+   "La comparaison des résultats des deux séries d'expériences nous permet de déduire  tout ce qui suit, sauf :"
+  ]
+ },
+ {
+  "level_id": 3328,
+  "level_title": "Niveau 3",
+  "old_unit": "Enzymologie et biochimie (enzymes, protéines, métabolisme)",
+  "old_unit_order": 9,
+  "level_order": 3,
+  "question_count": 10,
+  "sample_stems": [
+   "La classification des enzymes se fait selon",
+   "Les hydrolases, sont un exemple",
+   "Au cours d’une réaction enzymatique la vitesse de réaction est"
+  ]
+ },
+ {
+  "level_id": 3329,
+  "level_title": "Niveau 4",
+  "old_unit": "Enzymologie et biochimie (enzymes, protéines, métabolisme)",
+  "old_unit_order": 9,
+  "level_order": 4,
+  "question_count": 9,
+  "sample_stems": [
+   "Concernant les enzymes, éliminez ce qui ne convient pas :",
+   "La classification des enzymes se fait selon",
+   "La classification des enzymes se fait selon"
+  ]
+ },
+ {
+  "level_id": 3330,
+  "level_title": "Niveau 5",
+  "old_unit": "Enzymologie et biochimie (enzymes, protéines, métabolisme)",
+  "old_unit_order": 9,
+  "level_order": 5,
+  "question_count": 10,
+  "sample_stems": [
+   "La solution de Lugol ou d’iodure de potassium ou encore eau iodée, donne une couleur (X)  lorsqu’elle est mélangée avec l’amidon. Attribuer à (X) la couleur qui convient parmi les suivantes :",
+   "Concernant les enzymes, leur appellation et leurs variétés, éliminer l’option qui ne convient  pas :",
+   "Concernant les enzymes en général, éliminer l’option qui ne convient pas :"
+  ]
+ },
+ {
+  "level_id": 3331,
+  "level_title": "Niveau 6",
+  "old_unit": "Enzymologie et biochimie (enzymes, protéines, métabolisme)",
+  "old_unit_order": 9,
+  "level_order": 6,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les protéines, identifier la proposition erronée parmi les suivantes :",
+   "Pour être assimilé, l’amidon doit être transformé en molécules plus petites contenant de moins  en moins d’unités (n) et finalement du glucose. Cette simplification moléculaire est une,  identifier la proposition qui convient parmi les suivantes :",
+   "Quelle enzyme parmi les suivantes permet de lutter contre le stress oxydatif ?"
+  ]
+ },
+ {
+  "level_id": 3332,
+  "level_title": "Niveau 7",
+  "old_unit": "Enzymologie et biochimie (enzymes, protéines, métabolisme)",
+  "old_unit_order": 9,
+  "level_order": 7,
+  "question_count": 10,
+  "sample_stems": [
+   "Laquelle des molécules suivantes n’est pas une enzyme ?",
+   "Quel item parmi les suivants permet de lutter contre le stress oxydatif ?",
+   "Dans un tube à essai, vous mélanger de l’eau et de l’amidon. Quel agent des suivants donne  une coloration bleue-nuit lorsqu’il est ajouté à ce mélange ?"
+  ]
+ },
+ {
+  "level_id": 3333,
+  "level_title": "Niveau 8",
+  "old_unit": "Enzymologie et biochimie (enzymes, protéines, métabolisme)",
+  "old_unit_order": 9,
+  "level_order": 8,
+  "question_count": 2,
+  "sample_stems": [
+   "A qui appartient l’effet cytoprotecteur contre les dérivés d’oxygène toxiques, générés par  H2O2 ?",
+   "Un déficit enzymatique, d’origine génétique, altérant l’utilisation du glucos-6-phosphate,  entraine, choisir la proposition qui convient parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3334,
+  "level_title": "Niveau 9",
+  "old_unit": "Enzymologie et biochimie (enzymes, protéines, métabolisme)",
+  "old_unit_order": 9,
+  "level_order": 9,
+  "question_count": 10,
+  "sample_stems": [
+   "La structure primaire d'une protéine",
+   "Une enzyme",
+   "Une enzyme"
+  ]
+ },
+ {
+  "level_id": 3335,
+  "level_title": "Niveau 1",
+  "old_unit": "Techniques de laboratoire (PCR, caryotype, FISH, électrophorèse)",
+  "old_unit_order": 10,
+  "level_order": 1,
+  "question_count": 10,
+  "sample_stems": [
+   "Concernant les empreintes génétiques, éliminer la mauvaise réponse :",
+   "La détection d’un ADN étranger dans le corps humain, éliminer la mauvaise réponse :",
+   "Le transfert d’un gène d’intérêt à l’aide d’une bactérie à une cellule animale est qualifié  de :"
+  ]
+ },
+ {
+  "level_id": 3336,
+  "level_title": "Niveau 2",
+  "old_unit": "Techniques de laboratoire (PCR, caryotype, FISH, électrophorèse)",
+  "old_unit_order": 10,
+  "level_order": 2,
+  "question_count": 10,
+  "sample_stems": [
+   "La réalisation d'un caryotype repose sur l'utilisation",
+   "Pour pouvoir établir un caryotype, les mitoses sont bloquées en",
+   "Pour lire le caryotype, les chromosomes par paires homologues, sont classés selon"
+  ]
+ },
+ {
+  "level_id": 3337,
+  "level_title": "Niveau 3",
+  "old_unit": "Techniques de laboratoire (PCR, caryotype, FISH, électrophorèse)",
+  "old_unit_order": 10,
+  "level_order": 3,
+  "question_count": 10,
+  "sample_stems": [
+   "Parmi les propositions suivantes, indiquer celle qui corresponde à une indication de caryotype  chez un nouveau-né :",
+   "La chromatographie est une technique qui permet de séparer :",
+   "Sur une préparation microscopique de cellules pancréatiques, le vert de méthyl, colorie :"
+  ]
+ },
+ {
+  "level_id": 3338,
+  "level_title": "Niveau 4",
+  "old_unit": "Techniques de laboratoire (PCR, caryotype, FISH, électrophorèse)",
+  "old_unit_order": 10,
+  "level_order": 4,
+  "question_count": 10,
+  "sample_stems": [
+   "La technique de FISH intéresse",
+   "Pour évaluer l'empreinte génétique dans le test de paternité, on utilise",
+   "L'expression « ciseaux biologiques » d'ADN désigne"
+  ]
+ },
+ {
+  "level_id": 3339,
+  "level_title": "Niveau 5",
+  "old_unit": "Techniques de laboratoire (PCR, caryotype, FISH, électrophorèse)",
+  "old_unit_order": 10,
+  "level_order": 5,
+  "question_count": 10,
+  "sample_stems": [
+   "Le caryotype se réalise à partir d’une cellule",
+   "Le caryotype des sujets atteints de trisomie 21, montre",
+   "Le groupage sanguin est"
+  ]
+ },
+ {
+  "level_id": 3340,
+  "level_title": "Niveau 6",
+  "old_unit": "Techniques de laboratoire (PCR, caryotype, FISH, électrophorèse)",
+  "old_unit_order": 10,
+  "level_order": 6,
+  "question_count": 10,
+  "sample_stems": [
+   "L'étape d'hybridation pendant la PCR, consiste (choisir ce qui convient) :",
+   "Concernant la technique de PCR, quelle option parmi les suivantes ne convient pas ?",
+   "Concernant le caryotype, éliminer ce qui ne convient pas parmi les options suivantes :"
+  ]
+ },
+ {
+  "level_id": 3341,
+  "level_title": "Niveau 7",
+  "old_unit": "Techniques de laboratoire (PCR, caryotype, FISH, électrophorèse)",
+  "old_unit_order": 10,
+  "level_order": 7,
+  "question_count": 10,
+  "sample_stems": [
+   "La quantité d’ADN par cellule peut être mesurée à l’aide d’un des moyens suivants, lequel ?",
+   "Quel est l'intérêt du caryotype dans le diagnostic médical ?",
+   "L’acronyme PCR de l’anglais, identifier la proposition qui convient parmi les suivantes :"
+  ]
+ },
+ {
+  "level_id": 3342,
+  "level_title": "Niveau 8",
+  "old_unit": "Techniques de laboratoire (PCR, caryotype, FISH, électrophorèse)",
+  "old_unit_order": 10,
+  "level_order": 8,
+  "question_count": 8,
+  "sample_stems": [
+   "La technique de FISH, est l’une des techniques qui a aidé les scientifiques, identifier la  proposition qui convient parmi les suivantes :",
+   "Le caryotype d'une cellule de notre organisme s'interprète par :",
+   "A quelle valeur optimale de température, la réplication de l’ADN est initiée, en utilisant la  technique de PCR ?"
+  ]
+ },
+ {
+  "level_id": 3343,
+  "level_title": "Niveau 1",
+  "old_unit": "Divers",
+  "old_unit_order": 11,
+  "level_order": 1,
+  "question_count": 8,
+  "sample_stems": [
+   "Trouvez l'intrus :",
+   "L’acronyme OGM signifie :",
+   "Concernant les infections sexuellement transmissibles, éliminer la mauvaise réponse :"
+  ]
+ },
+ {
+  "level_id": 3344,
+  "level_title": "Niveau 2",
+  "old_unit": "Divers",
+  "old_unit_order": 11,
+  "level_order": 2,
+  "question_count": 1,
+  "sample_stems": [
+   "Dans un organisme,"
+  ]
+ }
+]

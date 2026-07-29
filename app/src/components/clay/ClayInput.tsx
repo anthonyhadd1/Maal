@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import { withAlpha } from '@/lib/color';
 import { colors, focusRing, radii, spacing, typography } from '@/theme/tokens';
 
 // Edge (Chromium) renders its own native reveal-password icon inside
@@ -41,6 +42,13 @@ export interface ClayInputProps extends TextInputProps {
   error?: string | null;
   hint?: string;
   containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Dark-surface variant — a translucent "glass" field instead of solid
+   * white, for screens on the near-black auth/marketing background. Every
+   * other screen (the light clay study app) is unaffected; this only
+   * activates when explicitly passed.
+   */
+  dark?: boolean;
 }
 
 /**
@@ -50,7 +58,7 @@ export interface ClayInputProps extends TextInputProps {
  * - built-in show/hide toggle for secure entry
  */
 export const ClayInput = forwardRef<TextInput, ClayInputProps>(function ClayInput(
-  { label, error, hint, secureTextEntry, containerStyle, onFocus, onBlur, ...rest },
+  { label, error, hint, secureTextEntry, containerStyle, dark, onFocus, onBlur, ...rest },
   ref,
 ) {
   const { t } = useTranslation('common');
@@ -60,25 +68,28 @@ export const ClayInput = forwardRef<TextInput, ClayInputProps>(function ClayInpu
   const borderColor = error
     ? colors.danger
     : focused
-      ? colors.primary[500]
-      : colors.neutral[200];
+      ? colors.primary[dark ? 400 : 500]
+      : dark
+        ? withAlpha(colors.neutral[0], 0.16)
+        : colors.neutral[200];
 
   return (
     <View style={containerStyle}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, dark && styles.labelDark]}>{label}</Text>
       <View
         style={[
           styles.field,
+          dark && styles.fieldDark,
           { borderColor },
-          focused && styles.fieldFocused,
+          focused && (dark ? styles.fieldFocusedDark : styles.fieldFocused),
           error ? styles.fieldError : null,
         ]}
       >
         <TextInput
           ref={ref}
           accessibilityLabel={label}
-          style={styles.input}
-          placeholderTextColor={colors.neutral[500]}
+          style={[styles.input, dark && styles.inputDark]}
+          placeholderTextColor={dark ? withAlpha(colors.neutral[0], 0.4) : colors.neutral[500]}
           secureTextEntry={secureTextEntry ? hidden : false}
           onFocus={(e) => {
             setFocused(true);
@@ -99,9 +110,9 @@ export const ClayInput = forwardRef<TextInput, ClayInputProps>(function ClayInpu
             style={styles.eye}
           >
             {hidden ? (
-              <Eye color={colors.neutral[500]} size={20} />
+              <Eye color={dark ? withAlpha(colors.neutral[0], 0.6) : colors.neutral[500]} size={20} />
             ) : (
-              <EyeOff color={colors.neutral[500]} size={20} />
+              <EyeOff color={dark ? withAlpha(colors.neutral[0], 0.6) : colors.neutral[500]} size={20} />
             )}
           </Pressable>
         ) : null}
@@ -111,7 +122,7 @@ export const ClayInput = forwardRef<TextInput, ClayInputProps>(function ClayInpu
           {error}
         </Text>
       ) : hint ? (
-        <Text style={styles.hint}>{hint}</Text>
+        <Text style={[styles.hint, dark && styles.hintDark]}>{hint}</Text>
       ) : null}
     </View>
   );
@@ -123,6 +134,9 @@ const styles = StyleSheet.create({
     color: colors.neutral[700],
     marginBottom: spacing.xs,
   },
+  labelDark: {
+    color: withAlpha(colors.neutral[0], 0.78),
+  },
   field: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -133,9 +147,15 @@ const styles = StyleSheet.create({
     minHeight: 52,
     paddingHorizontal: spacing.l,
   },
+  fieldDark: {
+    backgroundColor: withAlpha(colors.neutral[0], 0.06),
+  },
   fieldFocused: {
     backgroundColor: colors.neutral[0],
     ...focusRing,
+  },
+  fieldFocusedDark: {
+    backgroundColor: withAlpha(colors.neutral[0], 0.09),
   },
   fieldError: {
     backgroundColor: colors.danger + '0D',
@@ -148,6 +168,9 @@ const styles = StyleSheet.create({
     // The clay focus ring replaces the UA outline on web. RN's TextStyle
     // typing doesn't know the react-native-web-only 'none' value.
     ...(Platform.OS === 'web' ? ({ outlineStyle: 'none' } as unknown as object) : null),
+  },
+  inputDark: {
+    color: colors.neutral[0],
   },
   eye: {
     padding: spacing.xs,
@@ -162,5 +185,8 @@ const styles = StyleSheet.create({
     ...typography.caption,
     color: colors.neutral[500],
     marginTop: spacing.xs,
+  },
+  hintDark: {
+    color: withAlpha(colors.neutral[0], 0.55),
   },
 });

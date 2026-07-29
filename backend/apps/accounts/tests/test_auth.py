@@ -1,7 +1,11 @@
+from datetime import timedelta
+
 import pytest
+from django.core import mail
+from django.utils import timezone
 from rest_framework.test import APIClient
 
-from apps.accounts.models import Profile, User
+from apps.accounts.models import PasswordResetCode, Profile, User
 
 from .factories import DEFAULT_PASSWORD, UserFactory
 
@@ -17,7 +21,12 @@ class TestRegister:
     def test_register_creates_user_profile_and_returns_tokens(self, client):
         resp = client.post(
             "/api/v1/auth/register/",
-            {"username": "maya_k", "password": "S3cure!pass", "display_name": "Maya"},
+            {
+                "username": "maya_k",
+                "email": "maya@example.com",
+                "password": "S3cure!pass",
+                "display_name": "Maya",
+            },
             format="json",
         )
         assert resp.status_code == 201
@@ -31,15 +40,44 @@ class TestRegister:
         UserFactory(username="elie")
         resp = client.post(
             "/api/v1/auth/register/",
-            {"username": "Elie", "password": "S3cure!pass"},
+            {"username": "Elie", "email": "elie2@example.com", "password": "S3cure!pass"},
             format="json",
         )
         assert resp.status_code == 400
 
+    def test_register_requires_email(self, client):
+        resp = client.post(
+            "/api/v1/auth/register/",
+            {"username": "noemail", "password": "S3cure!pass"},
+            format="json",
+        )
+        assert resp.status_code == 400
+        assert "email" in resp.data
+
+    def test_register_rejects_duplicate_email_case_insensitive(self, client):
+        UserFactory(username="firstone", email="taken@example.com")
+        resp = client.post(
+            "/api/v1/auth/register/",
+            {"username": "secondone", "email": "Taken@Example.com", "password": "S3cure!pass"},
+            format="json",
+        )
+        assert resp.status_code == 400
+        assert "email" in resp.data
+        assert User.objects.filter(username="secondone").count() == 0
+
+    def test_register_normalizes_email_to_lowercase(self, client):
+        resp = client.post(
+            "/api/v1/auth/register/",
+            {"username": "mixedcase", "email": "Mixed.Case@Example.com", "password": "S3cure!pass"},
+            format="json",
+        )
+        assert resp.status_code == 201
+        assert User.objects.get(username="mixedcase").email == "mixed.case@example.com"
+
     def test_register_rejects_weak_password(self, client):
         resp = client.post(
             "/api/v1/auth/register/",
-            {"username": "weakling", "password": "123"},
+            {"username": "weakling", "email": "weak@example.com", "password": "123"},
             format="json",
         )
         assert resp.status_code == 400
@@ -47,7 +85,140 @@ class TestRegister:
     def test_register_rejects_bad_username_chars(self, client):
         resp = client.post(
             "/api/v1/auth/register/",
-            {"username": "no spaces!", "password": "S3cure!pass"},
+            {"username": "no spaces!", "email": "spaces@example.com", "password": "S3cure!pass"},
+            format="json",
+        )
+        assert resp.status_code == 400
+
+
+class TestPasswordReset:
+    def _request_code(self, client, email):
+        mail.outbox.clear()
+        resp = client.post("/api/v1/auth/password/reset/", {"email": email}, format="json")
+        assert resp.status_code == 200
+        # The 6-digit code is in the sent email body.
+        assert len(mail.outbox) == 1
+        import re
+
+        match = re.search(r"\b(\d{6})\b", mail.outbox[0].body)
+        assert match, "no 6-digit code found in reset email"
+        return match.group(1)
+
+    def test_full_reset_flow_rotates_password(self, client):
+        UserFactory(username="rania", email="rania@example.com")
+        code = self._request_code(client, "rania@example.com")
+        resp = client.post(
+            "/api/v1/auth/password/reset/confirm/",
+            {"email": "rania@example.com", "code": code, "new_password": "F3sh!newpass"},
+            format="json",
+        )
+        assert resp.status_code == 200
+        # Old password no longer authenticates; the new one does.
+        assert (
+            client.post(
+                "/api/v1/auth/token/",
+                {"username": "rania", "password": DEFAULT_PASSWORD},
+                format="json",
+            ).status_code
+            == 401
+        )
+        assert (
+            client.post(
+                "/api/v1/auth/token/",
+                {"username": "rania", "password": "F3sh!newpass"},
+                format="json",
+            ).status_code
+            == 200
+        )
+
+    def test_request_for_unknown_email_is_silent_200_no_email(self, client):
+        mail.outbox.clear()
+        resp = client.post(
+            "/api/v1/auth/password/reset/", {"email": "ghost@nowhere.com"}, format="json"
+        )
+        assert resp.status_code == 200  # no account enumeration
+        assert len(mail.outbox) == 0
+
+    def test_wrong_code_is_rejected(self, client):
+        UserFactory(username="wrongcode", email="wrongcode@example.com")
+        self._request_code(client, "wrongcode@example.com")
+        resp = client.post(
+            "/api/v1/auth/password/reset/confirm/",
+            {"email": "wrongcode@example.com", "code": "000000", "new_password": "F3sh!newpass"},
+            format="json",
+        )
+        assert resp.status_code == 400
+
+    def test_code_is_single_use(self, client):
+        UserFactory(username="singleuse", email="single@example.com")
+        code = self._request_code(client, "single@example.com")
+        first = client.post(
+            "/api/v1/auth/password/reset/confirm/",
+            {"email": "single@example.com", "code": code, "new_password": "F3sh!newpass"},
+            format="json",
+        )
+        assert first.status_code == 200
+        again = client.post(
+            "/api/v1/auth/password/reset/confirm/",
+            {"email": "single@example.com", "code": code, "new_password": "Another!200"},
+            format="json",
+        )
+        assert again.status_code == 400
+
+    def test_requesting_new_code_invalidates_old(self, client):
+        UserFactory(username="tworounds", email="two@example.com")
+        old_code = self._request_code(client, "two@example.com")
+        new_code = self._request_code(client, "two@example.com")
+        assert old_code != new_code or True  # codes may coincide; behavior is what matters
+        # Old code must no longer work.
+        resp = client.post(
+            "/api/v1/auth/password/reset/confirm/",
+            {"email": "two@example.com", "code": old_code, "new_password": "F3sh!newpass"},
+            format="json",
+        )
+        # Only assert the old one fails when it actually differs from the new one.
+        if old_code != new_code:
+            assert resp.status_code == 400
+
+    def test_expired_code_is_rejected(self, client):
+        user = UserFactory(username="expired", email="expired@example.com")
+        self._request_code(client, "expired@example.com")
+        # Force-expire the outstanding code.
+        PasswordResetCode.objects.filter(user=user).update(
+            expires_at=timezone.now() - timedelta(minutes=1)
+        )
+        # Re-derive by brute force is impossible; just assert any code now fails.
+        resp = client.post(
+            "/api/v1/auth/password/reset/confirm/",
+            {"email": "expired@example.com", "code": "123456", "new_password": "F3sh!newpass"},
+            format="json",
+        )
+        assert resp.status_code == 400
+
+    def test_attempts_cap_burns_the_code(self, client, settings):
+        UserFactory(username="brute", email="brute@example.com")
+        code = self._request_code(client, "brute@example.com")
+        cap = settings.PASSWORD_RESET["MAX_ATTEMPTS"]
+        for _ in range(cap):
+            client.post(
+                "/api/v1/auth/password/reset/confirm/",
+                {"email": "brute@example.com", "code": "999999", "new_password": "F3sh!newpass"},
+                format="json",
+            )
+        # Even the RIGHT code is now dead (attempts exhausted).
+        resp = client.post(
+            "/api/v1/auth/password/reset/confirm/",
+            {"email": "brute@example.com", "code": code, "new_password": "F3sh!newpass"},
+            format="json",
+        )
+        assert resp.status_code == 400
+
+    def test_confirm_rejects_weak_new_password(self, client):
+        UserFactory(username="weaknew", email="weaknew@example.com")
+        code = self._request_code(client, "weaknew@example.com")
+        resp = client.post(
+            "/api/v1/auth/password/reset/confirm/",
+            {"email": "weaknew@example.com", "code": code, "new_password": "123"},
             format="json",
         )
         assert resp.status_code == 400

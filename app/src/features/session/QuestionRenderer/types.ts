@@ -1,4 +1,5 @@
-import type { AnswerResponse, AttemptQuestion } from '@/api/types';
+import type { AttemptQuestion } from '@/api/types';
+import type { SessionAnswerRecord } from '@/stores/sessionStore';
 
 /**
  * Discriminated rendering kinds (design_mobile.md §4b): derived from `qtype`
@@ -16,6 +17,15 @@ export function classifyQuestion(question: AttemptQuestion): QuestionKind {
   return 'single';
 }
 
+/**
+ * True when every choice carries its own figure — i.e. the answer options ARE
+ * images (real exam "which of these curves is f?" questions). Such choices get
+ * the large uncropped image treatment instead of a thumbnail-beside-text row.
+ */
+export function allChoicesAreImages(question: AttemptQuestion): boolean {
+  return question.choices.length > 0 && question.choices.every((c) => !!c.image_url);
+}
+
 /** Visual state of one answer option through the select→reveal lifecycle. */
 export type RevealState = 'idle' | 'selected' | 'correct' | 'wrong' | 'revealCorrect' | 'dimmed';
 
@@ -26,7 +36,7 @@ export type RevealState = 'idle' | 'selected' | 'correct' | 'wrong' | 'revealCor
 export function choiceRevealState(
   choiceId: number,
   selected: number[],
-  revealed: AnswerResponse | null,
+  revealed: SessionAnswerRecord | null,
 ): RevealState {
   const isSelected = selected.includes(choiceId);
   if (!revealed) return isSelected ? 'selected' : 'idle';
@@ -44,8 +54,9 @@ export interface RendererProps {
   selected: number[];
   /** Tap on a choice (select for single/TF, toggle for multi). */
   onToggle: (choiceId: number) => void;
-  /** Server verdict during the feedback phase; null while answering. */
-  revealed: AnswerResponse | null;
-  /** Block interaction (submitting / feedback). */
+  /** This question's persisted verdict — set once answered, null until then
+   *  (drives both the just-submitted reveal AND revisiting a past card). */
+  revealed: SessionAnswerRecord | null;
+  /** Block interaction (submitting, or already answered). */
   disabled: boolean;
 }

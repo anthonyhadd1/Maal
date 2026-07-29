@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useNetworkState } from 'expo-network';
 import { useRouter } from 'expo-router';
 import { Crown } from 'lucide-react-native';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   FlatList,
   Platform,
@@ -12,6 +12,7 @@ import {
   useWindowDimensions,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
+  type ViewToken,
 } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
@@ -43,9 +44,11 @@ import { LevelNode, NODE_SIZE, offersLegendary } from '@/features/map/LevelNode'
 import { MapConnector } from '@/features/map/MapConnector';
 import { MapMilestone } from '@/features/map/MapMilestone';
 import { RowScenery } from '@/features/map/MapScenery';
+import { ChapterContextBar } from '@/features/map/ChapterContextBar';
 import { UnitHeader } from '@/features/map/UnitHeader';
 import {
   ROW_HEIGHT,
+  chapterInView,
   useMapLayout,
   type MapRow,
   type NodeRow,
@@ -53,6 +56,7 @@ import {
 import { MapHeader } from '@/features/map/MapHeader';
 import { withAlpha } from '@/lib/color';
 import { useReducedMotionPref } from '@/lib/motion';
+import { useMapNavStore } from '@/stores/mapNavStore';
 import { isSessionResumable, useSessionStore } from '@/stores/sessionStore';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { colors, getSubjectAccent, spacing } from '@/theme/tokens';
@@ -227,7 +231,7 @@ export function LevelsMap() {
             setConflict({ level, attemptId: info.attemptId });
             return;
           }
-          toast.show({ type: 'error', message: info.detail ?? tErrors('server') });
+          toast.show({ type: 'error', message: tErrors('server') });
         },
       });
     },
@@ -253,6 +257,34 @@ export function LevelsMap() {
   const onPremiumPress = useCallback(() => {
     router.push('/paywall');
   }, [router]);
+
+  // --- jump to a chapter (review any unit without scrolling past it) ------
+  const jumpToUnit = useCallback(
+    (rowIndex: number) => {
+      // The map climbs bottom-to-top, so a unit's OWN nodes render ABOVE its
+      // header row (not below) — anchor the header to the viewport's BOTTOM
+      // edge so scrolling up from the jump reveals that unit's own content,
+      // instead of the top-aligned default which would reveal the PREVIOUS
+      // unit below it.
+      listRef.current?.scrollToIndex({ index: rowIndex, viewPosition: 1, animated: true });
+    },
+    [],
+  );
+
+  // The chapters screen is a separate route, so it hands back its choice
+  // through an ephemeral store; consume it once the rows exist to scroll into.
+  const pendingUnitId = useMapNavStore((s) => s.pendingUnitId);
+  const consumePendingUnit = useMapNavStore((s) => s.consumePendingUnit);
+  useEffect(() => {
+    if (pendingUnitId == null || layout.rows.length === 0) return;
+    const rowIndex = layout.rows.findIndex(
+      (row) => row.type === 'unitHeader' && row.unit.id === pendingUnitId,
+    );
+    consumePendingUnit();
+    if (rowIndex < 0) return;
+    // rAF: let the list commit the current rows before scrolling into them.
+    requestAnimationFrame(() => jumpToUnit(rowIndex));
+  }, [pendingUnitId, layout.rows, consumePendingUnit, jumpToUnit]);
 
   // --- resume / conflict dialog handlers ----------------------------------
   const resumeSession = () => {
@@ -291,6 +323,20 @@ export function LevelsMap() {
   const conflictMatchesStore =
     conflict?.attemptId != null && useSessionStore.getState().attemptId === conflict.attemptId;
 
+  // --- chapter currently on screen ------------------------------------------
+  const [visibleRowIndices, setVisibleRowIndices] = useState<number[]>([]);
+  const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 20 }).current;
+  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
+    setVisibleRowIndices(
+      viewableItems.map((v) => v.index).filter((i): i is number => i != null),
+    );
+  }).current;
+
+  const visibleChapter = useMemo(
+    () => chapterInView(layout.rows, visibleRowIndices) ?? chapterInView(layout.rows, [layout.rows.length - 1]),
+    [layout.rows, visibleRowIndices],
+  );
+
   // --- render --------------------------------------------------------------
   const renderItem = useCallback(
     ({ item }: { item: MapRow }) => {
@@ -298,7 +344,13 @@ export function LevelsMap() {
       if (item.type === 'unitHeader') {
         return (
           <View style={{ backgroundColor: zoneTint }}>
-            <UnitHeader accent={accent} done={item.done} total={item.total} unit={item.unit} />
+            <UnitHeader
+              accent={accent}
+              done={item.done}
+              total={item.total}
+              unit={item.unit}
+              unitIndex={item.unitIndex}
+            />
           </View>
         );
       }
@@ -344,12 +396,13 @@ export function LevelsMap() {
             onPremium={onPremiumPress}
             onStart={onNodeStart}
             rowWidth={width}
+            starting={startAttempt.isPending}
             x={nodeX}
           />
         </View>
       );
     },
-    [accent, layout, width, onLockedPress, onPremiumPress, onNodeStart, activeSlug],
+    [accent, layout, width, onLockedPress, onPremiumPress, onNodeStart, activeSlug, startAttempt.isPending],
   );
 
   const refresh = useCallback(async () => {
@@ -366,14 +419,29 @@ export function LevelsMap() {
       <MapBackdrop accent={accent} scrollY={scrollY} />
       <MapHeader
         accent={accent}
-        chapterProgress={layout.chapterProgress}
         game={game.data}
         onSwitchSubject={() => router.push('/subject/switcher')}
-        onSwitchTrack={() => router.push('/track/switcher')}
         subjectName={subjectName}
-        trackIcon={activeTrack?.icon}
-        trackName={activeTrack?.name}
       />
+
+      {/* Which chapter the levels ON SCREEN belong to. Pinned here rather than
+          left to the in-list banners, which the bottom-to-top reversal pushes
+          below the levels they introduce. */}
+      {!isLoading && visibleChapter ? (
+        <ChapterContextBar
+          accent={accent}
+          done={visibleChapter.done}
+          index={visibleChapter.index}
+          levels={visibleChapter.levels}
+          onPress={
+            (layout.chapterProgress?.total ?? 0) > 1
+              ? () => router.push('/subject/chapters')
+              : undefined
+          }
+          title={visibleChapter.title}
+          total={layout.chapterProgress?.total ?? 0}
+        />
+      ) : null}
 
       {isLoading ? (
         <MapSkeleton width={width} />
@@ -412,6 +480,7 @@ export function LevelsMap() {
               tintColor={accent}
             />
           }
+          onViewableItemsChanged={onViewableItemsChanged}
           removeClippedSubviews={false}
           renderItem={renderItem}
           scrollEventThrottle={16}
@@ -419,104 +488,121 @@ export function LevelsMap() {
         />
       )}
 
-      <HeartsModal
-        nextHeartAt={game.data?.next_heart_at ?? null}
-        onClose={() => setHeartsModalVisible(false)}
-        onGoPremium={() => {
-          setHeartsModalVisible(false);
-          router.push('/paywall');
-        }}
-        onGoReview={() => {
-          setHeartsModalVisible(false);
-          router.push('/practice');
-        }}
-        visible={heartsModalVisible}
-      />
+      {heartsModalVisible ? (
+        <HeartsModal
+          nextHeartAt={game.data?.next_heart_at ?? null}
+          onClose={() => setHeartsModalVisible(false)}
+          onGoPremium={() => {
+            setHeartsModalVisible(false);
+            router.push('/paywall');
+          }}
+          onGoReview={() => {
+            setHeartsModalVisible(false);
+            router.push('/practice');
+          }}
+          visible
+        />
+      ) : null}
 
-      {/* Legendary offer on a 3-star node (gameplay §1.5): gold crown rules. */}
-      <ClayDialog
-        actions={[
-          {
-            label: t('legendaryDialog.start'),
-            onPress: () => {
-              const level = legendaryPrompt;
-              setLegendaryPrompt(null);
-              if (level) startLevel(level, { legendary: true });
+      {/* Legendary offer on a 3-star node (gameplay §1.5): gold crown rules.
+          Conditionally mounted (not just `visible` toggled) so the dialog is
+          torn down via React's own unmount instead of relying on Modal's
+          internal visibility handling — on web, closing this dialog while
+          simultaneously navigating to the session route (this screen staying
+          mounted underneath, non-topmost) could otherwise leave its content
+          rendered indefinitely (fade-out never resolved). */}
+      {legendaryPrompt != null ? (
+        <ClayDialog
+          actions={[
+            {
+              label: t('legendaryDialog.start'),
+              onPress: () => {
+                const level = legendaryPrompt;
+                setLegendaryPrompt(null);
+                if (level) startLevel(level, { legendary: true });
+              },
+              variant: 'gold',
+              testID: 'legendary-start',
             },
-            variant: 'gold',
-            testID: 'legendary-start',
-          },
-          {
-            label: t('legendaryDialog.replayNormal'),
-            onPress: () => {
-              const level = legendaryPrompt;
-              setLegendaryPrompt(null);
-              if (level) startLevel(level);
+            {
+              label: t('legendaryDialog.replayNormal'),
+              onPress: () => {
+                const level = legendaryPrompt;
+                setLegendaryPrompt(null);
+                if (level) startLevel(level);
+              },
+              variant: 'secondary',
+              testID: 'legendary-replay-normal',
             },
-            variant: 'secondary',
-            testID: 'legendary-replay-normal',
-          },
-          {
-            label: t('legendaryDialog.cancel'),
-            onPress: () => setLegendaryPrompt(null),
-            variant: 'secondary',
-            testID: 'legendary-cancel',
-          },
-        ]}
-        icon={<Crown color={colors.xpGold} fill={colors.xpGold} size={56} />}
-        message={t('legendaryDialog.body')}
-        onRequestClose={() => setLegendaryPrompt(null)}
-        title={t('legendaryDialog.title')}
-        visible={legendaryPrompt != null}
-      />
+            {
+              label: t('legendaryDialog.cancel'),
+              onPress: () => setLegendaryPrompt(null),
+              variant: 'secondary',
+              testID: 'legendary-cancel',
+            },
+          ]}
+          icon={<Crown color={colors.xpGold} fill={colors.xpGold} size={56} />}
+          message={t('legendaryDialog.body')}
+          onRequestClose={() => setLegendaryPrompt(null)}
+          title={t('legendaryDialog.title')}
+          visible
+        />
+      ) : null}
 
-      {/* Crash recovery: resume the persisted in-progress attempt. */}
-      <ClayDialog
-        actions={[
-          { label: t('resume.resume'), onPress: resumeSession, variant: 'primary' },
-          {
-            label: t('resume.abandon'),
-            onPress: () => abandonAndReset(),
-            variant: 'secondary',
-          },
-        ]}
-        mascotState="thinking"
-        message={t('resume.body')}
-        title={t('resume.title')}
-        visible={resumeVisible}
-      />
+      {/* Crash recovery: resume the persisted in-progress attempt. Conditionally
+          mounted (see legendary-offer dialog above for why). */}
+      {resumeVisible ? (
+        <ClayDialog
+          actions={[
+            { label: t('resume.resume'), onPress: resumeSession, variant: 'primary' },
+            {
+              label: t('resume.abandon'),
+              onPress: () => abandonAndReset(),
+              variant: 'secondary',
+            },
+          ]}
+          mascotState="thinking"
+          message={t('resume.body')}
+          title={t('resume.title')}
+          visible
+        />
+      ) : null}
 
-      {/* 409 attempt_in_progress on start. */}
-      <ClayDialog
-        actions={
-          conflictMatchesStore
-            ? [
-                { label: t('resume.resume'), onPress: resumeSession, variant: 'primary' },
-                {
-                  label: t('resume.abandonRestart'),
-                  onPress: () => abandonAndReset(conflict?.level),
-                  variant: 'secondary',
-                },
-              ]
-            : [
-                {
-                  label: t('resume.abandonRestart'),
-                  onPress: () => abandonAndReset(conflict?.level),
-                  variant: 'primary',
-                },
-                {
-                  label: t('resume.cancel'),
-                  onPress: () => setConflict(null),
-                  variant: 'secondary',
-                },
-              ]
-        }
-        mascotState="thinking"
-        message={t('resume.conflictBody')}
-        onRequestClose={() => setConflict(null)}
-        title={t('resume.title')}
-        visible={conflict != null}
-      />
+      {/* 409 attempt_in_progress on start. Conditionally mounted (see
+          legendary-offer dialog above for why). */}
+      {conflict != null ? (
+        <ClayDialog
+          actions={
+            conflictMatchesStore
+              ? [
+                  { label: t('resume.resume'), onPress: resumeSession, variant: 'primary' },
+                  {
+                    label: t('resume.abandonRestart'),
+                    onPress: () => abandonAndReset(conflict?.level),
+                    variant: 'secondary',
+                  },
+                ]
+              : [
+                  {
+                    label: t('resume.abandonRestart'),
+                    onPress: () => abandonAndReset(conflict?.level),
+                    variant: 'primary',
+                  },
+                  {
+                    label: t('resume.cancel'),
+                    onPress: () => setConflict(null),
+                    variant: 'secondary',
+                  },
+                ]
+          }
+          mascotState="thinking"
+          message={t('resume.conflictBody')}
+          onRequestClose={() => setConflict(null)}
+          title={t('resume.title')}
+          visible
+        />
+      ) : null}
+
     </Screen>
   );
 }

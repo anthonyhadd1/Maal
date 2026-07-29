@@ -1,0 +1,1 @@
+['external_id', 'type', 'language', 'difficulty', 'exam_year', 'exam_session', 'passage', 'text', 'image', 'choices', 'correct', 'explanation', 'explanation_media', 'tags']

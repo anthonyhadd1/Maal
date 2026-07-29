@@ -26,10 +26,14 @@ interface TrackCardProps {
 export function TrackCard({ track, selected, onPress, testID }: TrackCardProps) {
   const accent = track.color_hex;
   const Icon = getLucideIcon(track.icon);
+  // The description below is visible, informative text (what this track
+  // actually is) — an explicit accessibilityLabel on this wrapper would
+  // otherwise silently drop it for screen reader users.
+  const a11yLabel = track.description ? `${track.name}, ${track.description}` : track.name;
 
   return (
     <PressableScale
-      accessibilityLabel={track.name}
+      accessibilityLabel={a11yLabel}
       accessibilityState={{ selected }}
       clay={false}
       onPress={onPress}

@@ -40,7 +40,7 @@
     "days_other": "{{count}} jours",
     "celebrate": "Série de {{count}} jours !",
     "todayDone": "Série de {{count}} jours — c'est dans la poche pour aujourd'hui !",
-    "milestone": "{{count}} jours de série ! ACE est fier de toi.",
+    "milestone": "{{count}} jours de série ! Tu tiens le rythme.",
     "freezeUsed": "Ton Gel de série t'a sauvé·e !"
   },
   "level_one": "{{count}} niveau",

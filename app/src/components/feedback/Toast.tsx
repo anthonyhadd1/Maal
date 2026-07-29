@@ -14,6 +14,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } fr
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ClaySurface } from '@/components/clay/ClaySurface';
+import { OFFLINE_BANNER_CONTENT_HEIGHT, useIsOffline } from '@/components/feedback/OfflineBanner';
 import { colors, spacing, typography } from '@/theme/tokens';
 
 export type ToastType = 'success' | 'error' | 'info';
@@ -29,7 +30,10 @@ interface ToastContextValue {
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
-const AUTO_DISMISS_MS = 3_000;
+/** Exported so callers staggering multiple toasts (e.g. trophy unlocks on
+ * the results screen) can space them at least this far apart — otherwise
+ * each new toast preempts the previous one before its full reading time. */
+export const TOAST_AUTO_DISMISS_MS = 3_000;
 
 const ICONS: Record<ToastType, typeof Info> = {
   success: CheckCircle2,
@@ -60,7 +64,7 @@ export function ToastProvider({ children }: PropsWithChildren) {
     if (timer.current) clearTimeout(timer.current);
     nextId.current += 1;
     setToast({ type: options.type ?? 'info', message: options.message, id: nextId.current });
-    timer.current = setTimeout(() => setToast(null), AUTO_DISMISS_MS);
+    timer.current = setTimeout(() => setToast(null), TOAST_AUTO_DISMISS_MS);
   }, []);
 
   useEffect(
@@ -82,6 +86,12 @@ export function ToastProvider({ children }: PropsWithChildren) {
 
 function ToastView({ toast }: { toast: ActiveToast }) {
   const insets = useSafeAreaInsets();
+  // The offline banner is an independent overlay anchored at the very top —
+  // without this, a toast fired while offline (a "server error" toast is
+  // the exact scenario most likely to co-occur with going offline) renders
+  // at the same fixed offset and visually overlaps the banner instead of
+  // stacking below it.
+  const offline = useIsOffline();
   const translateY = useSharedValue(-96);
   const opacity = useSharedValue(0);
 
@@ -100,7 +110,11 @@ function ToastView({ toast }: { toast: ActiveToast }) {
   return (
     <Animated.View
       pointerEvents="none"
-      style={[styles.wrapper, { top: insets.top + spacing.s }, animatedStyle]}
+      style={[
+        styles.wrapper,
+        { top: insets.top + spacing.s + (offline ? OFFLINE_BANNER_CONTENT_HEIGHT : 0) },
+        animatedStyle,
+      ]}
     >
       <ClaySurface radius="m" shadow="floating" style={styles.toast}>
         <View

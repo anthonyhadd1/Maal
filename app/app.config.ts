@@ -8,7 +8,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: 'ACE',
   slug: 'ace',
-  version: '0.1.0',
+  version: '1.0.0',
   scheme: 'ace',
   orientation: 'portrait',
   userInterfaceStyle: 'light',
@@ -16,6 +16,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     bundleIdentifier: 'com.aceconcours.app',
     supportsTablet: false,
+    config: {
+      // Declares "no non-exempt encryption" so App Store Connect stops asking
+      // the export-compliance question on every single upload. True for this
+      // app: HTTPS only, no custom crypto.
+      usesNonExemptEncryption: false,
+    },
   },
   android: {
     package: 'com.aceconcours.app',
@@ -35,11 +41,27 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     'expo-router',
-    'expo-secure-store',
+    // Configured, not bare: the bare plugins inject capabilities and English
+    // permission strings this French app never uses. expo-audio defaults to
+    // background playback, which puts UIBackgroundModes: ['audio'] in the
+    // Info.plist — a well-known 2.5.4 rejection for an app whose only sounds
+    // are seven short UI effects. expo-secure-store defaults to asking for
+    // Face ID.
+    ['expo-secure-store', { faceIDPermission: false }],
     'expo-font',
     'expo-localization',
     'expo-notifications',
-    'expo-audio',
+    [
+      'expo-audio',
+      {
+        enableBackgroundPlayback: false,
+        microphonePermission: false,
+        // MUST be explicit: the plugin defaults it to true and injects
+        // android.permission.RECORD_AUDIO regardless of microphonePermission.
+        // The app only plays seven short UI sounds — it never records.
+        recordAudioAndroid: false,
+      },
+    ],
     [
       'expo-splash-screen',
       {

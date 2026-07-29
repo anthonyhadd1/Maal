@@ -117,6 +117,10 @@ REST_FRAMEWORK = {
         "register": "5/hour",
         "answers": "60/min",
         "user_search": "20/min",
+        # Password recovery: cheap to abuse (email spam / code brute-force), so
+        # throttle both the request-a-code and submit-a-code endpoints tightly.
+        "password_reset": "5/hour",
+        "password_reset_confirm": "10/hour",
     },
     "EXCEPTION_HANDLER": "apps.common.exceptions.api_exception_handler",
 }
@@ -174,4 +178,18 @@ GAME = {
     "STREAK_FREEZES_PREMIUM_MAX": env.int("STREAK_FREEZES_PREMIUM_MAX", default=2),
 }
 
+# Interrupteur de TEST : ouvre tous les niveaux (carte + démarrage de session)
+# sans toucher aux données de progression. Jamais activé par défaut.
+UNLOCK_ALL_LEVELS = env.bool("UNLOCK_ALL_LEVELS", default=False)
+
 REVENUECAT_WEBHOOK_AUTH = env("REVENUECAT_WEBHOOK_AUTH", default="")
+
+# --- Email + password recovery ---
+# From-address for transactional mail (password-reset codes). dev prints to the
+# console; prod wires real SMTP in prod.py.
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="ACE <no-reply@ace-concours.app>")
+PASSWORD_RESET = {
+    # 6-digit code, valid 15 minutes, at most 5 verify attempts before it dies.
+    "CODE_TTL_MINUTES": env.int("PASSWORD_RESET_CODE_TTL_MINUTES", default=15),
+    "MAX_ATTEMPTS": env.int("PASSWORD_RESET_MAX_ATTEMPTS", default=5),
+}

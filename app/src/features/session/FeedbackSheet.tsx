@@ -1,4 +1,8 @@
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetBackdrop,
+  BottomSheetScrollView,
+  type BottomSheetBackdropProps,
+} from '@gorhom/bottom-sheet';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Crown, Landmark, Volume2, VolumeX } from 'lucide-react-native';
 import { useMemo, useState } from 'react';
@@ -6,21 +10,23 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { VideoView, useVideoPlayer } from 'expo-video';
 
-import type { AnswerResponse, AttemptQuestion } from '@/api/types';
+import type { AttemptQuestion, ExplanationMediaType } from '@/api/types';
 import { ClayButton } from '@/components/clay/ClayButton';
 import { ClayCard } from '@/components/clay/ClayCard';
 import { MathText } from '@/components/content/MathText';
 import { Mascot } from '@/components/mascot/Mascot';
 import { withAlpha } from '@/lib/color';
-import { colors, radii, shadows, spacing, typography } from '@/theme/tokens';
+import type { SessionAnswerRecord } from '@/stores/sessionStore';
+import { colors, radii, scrim, shadows, spacing, typography } from '@/theme/tokens';
 
 const CORRECT_VERDICTS = 4; // session:feedback.correct.1-4
 const WRONG_VERDICTS = 3; // session:feedback.wrong.1-3
+const LETTERS = 'ABCDEFGH';
 
 interface FeedbackSheetProps {
-  answer: AnswerResponse;
+  answer: SessionAnswerRecord;
   question: AttemptQuestion;
-  /** « Continuer » — next question or completion. */
+  /** « Continuer » — dismiss this card's feedback overlay. */
   onContinue: () => void;
 }
 
@@ -45,8 +51,10 @@ export function FeedbackSheet({ answer, question, onContinue }: FeedbackSheetPro
     ? t(`feedback.correct.${verdictIndex}`)
     : t(`feedback.wrong.${verdictIndex}`);
 
+  // successDeep/successEdge (not success itself) so white verdict text holds
+  // >=3:1 against both stops — colors.success measured only 2.28:1.
   const gradient: readonly [string, string] = answer.is_correct
-    ? [colors.success, colors.successDeep]
+    ? [colors.successDeep, colors.successEdge]
     : [colors.heartsRed, colors.dangerDeep];
   const provenance = buildProvenance(question, t);
 
@@ -54,6 +62,7 @@ export function FeedbackSheet({ answer, question, onContinue }: FeedbackSheetPro
     <>
     <BottomSheet
       animateOnMount
+      backdropComponent={FeedbackBackdrop}
       backgroundStyle={styles.sheetBackground}
       enableDynamicSizing={false}
       enablePanDownToClose={false}
@@ -94,7 +103,17 @@ export function FeedbackSheet({ answer, question, onContinue }: FeedbackSheetPro
         {answer.explanation_text ? (
           <ClayCard radius="l" style={styles.explanation}>
             <Text style={styles.explanationTitle}>{t('feedback.explanationTitle')}</Text>
-            <MathText color={colors.neutral[700]} fontSize={15} text={answer.explanation_text} />
+            {/* Restates WHICH choice(s) were correct — the choice list above
+                (color-coded) can be scrolled out of view by the time this
+                sheet appears, leaving the explanation with no textual anchor
+                to a specific letter otherwise. */}
+            <View style={styles.correctAnswerRow}>
+              <Text style={styles.correctAnswerLabel}>{t('feedback.correctAnswer')}</Text>
+              <Text style={styles.correctAnswerValue}>
+                {formatCorrectLetters(question, answer.correct_choice_ids)}
+              </Text>
+            </View>
+            <MathText color={colors.neutral[700]} fontSize={16} text={answer.explanation_text} />
           </ClayCard>
         ) : answer.explanation_text === null ? (
           // Legendary run: the server withholds explanations until the end.
@@ -126,6 +145,33 @@ export function FeedbackSheet({ answer, question, onContinue }: FeedbackSheetPro
   );
 }
 
+/**
+ * Scrim behind the feedback sheet.
+ *
+ * The sheet is deliberately non-dismissable — but with no backdrop the swipe
+ * pager underneath stayed fully live: a stray horizontal drag moved the student
+ * to another question while the verdict for the previous one was still up.
+ * `pressBehavior="none"` keeps it undismissable while `pointerEvents: 'auto'`
+ * (the default when touch-through is off) actually blocks that leak. The scrim
+ * also darkens the pager, so the verdict finally reads as the focused layer
+ * instead of a panel floating over live content.
+ *
+ * Hidden from screen readers: it is a visual/touch barrier, not a control —
+ * the library's own default label says "Tap to none the Bottom Sheet".
+ */
+function FeedbackBackdrop(props: BottomSheetBackdropProps) {
+  return (
+    <BottomSheetBackdrop
+      {...props}
+      accessible={false}
+      appearsOnIndex={0}
+      disappearsOnIndex={-1}
+      pressBehavior="none"
+      style={[props.style, styles.backdrop]}
+    />
+  );
+}
+
 function buildProvenance(
   question: AttemptQuestion,
   t: (key: string, options?: Record<string, unknown>) => string,
@@ -137,11 +183,22 @@ function buildProvenance(
   return t('provenance', { year: question.exam_year });
 }
 
+/** "B" (single/true-false) or "B, D" (multi) — matches the A/B/C… badges
+ * AnswerOption renders for each choice, by position in `question.choices`. */
+export function formatCorrectLetters(question: AttemptQuestion, correctChoiceIds: number[]): string {
+  const letters = question.choices
+    .map((choice, index) => (correctChoiceIds.includes(choice.id) ? LETTERS[index] : null))
+    .filter((letter): letter is string => letter != null);
+  return letters.join(', ');
+}
+
 /** 9:16 rounded media: image, or muted-autoplay video (tap to unmute). */
-function MediaSlot({ url, type }: { url: string; type: AnswerResponse['explanation_media_type'] }) {
+function MediaSlot({ url, type }: { url: string; type: ExplanationMediaType | null }) {
+  const { t } = useTranslation('session');
   if (type === 'video') return <FeedbackVideo url={url} />;
   return (
     <Image
+      accessibilityLabel={t('media.explanationImage')}
       resizeMode="cover"
       source={{ uri: url }}
       style={styles.media}
@@ -189,6 +246,9 @@ const styles = StyleSheet.create({
   sheet: {
     ...shadows.clayFloating,
   },
+  backdrop: {
+    backgroundColor: scrim,
+  },
   sheetBackground: {
     backgroundColor: colors.neutral[50],
     borderTopLeftRadius: radii.xl,
@@ -234,7 +294,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.14)',
     borderRadius: radii.s,
     paddingHorizontal: spacing.s,
-    paddingVertical: 3,
+    paddingVertical: spacing.xs,
   },
   stampText: {
     ...typography.caption,
@@ -257,6 +317,23 @@ const styles = StyleSheet.create({
   explanationTitle: {
     ...typography.h2,
     color: colors.neutral[900],
+  },
+  correctAnswerRow: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    flexWrap: 'wrap',
+    gap: spacing.xs,
+  },
+  correctAnswerLabel: {
+    ...typography.smallMedium,
+    color: colors.neutral[500],
+  },
+  correctAnswerValue: {
+    ...typography.smallMedium,
+    fontFamily: typography.h2.fontFamily,
+    // successDeep only holds ~3.3:1 against this card's white background,
+    // below the 4.5:1 minimum (same fix as LeagueBadge's promote caption).
+    color: colors.successEdge,
   },
   withheldChip: {
     flexDirection: 'row',

@@ -3,6 +3,11 @@
     "validate": "Valider"
   },
   "questionCounter": "Question {{n}}/{{total}}",
+  "swipeHint": "Glisse vers le haut pour la question suivante",
+  "reviewed": {
+    "correct": "Répondu — correct",
+    "wrong": "Répondu — incorrect"
+  },
   "feedback": {
     "correct": {
       "1": "Bravo !",
@@ -32,11 +37,16 @@
   },
   "media": {
     "unmute": "Activer le son",
-    "mute": "Couper le son"
+    "mute": "Couper le son",
+    "answerImage": "Image du choix de réponse",
+    "passageImage": "Image du document",
+    "explanationImage": "Image d'explication",
+    "questionImage": "Image de la question",
+    "answerImageLettered": "Image du choix {{letter}}"
   },
   "legendary": {
-    "banner": "Run légendaire — 9/10 minimum",
-    "withheld": "Explications à la fin du run",
+    "banner": "Partie légendaire — 9/10 minimum",
+    "withheld": "Explications à la fin de la partie",
     "earnedTitle": "Couronne légendaire !",
     "notEarned": "Pas cette fois — il te faut 9/10."
   },
@@ -46,7 +56,7 @@
     "failed": "Pas cette fois… on remet ça ?",
     "xpEarned": "+{{xp}} XP",
     "accuracy": "Précision",
-    "maxCombo": "Meilleure série",
+    "maxCombo": "Meilleur combo",
     "time": "Temps",
     "replay": "Rejouer",
     "xp": {
@@ -56,13 +66,20 @@
       "firstClear": "Premier succès",
       "streak": "Bonus série",
       "legendary": "Couronne légendaire"
-    }
+    },
+    "skip": "Passer l'animation",
+    "skipHint": "Affiche tout de suite le résultat complet"
   },
   "hearts": {
     "lost": "Tu as perdu un cœur",
     "earned": "+1 cœur ! Bien joué.",
     "emptyMidSession": "Plus de cœurs ! Termine ce niveau tranquillement.",
     "refillIn": "Prochain cœur dans {{time}}",
+    "countdown": {
+      "hoursMinutes": "{{hours}} h {{minutes}} min",
+      "minutes": "{{minutes}} min",
+      "seconds": "{{seconds}} s"
+    },
     "empty": {
       "title": "Plus de cœurs !",
       "body": "Récupère un cœur dans {{time}}, gagne-en un en Révision, ou passe en illimité avec Premium.",
@@ -96,5 +113,10 @@
   "a11y": {
     "quit": "Quitter le niveau",
     "combo": "{{count}} bonnes réponses d'affilée"
+  },
+  "nav": {
+    "previous": "Question précédente",
+    "next": "Question suivante",
+    "lastAnswered": "Terminer"
   }
 }

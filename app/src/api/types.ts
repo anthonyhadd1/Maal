@@ -46,13 +46,24 @@ export interface Entitlement {
 export interface RegisterPayload {
   username: string;
   password: string;
-  email?: string;
+  /** Required + unique — the account's recovery address (one account per email). */
+  email: string;
   display_name?: string;
 }
 
 export interface RegisterResponse {
   user: Me;
   tokens: Tokens;
+}
+
+export interface PasswordResetRequestPayload {
+  email: string;
+}
+
+export interface PasswordResetConfirmPayload {
+  email: string;
+  code: string;
+  new_password: string;
 }
 
 export interface LoginPayload {

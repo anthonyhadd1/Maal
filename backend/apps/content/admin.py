@@ -111,7 +111,7 @@ class LevelAdmin(admin.ModelAdmin):
 @admin.register(Exam)
 class ExamAdmin(admin.ModelAdmin):
     list_display = ["__str__", "year", "session", "faculty", "question_count"]
-    list_filter = ["year", "faculty"]
+    list_filter = ["year", "session", "faculty"]
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(_question_count=Count("questions"))
@@ -144,15 +144,38 @@ class ChoiceInline(admin.TabularInline):
     ordering = ["order"]
 
 
+# Tag marking a question whose answer key was reconstructed without an official
+# key and still wants a human confirmation. Kept in sync with the seed data.
+NEEDS_REVIEW_TAG = "a_verifier"
+
+
+class NeedsReviewFilter(admin.SimpleListFilter):
+    """Filter the changelist to questions still tagged 'à vérifier' — the ones
+    whose answer a human hasn't confirmed yet."""
+
+    title = "à vérifier"
+    parameter_name = "needs_review"
+
+    def lookups(self, request, model_admin):
+        return [("yes", "À vérifier"), ("no", "Vérifiées / confirmées")]
+
+    def queryset(self, request, queryset):
+        if self.value() == "yes":
+            return queryset.filter(tags__contains=[NEEDS_REVIEW_TAG])
+        if self.value() == "no":
+            return queryset.exclude(tags__contains=[NEEDS_REVIEW_TAG])
+        return queryset
+
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoiceInline]
-    list_display = ["short_text", "subject", "qtype", "difficulty", "exam", "is_active", "thumbnail"]
-    list_filter = ["subject", "qtype", "difficulty", "is_active", "exam"]
+    list_display = ["short_text", "subject", "qtype", "difficulty", "exam_year", "needs_review", "is_active", "thumbnail"]
+    list_filter = [NeedsReviewFilter, "subject", "qtype", "difficulty", "is_active", "exam__year", "exam__session"]
     search_fields = ["text", "external_ref"]
     list_editable = ["is_active"]
     readonly_fields = ["external_ref", "content_hash", "created_at", "updated_at"]
-    actions = ["activate_questions", "deactivate_questions", "duplicate_questions"]
+    actions = ["activate_questions", "deactivate_questions", "duplicate_questions", "mark_reviewed"]
     list_per_page = 50
 
     fieldsets = [
@@ -166,6 +189,14 @@ class QuestionAdmin(admin.ModelAdmin):
     @admin.display(description="Question", ordering="text")
     def short_text(self, obj):
         return obj.text[:80] + ("…" if len(obj.text) > 80 else "")
+
+    @admin.display(description="Année", ordering="exam__year")
+    def exam_year(self, obj):
+        return obj.exam.year if obj.exam else "—"
+
+    @admin.display(description="À vérifier", boolean=True)
+    def needs_review(self, obj):
+        return NEEDS_REVIEW_TAG in (obj.tags or [])
 
     @admin.display(description="Aperçu")
     def thumbnail(self, obj):
@@ -184,6 +215,17 @@ class QuestionAdmin(admin.ModelAdmin):
     def deactivate_questions(self, request, queryset):
         updated = queryset.update(is_active=False)
         self.message_user(request, f"{updated} question(s) désactivée(s).")
+
+    @admin.action(description="Marquer comme vérifiées (retirer « à vérifier »)")
+    def mark_reviewed(self, request, queryset):
+        touched = 0
+        for question in queryset:
+            tags = question.tags or []
+            if NEEDS_REVIEW_TAG in tags:
+                question.tags = [tag for tag in tags if tag != NEEDS_REVIEW_TAG]
+                question.save(update_fields=["tags"])
+                touched += 1
+        self.message_user(request, f"{touched} question(s) marquée(s) comme vérifiée(s).")
 
     @admin.action(description="Dupliquer les questions sélectionnées")
     def duplicate_questions(self, request, queryset):

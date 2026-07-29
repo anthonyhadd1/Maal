@@ -1,7 +1,7 @@
 import { isAxiosError } from 'axios';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useRegister } from '@/api/queries/auth';
@@ -16,7 +16,8 @@ import {
   validatePassword,
   validateUsername,
 } from '@/features/auth/validation';
-import { spacing } from '@/theme/tokens';
+import { withAlpha } from '@/lib/color';
+import { colors, spacing, typography } from '@/theme/tokens';
 
 type Field = 'username' | 'display_name' | 'email' | 'password';
 type Errors = Partial<Record<Field, string | null>>;
@@ -55,7 +56,7 @@ export function RegisterScreen() {
         username: username.trim(),
         password,
         display_name: displayName.trim(),
-        email: email.trim() || undefined,
+        email: email.trim(),
       },
       {
         onError: (error) => {
@@ -82,13 +83,15 @@ export function RegisterScreen() {
   };
 
   return (
-    <AuthSheet mascotState="celebrate" subtitle={t('register.subtitle')} title={t('register.title')}>
+    <AuthSheet subtitle={t('register.subtitle')} title={t('register.title')}>
       <View style={styles.form}>
         <ClayInput
           autoCapitalize="none"
           autoComplete="username-new"
           autoCorrect={false}
+          dark
           error={errors.username}
+          hint={t('register.usernameHint')}
           label={t('register.username')}
           onBlur={() => setFieldError('username', validateUsername(username))}
           onChangeText={setUsername}
@@ -98,7 +101,9 @@ export function RegisterScreen() {
         />
         <ClayInput
           autoComplete="name"
+          dark
           error={errors.display_name}
+          hint={t('register.displayNameHint')}
           label={t('register.displayName')}
           onBlur={() => setFieldError('display_name', validateDisplayName(displayName))}
           onChangeText={setDisplayName}
@@ -109,6 +114,7 @@ export function RegisterScreen() {
         <ClayInput
           autoCapitalize="none"
           autoComplete="email"
+          dark
           error={errors.email}
           hint={t('register.emailHint')}
           keyboardType="email-address"
@@ -122,6 +128,7 @@ export function RegisterScreen() {
         <ClayInput
           autoCapitalize="none"
           autoComplete="password-new"
+          dark
           error={errors.password}
           label={t('register.password')}
           onBlur={() => setFieldError('password', validatePassword(password))}
@@ -141,14 +148,20 @@ export function RegisterScreen() {
           size="l"
           testID="register-submit"
           title={t('register.submit')}
-          variant="primary"
+          variant="inverted"
         />
-        <ClayButton
-          fullWidth
+      </View>
+
+      <View style={styles.footer}>
+        <Pressable
+          accessibilityRole="button"
           onPress={() => router.replace('/login')}
-          title={t('register.haveAccount')}
-          variant="secondary"
-        />
+          style={styles.footerRow}
+          testID="register-have-account"
+        >
+          <Text style={styles.footerMuted}>{t('register.haveAccountQ')} </Text>
+          <Text style={styles.footerLink}>{t('register.haveAccount')}</Text>
+        </Pressable>
       </View>
     </AuthSheet>
   );
@@ -161,5 +174,23 @@ const styles = StyleSheet.create({
   actions: {
     gap: spacing.m,
     marginTop: spacing.xl,
+  },
+  footer: {
+    marginTop: spacing.xxl,
+  },
+  footerRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: spacing.m,
+  },
+  footerMuted: {
+    ...typography.small,
+    color: withAlpha(colors.neutral[0], 0.62),
+  },
+  footerLink: {
+    ...typography.small,
+    fontFamily: typography.smallMedium.fontFamily,
+    color: colors.primary[300],
   },
 });

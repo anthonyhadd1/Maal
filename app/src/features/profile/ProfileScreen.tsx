@@ -3,6 +3,7 @@ import {
   BarChart3,
   ChevronRight,
   Crown,
+  RefreshCw,
   Settings,
   Trophy,
   Users,
@@ -81,10 +82,30 @@ export function ProfileScreen() {
               </View>
             </View>
             <View style={styles.chipsRow}>
-              <XPBadge xp={game.data?.xp_total ?? 0} />
-              <View style={styles.chip}>
-                <StreakFlame days={game.data?.streak_current ?? 0} size={18} />
-              </View>
+              {/* Don't present fabricated 0s while the game query is still
+                  loading — show placeholders until the real totals arrive.
+                  Keyed on isPending, NOT on "no data": a failed /me/game left
+                  the chips shimmering forever with no error and no way to
+                  retry, which reads as a hung app rather than a failed call. */}
+              {game.data ? (
+                <>
+                  <XPBadge xp={game.data.xp_total} />
+                  <View style={styles.chip}>
+                    <StreakFlame days={game.data.streak_current} size={18} />
+                  </View>
+                </>
+              ) : game.isPending ? (
+                <>
+                  <Skeleton height={28} radius={radii.pill} width={72} />
+                  <Skeleton height={28} radius={radii.pill} width={48} />
+                </>
+              ) : (
+                <RetryChip
+                  onRetry={() => void game.refetch()}
+                  retrying={game.isRefetching}
+                  testID="profile-game-retry"
+                />
+              )}
               {game.data?.league ? (
                 <View style={styles.chip} testID="league-chip">
                   <Trophy color={colors.xpGold} size={16} />
@@ -127,7 +148,17 @@ export function ProfileScreen() {
                 <Skeleton height={76} key={i} radius={radii.m} style={styles.summarySkeleton} />
               ))}
             </View>
-          ) : null}
+          ) : (
+            // Was `null` — a failed /me/stats silently deleted the whole totals
+            // grid, so the profile just looked like it had no stats section.
+            <View style={styles.summaryGrid}>
+              <RetryChip
+                onRetry={() => void stats.refetch()}
+                retrying={stats.isRefetching}
+                testID="profile-stats-retry"
+              />
+            </View>
+          )}
 
           {/* Premium status */}
           {isPremium ? (
@@ -170,6 +201,14 @@ export function ProfileScreen() {
               testID="row-stats"
             />
             <NavRow
+              accessibilityLabel={
+                unlocked != null && achievements.data
+                  ? `${t('rows.achievements')}, ${t('achievementsScreen.unlockedCount', {
+                      unlocked,
+                      total: achievements.data.length,
+                    })}`
+                  : undefined
+              }
               icon={Trophy}
               label={t('rows.achievements')}
               meta={
@@ -181,6 +220,11 @@ export function ProfileScreen() {
               testID="row-achievements"
             />
             <NavRow
+              accessibilityLabel={
+                pendingCount > 0
+                  ? `${t('rows.friends')}, ${t('rows.friendsPending', { count: pendingCount })}`
+                  : undefined
+              }
               badge={pendingCount > 0 ? pendingCount : undefined}
               icon={Users}
               label={t('rows.friends')}
@@ -200,6 +244,43 @@ export function ProfileScreen() {
   );
 }
 
+/**
+ * Compact inline "couldn't load — retry" affordance for a sub-query that failed
+ * while the rest of the profile is fine. Deliberately not the full-page
+ * ErrorState: /me succeeded, so the identity, premium status and nav rows are
+ * all still valid and should stay on screen.
+ */
+function RetryChip({
+  onRetry,
+  retrying,
+  testID,
+}: {
+  onRetry: () => void;
+  retrying: boolean;
+  testID: string;
+}) {
+  const { t: tErrors } = useTranslation('errors');
+
+  return (
+    <PressableScale
+      accessibilityLabel={`${tErrors('generic')} ${tErrors('retry')}`}
+      accessibilityRole="button"
+      clay={false}
+      disabled={retrying}
+      onPress={onRetry}
+      style={styles.retryChip}
+      testID={testID}
+    >
+      <RefreshCw
+        color={colors.neutral[700]}
+        size={14}
+        strokeWidth={2.6}
+      />
+      <Text style={styles.retryChipText}>{tErrors('retry')}</Text>
+    </PressableScale>
+  );
+}
+
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
     <ClayCard radius="m" style={styles.summaryCard}>
@@ -216,6 +297,7 @@ function NavRow({
   badge,
   onPress,
   testID,
+  accessibilityLabel,
 }: {
   icon: LucideIcon;
   label: string;
@@ -223,9 +305,19 @@ function NavRow({
   badge?: number;
   onPress: () => void;
   testID?: string;
+  /** Folds in `meta`/`badge` — an explicit accessibilityLabel replaces the
+   * subtree's natural text-content name rather than adding to it, so without
+   * this a screen reader would hear "Trophies" but never "12/21 unlocked",
+   * or "Friends" but never "1 pending request". Falls back to `label`. */
+  accessibilityLabel?: string;
 }) {
   return (
-    <PressableScale accessibilityLabel={label} onPress={onPress} style={styles.row} testID={testID}>
+    <PressableScale
+      accessibilityLabel={accessibilityLabel ?? label}
+      onPress={onPress}
+      style={styles.row}
+      testID={testID}
+    >
       <View style={styles.rowIcon}>
         <Icon color={colors.primary[600]} size={20} strokeWidth={2.2} />
       </View>
@@ -281,12 +373,12 @@ const styles = StyleSheet.create({
     borderRadius: radii.pill,
     borderWidth: 3,
     borderColor: colors.primary[400],
-    padding: 3,
+    padding: spacing.xs,
     backgroundColor: colors.neutral[0],
   },
   identity: {
     flex: 1,
-    gap: 2,
+    gap: spacing.xs,
   },
   displayName: {
     ...typography.h2,
@@ -321,6 +413,20 @@ const styles = StyleSheet.create({
     ...typography.smallMedium,
     color: colors.neutral[900],
   },
+  retryChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    alignSelf: 'flex-start',
+    minHeight: 44,
+    paddingHorizontal: spacing.m,
+    borderRadius: radii.pill,
+    backgroundColor: colors.neutral[100],
+  },
+  retryChipText: {
+    ...typography.smallMedium,
+    color: colors.neutral[700],
+  },
   summaryGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -331,7 +437,7 @@ const styles = StyleSheet.create({
     flexBasis: '45%',
     flexGrow: 1,
     alignItems: 'center',
-    gap: 2,
+    gap: spacing.xs,
     paddingVertical: spacing.m,
   },
   summarySkeleton: {
@@ -365,7 +471,7 @@ const styles = StyleSheet.create({
   },
   premiumText: {
     flex: 1,
-    gap: 2,
+    gap: spacing.xs,
   },
   premiumTitle: {
     ...typography.bodyBold,
@@ -429,7 +535,9 @@ const styles = StyleSheet.create({
     minWidth: 22,
     height: 22,
     borderRadius: radii.pill,
-    backgroundColor: colors.danger,
+    // dangerDeep, not danger: white on #EF4444 is 3.76:1, and this badge holds
+    // a small numeral — the one thing on it you have to read.
+    backgroundColor: colors.dangerDeep,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: spacing.xs,

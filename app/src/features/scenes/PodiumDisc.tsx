@@ -43,8 +43,7 @@ export function PodiumDisc({
 
   return (
     <View
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants"
+      aria-hidden
       pointerEvents="none"
       style={[{ width, height }, style]}
     >

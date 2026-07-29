@@ -39,16 +39,16 @@ describe('i18n', () => {
   });
 
   test('all 8 namespaces resolve in both locales', async () => {
-    expect(i18n.t('errors:server')).toBe('Oups, nos serveurs toussent. Réessaie.');
+    expect(i18n.t('errors:server')).toBe('Un problème est survenu de notre côté. Réessaie dans un instant.');
     expect(i18n.t('paywall:title')).toBe('Passe en Premium');
     expect(i18n.t('map:title')).toBe('Apprendre');
     expect(i18n.t('leagues:title')).toBe('Ligue');
     expect(i18n.t('profile:title')).toBe('Profil');
-    expect(i18n.t('auth:welcome.start')).toBe("C'est parti !");
+    expect(i18n.t('auth:welcome.start')).toBe('Commencer');
     expect(i18n.t('session:results.passed')).toBe('Niveau réussi !');
 
     await i18n.changeLanguage('en');
     expect(i18n.t('common:tabs.learn')).toBe('Learn');
-    expect(i18n.t('errors:server')).toBe('Oops, our servers are coughing. Try again.');
+    expect(i18n.t('errors:server')).toBe('Something went wrong on our end. Please try again in a moment.');
   });
 });

@@ -1,9 +1,23 @@
 import { useState, type PropsWithChildren } from 'react';
-import { Pressable, type PressableProps, type StyleProp, type ViewStyle } from 'react-native';
+import { Platform, Pressable, type PressableProps, type StyleProp, type ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
 import { impactLight } from '@/lib/haptics';
-import { shadows } from '@/theme/tokens';
+import { colors, shadows } from '@/theme/tokens';
+
+// Keyboard-focus ring, web only. Uses `outline*` (not `boxShadow`, which the
+// clay raised/pressed shadows already occupy — layering another boxShadow
+// value in the style array would just overwrite theirs) so it composes with
+// every variant's shadow instead of fighting it.
+const WEB_FOCUS_RING =
+  Platform.OS === 'web'
+    ? ({
+        outlineWidth: 3,
+        outlineColor: colors.primary[500],
+        outlineStyle: 'solid',
+        outlineOffset: 2,
+      } as unknown as ViewStyle)
+    : null;
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -33,11 +47,14 @@ export function PressableScale({
   disabled,
   onPressIn,
   onPressOut,
+  onFocus,
+  onBlur,
   ...rest
 }: PropsWithChildren<PressableScaleProps>) {
   const scale = useSharedValue(1);
   const translateY = useSharedValue(0);
   const [pressed, setPressed] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }, { translateY: translateY.value }],
@@ -60,9 +77,18 @@ export function PressableScale({
         setPressed(false);
         onPressOut?.(event);
       }}
+      onFocus={(event) => {
+        setFocused(true);
+        onFocus?.(event);
+      }}
+      onBlur={(event) => {
+        setFocused(false);
+        onBlur?.(event);
+      }}
       style={[
         clay ? (pressed ? shadows.clayPressed : shadows.clayRaised) : undefined,
         style,
+        focused && !disabled ? WEB_FOCUS_RING : undefined,
         animatedStyle,
       ]}
       {...rest}

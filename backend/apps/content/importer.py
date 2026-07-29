@@ -499,6 +499,17 @@ class ExamImporter:
         content_hash = compute_content_hash(spec)
         existing = Question.objects.filter(external_ref=ref).first()
         if existing is not None and existing.content_hash == content_hash:
+            # `is_active` is a publication flag, not content, so it does NOT
+            # take part in the hash — which means a re-import that only flips
+            # it would otherwise be skipped and the change silently lost. That
+            # matters: this is how a question held back for a missing figure
+            # gets released once the figure is attached.
+            wanted_active = bool(spec.get("is_active", True))
+            if existing.is_active != wanted_active:
+                existing.is_active = wanted_active
+                existing.save(update_fields=["is_active"])
+                self.report.updated += 1
+                return existing
             self.report.skipped += 1
             return existing
 
@@ -514,9 +525,14 @@ class ExamImporter:
             "difficulty": int(spec.get("difficulty") or 2),
             "tags": spec.get("tags") or [],
             "content_hash": content_hash,
+            # Un import peut désactiver une question (défaut : active). Sert à
+            # retenir hors rotation les questions qui renvoient à une figure
+            # qu'on n'a pas encore extraite : sans le schéma elles sont
+            # littéralement insolubles, et l'élève y perdrait un cœur.
+            "is_active": bool(spec.get("is_active", True)),
         }
         if existing is None:
-            question = Question(external_ref=ref, is_active=True, **fields)
+            question = Question(external_ref=ref, **fields)
         else:
             question = existing
             for field, value in fields.items():

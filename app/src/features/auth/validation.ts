@@ -3,12 +3,13 @@ import i18n from '@/i18n';
 /**
  * Client-side mirrors of the backend rules (accounts.RegisterSerializer):
  * username `^[a-zA-Z0-9_.]{3,30}$`, Django password validators (min 8,
- * not all-numeric), optional email, display_name <= 40 chars.
+ * not all-numeric), REQUIRED + unique email, display_name <= 40 chars.
  * Server remains the source of truth — these just catch mistakes on blur.
  */
 
 const USERNAME_RE = /^[a-zA-Z0-9_.]{3,30}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const CODE_RE = /^\d{6}$/;
 
 export function validateUsername(value: string): string | null {
   if (!value.trim()) return i18n.t('auth:validation.usernameRequired');
@@ -24,8 +25,14 @@ export function validatePassword(value: string): string | null {
 }
 
 export function validateEmail(value: string): string | null {
-  if (!value.trim()) return null; // optional
+  if (!value.trim()) return i18n.t('auth:validation.emailRequired');
   if (!EMAIL_RE.test(value.trim())) return i18n.t('auth:validation.emailInvalid');
+  return null;
+}
+
+export function validateResetCode(value: string): string | null {
+  if (!value.trim()) return i18n.t('auth:validation.codeRequired');
+  if (!CODE_RE.test(value.trim())) return i18n.t('auth:validation.codeInvalid');
   return null;
 }
 

@@ -52,6 +52,7 @@
   },
   "challenges": {
     "title": "Challenges",
+    "resultUnavailable": "Result unavailable right now.",
     "received": "Received",
     "sent": "Sent",
     "you": "You",
@@ -86,7 +87,9 @@
       "title": "Challenge on \"{{level}}\"",
       "perQuestion": "Question by question",
       "questionN": "Question {{n}}",
-      "error": "Couldn't load this challenge. Try again."
+      "error": "Couldn't load this challenge. Try again.",
+      "markCorrect": "Correct answer",
+      "markWrong": "Wrong answer"
     }
   }
 }

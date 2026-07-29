@@ -418,3 +418,53 @@ class TestBossPoolSizeWarning:
         level = Level.objects.get()
         assert level.kind == Level.Kind.BOSS
         assert level.level_questions.count() == 6
+
+
+class TestInactiveImport:
+    """A seed entry may ship `is_active: false`.
+
+    Used to hold back questions that reference a figure we have not extracted
+    yet: without the diagram they are literally unanswerable, and a student
+    would lose a heart on a question that cannot be answered. They stay in the
+    database (so the figure can be attached later) but out of every session —
+    `attempts.py` filters on `question__is_active=True`.
+    """
+
+    def _first_question(self, payload):
+        return payload["subjects"][0]["units"][0]["levels"][0]["questions"][0]
+
+    def test_is_active_false_is_honoured_on_create(self, tmp_path):
+        payload = _base_payload()
+        q = self._first_question(payload)
+        q["is_active"] = False
+        ExamImporter(payload, media_dir=tmp_path).run()
+        assert Question.objects.get(external_ref=q["external_id"]).is_active is False
+
+    def test_questions_are_active_by_default(self, tmp_path):
+        payload = _base_payload()
+        q = self._first_question(payload)
+        q.pop("is_active", None)
+        ExamImporter(payload, media_dir=tmp_path).run()
+        assert Question.objects.get(external_ref=q["external_id"]).is_active is True
+
+    def test_reimport_reactivates_once_the_figure_arrives(self, tmp_path):
+        payload = _base_payload()
+        ref = self._first_question(payload)["external_id"]
+        self._first_question(payload)["is_active"] = False
+        ExamImporter(payload, media_dir=tmp_path).run()
+        assert Question.objects.get(external_ref=ref).is_active is False
+
+        payload2 = _base_payload()
+        self._first_question(payload2)["is_active"] = True
+        ExamImporter(payload2, media_dir=tmp_path).run()
+        assert Question.objects.get(external_ref=ref).is_active is True
+
+    def test_other_questions_are_unaffected(self, tmp_path):
+        payload = _base_payload()
+        self._first_question(payload)["is_active"] = False
+        ExamImporter(payload, media_dir=tmp_path).run()
+        others = Question.objects.exclude(
+            external_ref=self._first_question(payload)["external_id"]
+        )
+        assert others.exists()
+        assert all(q.is_active for q in others)

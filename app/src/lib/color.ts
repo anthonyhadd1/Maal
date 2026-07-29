@@ -89,3 +89,38 @@ export function shade(color: string, amount: number): string {
     b: rgb.b + (target - rgb.b) * mix,
   });
 }
+
+/**
+ * Subject accent, darkened enough to be legible as TEXT on the app's light
+ * surfaces (white cards and faint accent tints).
+ *
+ * Accents are data-driven — a subject can arrive from the API with any hue,
+ * and unknown slugs fall back to a generated `hsl(h, 65%, 52%)`. The lighter
+ * ones (orange #F97316, emerald #10B981, cyan #06B6D4) are nowhere near
+ * readable at their raw value: as body text on white they measure ~3.3-3.8:1,
+ * under the WCAG AA 4.5:1 minimum. -0.5 is the shallowest darkening at which
+ * EVERY accent in the palette — plus every hashed fallback hue — clears 4.5:1
+ * both on white and on a 9%-accent tint (worst cases 5.69:1 and 5.24:1).
+ *
+ * Use this for accent-coloured text. For borders, rings and fills — which are
+ * decoration, not information — the raw accent is fine.
+ */
+export function accentText(accent: string): string {
+  return shade(accent, -0.5);
+}
+
+/**
+ * Subject accent, darkened enough that WHITE text on top of it clears WCAG AA.
+ *
+ * Raw accents are far too light to carry white text: on the map header's
+ * subject pill, white measures 2.28:1 on Biologie's #22C55E and 2.80:1 on
+ * Physique's #F97316 — worse than the 3:1 floor for large text, let alone the
+ * 4.5:1 body-text bar. -0.45 is the shallowest darkening at which white clears
+ * 4.5:1 against every palette accent, every seeded subject colour, and every
+ * hashed fallback hue (worst case 4.86:1).
+ *
+ * Pair with `shade(accent, -0.6)` for the clay bottom lip, as UnitHeader does.
+ */
+export function accentFill(accent: string): string {
+  return shade(accent, -0.45);
+}

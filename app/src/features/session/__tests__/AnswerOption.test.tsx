@@ -1,9 +1,18 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 
+import type { AnswerResponse } from '@/api/types';
 import { AnswerOption } from '@/features/session/AnswerOption';
 import { choiceRevealState } from '@/features/session/QuestionRenderer/types';
+import type { SessionAnswerRecord } from '@/stores/sessionStore';
 import { wrongAnswer } from '@/test/fixtures/session';
 import { colors } from '@/theme/tokens';
+
+/** choiceRevealState takes the persisted SessionAnswerRecord, not the raw
+ * server AnswerResponse — wrap the fixture with the one extra field. */
+function verdict(overrides: Partial<AnswerResponse> = {}): SessionAnswerRecord {
+  const response = wrongAnswer(overrides);
+  return { selected: [], ...response };
+}
 
 const ACCENT = colors.primary[500];
 
@@ -85,14 +94,14 @@ describe('choiceRevealState (server verdict → per-choice states)', () => {
 
   test('after reveal: wrong pick turns red, the true answer highlights green, rest dim', () => {
     // User picked 2; the correct choice is 1 (fixture).
-    const verdict = wrongAnswer({ correct_choice_ids: [1] });
-    expect(choiceRevealState(2, [2], verdict)).toBe('wrong');
-    expect(choiceRevealState(1, [2], verdict)).toBe('revealCorrect');
-    expect(choiceRevealState(3, [2], verdict)).toBe('dimmed');
+    const v = verdict({ correct_choice_ids: [1] });
+    expect(choiceRevealState(2, [2], v)).toBe('wrong');
+    expect(choiceRevealState(1, [2], v)).toBe('revealCorrect');
+    expect(choiceRevealState(3, [2], v)).toBe('dimmed');
   });
 
   test('after reveal: correct pick turns green', () => {
-    const verdict = wrongAnswer({ is_correct: true, correct_choice_ids: [1] });
-    expect(choiceRevealState(1, [1], verdict)).toBe('correct');
+    const v = verdict({ is_correct: true, correct_choice_ids: [1] });
+    expect(choiceRevealState(1, [1], v)).toBe('correct');
   });
 });

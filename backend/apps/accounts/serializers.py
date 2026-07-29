@@ -18,7 +18,9 @@ class RegisterSerializer(serializers.Serializer):
         error_messages={"invalid": "3 à 30 caractères : lettres, chiffres, _ ou ."},
     )
     password = serializers.CharField(write_only=True, trim_whitespace=False)
-    email = serializers.EmailField(required=False, allow_blank=True, default="")
+    # Required + unique: email is the recovery channel and the account key
+    # (one account per email). Store it normalized so "A@x.com" == "a@x.com".
+    email = serializers.EmailField(required=True, allow_blank=False)
     display_name = serializers.CharField(max_length=40, required=False, allow_blank=True, default="")
 
     def validate_username(self, value):
@@ -26,7 +28,40 @@ class RegisterSerializer(serializers.Serializer):
             raise serializers.ValidationError("Ce nom d'utilisateur est déjà pris.")
         return value
 
+    def validate_email(self, value):
+        normalized = value.strip().lower()
+        if User.objects.filter(email__iexact=normalized).exists():
+            raise serializers.ValidationError("Un compte existe déjà avec cette adresse e-mail.")
+        return normalized
+
     def validate_password(self, value):
+        validate_password(value)
+        return value
+
+
+class PasswordResetRequestSerializer(serializers.Serializer):
+    """Step 1: user submits the email tied to their account."""
+
+    email = serializers.EmailField(required=True, allow_blank=False)
+
+    def validate_email(self, value):
+        return value.strip().lower()
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    """Step 2: user submits the emailed code + a new password."""
+
+    email = serializers.EmailField(required=True, allow_blank=False)
+    code = serializers.RegexField(
+        regex=r"^\d{6}$",
+        error_messages={"invalid": "Code à 6 chiffres."},
+    )
+    new_password = serializers.CharField(write_only=True, trim_whitespace=False)
+
+    def validate_email(self, value):
+        return value.strip().lower()
+
+    def validate_new_password(self, value):
         validate_password(value)
         return value
 

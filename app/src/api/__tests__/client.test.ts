@@ -15,6 +15,7 @@ import {
   loadStoredTokens,
   REFRESH_TOKEN_KEY,
   registerAuthFailureHandler,
+  resolveBaseURL,
   setTokens,
 } from '@/api/client';
 
@@ -192,5 +193,135 @@ describe('api client auth', () => {
     expect(refreshCalls).toBe(0);
     expect(onAuthFailure).not.toHaveBeenCalled();
     expect(getAccessToken()).toBe('access-1');
+  });
+});
+
+/**
+ * Release builds must not silently point at the phone.
+ *
+ * The fallback used to be `http://127.0.0.1:8000/api/v1` unconditionally, so an
+ * EAS production build with no EXPO_PUBLIC_API_URL shipped an app where every
+ * request went to localhost — no crash, no log, just nothing ever loading.
+ */
+
+/**
+ * Release builds must not silently point at the phone.
+ *
+ * Two distinct bugs live here, both of which shipped:
+ *  1. The fallback was `http://127.0.0.1:8000/api/v1` unconditionally, so an
+ *     EAS production build with no EXPO_PUBLIC_API_URL shipped an app where
+ *     every request went to localhost — no crash, no log, nothing ever loading.
+ *  2. Fixing (1) by giving EXPO_PUBLIC_API_URL top priority broke the web
+ *     demo: that variable holds the Windows hotspot gateway (192.168.137.1),
+ *     an address only a PHONE can reach, so the browser hung 15s per request
+ *     and the app sat on skeletons with nothing in the server log.
+ */
+describe('resolveBaseURL', () => {
+  const PHONE_ONLY = 'http://192.168.137.1:18000/api/v1';
+
+  test('an explicit API origin wins for native dev and every release build', () => {
+    expect(resolveBaseURL('https://api.example.com/api/v1', true, null)).toBe(
+      'https://api.example.com/api/v1',
+    );
+    expect(resolveBaseURL('https://api.example.com/api/v1', false, null)).toBe(
+      'https://api.example.com/api/v1',
+    );
+  });
+
+  test('a RELEASE build with no origin configured throws instead of guessing', () => {
+    expect(() => resolveBaseURL(undefined, false, null)).toThrow(/EXPO_PUBLIC_API_URL/);
+    expect(() => resolveBaseURL('', false, null)).toThrow(/EXPO_PUBLIC_API_URL/);
+  });
+
+  test('the error names the fix, not just the symptom', () => {
+    expect(() => resolveBaseURL(undefined, false, null)).toThrow(/EAS build profile/);
+  });
+
+  test('native dev keeps the laptop fallback so local work needs no .env', () => {
+    expect(resolveBaseURL(undefined, true, null)).toBe('http://127.0.0.1:8000/api/v1');
+  });
+
+  test('no build can ever resolve to loopback unless it is a dev build', () => {
+    for (const env of [undefined, '']) {
+      let resolved: string | null = null;
+      try {
+        resolved = resolveBaseURL(env, false, null);
+      } catch {
+        resolved = null;
+      }
+      expect(resolved).toBeNull();
+    }
+  });
+
+  describe('dev web ignores EXPO_PUBLIC_API_URL — it is phone-only', () => {
+    test('uses the page host on :18000, not the phone-only .env value', () => {
+      expect(resolveBaseURL(PHONE_ONLY, true, 'localhost')).toBe('http://localhost:18000/api/v1');
+    });
+
+    test('follows the page host so a LAN preview works untouched', () => {
+      expect(resolveBaseURL(PHONE_ONLY, true, '192.168.1.50')).toBe(
+        'http://192.168.1.50:18000/api/v1',
+      );
+    });
+
+    test('never routes the browser at the hotspot gateway', () => {
+      for (const host of ['localhost', '127.0.0.1', '10.0.0.4']) {
+        expect(resolveBaseURL(PHONE_ONLY, true, host)).not.toContain('192.168.137.1');
+      }
+    });
+
+    test('a RELEASE web build DOES honour the configured origin', () => {
+      // The page-host rule is dev-only: a real web deployment must reach its
+      // real API, not <page-host>:18000.
+      expect(resolveBaseURL('https://api.example.com/api/v1', false, 'app.example.com')).toBe(
+        'https://api.example.com/api/v1',
+      );
+    });
+  });
+});
+
+/**
+ * Phone testing must not depend on a hand-edited IP.
+ *
+ * `app/.env` held the Windows hotspot gateway (192.168.137.1). The moment the
+ * hotspot is off or the laptop changes Wi-Fi, that address routes nowhere and
+ * every request hangs with no diagnostic. In a dev build the phone downloaded
+ * the bundle from Metro, so Metro's host is by construction reachable — and it
+ * is the same machine publishing the API on :18000.
+ */
+describe('resolveBaseURL — dev native derives the host from Metro', () => {
+  const STALE = 'http://192.168.137.1:18000/api/v1';
+
+  test('the Metro host wins over a stale .env value', () => {
+    expect(resolveBaseURL(STALE, true, null, '192.168.10.246')).toBe(
+      'http://192.168.10.246:18000/api/v1',
+    );
+  });
+
+  test('switching network needs no edit — it follows Metro', () => {
+    expect(resolveBaseURL(STALE, true, null, '10.0.0.7')).toBe('http://10.0.0.7:18000/api/v1');
+    expect(resolveBaseURL(STALE, true, null, '192.168.137.1')).toBe(STALE);
+  });
+
+  test('no Metro host (simulator, plain node) falls back to .env', () => {
+    expect(resolveBaseURL(STALE, true, null, null)).toBe(STALE);
+  });
+
+  test('web still wins over Metro — the browser cannot use a LAN phone route', () => {
+    expect(resolveBaseURL(STALE, true, 'localhost', '192.168.10.246')).toBe(
+      'http://localhost:18000/api/v1',
+    );
+  });
+
+  test('a RELEASE build ignores Metro entirely and uses the configured origin', () => {
+    expect(resolveBaseURL('https://api.example.com/api/v1', false, null, '192.168.10.246')).toBe(
+      'https://api.example.com/api/v1',
+    );
+  });
+
+  test('a RELEASE build with no origin still throws, Metro host or not', () => {
+    expect(() => resolveBaseURL(undefined, false, null, '192.168.10.246')).toThrow(
+      /EXPO_PUBLIC_API_URL/,
+    );
   });
 });

@@ -40,7 +40,7 @@
     "days_other": "{{count}} days",
     "celebrate": "{{count}}-day streak!",
     "todayDone": "{{count}}-day streak — today is in the bag!",
-    "milestone": "{{count}}-day streak! ACE is proud of you.",
+    "milestone": "{{count}}-day streak! You're building serious momentum.",
     "freezeUsed": "Your Streak Freeze saved you!"
   },
   "level_one": "{{count}} level",

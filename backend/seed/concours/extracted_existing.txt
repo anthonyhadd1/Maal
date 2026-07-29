@@ -1,0 +1,9 @@
+8
+physique-2018-fevrier-q16-fm18.p | physique-statique-des-solides | Un solide S1 de masse inconnue est attaché à l’extrémité d’un ressort vertical. 
+physique-2018-fevrier-q17-fm18.p | physique-mecanique-des-fluides | Une force verticale de module 10 N est nécessaire pour tout juste immerger dans 
+physique-2018-fevrier-q21-fm18.p | physique-mecanique-cinematique-dynamique | Un enfant de 30 kg tire une luge de 3,6 kg selon  un angle de 25o par rapport à 
+physique-2018-fevrier-q22-fm18.p | physique-mecanique-cinematique-dynamique | Pour la donnée précédente, quelle est la valeur de la réaction normale du sol  r
+physique-2018-fevrier-q23-fm18.p | physique-mecanique-cinematique-dynamique | Un avion volant à une vitesse de 36 m/s prend 1min 15 s pour compléter un cercle
+physique-2018-fevrier-q26-fm18.p | physique-mecanique-cinematique-dynamique | Un avion volant à une altitude de 400 m a pour mission de larguer un colis sur u
+physique-2018-fevrier-q5-fm18.p | physique-mecanique-cinematique-dynamique | Un passionné de jogging court dans une ville 400 m vers le nord, 200 m vers l’es
+physique-2018-fevrier-q6-fm18.p | physique-ondes-mecaniques-acoustique | Deux diapasons de fréquences 440 Hz et 444 Hz sont excités simultanément.  L’int

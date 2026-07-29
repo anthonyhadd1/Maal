@@ -128,8 +128,7 @@ export function FloatingIsland({
 
   return (
     <View
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants"
+      aria-hidden
       pointerEvents="none"
       style={[styles.base, { width: size }, style]}
     >

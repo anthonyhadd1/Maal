@@ -50,7 +50,7 @@ export default function SubjectSwitcherRoute() {
           onPress={() => router.back()}
           size={44}
         >
-          <X color={colors.neutral[700]} size={20} />
+          <X color={colors.neutral[700]} size={22} />
         </ClayIconButton>
       </View>
 
@@ -187,9 +187,16 @@ function SubjectCard({
   const Icon = getLucideIcon(subject.icon);
   const pct = subject.completion_pct;
 
+  // The completion ring is the ONLY place this shows up visually — without
+  // folding it into the label too, a screen reader only ever hears the
+  // subject name, never how much of it is done (sighted users get that from
+  // the ring fill).
+  const label =
+    typeof pct === 'number' ? `${subject.name}, ${t('completed', { pct })}` : subject.name;
+
   return (
     <PressableScale
-      accessibilityLabel={subject.name}
+      accessibilityLabel={label}
       accessibilityState={{ selected: active }}
       onPress={onPress}
       style={styles.gridItem}

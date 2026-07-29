@@ -26,6 +26,11 @@ import {
  * Engine tests against MOCKED SERVER RESPONSES following the PLAN contract
  * exactly — a parallel agent implements the same contract server-side.
  * Mocking swaps the axios adapter (same pattern as api/__tests__/client.test).
+ *
+ * Contract (free-navigation swipe-card pager): submit() takes an explicit
+ * question — no implicit "current" question — and any order of answering is
+ * valid. Completion fires automatically once every question is answered,
+ * regardless of order.
  */
 
 type Adapter = (config: InternalAxiosRequestConfig) => Promise<AxiosResponse>;
@@ -123,22 +128,23 @@ describe('useSessionEngine', () => {
     await waitFor(() => expect(result.current.phase).toBe('question'));
 
     expect(startCalls()).toBe(1);
-    expect(result.current.question?.id).toBe(101);
+    expect(result.current.questions).toHaveLength(3);
     expect(result.current.total).toBe(3);
     const s = useSessionStore.getState();
     expect(s.attemptId).toBe(ATTEMPT_ID);
     expect(s.status).toBe('inProgress');
   });
 
-  test('submit → feedback with the server verdict; payload matches the contract', async () => {
+  test('submit takes an explicit question — the payload matches the contract', async () => {
     answerQueue.push(correctAnswer({ combo: 1 }));
     const { result } = await renderEngine();
     await waitFor(() => expect(result.current.phase).toBe('question'));
 
-    await actAsync(() => result.current.submit([1]));
-    await waitFor(() => expect(result.current.phase).toBe('feedback'));
+    const question = result.current.questions[0];
+    await actAsync(() => result.current.submit(question, [1]));
+    await waitFor(() => expect(result.current.justAnsweredId).toBe(101));
 
-    expect(result.current.lastAnswer?.is_correct).toBe(true);
+    expect(result.current.answers[101]?.is_correct).toBe(true);
     expect(result.current.combo).toBe(1);
 
     const answerPost = requests.find((r) => r.url === ENDPOINTS.attemptAnswers(ATTEMPT_ID));
@@ -149,20 +155,37 @@ describe('useSessionEngine', () => {
     expect((answerPost?.body as { time_ms: number }).time_ms).toBeGreaterThanOrEqual(0);
   });
 
-  test('feedback → next question; the answered question NEVER reappears', async () => {
+  test('answering ANY question leaves the others untouched and never re-answerable', async () => {
     answerQueue.push(wrongAnswer({ combo: 0 }));
     const { result } = await renderEngine();
     await waitFor(() => expect(result.current.phase).toBe('question'));
 
-    await actAsync(() => result.current.submit([2]));
-    await waitFor(() => expect(result.current.phase).toBe('feedback'));
+    // Answer the SECOND question first — free navigation, no forced order.
+    const second = result.current.questions[1];
+    await actAsync(() => result.current.submit(second, [4]));
+    await waitFor(() => expect(result.current.justAnsweredId).toBe(102));
 
-    await actAsync(() => result.current.continueNext());
-    expect(result.current.phase).toBe('question');
-    // Wrong answer does NOT re-queue (PLAN decision 4): index moves forward.
-    expect(result.current.currentIndex).toBe(1);
-    expect(result.current.question?.id).toBe(102);
-    expect(useSessionStore.getState().answers[101]).toBeTruthy();
+    expect(useSessionStore.getState().answers[102]).toBeTruthy();
+    expect(useSessionStore.getState().answers[101]).toBeUndefined();
+    expect(result.current.phase).toBe('question'); // session stays active
+
+    // Re-submitting the same question is a no-op (no duplicate request).
+    await actAsync(() => result.current.submit(second, [5]));
+    expect(requests.filter((r) => r.url === ENDPOINTS.attemptAnswers(ATTEMPT_ID))).toHaveLength(1);
+  });
+
+  test('dismissFeedback closes the just-answered overlay without navigating anywhere', async () => {
+    answerQueue.push(correctAnswer({ combo: 1 }));
+    const { result } = await renderEngine();
+    await waitFor(() => expect(result.current.phase).toBe('question'));
+
+    const question = result.current.questions[0];
+    await actAsync(() => result.current.submit(question, [1]));
+    await waitFor(() => expect(result.current.justAnsweredId).toBe(101));
+
+    await actAsync(() => result.current.dismissFeedback());
+    expect(result.current.justAnsweredId).toBeNull();
+    expect(result.current.phase).toBe('question'); // still 2 unanswered — no auto-complete
   });
 
   test('combo increments on correct answers and resets on wrong (server-mirrored)', async () => {
@@ -174,16 +197,16 @@ describe('useSessionEngine', () => {
     const { result } = await renderEngine();
     await waitFor(() => expect(result.current.phase).toBe('question'));
 
-    await actAsync(() => result.current.submit([1]));
+    await actAsync(() => result.current.submit(result.current.questions[0], [1]));
     await waitFor(() => expect(result.current.combo).toBe(1));
-    await actAsync(() => result.current.continueNext());
+    await actAsync(() => result.current.dismissFeedback());
 
-    await actAsync(() => result.current.submit([4, 6]));
+    await actAsync(() => result.current.submit(result.current.questions[1], [4, 6]));
     await waitFor(() => expect(result.current.combo).toBe(2));
-    await actAsync(() => result.current.continueNext());
+    await actAsync(() => result.current.dismissFeedback());
 
-    await actAsync(() => result.current.submit([8]));
-    await waitFor(() => expect(result.current.phase).toBe('feedback'));
+    await actAsync(() => result.current.submit(result.current.questions[2], [8]));
+    await waitFor(() => expect(result.current.justAnsweredId).toBe(103));
     expect(result.current.combo).toBe(0);
     expect(useSessionStore.getState().maxCombo).toBe(2);
   });
@@ -194,17 +217,17 @@ describe('useSessionEngine', () => {
     const { result } = await renderEngine({ onHeartsDepleted });
     await waitFor(() => expect(result.current.phase).toBe('question'));
 
-    await actAsync(() => result.current.submit([3]));
-    await waitFor(() => expect(result.current.phase).toBe('feedback'));
+    await actAsync(() => result.current.submit(result.current.questions[0], [3]));
+    await waitFor(() => expect(result.current.justAnsweredId).toBe(101));
 
     expect(onHeartsDepleted).toHaveBeenCalledTimes(1);
     expect(result.current.heartsRemaining).toBe(0);
-    // The session continues — feedback then next question, no blocking state.
-    await actAsync(() => result.current.continueNext());
+    // The session continues — no blocking state.
+    await actAsync(() => result.current.dismissFeedback());
     expect(result.current.phase).toBe('question');
   });
 
-  test('last question → completing → done with the results payload stored', async () => {
+  test('last question answered (in ANY order) → completing → done with the results payload stored', async () => {
     answerQueue.push(
       correctAnswer({ combo: 1 }),
       correctAnswer({ combo: 2 }),
@@ -213,11 +236,14 @@ describe('useSessionEngine', () => {
     const { result } = await renderEngine();
     await waitFor(() => expect(result.current.phase).toBe('question'));
 
-    for (let i = 0; i < 3; i += 1) {
-      const choiceId = result.current.question!.choices[0].id;
-      await actAsync(() => result.current.submit([choiceId]));
-      await waitFor(() => expect(result.current.phase).toBe('feedback'));
-      await actAsync(() => result.current.continueNext());
+    // Answer out of order: 3rd, then 1st, then 2nd.
+    const order = [2, 0, 1];
+    for (const idx of order) {
+      const q = result.current.questions[idx];
+      const choiceId = q.choices[0].id;
+      await actAsync(() => result.current.submit(q, [choiceId]));
+      await waitFor(() => expect(result.current.justAnsweredId).toBe(q.id));
+      await actAsync(() => result.current.dismissFeedback());
     }
 
     await waitFor(() => expect(result.current.phase).toBe('done'));
@@ -234,31 +260,30 @@ describe('useSessionEngine', () => {
       questions: startAttemptResponse.questions,
     });
     useSessionStore.getState().recordAnswer(101, [1], correctAnswer({ combo: 1 }));
-    useSessionStore.getState().advance();
+    useSessionStore.getState().setViewedIndex(1);
 
     const { result } = await renderEngine();
     await waitFor(() => expect(result.current.phase).toBe('question'));
 
     expect(startCalls()).toBe(0); // resumed, not restarted
-    expect(result.current.currentIndex).toBe(1);
-    expect(result.current.question?.id).toBe(102);
+    expect(result.current.viewedIndex).toBe(1);
     expect(result.current.combo).toBe(1);
+    expect(result.current.answers[101]?.is_correct).toBe(true);
   });
 
-  test('crash recovery: crashed during feedback (answered but not advanced) skips ahead', async () => {
+  test('crash recovery: scrolls to the first unanswered card when resuming mid-attempt', async () => {
     useSessionStore.getState().startSession({
       attemptId: ATTEMPT_ID,
       levelId: LEVEL_ID,
       questions: startAttemptResponse.questions,
     });
-    // Answer recorded, but the app died before advance() — currentIndex still 0.
+    // Answer recorded, but the app died before the pager scrolled — currentIndex still 0.
     useSessionStore.getState().recordAnswer(101, [2], wrongAnswer({ combo: 0 }));
 
     const { result } = await renderEngine();
     await waitFor(() => expect(result.current.phase).toBe('question'));
 
-    expect(result.current.currentIndex).toBe(1); // auto-skipped the answered one
-    expect(result.current.question?.id).toBe(102);
+    expect(result.current.viewedIndex).toBe(1); // auto-skipped the answered one
     expect(startCalls()).toBe(0);
   });
 
@@ -295,21 +320,37 @@ describe('useSessionEngine', () => {
     expect(result.current.startError?.status).toBe(409);
   });
 
-  test('answers map integrity: every verdict lands under its question id', async () => {
+  test('answers map carries the full verdict (for reviewing any past card, not just the latest)', async () => {
     answerQueue.push(correctAnswer({ combo: 1 }), wrongAnswer({ combo: 0 }));
     const { result } = await renderEngine();
     await waitFor(() => expect(result.current.phase).toBe('question'));
 
-    await actAsync(() => result.current.submit([1]));
-    await waitFor(() => expect(result.current.phase).toBe('feedback'));
-    await actAsync(() => result.current.continueNext());
+    await actAsync(() => result.current.submit(result.current.questions[0], [1]));
+    await waitFor(() => expect(result.current.justAnsweredId).toBe(101));
+    await actAsync(() => result.current.dismissFeedback());
 
-    await actAsync(() => result.current.submit([5, 7]));
-    await waitFor(() => expect(result.current.phase).toBe('feedback'));
+    await actAsync(() => result.current.submit(result.current.questions[1], [5, 7]));
+    await waitFor(() => expect(result.current.justAnsweredId).toBe(102));
 
-    expect(useSessionStore.getState().answers).toEqual({
-      101: { selected: [1], is_correct: true },
-      102: { selected: [5, 7], is_correct: false },
+    const answers = useSessionStore.getState().answers;
+    expect(answers[101]).toMatchObject({ selected: [1], is_correct: true });
+    expect(answers[101].correct_choice_ids).toEqual([1]);
+    expect(answers[102]).toMatchObject({ selected: [5, 7], is_correct: false });
+  });
+
+  test('only one submission is in flight at a time', async () => {
+    answerQueue.push(correctAnswer({ combo: 1 }));
+    const { result } = await renderEngine();
+    await waitFor(() => expect(result.current.phase).toBe('question'));
+
+    const [q1, q2] = result.current.questions;
+    await actAsync(() => {
+      result.current.submit(q1, [1]);
+      result.current.submit(q2, [4]); // ignored — q1 still in flight
     });
+    await waitFor(() => expect(result.current.justAnsweredId).toBe(101));
+
+    expect(requests.filter((r) => r.url === ENDPOINTS.attemptAnswers(ATTEMPT_ID))).toHaveLength(1);
+    expect(useSessionStore.getState().answers[102]).toBeUndefined();
   });
 });

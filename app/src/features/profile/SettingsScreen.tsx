@@ -1,5 +1,5 @@
 import Constants from 'expo-constants';
-import { LogOut, Trash2 } from 'lucide-react-native';
+import { ExternalLink, FileText, LogOut, ShieldCheck, Trash2 } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Switch, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,13 @@ import { useToast } from '@/components/feedback/Toast';
 import { Avatar, AVATAR_PRESET_IDS } from '@/components/game/Avatar';
 import { PressableScale } from '@/components/layout/PressableScale';
 import { Screen } from '@/components/layout/Screen';
+import {
+  PRIVACY_URL,
+  TERMS_URL,
+  hasLegalLinks,
+  hasPrivacyLink,
+  openLegal,
+} from '@/lib/legal';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { SUPPORTED_LOCALES, type SupportedLocale } from '@/i18n';
 import { cancelStreakReminders, scheduleStreakReminders } from '@/lib/notifications';
@@ -153,12 +160,17 @@ export function SettingsScreen() {
                 return (
                   <PressableScale
                     accessibilityLabel={t('settings.avatarOption', { id })}
-                    accessibilityState={{ selected }}
+                    accessibilityState={{ disabled: patchMe.isPending, selected }}
                     clay={false}
+                    disabled={patchMe.isPending}
                     key={id}
                     onPress={() => pickAvatar(id)}
                     pressedTranslateY={2}
-                    style={[styles.avatarCell, selected && styles.avatarCellSelected]}
+                    style={[
+                      styles.avatarCell,
+                      selected && styles.avatarCellSelected,
+                      patchMe.isPending && styles.avatarCellDisabled,
+                    ]}
                     testID={`avatar-option-${id}`}
                   >
                     <Avatar
@@ -210,6 +222,7 @@ export function SettingsScreen() {
                       accessibilityRole="button"
                       accessibilityState={{ selected: active }}
                       clay={false}
+                      hitSlop={{ top: 8, bottom: 8 }}
                       key={code}
                       onPress={() => setLocale(code)}
                       pressedTranslateY={2}
@@ -236,6 +249,53 @@ export function SettingsScreen() {
               value={leaguesOptIn}
             />
           </ClayCard>
+
+          {/* Légal — Apple requires the privacy policy and the terms to be
+              reachable from INSIDE the binary, not only from the store
+              listing. Hidden entirely when the URLs are not configured for
+              this build: a legal row that goes nowhere is worse than none. */}
+          {hasPrivacyLink() ? (
+            <>
+              <Text style={styles.sectionTitle}>{t('settings.sections.legal')}</Text>
+              <ClayCard style={styles.card}>
+                <PressableScale
+                  accessibilityLabel={t('settings.privacy')}
+                  accessibilityRole="link"
+                  clay={false}
+                  onPress={() => void openLegal(PRIVACY_URL)}
+                  pressedTranslateY={2}
+                  style={styles.legalRow}
+                  testID="settings-privacy"
+                >
+                  <ShieldCheck color={colors.neutral[700]} size={20} />
+                  <Text style={styles.legalRowLabel}>{t('settings.privacy')}</Text>
+                  <ExternalLink color={colors.neutral[500]} size={16} />
+                </PressableScale>
+                {hasLegalLinks() ? (
+                  <>
+                    <View style={styles.dangerDivider} />
+                    <PressableScale
+                      accessibilityLabel={t('settings.terms')}
+                      accessibilityRole="link"
+                      clay={false}
+                      onPress={() => void openLegal(TERMS_URL)}
+                      pressedTranslateY={2}
+                      style={styles.legalRow}
+                      testID="settings-terms"
+                    >
+                      <FileText color={colors.neutral[700]} size={20} />
+                      <Text style={styles.legalRowLabel}>{t('settings.terms')}</Text>
+                      <ExternalLink color={colors.neutral[500]} size={16} />
+                    </PressableScale>
+                  </>
+                ) : null}
+              </ClayCard>
+            </>
+          ) : null}
+
+          {/* Non-affiliation. The app names the USJ concours throughout; say
+              plainly that it is not run by the university. */}
+          <Text style={styles.disclaimer}>{t('settings.disclaimer')}</Text>
 
           {/* Zone de danger */}
           <Text style={[styles.sectionTitle, styles.dangerTitle]}>
@@ -407,9 +467,12 @@ const styles = StyleSheet.create({
   },
   avatarCell: {
     borderRadius: radii.pill,
-    padding: 3,
+    padding: spacing.xs,
     borderWidth: 2.5,
     borderColor: 'transparent',
+  },
+  avatarCellDisabled: {
+    opacity: 0.5,
   },
   avatarCellSelected: {
     borderColor: colors.primary[500],
@@ -456,6 +519,27 @@ const styles = StyleSheet.create({
   dangerCard: {
     borderColor: 'rgba(239, 68, 68, 0.25)',
     borderBottomColor: 'rgba(185, 28, 28, 0.35)',
+  },
+  legalRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.m,
+    minHeight: 48,
+    paddingHorizontal: spacing.l,
+    paddingVertical: spacing.s,
+  },
+  legalRowLabel: {
+    ...typography.bodyMedium,
+    color: colors.neutral[900],
+    flex: 1,
+  },
+  disclaimer: {
+    ...typography.caption,
+    color: colors.neutral[500],
+    textAlign: 'center',
+    marginTop: spacing.m,
+    marginBottom: spacing.s,
+    paddingHorizontal: spacing.m,
   },
   dangerRow: {
     flexDirection: 'row',

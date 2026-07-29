@@ -7,6 +7,8 @@
 
 import { Platform } from 'react-native';
 
+import { shade } from '@/lib/color';
+
 // ---------------------------------------------------------------------------
 // Colors
 // ---------------------------------------------------------------------------
@@ -25,6 +27,8 @@ export const colors = {
     800: '#5B21B6',
   },
   xpGold: '#F59E0B',
+  /** Lighter gold — gradient highlight / crest tip / ember accents. */
+  xpGoldLight: '#FBBF24',
   /** Darker gold — bottom "clay edge" of gold buttons/chips. */
   goldDeep: '#B45309',
   streakOrange: '#F97316',
@@ -43,12 +47,27 @@ export const colors = {
     100: '#F3F1F8',
     200: '#E9E6F1',
     300: '#D8D4E3',
-    500: '#8E8AA0',
+    /** Darkened from #8E8AA0 (2026-07) — the original only measured 3.34:1
+     * against white, below the 4.5:1 minimum for the body/caption text it's
+     * widely used for. This shade holds ~6.0:1 against white and ~4.9:1
+     * against the lightest accent-tinted card background it appears on
+     * (TrackCard), while keeping the same muted gray-violet hue. */
+    500: '#63616F',
     700: '#4B4763',
     900: '#241F3E',
   },
   /** Streak-freeze snowflake chips. */
   freezeBlue: '#38BDF8',
+  /**
+   * Near-black "ink" pair for the dark/clinical auth + marketing screens
+   * (welcome, login, register, forgot-password, onboarding) — deliberately
+   * LESS violet-saturated than `neutral` (which is itself violet-tinted and
+   * used everywhere in the light study app) so this reads as sober/clinical
+   * rather than "purple app". Violet survives only as a restrained accent on
+   * these screens.
+   */
+  inkTop: '#14121C',
+  inkBottom: '#09080D',
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -56,16 +75,24 @@ export const colors = {
 // ---------------------------------------------------------------------------
 
 export const gradients = {
-  /** Brand backdrop — welcome hero, headers (600 → 400 diagonal). */
-  brand: [colors.primary[600], colors.primary[400]] as const,
-  /** Deeper brand variant for large full-bleed surfaces. */
-  brandDeep: [colors.primary[700], colors.primary[500]] as const,
+  /** Brand backdrop — welcome hero, headers (700 → 800 diagonal).
+   * Darkened from (600 → 400) in 2026-07: white/near-white text sitting
+   * directly on this gradient (wordmark, tagline, pitch) measured as low as
+   * 2.72:1 against the lighter original stop, below both the 3:1 (large
+   * text) and 4.5:1 (body text) minimums. Both new stops hold >=5.7:1. */
+  brand: [colors.primary[700], colors.primary[800]] as const,
+  /** Deeper brand variant for large full-bleed surfaces. Darkened from
+   * (700 → 500) alongside `brand` above — the paywall's "pitch" text on the
+   * old lighter stop measured 3.57:1, below the 4.5:1 minimum. */
+  brandDeep: [colors.primary[800], shade(colors.primary[800], -0.25)] as const,
   /** Streak flame / crest: orange → gold. */
   flame: [colors.streakOrange, colors.xpGold] as const,
   /** XP gold shine. */
-  gold: [colors.xpGold, '#FBBF24'] as const,
+  gold: [colors.xpGold, colors.xpGoldLight] as const,
   /** Soft top sheen used on clay elements (white fade-out). */
   sheen: ['rgba(255,255,255,0.32)', 'rgba(255,255,255,0)'] as const,
+  /** Near-black backdrop for the dark/clinical auth + marketing screens. */
+  ink: [colors.inkTop, colors.inkBottom] as const,
 } as const;
 
 export type GradientToken = keyof typeof gradients;
@@ -114,7 +141,7 @@ export const mascotPalette = {
   mouth: colors.primary[800],
   crestBase: colors.streakOrange,
   crestMid: colors.xpGold,
-  crestTip: '#FBBF24',
+  crestTip: colors.xpGoldLight,
   tongue: '#F472B6',
   tear: colors.freezeBlue,
   groundShadow: 'rgba(36, 31, 62, 0.12)',

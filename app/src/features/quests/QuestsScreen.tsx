@@ -62,7 +62,12 @@ export function QuestsScreen() {
         {quests.isPending ? (
           <QuestsSkeleton />
         ) : quests.isError ? (
-          <ErrorState onRetry={() => void quests.refetch()} retrying={quests.isRefetching} />
+          // ErrorState is `flex: 1`, which resolves to ZERO inside a
+          // ScrollView's content container — the sad mascot and its retry
+          // button collapsed onto the streak section below.
+          <View style={styles.errorWrap}>
+            <ErrorState onRetry={() => void quests.refetch()} retrying={quests.isRefetching} />
+          </View>
         ) : (
           <>
             {/* Daily goal ring */}
@@ -89,14 +94,27 @@ export function QuestsScreen() {
         <ClayCard style={styles.streakCard}>
           <View style={styles.streakRow}>
             <View style={styles.streakStat}>
-              <StreakFlame days={game.data?.streak_current ?? 0} size={26} />
+              {/* Never fabricate a 0 streak: show a placeholder while the game
+                  query loads, and a dash (not 0) if it fails — a false "0" on
+                  the app's core motivation metric reads as lost progress. */}
+              {game.data ? (
+                <StreakFlame days={game.data.streak_current} size={26} />
+              ) : game.isPending ? (
+                <Skeleton height={30} radius={radii.pill} width={46} />
+              ) : (
+                <Text style={styles.streakBest}>—</Text>
+              )}
               <Text style={styles.streakLabel}>{t('streak.current')}</Text>
             </View>
             <View style={styles.streakDivider} />
             <View style={styles.streakStat}>
-              <Text style={styles.streakBest}>
-                {formatNumber(game.data?.streak_longest ?? 0)}
-              </Text>
+              {game.data ? (
+                <Text style={styles.streakBest}>{formatNumber(game.data.streak_longest)}</Text>
+              ) : game.isPending ? (
+                <Skeleton height={30} radius={radii.pill} width={46} />
+              ) : (
+                <Text style={styles.streakBest}>—</Text>
+              )}
               <Text style={styles.streakLabel}>{t('streak.longest')}</Text>
             </View>
           </View>
@@ -104,17 +122,31 @@ export function QuestsScreen() {
           {typeof game.data?.streak_freezes === 'number' ? (
             <View style={styles.freezeRow} testID="freeze-chips">
               <Text style={styles.freezeLabel}>{t('streak.freezes')}</Text>
-              <View style={styles.freezeChips}>
+              {/* One announcement for the pair — the chips are a single
+                  quantity ("1 of 2 held"), not two independent controls. */}
+              <View
+                accessible
+                accessibilityLabel={t('streak.freezesA11y', {
+                  held: game.data?.streak_freezes ?? 0,
+                  total: MAX_FREEZES,
+                })}
+                accessibilityRole="text"
+                style={styles.freezeChips}
+              >
                 {Array.from({ length: MAX_FREEZES }, (_, i) => {
                   const held = i < (game.data?.streak_freezes ?? 0);
                   return (
                     <View
                       key={i}
-                      style={[styles.freezeChip, held && styles.freezeChipHeld]}
+                      // Held vs. spent was signalled by hue alone. The empty
+                      // chip now also loses its fill and takes a dashed
+                      // outline, so the difference survives greyscale and
+                      // colour-blindness.
+                      style={[styles.freezeChip, held ? styles.freezeChipHeld : styles.freezeChipEmpty]}
                       testID={held ? 'freeze-held' : 'freeze-empty'}
                     >
                       <Snowflake
-                        color={held ? tints.iceText : colors.neutral[300]}
+                        color={held ? tints.iceText : colors.neutral[500]}
                         size={15}
                         strokeWidth={2.4}
                       />
@@ -213,7 +245,12 @@ const styles = StyleSheet.create({
   },
   streakBest: {
     ...typography.h1,
-    color: colors.streakOrange,
+    // #F97316 on white is 2.80:1 — fails even the large-text floor. The flame
+    // glyph beside it keeps the bright hue.
+    color: tints.flameText,
+  },
+  errorWrap: {
+    minHeight: 320,
   },
   streakLabel: {
     ...typography.caption,
@@ -243,6 +280,12 @@ const styles = StyleSheet.create({
   },
   freezeChipHeld: {
     backgroundColor: tints.ice,
+  },
+  freezeChipEmpty: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: colors.neutral[300],
   },
   freezeChipText: {
     ...typography.caption,
@@ -282,7 +325,7 @@ const styles = StyleSheet.create({
     backgroundColor: tints.gold,
     borderRadius: radii.pill,
     paddingHorizontal: spacing.m,
-    paddingVertical: 3,
+    paddingVertical: spacing.xs,
   },
   achievementsCount: {
     ...typography.caption,

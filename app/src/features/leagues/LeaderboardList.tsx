@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import type { LeaderboardRow } from '@/api/types';
 import { Avatar } from '@/components/game/Avatar';
 import { buildBoardItems, type BoardItem } from '@/features/leagues/leaderboardZones';
+import { withAlpha } from '@/lib/color';
 import { formatNumber } from '@/lib/format';
 import { colors, fonts, medalColors, radii, shadows, spacing, typography } from '@/theme/tokens';
 import { darken } from '@/features/leagues/tierColor';
@@ -56,27 +57,37 @@ function BoardItemView({ item }: { item: BoardItem }) {
 function ZoneSeparator({ zone }: { zone: 'promote' | 'demote' }) {
   const { t } = useTranslation('leagues');
   const promote = zone === 'promote';
-  const color = promote ? colors.successDeep : colors.dangerDeep;
-  const bg = promote ? 'rgba(34, 197, 94, 0.12)' : 'rgba(239, 68, 68, 0.10)';
+  // The divider lines are graphics (3:1 suffices) so they keep the vivid deep
+  // hue; the pill's icon + label are text-weight, so the promote side steps to
+  // successEdge (5.0:1) — successDeep is only 3.3:1 on the near-white pill.
+  const lineColor = promote ? colors.successDeep : colors.dangerDeep;
+  const inkColor = promote ? colors.successEdge : colors.dangerDeep;
+  const bg = promote ? withAlpha(colors.success, 0.12) : withAlpha(colors.danger, 0.1);
   const Icon = promote ? ChevronsUp : ChevronsDown;
   const label = promote ? t('promotionZone') : t('dangerZone');
 
   return (
     <View style={styles.separator} testID={`zone-${zone}`}>
-      <View style={[styles.separatorLine, { backgroundColor: color }]} />
+      <View style={[styles.separatorLine, { backgroundColor: lineColor }]} />
       <View style={[styles.separatorPill, { backgroundColor: bg }]}>
-        <Icon color={color} size={14} strokeWidth={2.8} />
-        <Text style={[styles.separatorLabel, { color }]}>{label}</Text>
+        <Icon color={inkColor} size={14} strokeWidth={2.8} />
+        <Text style={[styles.separatorLabel, { color: inkColor }]}>{label}</Text>
       </View>
-      <View style={[styles.separatorLine, { backgroundColor: color }]} />
+      <View style={[styles.separatorLine, { backgroundColor: lineColor }]} />
     </View>
   );
 }
 
-const MEDALS: Record<number, string> = {
-  1: medalColors.gold,
-  2: medalColors.silver,
-  3: medalColors.bronze,
+/**
+ * Podium medals. `fg` is picked per medal instead of a blanket white: white on
+ * gold measured 1.8:1 and on silver 1.6:1 — the top three ranks, the ones
+ * people actually look for, were the only unreadable numbers on the board.
+ * Ink on gold is 7.29:1 and on silver 6.11:1; bronze keeps white at 5.02:1.
+ */
+const MEDALS: Record<number, { bg: string; fg: string }> = {
+  1: { bg: medalColors.gold, fg: colors.neutral[900] },
+  2: { bg: medalColors.silver, fg: colors.neutral[900] },
+  3: { bg: medalColors.bronze, fg: colors.neutral[0] },
 };
 
 function LeaderboardRowView({ row }: { row: LeaderboardRow }) {
@@ -86,6 +97,9 @@ function LeaderboardRowView({ row }: { row: LeaderboardRow }) {
 
   return (
     <View
+      // Without `accessible`, a View's label is inert: VoiceOver walked the
+      // children and read the rank, name and XP as three unrelated fragments.
+      accessible
       accessibilityLabel={`${row.rank}. ${name} — ${t('xpWeek', { xp: formatNumber(row.xp_week) })}`}
       style={[styles.row, row.is_me && styles.rowMe]}
       testID={row.is_me ? 'board-row-me' : `board-row-${row.rank}`}
@@ -94,10 +108,10 @@ function LeaderboardRowView({ row }: { row: LeaderboardRow }) {
         <View
           style={[
             styles.medal,
-            { backgroundColor: medal, borderBottomColor: darken(medal, 0.28) },
+            { backgroundColor: medal.bg, borderBottomColor: darken(medal.bg, 0.28) },
           ]}
         >
-          <Text style={styles.medalText}>{row.rank}</Text>
+          <Text style={[styles.medalText, { color: medal.fg }]}>{row.rank}</Text>
         </View>
       ) : (
         <Text style={styles.rank}>{row.rank}</Text>
@@ -152,7 +166,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.headingBlack,
     fontSize: 13,
     lineHeight: 16,
-    color: colors.neutral[0],
   },
   rank: {
     ...typography.smallMedium,
@@ -164,7 +177,7 @@ const styles = StyleSheet.create({
   },
   names: {
     flex: 1,
-    gap: 1,
+    gap: spacing.xs,
   },
   name: {
     ...typography.bodyMedium,

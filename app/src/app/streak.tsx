@@ -28,7 +28,7 @@ const EMBERS = [
   { x: 22, delayMs: 0, durationMs: 2700, size: 7, color: colors.streakOrange },
   { x: 52, delayMs: 900, durationMs: 2300, size: 5, color: colors.xpGold },
   { x: 84, delayMs: 1600, durationMs: 2900, size: 6, color: colors.streakOrange },
-  { x: 118, delayMs: 400, durationMs: 2500, size: 5, color: '#FBBF24' },
+  { x: 118, delayMs: 400, durationMs: 2500, size: 5, color: colors.xpGoldLight },
   { x: 146, delayMs: 1200, durationMs: 2800, size: 7, color: colors.xpGold },
   { x: 168, delayMs: 2000, durationMs: 2400, size: 5, color: colors.streakOrange },
 ] as const;
@@ -48,8 +48,12 @@ export default function StreakRoute() {
     <View style={styles.scrim}>
       <ClaySurface radius="xl" shadow="floating" style={styles.card}>
         <View style={styles.flameScene}>
-          {/* Warm radial glow: two stacked alpha gradients. */}
+          {/* Warm radial glow: two stacked alpha gradients. Decorative only —
+              hidden from accessibility the same way Ember/PodiumDisc (used
+              right below) already are; pointerEvents alone only blocks touch,
+              not screen-reader traversal. */}
           <Svg
+            aria-hidden
             height={200}
             pointerEvents="none"
             style={styles.glow}

@@ -46,16 +46,6 @@ export function formatTime(date: Date | string, locale?: string): string {
   }).format(d);
 }
 
-/** Compact countdown: "3 h 24 min", "12 min", "45 s" (heart regen). */
-export function formatDurationMs(ms: number): string {
-  const totalSeconds = Math.max(0, Math.ceil(ms / 1000));
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  if (hours > 0) return `${hours} h ${String(minutes).padStart(2, '0')} min`;
-  if (minutes > 0) return `${minutes} min`;
-  return `${totalSeconds} s`;
-}
-
 export interface DurationParts {
   days: number;
   hours: number;

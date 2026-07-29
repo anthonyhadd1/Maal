@@ -6,13 +6,24 @@ from apps.common.models import TimeStampedModel
 
 
 class User(AbstractUser):
-    """Login identifier = username (case-insensitive unique). Email optional (recovery)."""
+    """Login identifier = username (case-insensitive unique).
+
+    Email is the account's recovery + uniqueness key: required at registration
+    and unique (case-insensitive) among non-empty values. The partial condition
+    keeps legacy/demo rows with a blank email valid without letting two real
+    accounts share an address — one account per email.
+    """
 
     email = models.EmailField(blank=True)
 
     class Meta(AbstractUser.Meta):
         constraints = [
             models.UniqueConstraint(Lower("username"), name="user_username_ci_unique"),
+            models.UniqueConstraint(
+                Lower("email"),
+                condition=~models.Q(email=""),
+                name="user_email_ci_unique",
+            ),
         ]
 
 
@@ -52,3 +63,27 @@ class Profile(TimeStampedModel):
 
     def __str__(self):
         return f"Profile<{self.user.username}>"
+
+
+class PasswordResetCode(TimeStampedModel):
+    """A short-lived, single-use numeric code emailed for password recovery.
+
+    Only the *hash* of the code is stored (same hashing as passwords), never the
+    plaintext. A code is valid while: not used, not expired, and under the
+    per-code attempt cap. Requesting a new code invalidates a user's older ones.
+    """
+
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="password_reset_codes"
+    )
+    code_hash = models.CharField(max_length=128)
+    expires_at = models.DateTimeField()
+    used_at = models.DateTimeField(null=True, blank=True)
+    attempts = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        indexes = [models.Index(fields=["user", "used_at"])]
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"PasswordResetCode<{self.user.username} exp={self.expires_at:%Y-%m-%d %H:%M}>"

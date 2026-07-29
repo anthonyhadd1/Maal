@@ -6,7 +6,15 @@ import * as SecureStore from '@/lib/secureStorage';
 import { ENDPOINTS } from '@/api/endpoints';
 import { keys } from '@/api/queries/keys';
 import { queryClient } from '@/api/queryClient';
-import type { LoginPayload, Me, RegisterPayload, RegisterResponse, Tokens } from '@/api/types';
+import type {
+  LoginPayload,
+  Me,
+  PasswordResetConfirmPayload,
+  PasswordResetRequestPayload,
+  RegisterPayload,
+  RegisterResponse,
+  Tokens,
+} from '@/api/types';
 import { useAuthStore } from '@/stores/authStore';
 
 export function useMe() {
@@ -25,7 +33,7 @@ export function useRegister() {
         username: payload.username,
         password: payload.password,
         display_name: payload.display_name ?? '',
-        ...(payload.email ? { email: payload.email } : {}),
+        email: payload.email,
       };
       return (await authApi.post<RegisterResponse>(ENDPOINTS.authRegister, body)).data;
     },
@@ -46,6 +54,23 @@ export function useLogin() {
       useAuthStore.getState().setAuthed();
       await queryClient.invalidateQueries({ queryKey: keys.me });
     },
+  });
+}
+
+/** Step 1 of recovery — email a 6-digit reset code. Always resolves 200 server-side
+ * (the response never reveals whether the address is registered). */
+export function useRequestPasswordReset() {
+  return useMutation({
+    mutationFn: async (payload: PasswordResetRequestPayload) =>
+      (await authApi.post(ENDPOINTS.authPasswordReset, payload)).data,
+  });
+}
+
+/** Step 2 of recovery — verify the code + set a new password. */
+export function useConfirmPasswordReset() {
+  return useMutation({
+    mutationFn: async (payload: PasswordResetConfirmPayload) =>
+      (await authApi.post(ENDPOINTS.authPasswordResetConfirm, payload)).data,
   });
 }
 

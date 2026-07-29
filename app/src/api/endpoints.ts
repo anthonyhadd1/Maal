@@ -8,6 +8,8 @@ export const ENDPOINTS = {
   authToken: '/auth/token/',
   authRefresh: '/auth/token/refresh/',
   authLogout: '/auth/logout/',
+  authPasswordReset: '/auth/password/reset/',
+  authPasswordResetConfirm: '/auth/password/reset/confirm/',
   me: '/me/',
   meStats: '/me/stats/',
   meGame: '/me/game/',

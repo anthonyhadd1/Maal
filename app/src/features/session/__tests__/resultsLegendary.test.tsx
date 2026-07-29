@@ -35,6 +35,9 @@ jest.mock('expo-router', () => ({
     dismissAll: jest.fn(),
     dismissTo: mockDismissTo,
   }),
+  useNavigation: () => ({
+    addListener: jest.fn(() => jest.fn()),
+  }),
   Redirect: jest.fn(() => null),
 }));
 

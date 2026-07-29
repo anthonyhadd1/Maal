@@ -31,12 +31,12 @@
   "legendary": "Niveau légendaire",
   "legendaryDialog": {
     "title": "Niveau légendaire",
-    "body": "Réussis 9/10 minimum. 1 cœur d'entrée. Pas d'explications pendant le run.",
-    "start": "Tenter le run légendaire",
+    "body": "Réussis 9/10 minimum. 1 cœur d'entrée. Pas d'explications pendant la partie.",
+    "start": "Tenter la partie légendaire",
     "replayNormal": "Rejouer normalement",
     "cancel": "Annuler"
   },
-  "legendaryLocked": "Le run légendaire n'est pas encore débloqué pour ce niveau.",
+  "legendaryLocked": "La partie légendaire n'est pas encore débloquée pour ce niveau.",
   "a11y": {
     "nodeCompleted": "{{title}} — terminé, {{stars}} étoiles sur 3",
     "nodeLegendary": "{{title}} — couronne légendaire, {{stars}} étoiles sur 3",
@@ -52,5 +52,23 @@
     "abandon": "Abandonner",
     "abandonRestart": "Abandonner et recommencer",
     "cancel": "Annuler"
+  },
+  "chapters": {
+    "title": "Programme",
+    "close": "Fermer",
+    "overall": "{{done}} chapitre(s) terminé(s) sur {{total}}",
+    "overallA11y": "Progression globale : {{done}} chapitres terminés sur {{total}}",
+    "progress": "{{done}}/{{total}} niveaux",
+    "cardA11y": "Chapitre {{index}}, {{title}}, {{done}} niveaux sur {{total}}, {{status}}",
+    "state": {
+      "completed": "Terminé",
+      "current": "En cours",
+      "locked": "À débloquer"
+    },
+    "hint": "Ouvre le programme et va à n’importe quel chapitre"
+  },
+  "chapterBar": {
+    "ordinal": "Chapitre {{index}}",
+    "a11y": "Chapitre {{index}} sur {{total}} : {{title}}, {{done}} niveaux terminés sur {{levels}}"
   }
 }

@@ -10,10 +10,12 @@ import { ROW_HEIGHT } from '@/features/map/useMapLayout';
  * from the PREVIOUS node's center to this node's center. Previous position is
  * derived from indices — zero measurement.
  *
- * Geometry: node centers sit ROW_HEIGHT apart, so the segment lives in a
- * ROW_HEIGHT-tall SVG anchored half a row above this row (top: -ROW_HEIGHT/2).
- * The stroke is trimmed to run sphere-edge to sphere-edge, so it never paints
- * over the previous row's node (only its empty bottom strip).
+ * The map renders bottom-to-top (level 1 at the bottom, climbing upward), so
+ * the previous node sits in the row BELOW this one. Geometry: node centers
+ * sit ROW_HEIGHT apart, so the segment lives in a ROW_HEIGHT-tall SVG anchored
+ * half a row below this row (top: ROW_HEIGHT/2). The stroke is trimmed to run
+ * sphere-edge to sphere-edge, so it never paints over the previous row's node
+ * (only its empty top strip).
  */
 
 interface MapConnectorProps {
@@ -49,12 +51,16 @@ export function MapConnector({
   const lockedTarget = level.status === 'locked' || !level.is_free_for_me;
   const color = walked ? accent : colors.neutral[300];
 
+  // Previous node (fromX) renders BELOW this row now, so the path starts
+  // near this row's own node (top of the SVG) and ends near the previous
+  // node (bottom of the SVG) — the mirror of the pre-flip top-to-bottom path.
   const midX = (fromX + toX) / 2;
-  const d = `M ${fromX} ${EDGE_GAP} Q ${midX} ${ROW_HEIGHT / 2} ${toX} ${ROW_HEIGHT - EDGE_GAP}`;
+  const d = `M ${toX} ${EDGE_GAP} Q ${midX} ${ROW_HEIGHT / 2} ${fromX} ${ROW_HEIGHT - EDGE_GAP}`;
 
   return (
     <Svg
       height={ROW_HEIGHT}
+      aria-hidden
       pointerEvents="none"
       style={styles.svg}
       width={rowWidth}
@@ -83,7 +89,7 @@ export function MapConnector({
 const styles = StyleSheet.create({
   svg: {
     position: 'absolute',
-    top: -ROW_HEIGHT / 2,
+    top: ROW_HEIGHT / 2,
     left: 0,
   },
 });

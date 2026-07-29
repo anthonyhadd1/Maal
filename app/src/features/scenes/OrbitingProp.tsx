@@ -87,8 +87,7 @@ export function OrbitingProp({
 
   return (
     <Animated.View
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants"
+      aria-hidden
       pointerEvents="none"
       style={[styles.base, { width: size, height: size, marginLeft: -size / 2, marginTop: -size / 2 }, style, orbitStyle]}
     >

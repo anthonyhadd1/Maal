@@ -54,6 +54,8 @@ interface LevelNodeProps {
   onStart: (level: MapLevel) => void;
   onLocked: (level: MapLevel) => void;
   onPremium: (level: MapLevel) => void;
+  /** An attempt-start request is in flight (any node) — dim + ignore taps to avoid a double-start. */
+  starting?: boolean;
 }
 
 /**
@@ -69,6 +71,7 @@ export function LevelNode({
   onStart,
   onLocked,
   onPremium,
+  starting = false,
 }: LevelNodeProps) {
   const { t } = useTranslation('map');
   const reduceMotion = useReducedMotionPref();
@@ -90,6 +93,7 @@ export function LevelNode({
   };
 
   const handlePress = () => {
+    if (starting) return;
     if (visual === 'premiumLocked') {
       onPremium(level);
       return;
@@ -143,7 +147,13 @@ export function LevelNode({
       <Animated.View style={[styles.nodeWrap, { left, top }, shakeStyle]}>
         <PressableScale
           accessibilityLabel={a11yLabel}
-          accessibilityState={{ disabled: visual === 'locked' }}
+          // NOT accessibility-disabled for `locked`: the node is genuinely
+          // actionable in that state (shake + "why is this locked" toast via
+          // onLocked) — assistive tech treats accessibilityState.disabled as
+          // non-activatable and would silently swallow that tap for
+          // keyboard/screen-reader users, who'd lose the explanation sighted
+          // users get. Only `starting` (in-flight request) is truly inert.
+          accessibilityState={{ busy: starting, disabled: starting }}
           onPress={handlePress}
           pressedTranslateY={NODE_EDGE - 2}
           style={[
@@ -155,6 +165,7 @@ export function LevelNode({
               backgroundColor: a.fill,
               borderBottomWidth: NODE_EDGE,
               borderBottomColor: a.edge,
+              opacity: starting ? 0.6 : 1,
             },
           ]}
           testID={`level-node-${level.id}`}
@@ -423,7 +434,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral[0],
     borderRadius: radii.pill,
     paddingHorizontal: spacing.s,
-    paddingVertical: 3,
+    paddingVertical: spacing.xs,
     ...shadows.clayPressed,
   },
   mascot: {
@@ -439,7 +450,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.neutral[0],
     borderRadius: radii.pill,
-    paddingVertical: 6,
+    paddingVertical: spacing.xs,
     paddingHorizontal: spacing.m,
     ...shadows.clayRaised,
   },

@@ -41,19 +41,27 @@ export function ClayDialog({
   onRequestClose,
   children,
 }: PropsWithChildren<ClayDialogProps>) {
+  // Unmount entirely rather than just toggling Modal's own `visible` prop:
+  // a screen hosting this dialog often stays mounted (non-topmost) right
+  // after dismissal while navigation continues underneath it (e.g. an action
+  // closes the dialog then routes elsewhere) — on web that combination can
+  // leave Modal's fade-out permanently stuck mid-transition, rendering its
+  // content indefinitely. A real React unmount sidesteps that entirely.
+  if (!visible) return null;
+
   return (
     <Modal
       animationType="fade"
       onRequestClose={onRequestClose}
       statusBarTranslucent
       transparent
-      visible={visible}
+      visible
     >
       <View style={styles.scrim}>
         <ClaySurface radius="xl" shadow="floating" style={styles.card}>
           {mascotState ? <Mascot size={104} state={mascotState} /> : null}
           {icon ? (
-            <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+            <View aria-hidden>
               {icon}
             </View>
           ) : null}

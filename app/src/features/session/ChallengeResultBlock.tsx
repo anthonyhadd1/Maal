@@ -8,6 +8,7 @@ import { useChallengeDetail } from '@/api/queries/challenges';
 import { keys } from '@/api/queries/keys';
 import { queryClient } from '@/api/queryClient';
 import { ClayCard } from '@/components/clay/ClayCard';
+import { PressableScale } from '@/components/layout/PressableScale';
 import { Skeleton } from '@/components/feedback/Skeleton';
 import { challengeOutcome, challengeResultKey } from '@/features/friends/challengeStatus';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
@@ -23,6 +24,7 @@ interface ChallengeResultBlockProps {
  */
 export function ChallengeResultBlock({ challengeId }: ChallengeResultBlockProps) {
   const { t } = useTranslation('friends');
+  const { t: tErrors } = useTranslation('errors');
   const me = useMe();
   const detail = useChallengeDetail(challengeId);
 
@@ -35,31 +37,60 @@ export function ChallengeResultBlock({ challengeId }: ChallengeResultBlockProps)
     detail.data && me.data ? challengeOutcome(detail.data, me.data.username) : null;
 
   if (!outcome) {
+    // Distinguish "still loading" from "load failed": once the queries settle
+    // in error, the skeleton would otherwise shimmer forever, implying a result
+    // is still coming when it never will. Show a retry instead.
+    const loading = detail.isPending || me.isPending;
     return (
       <ClayCard style={styles.card} testID="challenge-result-pending">
         <View style={styles.headerRow}>
           <Swords color={colors.primary[500]} size={18} />
           <Text style={styles.headerLabel}>{t('challenges.title')}</Text>
         </View>
-        <Skeleton height={22} radius={radii.s} width="70%" />
+        {loading ? (
+          <Skeleton height={22} radius={radii.s} width="70%" />
+        ) : (
+          <View style={styles.errorRow}>
+            <Text style={styles.failed}>{t('challenges.resultUnavailable')}</Text>
+            <PressableScale
+              accessibilityRole="button"
+              clay={false}
+              onPress={() => {
+                void detail.refetch();
+                void me.refetch();
+              }}
+              testID="challenge-result-retry"
+            >
+              <Text style={styles.retry}>{tErrors('retry')}</Text>
+            </PressableScale>
+          </View>
+        )}
       </ClayCard>
     );
   }
 
-  const tone =
+  // Split icon vs. text: the bright semantic hues read fine as a filled glyph
+  // but fail badly as headline text (colors.success is 2.28:1 on the card).
+  const toneIcon =
     outcome.result === 'won'
       ? colors.success
       : outcome.result === 'lost'
         ? colors.danger
         : colors.primary[600];
+  const toneText =
+    outcome.result === 'won'
+      ? colors.successEdge
+      : outcome.result === 'lost'
+        ? colors.dangerEdge
+        : colors.primary[700];
 
   return (
     <ClayCard style={styles.card} testID="challenge-result">
       <View style={styles.headerRow}>
-        <Swords color={tone} size={18} />
+        <Swords color={toneIcon} size={18} />
         <Text style={styles.headerLabel}>{t('challenges.title')}</Text>
       </View>
-      <Text style={[styles.outcome, { color: tone }]}>
+      <Text style={[styles.outcome, { color: toneText }]}>
         {t(`challenges.result.${challengeResultKey(outcome)}`, {
           name: outcome.otherName,
           a: outcome.myScore,
@@ -88,5 +119,20 @@ const styles = StyleSheet.create({
   },
   outcome: {
     ...typography.h2,
+  },
+  errorRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: spacing.m,
+  },
+  failed: {
+    ...typography.small,
+    color: colors.neutral[500],
+    flexShrink: 1,
+  },
+  retry: {
+    ...typography.smallMedium,
+    color: colors.primary[600],
   },
 });

@@ -38,8 +38,7 @@ export function Skeleton({ width = '100%', height = 16, radius = radii.s, style 
 
   return (
     <Animated.View
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants"
+      aria-hidden
       style={[
         { width, height, borderRadius: radius, backgroundColor: colors.neutral[100] },
         animatedStyle,

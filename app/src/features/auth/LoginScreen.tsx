@@ -1,7 +1,7 @@
 import { isAxiosError } from 'axios';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useLogin } from '@/api/queries/auth';
@@ -9,7 +9,8 @@ import { ClayButton } from '@/components/clay/ClayButton';
 import { ClayInput } from '@/components/clay/ClayInput';
 import { useToast } from '@/components/feedback/Toast';
 import { AuthSheet } from '@/features/auth/AuthSheet';
-import { spacing } from '@/theme/tokens';
+import { withAlpha } from '@/lib/color';
+import { colors, spacing, typography } from '@/theme/tokens';
 
 export function LoginScreen() {
   const { t } = useTranslation('auth');
@@ -40,12 +41,13 @@ export function LoginScreen() {
   };
 
   return (
-    <AuthSheet mascotState="idle" subtitle={t('login.subtitle')} title={t('login.title')}>
+    <AuthSheet subtitle={t('login.subtitle')} title={t('login.title')}>
       <View style={styles.form}>
         <ClayInput
           autoCapitalize="none"
           autoComplete="username"
           autoCorrect={false}
+          dark
           label={t('login.username')}
           onChangeText={setUsername}
           placeholder={t('login.usernamePlaceholder')}
@@ -55,6 +57,7 @@ export function LoginScreen() {
         <ClayInput
           autoCapitalize="none"
           autoComplete="current-password"
+          dark
           error={formError}
           label={t('login.password')}
           onChangeText={setPassword}
@@ -76,21 +79,28 @@ export function LoginScreen() {
           size="l"
           testID="login-submit"
           title={t('login.submit')}
-          variant="primary"
+          variant="inverted"
         />
-        <ClayButton
-          fullWidth
+        <Pressable
+          accessibilityRole="button"
           onPress={() => router.push('/forgot-password')}
-          title={t('login.forgot')}
-          variant="secondary"
-        />
-        <ClayButton
-          fullWidth
-          haptic={false}
+          style={styles.linkRow}
+          testID="login-forgot"
+        >
+          <Text style={styles.link}>{t('login.forgot')}</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.footer}>
+        <Pressable
+          accessibilityRole="button"
           onPress={() => router.replace('/register')}
-          title={t('login.noAccount')}
-          variant="secondary"
-        />
+          style={styles.footerRow}
+          testID="login-no-account"
+        >
+          <Text style={styles.footerMuted}>{t('login.noAccountQ')} </Text>
+          <Text style={styles.footerLink}>{t('login.noAccount')}</Text>
+        </Pressable>
       </View>
     </AuthSheet>
   );
@@ -103,5 +113,34 @@ const styles = StyleSheet.create({
   actions: {
     gap: spacing.m,
     marginTop: spacing.xl,
+  },
+  linkRow: {
+    alignSelf: 'center',
+    // Visible >=44pt tap target without relying on hitSlop (unreliable on
+    // react-native-web).
+    paddingVertical: spacing.m,
+    paddingHorizontal: spacing.m,
+  },
+  link: {
+    ...typography.smallMedium,
+    color: colors.primary[300],
+  },
+  footer: {
+    marginTop: spacing.xxl,
+  },
+  footerRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: spacing.m,
+  },
+  footerMuted: {
+    ...typography.small,
+    color: withAlpha(colors.neutral[0], 0.62),
+  },
+  footerLink: {
+    ...typography.small,
+    fontFamily: typography.smallMedium.fontFamily,
+    color: colors.primary[300],
   },
 });

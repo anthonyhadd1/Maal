@@ -9,3 +9,8 @@ STORAGES["staticfiles"] = {"BACKEND": "django.contrib.staticfiles.storage.Static
 
 REST_FRAMEWORK = {**REST_FRAMEWORK}  # noqa: F405
 REST_FRAMEWORK["DEFAULT_THROTTLE_CLASSES"] = ()
+
+# Test settings must be hermetic — never at the mercy of whatever a dev's
+# local .env happens to have set (e.g. UNLOCK_ALL_LEVELS=1 for manual
+# testing in the browser breaks every unlock/premium-gating test otherwise).
+UNLOCK_ALL_LEVELS = False

@@ -2,7 +2,6 @@
   "title": "Go Premium",
   "pitch": "Every level. Unlimited hearts. Smart review. Everything to earn your seat.",
   "priceNote": "Cheaper than an hour of tutoring.",
-  "cta": "Try 7 days free",
   "restore": "Restore my purchases",
   "perMonth": "{{price}} / month",
   "perYear": "{{price}} / year",
@@ -33,5 +32,11 @@
     "until": "Active until {{date}}",
     "lifetime": "Active with no end date",
     "source": "Subscription: {{source}}"
+  },
+  "ctaTrial": "Try {{days}} days free",
+  "ctaNoTrial": "Subscribe — {{price}} / month",
+  "ctaNote": {
+    "trial": "Then {{price}} per year. Cancel before the {{days}} days end and you pay nothing.",
+    "direct": "Billed {{price}} every month."
   }
 }

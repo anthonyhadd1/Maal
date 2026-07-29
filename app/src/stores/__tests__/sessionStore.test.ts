@@ -45,11 +45,30 @@ describe('sessionStore', () => {
     useSessionStore.getState().recordAnswer(101, [1], correctAnswer({ combo: 1 }));
 
     const s = useSessionStore.getState();
-    expect(s.answers[101]).toEqual({ selected: [1], is_correct: true });
+    expect(s.answers[101]).toEqual({
+      selected: [1],
+      is_correct: true,
+      correct_choice_ids: [1],
+      explanation_text: '$M = 2(1) + 32 + 4(16) = 98$ g/mol.',
+      explanation_media_url: null,
+      explanation_media_type: null,
+    });
     expect(s.combo).toBe(1);
     expect(s.maxCombo).toBe(1);
     expect(s.heartsRemaining).toBe(5);
     expect(s.heartsUnlimited).toBe(false);
+  });
+
+  test('recordAnswer persists the FULL verdict — a revisited card can render its own review without a live "lastAnswer" pointer', () => {
+    seedSession();
+    const store = useSessionStore.getState();
+    store.recordAnswer(101, [1], correctAnswer({ combo: 1 }));
+    store.recordAnswer(102, [5], wrongAnswer({ combo: 0, explanation_text: 'Non — acide faible.' }));
+
+    const s = useSessionStore.getState();
+    expect(s.answers[101].correct_choice_ids).toEqual([1]);
+    expect(s.answers[102].explanation_text).toBe('Non — acide faible.');
+    expect(s.answers[102].is_correct).toBe(false);
   });
 
   test('combo resets on a wrong verdict but maxCombo is retained', () => {
@@ -74,50 +93,48 @@ describe('sessionStore', () => {
     store.recordAnswer(101, [1], correctAnswer({ combo: 5, hearts_remaining: 5 }));
 
     const s = useSessionStore.getState();
-    expect(s.answers[101]).toEqual({ selected: [2], is_correct: false });
+    expect(s.answers[101].selected).toEqual([2]);
+    expect(s.answers[101].is_correct).toBe(false);
     expect(s.combo).toBe(0);
     expect(Object.keys(s.answers)).toHaveLength(1);
   });
 
-  test('advance is forward-only and clamped to the last question', () => {
+  test('setViewedIndex moves freely in either direction — navigation is not gated', () => {
     seedSession();
     const store = useSessionStore.getState();
-    store.advance();
+    store.setViewedIndex(2);
+    expect(useSessionStore.getState().currentIndex).toBe(2);
+    // Backward is fine — swipe-card navigation, not a linear walk.
+    store.setViewedIndex(0);
+    expect(useSessionStore.getState().currentIndex).toBe(0);
+    store.setViewedIndex(1);
     expect(useSessionStore.getState().currentIndex).toBe(1);
-    store.advance();
-    expect(useSessionStore.getState().currentIndex).toBe(2);
-    store.advance(); // clamped
-    expect(useSessionStore.getState().currentIndex).toBe(2);
   });
 
-  test('advanceTo jumps forward (crash resume) but never backward', () => {
+  test('setViewedIndex ignores out-of-range indices', () => {
     seedSession();
     const store = useSessionStore.getState();
-    store.advanceTo(2);
-    expect(useSessionStore.getState().currentIndex).toBe(2);
-    store.advanceTo(0);
-    expect(useSessionStore.getState().currentIndex).toBe(2);
-    store.advanceTo(99);
-    expect(useSessionStore.getState().currentIndex).toBe(2);
+    store.setViewedIndex(99);
+    expect(useSessionStore.getState().currentIndex).toBe(0);
+    store.setViewedIndex(-1);
+    expect(useSessionStore.getState().currentIndex).toBe(0);
   });
 
-  test('a full no-requeue walk visits each question exactly once', () => {
+  test('questions can be answered in ANY order — no re-queue regardless of order', () => {
     seedSession();
     const store = useSessionStore.getState();
-    const visited: number[] = [];
+    const ids = [103, 101, 102]; // deliberately out of order
 
-    for (;;) {
+    for (const id of ids) {
       const s = useSessionStore.getState();
-      const question = s.questions[s.currentIndex];
-      expect(visited).not.toContain(question.id); // never re-shown
-      visited.push(question.id);
+      const question = s.questions.find((q) => q.id === id)!;
+      expect(s.answers[id]).toBeUndefined(); // never answered yet
       s.recordAnswer(question.id, [question.choices[0].id], wrongAnswer({ combo: 0 }));
-      if (s.currentIndex >= s.questions.length - 1) break;
-      store.advance();
     }
 
-    expect(visited).toEqual([101, 102, 103]);
-    expect(Object.keys(useSessionStore.getState().answers)).toHaveLength(3);
+    expect(Object.keys(useSessionStore.getState().answers).map(Number).sort()).toEqual([
+      101, 102, 103,
+    ]);
   });
 
   test('setResults closes the attempt and stamps completedAt', () => {
@@ -146,7 +163,7 @@ describe('sessionStore', () => {
     seedSession();
     const store = useSessionStore.getState();
     store.recordAnswer(101, [1], correctAnswer({ combo: 1 }));
-    store.advance();
+    store.setViewedIndex(1);
 
     // Wait for zustand/persist to flush to AsyncStorage.
     await new Promise((resolve) => setTimeout(resolve, 0));
@@ -175,8 +192,8 @@ describe('sessionStore', () => {
     expect(s.attemptId).toBe(ATTEMPT_ID);
     expect(s.levelId).toBe(LEVEL_ID);
     expect(s.status).toBe('inProgress');
-    expect(s.currentIndex).toBe(1); // resumed where we crashed
-    expect(s.answers[101]).toEqual({ selected: [1], is_correct: true });
+    expect(s.currentIndex).toBe(1); // resumed where we left off scrolled to
+    expect(s.answers[101]).toMatchObject({ selected: [1], is_correct: true });
     expect(s.questions).toHaveLength(3);
     expect(isSessionResumable(s)).toBe(true);
   });
@@ -217,7 +234,9 @@ describe('sessionStore', () => {
 
     const s = useSessionStore.getState();
     expect(s.legendary).toBe(true);
-    expect(s.answers[101]).toEqual({ selected: [1], is_correct: true });
+    expect(s.answers[101]).toMatchObject({ selected: [1], is_correct: true });
+    // Withheld explanation persists too — a revisited legendary card still shows "withheld", not a blank.
+    expect(s.answers[101].explanation_text).toBeNull();
     expect(s.challengeId).toBeNull();
   });
 

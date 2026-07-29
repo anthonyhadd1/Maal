@@ -9,7 +9,7 @@ import {
   useStartPracticeAttempt,
   useSubmitAnswer,
 } from '@/api/queries/session';
-import type { AnswerResponse, StartAttemptResponse } from '@/api/types';
+import type { AttemptQuestion, StartAttemptResponse } from '@/api/types';
 import { notifyError, notifySuccess } from '@/lib/haptics';
 import { play } from '@/lib/sounds';
 import { useSessionStore } from '@/stores/sessionStore';
@@ -18,26 +18,23 @@ import { useSessionStore } from '@/stores/sessionStore';
 export const COMBO_SOUND_STEPS = [3, 5, 8] as const;
 
 /**
- * Session state machine (design_mobile.md §4b + PLAN decisions 1/4):
+ * Session state machine (swipe-card pager — free navigation):
  *
- *   loading → question(idle) → submitting → feedback(correct|wrong)
- *       → next question | completing → done (results ready)
+ *   loading → question → completing → done (results ready)
  *
- * - NO wrong-answer re-queue: every question is answered exactly once.
- * - Grading/hearts/combo are server verdicts, mirrored from responses.
+ * - NO wrong-answer re-queue: every question is answered exactly once, in
+ *   WHATEVER ORDER the player swipes to it. The server doesn't enforce order
+ *   either (submit_answer only checks attempt membership + "not already
+ *   answered") — so this is a pure client-side navigation freedom, not a
+ *   relaxation of any server contract.
+ * - Any card can be viewed at any time; only one submission is ever in
+ *   flight (`submittingId`), and at most one card's feedback overlay is open
+ *   at a time (`justAnsweredId`) — a human can only tap one button at once.
  * - All durable state lives in sessionStore (persisted → crash recovery);
- *   the engine holds only the ephemeral phase + last verdict.
- * - Navigation is NOT performed here — screens react to `phase`.
+ *   the engine holds only the ephemeral phase + in-flight/just-answered ids.
  */
 
-export type SessionPhase =
-  | 'loading'
-  | 'question'
-  | 'submitting'
-  | 'feedback'
-  | 'completing'
-  | 'done'
-  | 'error';
+export type SessionPhase = 'loading' | 'question' | 'completing' | 'done' | 'error';
 
 export interface SessionEngineCallbacks {
   /** Hearts just hit 0 mid-session (non-blocking — the attempt continues). */
@@ -71,16 +68,18 @@ export function useSessionEngine(
   const challengeId = options.challengeId ?? null;
   const practice = options.practice ?? false;
   const [phase, setPhase] = useState<SessionPhase>('loading');
-  const [lastAnswer, setLastAnswer] = useState<AnswerResponse | null>(null);
+  const [submittingId, setSubmittingId] = useState<number | null>(null);
+  const [justAnsweredId, setJustAnsweredId] = useState<number | null>(null);
   const [startError, setStartError] = useState<ApiErrorInfo | null>(null);
 
   const attemptId = useSessionStore((s) => s.attemptId);
   const questions = useSessionStore((s) => s.questions);
-  const currentIndex = useSessionStore((s) => s.currentIndex);
+  const viewedIndex = useSessionStore((s) => s.currentIndex);
   const answers = useSessionStore((s) => s.answers);
   const combo = useSessionStore((s) => s.combo);
   const heartsRemaining = useSessionStore((s) => s.heartsRemaining);
   const heartsUnlimited = useSessionStore((s) => s.heartsUnlimited);
+  const setViewedIndexStore = useSessionStore((s) => s.setViewedIndex);
 
   const startAttempt = useStartAttempt();
   const startChallengeAttempt = useStartChallengeAttempt();
@@ -89,13 +88,19 @@ export function useSessionEngine(
   const completeAttempt = useCompleteAttempt();
   const abandonAttempt = useAbandonAttempt();
 
-  /** Per-question display timestamp -> time_ms in the answer payload. */
-  const shownAtRef = useRef<number>(Date.now());
+  /** Per-question "first seen" timestamp -> time_ms in the answer payload. */
+  const shownAtRef = useRef<Map<number, number>>(new Map());
   const callbacksRef = useRef(callbacks);
   callbacksRef.current = callbacks;
+  const completingRef = useRef(false); // guards firing complete() twice
+  // Synchronous guard: `submittingId` (React state) is batched, so two
+  // submit() calls fired in the same tick would both still see the stale
+  // pre-update value. A ref reads/writes immediately, closing that race.
+  const submittingRef = useRef<number | null>(null);
 
   const complete = useCallback(
     (id: number) => {
+      completingRef.current = true;
       setPhase('completing');
       completeAttempt.mutate(id, {
         onSuccess: (results) => {
@@ -103,6 +108,7 @@ export function useSessionEngine(
           setPhase('done');
         },
         onError: (error) => {
+          completingRef.current = false;
           const info = parseApiError(error);
           setStartError(info);
           setPhase('error');
@@ -124,9 +130,8 @@ export function useSessionEngine(
       return true;
     }
     if (firstUnanswered !== s.currentIndex) {
-      s.advanceTo(firstUnanswered);
+      s.setViewedIndex(firstUnanswered);
     }
-    shownAtRef.current = Date.now();
     setPhase('question');
     return true;
   }, [complete]);
@@ -151,7 +156,6 @@ export function useSessionEngine(
         challengeId,
         isPractice: practice,
       });
-      shownAtRef.current = Date.now();
       setPhase('question');
     };
     const onError = (error: unknown) => {
@@ -183,29 +187,58 @@ export function useSessionEngine(
     if (prevAttemptRef.current === attemptId) return;
     prevAttemptRef.current = attemptId;
     if (attemptId != null) {
-      setLastAnswer(null);
+      setJustAnsweredId(null);
+      setSubmittingId(null);
       setStartError(null);
+      shownAtRef.current = new Map();
+      completingRef.current = false;
+      submittingRef.current = null;
       enterFromStore();
     }
   }, [attemptId, enterFromStore]);
 
-  const submit = useCallback(
-    (selectedChoiceIds: number[]) => {
-      if (phase !== 'question' || selectedChoiceIds.length === 0) return;
-      const store = useSessionStore.getState();
-      const question = store.questions[store.currentIndex];
-      if (!question || store.answers[question.id]) return; // answered once, forever
+  // All questions answered → complete automatically, regardless of which
+  // card (or order) supplied the last verdict. Guarded by `completingRef` so
+  // a re-render mid-flight never double-fires the request.
+  useEffect(() => {
+    if (phase !== 'question') return;
+    if (questions.length === 0 || attemptId == null) return;
+    if (completingRef.current) return;
+    if (Object.keys(answers).length < questions.length) return;
+    complete(attemptId);
+  }, [phase, questions.length, answers, attemptId, complete]);
 
-      setPhase('submitting');
-      const timeMs = Math.max(0, Date.now() - shownAtRef.current);
+  /** First render of a card marks its "shown" timestamp for time_ms. Idempotent. */
+  const markShown = useCallback((questionId: number) => {
+    if (!shownAtRef.current.has(questionId)) {
+      shownAtRef.current.set(questionId, Date.now());
+    }
+  }, []);
+
+  const setViewedIndex = useCallback(
+    (index: number) => setViewedIndexStore(index),
+    [setViewedIndexStore],
+  );
+
+  const submit = useCallback(
+    (question: AttemptQuestion, selectedChoiceIds: number[]) => {
+      if (phase !== 'question' || selectedChoiceIds.length === 0) return;
+      if (submittingRef.current != null) return; // one in flight at a time
+      if (useSessionStore.getState().answers[question.id]) return; // answered once, forever
+
+      submittingRef.current = question.id;
+      setSubmittingId(question.id);
+      const shownAt = shownAtRef.current.get(question.id) ?? Date.now();
+      const timeMs = Math.max(0, Date.now() - shownAt);
       submitAnswer.mutate(
         { question_id: question.id, selected_choice_ids: selectedChoiceIds, time_ms: timeMs },
         {
           onSuccess: (response) => {
             const prevHearts = useSessionStore.getState().heartsRemaining;
             useSessionStore.getState().recordAnswer(question.id, selectedChoiceIds, response);
-            setLastAnswer(response);
-            setPhase('feedback');
+            submittingRef.current = null;
+            setSubmittingId(null);
+            setJustAnsweredId(question.id);
             if (response.is_correct) {
               notifySuccess();
               play('correct');
@@ -226,7 +259,8 @@ export function useSessionEngine(
             }
           },
           onError: (error) => {
-            setPhase('question');
+            submittingRef.current = null;
+            setSubmittingId(null);
             callbacksRef.current.onRequestError?.(parseApiError(error));
           },
         },
@@ -235,18 +269,10 @@ export function useSessionEngine(
     [phase, submitAnswer],
   );
 
-  const continueNext = useCallback(() => {
-    if (phase !== 'feedback') return;
-    const store = useSessionStore.getState();
-    setLastAnswer(null);
-    if (store.currentIndex >= store.questions.length - 1) {
-      if (store.attemptId != null) complete(store.attemptId);
-    } else {
-      store.advance();
-      shownAtRef.current = Date.now();
-      setPhase('question');
-    }
-  }, [phase, complete]);
+  /** Closes the just-answered card's feedback overlay. */
+  const dismissFeedback = useCallback(() => {
+    setJustAnsweredId(null);
+  }, []);
 
   /** Retry the failed stage (start / complete). */
   const retry = useCallback(() => {
@@ -263,23 +289,27 @@ export function useSessionEngine(
     store.reset();
   }, [abandonAttempt]);
 
-  const question = questions[currentIndex] ?? null;
+  const question = questions[viewedIndex] ?? null;
   const answeredCount = Object.keys(answers).length;
 
   return {
     phase,
+    questions,
+    answers,
     question,
-    currentIndex,
+    viewedIndex,
+    setViewedIndex,
     total: questions.length,
     answeredCount,
     combo,
     heartsRemaining,
     heartsUnlimited,
-    lastAnswer,
+    submittingId,
+    justAnsweredId,
     startError,
-    isSubmitting: phase === 'submitting',
+    markShown,
     submit,
-    continueNext,
+    dismissFeedback,
     retry,
     abandon,
   };

@@ -1,4 +1,4 @@
-import { Redirect, useRouter } from 'expo-router';
+import { Redirect, useNavigation, useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import {
   CalendarCheck,
@@ -13,9 +13,14 @@ import {
   Zap,
   type LucideIcon,
 } from 'lucide-react-native';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { useEffect, useRef, useState } from 'react';
+import { Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
+import Animated, {
+  FadeInDown,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 
 import { parseApiError } from '@/api/errors';
@@ -23,7 +28,7 @@ import { useStartAttempt } from '@/api/queries/session';
 import type { LegendaryResult, XpBreakdown } from '@/api/types';
 import { ClayButton } from '@/components/clay/ClayButton';
 import { ClayCard } from '@/components/clay/ClayCard';
-import { useToast } from '@/components/feedback/Toast';
+import { TOAST_AUTO_DISMISS_MS, useToast } from '@/components/feedback/Toast';
 import { Screen } from '@/components/layout/Screen';
 import { Mascot } from '@/components/mascot/Mascot';
 import {
@@ -42,9 +47,44 @@ import { useSessionStore } from '@/stores/sessionStore';
 import { ClaySurface } from '@/components/clay/ClaySurface';
 import { ParticleBurst, PodiumDisc, RadialRays } from '@/features/scenes';
 import { colors, spacing, typography } from '@/theme/tokens';
+import { tints } from '@/theme/tints';
 
 const STAR_STAGGER_MS = 380;
 const STAGE_DELAYS_MS = [0, 1300, 2000, 2400, 2800]; // stars, xp, confetti, stats, ctas
+const LAST_STAGE = STAGE_DELAYS_MS.length - 1;
+
+/**
+ * XP bonus rows, declared once outside the component so the pre-reveal
+ * placeholder can reserve the block's REAL height. Sizing it from a flat 96pt
+ * meant the whole page jumped downward when the XP card mounted.
+ *
+ * `tint` is the bright brand hue (used at 14% alpha as the icon wash); `fg` is
+ * the readable foreground drawn on it — a #22C55E glyph on its own pale tint
+ * measures ~1.9:1, well under the 3:1 floor for meaningful non-text content.
+ */
+const XP_ROWS = [
+  { key: 'base', field: 'base', icon: Check, tint: colors.success, fg: tints.successText },
+  { key: 'perfect', field: 'perfect_bonus', icon: Sparkles, tint: colors.primary[500], fg: colors.primary[700] },
+  { key: 'combo', field: 'combo_bonus', icon: Flame, tint: colors.streakOrange, fg: tints.flameText },
+  { key: 'firstClear', field: 'first_clear_bonus', icon: Medal, tint: colors.freezeBlue, fg: tints.iceText },
+  { key: 'streak', field: 'streak_bonus', icon: CalendarCheck, tint: colors.streakOrange, fg: tints.flameText },
+  { key: 'legendary', field: 'legendary_bonus', icon: Crown, tint: colors.xpGold, fg: tints.goldText },
+] as const satisfies readonly {
+  key: string;
+  field: keyof XpBreakdown;
+  icon: LucideIcon;
+  tint: string;
+  fg: string;
+}[];
+
+/** Bonus rows that will actually render for this breakdown. */
+function visibleXpRows(xp: XpBreakdown) {
+  return XP_ROWS.filter((row) => (xp[row.field] ?? 0) > 0);
+}
+
+/** Height of the XP card, so the placeholder before it reserves the same box. */
+const XP_HEADER_HEIGHT = 96;
+const XP_ROW_HEIGHT = 34;
 
 /**
  * Results choreography (design_mobile.md §4b): stars punch in one-by-one →
@@ -57,9 +97,39 @@ export function ResultsScreen() {
   const { t: tErrors } = useTranslation('errors');
   const { t: tProfile } = useTranslation('profile');
   const router = useRouter();
+  const navigation = useNavigation();
   const toast = useToast();
   const reduceMotion = useReducedMotionPref();
   const startAttempt = useStartAttempt();
+
+  // "PUSH within the session stack — celebration; only exit = CTA buttons"
+  // (see session/results.tsx) was never actually enforced: the header's
+  // gestureEnabled: false (session/_layout.tsx) only blocks iOS's edge-swipe.
+  // Android's hardware back button and the web browser back button both pop
+  // straight through to the [levelId] screen still underneath in the stack —
+  // which onContinue's own comment above documents as a dead end (emptied,
+  // just-reset session store, hangs forever on the loading skeleton). Redirect
+  // any such uncontrolled pop to the same safe exit onContinue uses, instead of
+  // landing on that stale screen. `deliberateExit` marks our OWN navigation
+  // calls (onContinue / onReplay's router.back()) so THOSE go through untouched.
+  const deliberateExit = useRef(false);
+  const [blockedPop, setBlockedPop] = useState(false);
+
+  useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        if (deliberateExit.current) return;
+        e.preventDefault();
+        setBlockedPop(true);
+      }),
+    [navigation],
+  );
+
+  useEffect(() => {
+    if (!blockedPop) return;
+    deliberateExit.current = true;
+    router.dismissTo('/');
+  }, [blockedPop, router]);
 
   // Snapshot at mount: « Rejouer » reseeds the store without unmounting us.
   const [snapshot] = useState(() => {
@@ -75,7 +145,7 @@ export function ResultsScreen() {
     };
   });
 
-  const [stage, setStage] = useState(reduceMotion ? STAGE_DELAYS_MS.length - 1 : 0);
+  const [stage, setStage] = useState(reduceMotion ? LAST_STAGE : 0);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -84,6 +154,12 @@ export function ResultsScreen() {
     );
     return () => timers.forEach(clearTimeout);
   }, [reduceMotion]);
+
+  // The choreography holds the CTAs back for 2.8s and `beforeRemove` above
+  // redirects any back press — so a returning student had no way out of the
+  // celebration at all. Any tap reveals everything at once (HIG: animations
+  // must be interruptible; never block input while one plays).
+  const skipChoreography = () => setStage(LAST_STAGE);
 
   // Server sends a pre-formatted French title for the unlock toast (same
   // gap as everywhere else the catalog leaks raw FR text) — localize known
@@ -117,7 +193,11 @@ export function ResultsScreen() {
               type: 'success',
               message: tCommon('trophy.unlocked', { name: localizedTrophyName(achievement) }),
             }),
-          index * 2000, // single-slot toast — stagger multiples
+          // Single-slot toast — stagger multiples. Must be >= the toast's own
+          // auto-dismiss, or the next trophy toast preempts the previous one
+          // before its full reading time (was a flat 2000ms against a 3000ms
+          // dismiss — every unlock after the first got cut a second short).
+          index * TOAST_AUTO_DISMISS_MS,
         ),
       );
       // Cancel pending toasts if the user leaves early; shown ones auto-dismiss.
@@ -190,6 +270,7 @@ export function ResultsScreen() {
     // `dismissTo` resolves the target href against the real route tree
     // (like a Link), so it correctly crosses out of the nested stack and
     // back to the tabs root underneath the whole modal group.
+    deliberateExit.current = true;
     router.dismissTo('/');
     if (streak.extended_today) {
       router.push({ pathname: '/streak', params: { days: String(streak.current) } });
@@ -205,6 +286,7 @@ export function ResultsScreen() {
           levelId: snapshot.levelId!,
           questions: data.questions,
         });
+        deliberateExit.current = true;
         router.back();
       },
       onError: (error) => {
@@ -217,7 +299,7 @@ export function ResultsScreen() {
           toast.show({ type: 'error', message: t('hearts.empty.title') });
           return;
         }
-        toast.show({ type: 'error', message: info.detail ?? tErrors('server') });
+        toast.show({ type: 'error', message: tErrors('server') });
       },
     });
   };
@@ -230,7 +312,13 @@ export function ResultsScreen() {
              Skipped for practice — stars/passed are null server-side, and a
              review run isn't a pass-fail moment. */}
       {!isPractice ? (
-        <View style={styles.starsRow} testID="results-stars">
+        <View
+          accessibilityLabel={tCommon('a11y.stars', { count: results.stars ?? 0 })}
+          accessibilityRole="text"
+          accessible
+          style={styles.starsRow}
+          testID="results-stars"
+        >
           {results.passed ? (
             <RadialRays durationMs={60000} opacity={0.2} size={340} style={styles.rays} />
           ) : null}
@@ -283,50 +371,64 @@ export function ResultsScreen() {
         <LegendaryBlock legendary={results.legendary} reduceMotion={reduceMotion} />
       ) : null}
 
-      {/* 2 — XP count-up + breakdown */}
+      {/* 2 — XP count-up + breakdown. The placeholder reserves the card's real
+             height so revealing it doesn't shove the page down (CLS). */}
       {stage >= 1 ? (
         <XpBlock reduceMotion={reduceMotion} xp={results.xp} />
       ) : (
-        <View style={styles.xpPlaceholder} />
+        <View
+          style={{
+            height: XP_HEADER_HEIGHT + visibleXpRows(results.xp).length * XP_ROW_HEIGHT,
+          }}
+        />
       )}
 
       {/* 3 — mascot on a small clay podium (+ confetti overlay below) */}
       {stage >= 2 ? (
-        <View style={styles.mascotScene}>
-          <Mascot size={132} state={positive ? 'celebrate' : 'sad'} style={styles.mascotOnPodium} />
-          <PodiumDisc width={158} />
-        </View>
+        <Beat reduceMotion={reduceMotion}>
+          <View style={styles.mascotScene}>
+            <Mascot
+              size={132}
+              state={positive ? 'celebrate' : 'sad'}
+              style={styles.mascotOnPodium}
+            />
+            <PodiumDisc width={158} />
+          </View>
+        </Beat>
       ) : null}
 
       {/* 4 — stat chips */}
       {stage >= 3 ? (
-        <View style={styles.stats} testID="results-stats">
+        <Beat reduceMotion={reduceMotion} style={styles.stats} testID="results-stats">
           <StatChip
-            color={colors.primary[600]}
+            fg={colors.primary[700]}
             icon={Target}
             label={t('results.accuracy')}
+            tint={colors.primary[500]}
             value={formatPercent(results.score_pct)}
           />
           <StatChip
-            color={colors.streakOrange}
+            fg={tints.flameText}
             icon={Flame}
             label={t('results.maxCombo')}
+            tint={colors.streakOrange}
             value={formatNumber(snapshot.maxCombo)}
           />
           {elapsed != null ? (
             <StatChip
-              color={colors.freezeBlue}
+              fg={tints.iceText}
               icon={Timer}
               label={t('results.time')}
+              tint={colors.freezeBlue}
               value={formatElapsedMs(elapsed)}
             />
           ) : null}
-        </View>
+        </Beat>
       ) : null}
 
       {/* 5 — CTAs */}
       {stage >= 4 ? (
-        <View style={styles.actions}>
+        <Beat reduceMotion={reduceMotion} style={styles.actions}>
           <ClayButton
             fullWidth
             onPress={onContinue}
@@ -349,12 +451,20 @@ export function ResultsScreen() {
               variant="secondary"
             />
           ) : null}
-        </View>
+        </Beat>
       ) : null}
 
-      {/* Confetti overlay (skipped at reduced motion / failed levels). */}
+      {/* Confetti overlay (skipped at reduced motion / failed levels). Purely
+          decorative — same accessibility-hiding as Ember/PodiumDisc/streak's
+          glow SVG; pointerEvents alone only blocks touch, not screen-reader
+          traversal, and an animating unlabeled element is worse than none. */}
       {stage >= 2 && results.passed && !reduceMotion ? (
-        <View pointerEvents="none" style={StyleSheet.absoluteFill} testID="results-confetti">
+        <View
+          aria-hidden
+          pointerEvents="none"
+          style={StyleSheet.absoluteFill}
+          testID="results-confetti"
+        >
           <LottieView
             autoPlay
             loop={false}
@@ -363,7 +473,50 @@ export function ResultsScreen() {
           />
         </View>
       ) : null}
+
+      {/* Tap-to-skip. Rendered ON TOP and only while the choreography is still
+          running — nothing underneath is interactive before the CTAs appear,
+          so it can't swallow a real press, and it unmounts the moment the
+          last beat lands. */}
+      {stage < LAST_STAGE ? (
+        <Pressable
+          accessibilityHint={t('results.skipHint')}
+          accessibilityLabel={t('results.skip')}
+          accessibilityRole="button"
+          onPress={skipChoreography}
+          style={StyleSheet.absoluteFill}
+          testID="results-skip"
+        />
+      ) : null}
     </Screen>
+  );
+}
+
+/**
+ * One beat of the results choreography. Every stage used to be a bare
+ * conditional — three of the five simply popped into existence and shoved the
+ * page down. Entering from below also matches the app's "forward = up" motion
+ * direction.
+ */
+function Beat({
+  children,
+  reduceMotion,
+  style,
+  testID,
+}: {
+  children: React.ReactNode;
+  reduceMotion: boolean;
+  style?: StyleProp<ViewStyle>;
+  testID?: string;
+}) {
+  return (
+    <Animated.View
+      entering={reduceMotion ? undefined : FadeInDown.duration(220)}
+      style={style}
+      testID={testID}
+    >
+      {children}
+    </Animated.View>
   );
 }
 
@@ -465,19 +618,13 @@ function XpBlock({ xp, reduceMotion }: { xp: XpBreakdown; reduceMotion: boolean 
     return () => timers.forEach(clearTimeout);
   }, [reduceMotion, xp.total]);
 
-  const rows: { label: string; amount: number | undefined; icon: LucideIcon; color: string }[] = [
-    { label: t('results.xp.base'), amount: xp.base, icon: Check, color: colors.success },
-    { label: t('results.xp.perfect'), amount: xp.perfect_bonus, icon: Sparkles, color: colors.primary[500] },
-    { label: t('results.xp.combo'), amount: xp.combo_bonus, icon: Flame, color: colors.streakOrange },
-    { label: t('results.xp.firstClear'), amount: xp.first_clear_bonus, icon: Medal, color: colors.freezeBlue },
-    { label: t('results.xp.streak'), amount: xp.streak_bonus, icon: CalendarCheck, color: colors.streakOrange },
-    { label: t('results.xp.legendary'), amount: xp.legendary_bonus, icon: Crown, color: colors.xpGold },
-  ];
-  const visible = rows.filter((row) => (row.amount ?? 0) > 0);
+  const visible = visibleXpRows(xp);
 
   return (
     <ClayCard style={styles.xpCard}>
       <View style={styles.xpTotalRow}>
+        {/* Glyph keeps the bright gold — as a filled shape it carries the
+            identity. The NUMBER can't: #F59E0B on white is 2.15:1. */}
         <Zap color={colors.xpGold} fill={colors.xpGold} size={30} />
         <Text style={styles.xpTotal} testID="results-xp-total">
           {t('results.xpEarned', { xp: formatNumber(value) })}
@@ -485,12 +632,12 @@ function XpBlock({ xp, reduceMotion }: { xp: XpBreakdown; reduceMotion: boolean 
       </View>
       {visible.length > 0 ? <View style={styles.xpDivider} /> : null}
       {visible.map((row) => (
-        <View key={row.label} style={styles.xpRow}>
-          <View style={[styles.xpIcon, { backgroundColor: withAlpha(row.color, 0.14) }]}>
-            <row.icon color={row.color} size={15} strokeWidth={2.6} />
+        <View key={row.key} style={styles.xpRow}>
+          <View style={[styles.xpIcon, { backgroundColor: withAlpha(row.tint, 0.14) }]}>
+            <row.icon color={row.fg} size={17} strokeWidth={2.6} />
           </View>
-          <Text style={styles.xpLabel}>{row.label}</Text>
-          <Text style={styles.xpAmount}>{t('results.xpEarned', { xp: row.amount })}</Text>
+          <Text style={styles.xpLabel}>{t(`results.xp.${row.key}`)}</Text>
+          <Text style={styles.xpAmount}>{t('results.xpEarned', { xp: xp[row.field] })}</Text>
         </View>
       ))}
     </ClayCard>
@@ -522,17 +669,21 @@ function StatChip({
   label,
   value,
   icon: Icon,
-  color,
+  tint,
+  fg,
 }: {
   label: string;
   value: string;
   icon: LucideIcon;
-  color: string;
+  /** Bright brand hue — used at 14% alpha as the tile wash. */
+  tint: string;
+  /** Readable foreground drawn on that wash (≥ 3:1). */
+  fg: string;
 }) {
   return (
     <ClaySurface radius="m" style={styles.statChip}>
-      <View style={[styles.statIcon, { backgroundColor: withAlpha(color, 0.14) }]}>
-        <Icon color={color} size={17} strokeWidth={2.6} />
+      <View style={[styles.statIcon, { backgroundColor: withAlpha(tint, 0.14) }]}>
+        <Icon color={fg} size={17} strokeWidth={2.6} />
       </View>
       <Text style={styles.statValue}>{value}</Text>
       <Text numberOfLines={1} style={styles.statLabel}>
@@ -598,9 +749,6 @@ const styles = StyleSheet.create({
     marginTop: -spacing.m,
     marginBottom: spacing.l,
   },
-  xpPlaceholder: {
-    height: 96,
-  },
   legendaryEarned: {
     alignItems: 'center',
     gap: spacing.s,
@@ -608,7 +756,9 @@ const styles = StyleSheet.create({
   },
   legendaryTitle: {
     ...typography.h2,
-    color: colors.xpGold,
+    // Deep gold, not #F59E0B: the crown glyph above already carries the hue,
+    // and bright gold as TEXT on white measures 2.15:1.
+    color: colors.goldDeep,
     textAlign: 'center',
   },
   legendaryMiss: {
@@ -629,7 +779,7 @@ const styles = StyleSheet.create({
   },
   xpTotal: {
     ...typography.display,
-    color: colors.xpGold,
+    color: colors.goldDeep,
     textAlign: 'center',
   },
   xpDivider: {
@@ -667,7 +817,7 @@ const styles = StyleSheet.create({
   statChip: {
     flex: 1,
     alignItems: 'center',
-    gap: 3,
+    gap: spacing.xs,
     paddingVertical: spacing.m,
     paddingHorizontal: spacing.s,
   },
@@ -690,8 +840,7 @@ const styles = StyleSheet.create({
   },
   actions: {
     gap: spacing.m,
-    marginTop: 'auto',
-    paddingTop: spacing.xl,
+    marginTop: spacing.xl,
     paddingBottom: spacing.l,
   },
   confetti: {

@@ -7,6 +7,11 @@ import { usePatchMe } from '@/api/queries/profile';
 import { useToast } from '@/components/feedback/Toast';
 import { Mascot } from '@/components/mascot/Mascot';
 import { OnboardingStep } from '@/features/onboarding/OnboardingStep';
+import {
+  onboardingPrevious,
+  onboardingProgress,
+} from '@/features/onboarding/onboardingProgress';
+import { useSettingsStore } from '@/stores/settingsStore';
 import { spacing } from '@/theme/tokens';
 
 /**
@@ -20,6 +25,9 @@ export function NotificationsScreen() {
   const router = useRouter();
   const toast = useToast();
   const patchMe = usePatchMe();
+  const activeTrackSlug = useSettingsStore((s) => s.activeTrackSlug);
+  const { step, totalSteps } = onboardingProgress('notifications');
+  const previous = onboardingPrevious('notifications');
   const [requesting, setRequesting] = useState(false);
 
   const finish = () => {
@@ -70,11 +78,13 @@ export function NotificationsScreen() {
         onPress: () => void acceptAndFinish(),
         loading: requesting || patchMe.isPending,
       }}
+      onBack={previous ? () => router.replace(`/onboarding/${previous}`) : undefined}
       onSkip={finish}
       skipLabel={t('notifications.later')}
-      step={3}
+      step={step}
       subtitle={t('notifications.pitch')}
       title={t('notifications.title')}
+      totalSteps={totalSteps}
     >
       <View style={styles.mascotWrap}>
         <Mascot size={180} state="celebrate" />

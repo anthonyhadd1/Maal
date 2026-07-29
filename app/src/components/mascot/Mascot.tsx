@@ -64,8 +64,7 @@ export function Mascot({ state = 'idle', size = 120, loop = true, speed = 1, sty
 
   return (
     <View
-      accessibilityElementsHidden
-      importantForAccessibility="no-hide-descendants"
+      aria-hidden
       style={[styles.base, { width: size, height: size }, style]}
     >
       {/* Ground shadow stays put while the chick bobs. */}

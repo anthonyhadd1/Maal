@@ -2,7 +2,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import type { AnswerResponse, AttemptQuestion, CompleteResponse } from '@/api/types';
+import type {
+  AnswerResponse,
+  AttemptQuestion,
+  CompleteResponse,
+  ExplanationMediaType,
+} from '@/api/types';
 
 /**
  * In-session game state (design_mobile.md §5/§10 + PLAN decision 1/4).
@@ -12,8 +17,10 @@ import type { AnswerResponse, AttemptQuestion, CompleteResponse } from '@/api/ty
  * the attempt is < 30 min old (the server keeps attempts alive that long).
  *
  * Invariants:
- * - NO re-queue (PLAN decision 4): each question is answered exactly once,
- *   `currentIndex` only ever moves forward.
+ * - NO re-queue: each question is answered exactly once, ever.
+ * - Navigation between questions is FREE (swipe-card pager) — `currentIndex`
+ *   is just "which card the pager last showed", restored on resume, and can
+ *   move in either direction. It gates nothing.
  * - Correctness/combo/hearts are server verdicts mirrored from the answer
  *   response — never computed locally.
  */
@@ -22,9 +29,18 @@ export const SESSION_RESUME_WINDOW_MS = 30 * 60 * 1000;
 
 export type SessionStatus = 'idle' | 'inProgress' | 'completed';
 
+/**
+ * The full server verdict for one question, persisted so ANY card — not just
+ * the one just answered — can render its own reveal colors + explanation
+ * when the player swipes back to review it.
+ */
 export interface SessionAnswerRecord {
   selected: number[];
   is_correct: boolean;
+  correct_choice_ids: number[];
+  explanation_text: string | null;
+  explanation_media_url: string | null;
+  explanation_media_type: ExplanationMediaType | null;
 }
 
 interface SessionStateData {
@@ -38,7 +54,7 @@ interface SessionStateData {
   /** True for legendary runs (≥9/10, explanations withheld, gold chrome). */
   legendary: boolean;
   questions: AttemptQuestion[];
-  /** Index of the question currently on screen (forward-only). */
+  /** Which card the pager last showed — free navigation, restored on resume. */
   currentIndex: number;
   /** questionId -> verdict. A key present here can never be re-answered. */
   answers: Record<number, SessionAnswerRecord>;
@@ -73,10 +89,8 @@ interface SessionStateActions {
   }) => void;
   /** Records ONE server verdict. Ignores duplicates (no re-answer, no re-queue). */
   recordAnswer: (questionId: number, selected: number[], response: AnswerResponse) => void;
-  /** Move to the next question (forward-only). */
-  advance: () => void;
-  /** Jump forward to an index (crash-recovery resume). Never moves backward. */
-  advanceTo: (index: number) => void;
+  /** Pager reports whichever card is focused — free navigation, either direction. */
+  setViewedIndex: (index: number) => void;
   setResults: (results: CompleteResponse) => void;
   reset: () => void;
   setHasHydrated: (value: boolean) => void;
@@ -136,7 +150,14 @@ export const useSessionStore = create<SessionState>()(
         set({
           answers: {
             ...state.answers,
-            [questionId]: { selected, is_correct: response.is_correct },
+            [questionId]: {
+              selected,
+              is_correct: response.is_correct,
+              correct_choice_ids: response.correct_choice_ids,
+              explanation_text: response.explanation_text,
+              explanation_media_url: response.explanation_media_url,
+              explanation_media_type: response.explanation_media_type,
+            },
           },
           combo: response.combo,
           maxCombo: Math.max(state.maxCombo, response.combo),
@@ -145,17 +166,10 @@ export const useSessionStore = create<SessionState>()(
         });
       },
 
-      advance: () => {
+      setViewedIndex: (index) => {
         const state = get();
         if (state.status !== 'inProgress') return;
-        if (state.currentIndex >= state.questions.length - 1) return;
-        set({ currentIndex: state.currentIndex + 1 });
-      },
-
-      advanceTo: (index) => {
-        const state = get();
-        if (state.status !== 'inProgress') return;
-        if (index <= state.currentIndex || index > state.questions.length - 1) return;
+        if (index < 0 || index > state.questions.length - 1) return;
         set({ currentIndex: index });
       },
 

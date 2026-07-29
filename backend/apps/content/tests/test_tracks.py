@@ -112,7 +112,12 @@ class TestProfileActiveTrack:
         # to prove the default is set at creation time, not just a serializer fallback.
         resp = client.post(
             "/api/v1/auth/register/",
-            {"username": "track_default_user", "password": "S3cure!pass", "display_name": "T"},
+            {
+                "username": "track_default_user",
+                "email": "track_default@example.com",
+                "password": "S3cure!pass",
+                "display_name": "T",
+            },
             format="json",
         )
         assert resp.status_code == 201

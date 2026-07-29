@@ -15,6 +15,7 @@ import { ProgressBar } from '@/components/game/ProgressBar';
 import { Screen } from '@/components/layout/Screen';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { XpBarChart } from '@/features/profile/XpBarChart';
+import { accentFill, accentText } from '@/lib/color';
 import { formatNumber, formatPercent } from '@/lib/format';
 import { getLucideIcon } from '@/lib/lucide';
 import { colors, fonts, getSubjectAccent, radii, spacing, typography } from '@/theme/tokens';
@@ -158,7 +159,11 @@ function SubjectRow({ entry }: { entry: SubjectStat }) {
 
   return (
     <ClayCard style={styles.subjectRow}>
-      <View style={[styles.subjectIcon, { backgroundColor: accent }]}>
+      {/* accentFill behind the white glyph, accentText for the percentage —
+          the raw accent fails contrast in both roles (Biologie's #22C55E is
+          2.28:1 under white and 2.4:1 as text). The ProgressBar below keeps
+          the raw hue: a bar is decorative, not something you read. */}
+      <View style={[styles.subjectIcon, { backgroundColor: accentFill(accent) }]}>
         <Icon color={colors.neutral[0]} size={20} strokeWidth={2.2} />
       </View>
       <View style={styles.subjectBody}>
@@ -166,7 +171,7 @@ function SubjectRow({ entry }: { entry: SubjectStat }) {
           <Text numberOfLines={1} style={styles.subjectName}>
             {entry.name}
           </Text>
-          <Text style={[styles.subjectPct, { color: accent }]}>
+          <Text style={[styles.subjectPct, { color: accentText(accent) }]}>
             {formatPercent(entry.accuracy_pct)}
           </Text>
         </View>
@@ -252,7 +257,7 @@ const styles = StyleSheet.create({
     flexBasis: '45%',
     flexGrow: 1,
     alignItems: 'center',
-    gap: 2,
+    gap: spacing.xs,
     paddingVertical: spacing.m,
   },
   summaryIcon: {
